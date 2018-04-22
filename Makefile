@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/04/12 12:51:35 by adleau           ###   ########.fr        #
+#    Updated: 2018/04/22 14:14:41 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRC =   $(SRCPATH)main.c \
 
 INCPATH	=	includes/
 
-INC	=
+INC	=		$(INCPATH)/objects/object.h
 
 OBJ = $(SRC:.c=.o)
 
@@ -70,6 +70,8 @@ ext/glfw:
 		rm -fr ext/glfw
 		git clone https://github.com/glfw/glfw.git ext/glfw
 		@echo "$(VERT)~> [ glfw3 library downloaded. ]$(NCOL)"
+		#( cd ext/glfw && mkdir build && cd build \
+		#&& cmake ..  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
 		( cd ext/glfw && mkdir build && cd build \
 		&& $(HOME)/.brew/bin/cmake ..  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
 		@echo "$(VERT)~> [ glfw3 library set up. ]$(NCOL)"
