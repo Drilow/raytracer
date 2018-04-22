@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/22 16:10:01 by adleau           ###   ########.fr       */
+/*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
+/*   Updated: 2018/04/22 16:11:14 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <gl_handling/gl_includes.h>
-#include <objects/object.h>
-#include <global.h>
+#ifndef GLOBAL_H
+# define GLOBAL_H
+# include <gl_handling/gl_includes.h>
+# include <scene/scene_list.h>
 
-t_global		g_global;
-
-int				main(int __attribute__((unused))ac, char __attribute__((unused))**av)
+typedef struct			s_global
 {
-	// getting scenes
-	init_glfw();
-	// initializing glfw
-	// prepare opencl for parallel computing
-	// launch rays
-	// trace (glfw loop)
-	// free everything that was allocated
-	return (0);
-}
+	t_scene_list		scene_list;
+	t_gl_mgr			gl_mgr;
+
+}						t_global;
+
+#endif

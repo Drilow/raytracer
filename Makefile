@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/04/22 14:14:41 by adleau           ###   ########.fr        #
+#    Updated: 2018/04/22 16:06:04 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,12 @@ LIB	 :=  -L./ext/glfw/build/src/ -I./ext/glfw/include/GLFW/
 SRCPATH = srcs/
 
 SRC =   $(SRCPATH)main.c \
+		$(SRCPATH)gl_handling/glfw_init.c \
 
 INCPATH	=	includes/
 
-INC	=		$(INCPATH)/objects/object.h
+INC	=		$(INCPATH)objects/object.h \
+			$(INCPATH)gl_handling/gl_includes.h
 
 OBJ = $(SRC:.c=.o)
 
