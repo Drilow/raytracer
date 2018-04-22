@@ -23,6 +23,7 @@
 typedef struct	s_gl_mgr
 {
 	GLFWwindow*	window;
+
 }				t_gl_mgr;
 
 void			init_glfw(void);

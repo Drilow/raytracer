@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/22 16:10:01 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/22 16:39:17 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ int				main(int __attribute__((unused))ac, char __attribute__((unused))**av)
 	// prepare opencl for parallel computing
 	// launch rays
 	// trace (glfw loop)
+	while (!glfwWindowShouldClose(g_global.gl_mgr.window))
+	{
+		// Keep running
+	}
 	// free everything that was allocated
 	return (0);
 }
