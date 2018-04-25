@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/04/22 16:06:04 by adleau           ###   ########.fr        #
+#    Updated: 2018/04/25 15:32:53 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CFLAGS = -Wall -Werror -Wextra -O3
 
 LDFLAGS =  -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
-LIB	 :=  -L./ext/glfw/build/src/ -I./ext/glfw/include/GLFW/
+LIB	 :=  -L./ext/glfw/build/src/ -I./ext/glfw/include/GLFW/  -L./ext/glew/build/lib/ -I./ext/glew/include/ -I/usr/local/include -I/opt/X11/include -L/usr/local/lib -I/opt/X11/lib
 
 SRCPATH = srcs/
 
@@ -43,7 +43,7 @@ all: ext $(NAME)
 $(NAME): $(OBJ) $(INC)
 		make -C libft/
 		@echo "$(VERT)~> [ libft library made. ]$(NCOL)"
-		$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -Iincludes/ $(LDFLAGS) -Ilibft/ -Llibft/ -lft $(LIB)
+		$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -Iincludes/ $(LDFLAGS) -Ilibft/ -Llibft/ -lft $(LIB) ./ext/glew/build/lib/libGLEW.a
 		@echo "$(VERT)~> [ binary file '$(NAME)' made. ]$(NCOL)"
 
 %.o: %.c
@@ -65,7 +65,7 @@ fclean: clean
 
 re: fclean all
 
-ext: ext/glfw
+ext: ext/glfw ext/glew
 
 
 ext/glfw:
@@ -77,5 +77,13 @@ ext/glfw:
 		( cd ext/glfw && mkdir build && cd build \
 		&& $(HOME)/.brew/bin/cmake ..  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
 		@echo "$(VERT)~> [ glfw3 library set up. ]$(NCOL)"
+
+ext/glew:
+		rm -fr ext/glew
+		git clone https://github.com/nigels-com/glew.git ext/glew
+		@echo "$(VERT)~> [ GLEW library downloaded. ]$(NCOL)"
+		(cd ext/glew \
+		&& $(MAKE) -C auto && cd build && $(HOME)/.brew/bin/cmake ./cmake  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
+		@echo "$(VERT)~> [ GLEW library set up. ]$(NCOL)"
 
 .PHONY: clean all re fclean
