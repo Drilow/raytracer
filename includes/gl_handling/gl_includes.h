@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:58:26 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/25 15:18:57 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/25 16:36:46 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,12 @@ typedef struct	s_gl_mgr
 {
 	GLFWwindow*	window;
 	GLuint		vertex_array_id;
+	GLvoid		*data;
 }				t_gl_mgr;
 
 void			init_glfw(void);
+void			error_callback(int error, const char* description);
+void			destroy_glfw(void);
+void			draw(void);
 
 #endif
