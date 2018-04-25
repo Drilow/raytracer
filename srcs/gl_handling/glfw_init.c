@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:04:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/25 16:41:55 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/25 17:19:55 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			init_glfw(void)
 		ft_putstr_fd("Failed to initialize GLEW\n", 2);
 		exit(1);
 	}
-/*	glGenVertexArrays(1, &g_global.gl_mgr.vertex_array_id);
+	glGenVertexArrays(1, &g_global.gl_mgr.vertex_array_id);
 	glBindVertexArray(g_global.gl_mgr.vertex_array_id);
-	glfwSetInputMode(g_global.gl_mgr.window, GLFW_STICKY_KEYS, GL_TRUE);*/
+	glfwSetInputMode(g_global.gl_mgr.window, GLFW_STICKY_KEYS, GL_TRUE);
 }
