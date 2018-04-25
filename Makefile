@@ -82,6 +82,8 @@ ext/glew:
 		rm -fr ext/glew
 		git clone https://github.com/nigels-com/glew.git ext/glew
 		@echo "$(VERT)~> [ GLEW library downloaded. ]$(NCOL)"
+		#(cd ext/glew \
+		#&& $(MAKE) -C auto && cd build && cmake ./cmake  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
 		(cd ext/glew \
 		&& $(MAKE) -C auto && cd build && $(HOME)/.brew/bin/cmake ./cmake  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
 		@echo "$(VERT)~> [ GLEW library set up. ]$(NCOL)"
