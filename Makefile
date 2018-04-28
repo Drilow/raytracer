@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/04/28 23:27:27 by Dagnear          ###   ########.fr        #
+#    Updated: 2018/04/28 23:50:27 by Dagnear          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ LIB	 += -lSDL2 -lSDL2_image
 SRCPATH = srcs/
 
 SRC =   $(SRCPATH)main.c \
-		$(SRCPATH)gl_handling/glfw_init.c \
 		$(SRCPATH)maths/transformations.c	\
 		$(SRCPATH)maths/ft_solve_equation.c	\
 		$(SRCPATH)maths/ft_delta.c			\
@@ -92,6 +91,9 @@ fclean: clean
 		@echo "$(JAUN)~> [ binary file '$(NAME)' erased. ]$(NCOL)"
 		rm -fr ext
 		rm -fr ext/glfw
+		rm -fr ext/glew
+		rm -fr ext/SDL2
+		rm -fr ext/SDL2_Image
 		@echo "$(JAUN)~> [ glfw3 folder cleaned. ]$(NCOL)"
 		make fclean -C libft/
 		@echo "$(JAUN)~> [ libft cleaned. ]$(NCOL)"

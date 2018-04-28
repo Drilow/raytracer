@@ -12,7 +12,7 @@
 
 #ifndef GLOBAL_H
 # define GLOBAL_H
-# include <gl_handling/gl_includes.h>
+//# include <gl_handling/gl_includes.h>
 # include <sdl_stuff/sdl_mgr.h>
 # include <scene/scene_list.h>
 # include <rt.h>
@@ -22,7 +22,7 @@
 typedef struct			s_global
 {
 	t_scene_list		scene_list;
-	t_gl_mgr			gl_mgr;
+  //	t_gl_mgr			gl_mgr;
 	t_sdl_wrapper		sdl_mgr;
 	char				running;
 	t_rt				r;

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <gl_handling/gl_includes.h>
+//#include <gl_handling/gl_includes.h>
 #include <objects/object.h>
 #include <global.h>
 #include <cl_inc/cl_defs.h>
