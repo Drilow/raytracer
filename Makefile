@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/04/25 16:12:18 by adleau           ###   ########.fr        #
+#    Updated: 2018/04/28 13:14:54 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,20 +72,20 @@ ext/glfw:
 		rm -fr ext/glfw
 		git clone https://github.com/glfw/glfw.git ext/glfw
 		@echo "$(VERT)~> [ glfw3 library downloaded. ]$(NCOL)"
-		#( cd ext/glfw && mkdir build && cd build \
-		#&& cmake ..  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
 		( cd ext/glfw && mkdir build && cd build \
-		&& $(HOME)/.brew/bin/cmake ..  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
+		&& cmake ..  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
+		#( cd ext/glfw && mkdir build && cd build \
+		#&& $(HOME)/.brew/bin/cmake ..  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
 		@echo "$(VERT)~> [ glfw3 library set up. ]$(NCOL)"
 
 ext/glew:
 		rm -fr ext/glew
 		git clone https://github.com/nigels-com/glew.git ext/glew
 		@echo "$(VERT)~> [ GLEW library downloaded. ]$(NCOL)"
-		#(cd ext/glew \
-		#&& $(MAKE) -C auto && cd build && cmake ./cmake  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
 		(cd ext/glew \
-		&& $(MAKE) -C auto && cd build && $(HOME)/.brew/bin/cmake ./cmake  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
+		&& $(MAKE) -C auto && cd build && cmake ./cmake  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
+		#(cd ext/glew \
+		#&& $(MAKE) -C auto && cd build && $(HOME)/.brew/bin/cmake ./cmake  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
 		@echo "$(VERT)~> [ GLEW library set up. ]$(NCOL)"
 
 .PHONY: clean all re fclean
