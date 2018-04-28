@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/04/28 17:12:15 by adleau           ###   ########.fr        #
+#    Updated: 2018/04/28 20:11:24 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,27 @@ SRCPATH = srcs/
 
 SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gl_handling/glfw_init.c \
+		$(SRCPATH)maths/transformations.c	\
+		$(SRCPATH)maths/ft_solve_equation.c	\
+		$(SRCPATH)maths/ft_delta.c			\
+		$(SRCPATH)maths/ft_deltasq.c		\
 		$(SRCPATH)sdl_stuff/sdl_mgr.c		\
 		$(SRCPATH)parser/parsing_1.c		\
 		$(SRCPATH)parser/parsing_2.c		\
 		$(SRCPATH)parser/parsing_3.c		\
+		$(SRCPATH)parser/parse_objects.c		\
+		$(SRCPATH)parser/parse_obj_file.c		\
+		$(SRCPATH)objects/camera.c		\
+		$(SRCPATH)objects/plane.c		\
+		$(SRCPATH)objects/sphere.c		\
+		$(SRCPATH)objects/cone_1.c		\
+		$(SRCPATH)objects/cone_2.c		\
+		$(SRCPATH)objects/cylinder_1.c		\
+		$(SRCPATH)objects/cylinder_2.c		\
+		$(SRCPATH)extra/ft_rgb.c		\
+		$(SRCPATH)geometry/rpoint_fcts.c	\
+		$(SRCPATH)maths/vector_fcts_1.c	\
+		$(SRCPATH)maths/vector_fcts_2.c	\
 
 INCPATH	=	includes/
 
