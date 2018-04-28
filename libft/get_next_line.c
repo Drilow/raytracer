@@ -3,72 +3,83 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/31 14:49:33 by adleau            #+#    #+#             */
-/*   Updated: 2018/03/16 14:55:51 by mabessir         ###   ########.fr       */
+/*   Created: 2014/11/10 12:13:58 by cpays             #+#    #+#             */
+/*   Updated: 2015/03/17 21:03:59 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "libft.h"
-#include <limits.h>
 
-static int	cut_line(char **pos, char **line)
+t_list	*check_fd(t_list **tmp, int fd)
 {
-	char *n_pos;
+	t_list	*tmp2;
 
-	if ((n_pos = ft_strchr(*pos, (int)'\n')))
+	tmp2 = *tmp;
+	while (tmp2)
 	{
-		*line = ft_strsub(*pos, 0, n_pos - *pos);
-		ft_memmove(*pos, n_pos + 1, ft_strlen(n_pos));
-		n_pos = NULL;
-		return (1);
+		if (tmp2->content_size == (size_t)fd)
+			return (tmp2);
+		tmp2 = tmp2->next;
 	}
-	return (0);
+	tmp2 = ft_lstnew(ft_strnew(0), fd);
+	ft_lstadd(tmp, tmp2);
+	return (tmp2);
 }
 
-static int	read_line(const int fd, char **pos, char **line)
+void	ft_loop(int ret, char *buffer, t_list **tmp)
 {
-	char	buf[BUFF_SIZE + 1];
-	char	*tmp;
-	int		ret;
+	char	*tmp2;
 
-	while ((ret = read(fd, buf, BUFF_SIZE)))
-	{
-		if (ret == -1)
-			return (-1);
-		buf[ret] = '\0';
-		tmp = NULL;
-		if (*pos)
-		{
-			tmp = ft_strdup(*pos);
-			ft_strdel(*(&pos));
-			*pos = ft_strjoin(tmp, buf);
-			ft_strdel(&tmp);
-		}
-		else
-			*pos = ft_strdup(buf);
-		if (cut_line(pos, line))
-			return (1);
-	}
-	return (0);
+	buffer[ret] = '\0';
+	tmp2 = (*tmp)->content;
+	(*tmp)->content = ft_strjoin(tmp2, buffer);
+	ft_strdel(&tmp2);
 }
 
-int			get_next_line(const int fd, char **line)
+void	ft_get2(char **line, t_list **tmp)
 {
-	static char	*pos;
-	int			ret;
+	char	*tmp2;
+	size_t	len;
 
-	if (fd < 0 || BUFF_SIZE < 1 || !line)
+	len = ft_strchr((*tmp)->content, '\n') - (char*)(*tmp)->content;
+	*line = ft_strsub((*tmp)->content, 0, len);
+	tmp2 = (*tmp)->content;
+	(*tmp)->content = ft_strdup(ft_strchr((*tmp)->content, '\n') + 1);
+	ft_strdel(&tmp2);
+}
+
+void	ft_lstfree(t_list **lst)
+{
+	free((*lst)->content);
+	free(*lst);
+	(*lst)->next = NULL;
+}
+
+int		get_next_line(const int fd, char **line)
+{
+	char			buffer[BUFF_SIZE + 1];
+	int				ret;
+	static t_list	*tmp;
+	t_list			*tmp2;
+
+	ft_putnbr(fd);
+	ft_putchar('\n');
+	if (line == NULL)
 		return (-1);
-	if (pos && cut_line(&pos, line))
-		return (1);
-	if ((ret = read_line(fd, &pos, line)) != 0)
-		return (ret);
-	if (pos == NULL || pos[0] == '\0')
+	tmp2 = check_fd(&tmp, fd);
+	ret = 0;
+	while ((ft_strchr(tmp2->content, '\n')) == NULL
+		&& (ret = read(fd, buffer, BUFF_SIZE)) > 0)
+		ft_loop(ret, buffer, &tmp2);
+	if (ret == -1)
+		return (-1);
+	if (ret == 0 && ft_strchr(tmp2->content, '\n') == NULL)
+	{
+		*line = ft_strdup(tmp2->content);
 		return (0);
-	*line = pos;
-	pos = NULL;
+	}
+	ft_get2(line, &tmp2);
 	return (1);
 }
