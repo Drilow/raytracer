@@ -68,4 +68,5 @@ void			draw_image(t_sdl_wrapper *e)
 		if (pthread_join(threads[i], NULL) != 0)
 			ft_exit("Thread could not be joined.", 1);
 	}
+	g_global.drawn = 0;
 }
