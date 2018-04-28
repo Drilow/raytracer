@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   cylinder.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 16:56:03 by adleau           ###   ########.fr       */
+/*   Created: 2018/04/28 16:49:50 by adleau            #+#    #+#             */
+/*   Updated: 2018/04/28 16:50:00 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
-# define OBJECT_H
-# include <geometry/geometry.h>
-# include <stddef.h>
+#ifndef CYLINDER_H
+# define CYLINDER_H
 
-typedef struct		s_obj
+typedef struct		s_cylinder
 {
-	int				type;
-	t_rpoint		position;
-	void			*obj;
-	t_rgb			color;
-	struct s_obj	*next;
-}					t_obj;
+	t_rpoint		summit;
+	t_rpoint		vector;
+	double			radius;
+	t_bool			infinite;
+}					t_cylinder;
+
 
 #endif

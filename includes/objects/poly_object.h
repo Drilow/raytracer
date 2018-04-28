@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   poly_object.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 16:56:03 by adleau           ###   ########.fr       */
+/*   Created: 2018/04/28 16:47:24 by adleau            #+#    #+#             */
+/*   Updated: 2018/04/28 16:48:34 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
-# define OBJECT_H
-# include <geometry/geometry.h>
-# include <stddef.h>
+#ifndef POLY_OBJECT_H
+# define POLY_OBJECT_H
 
-typedef struct		s_obj
+typedef struct		s_face
 {
-	int				type;
-	t_rpoint		position;
-	void			*obj;
-	t_rgb			color;
-	struct s_obj	*next;
-}					t_obj;
+	t_rpoint		p1;
+	t_rpoint		p2;
+	t_rpoint		p3;
+}					t_face;
+
+typedef struct		s_vertex
+{
+  t_rpoint			p;
+  struct s_vertex	*next;
+}					t_vertex;
+
+typedef struct		s_poly_obj
+{
+	t_face				f;
+	t_vertex			*vertices;
+	struct s_poly_obj	*next;
+}					t_poly_obj;
 
 #endif

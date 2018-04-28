@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   parsing_3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 16:56:03 by adleau           ###   ########.fr       */
+/*   Created: 2018/04/02 20:51:38 by alacrois          #+#    #+#             */
+/*   Updated: 2018/04/28 17:17:50 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
-# define OBJECT_H
-# include <geometry/geometry.h>
-# include <stddef.h>
+#include <extra/extra_defs.h>
 
-typedef struct		s_obj
+t_bool		cmp_chars(char *s, char *o, int start)
 {
-	int				type;
-	t_rpoint		position;
-	void			*obj;
-	t_rgb			color;
-	struct s_obj	*next;
-}					t_obj;
+	int		is;
+	int		io;
 
-#endif
+	is = start - 1;
+	io = -1;
+	while (o[++io] != '\0')
+	{
+		if (s[++is] != o[io])
+			return (false);
+	}
+	return (true);
+}

@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   optics.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 16:56:03 by adleau           ###   ########.fr       */
+/*   Created: 2018/04/28 16:46:29 by adleau            #+#    #+#             */
+/*   Updated: 2018/04/28 16:47:02 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
-# define OBJECT_H
-# include <geometry/geometry.h>
-# include <stddef.h>
+#ifndef		OPTICS_H
+# define	OPTICS_H
 
-typedef struct		s_obj
+typedef struct		s_light_clr
 {
-	int				type;
-	t_rpoint		position;
-	void			*obj;
+	t_rpoint		clr;
+	double			shining;
+}					t_light_clr;
+
+typedef struct		s_light
+{
+	t_rpoint		source;
 	t_rgb			color;
-	struct s_obj	*next;
-}					t_obj;
+	struct s_light	*next;
+}					t_light;
 
 #endif

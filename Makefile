@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/04/28 13:14:54 by adleau           ###   ########.fr        #
+#    Updated: 2018/04/28 17:12:15 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,18 +23,28 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -O3
 
 LDFLAGS =  -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+LDFLAGS += `ext/SDL2/bin/sdl2-config --cflags --libs -lSDL2 -lSDL2_image`
 
 LIB	 :=  -L./ext/glfw/build/src/ -I./ext/glfw/include/GLFW/  -L./ext/glew/build/lib/ -I./ext/glew/include/ -I/usr/local/include -I/opt/X11/include -L/usr/local/lib -I/opt/X11/lib
+LIB	 +=  -L./ext/SDL2/lib -I./ext/SDL2/include/SDL2
+LIB	 += -L./ext/SDL2_Image/lib -I./ext/SDL2_Image/include/SDL2
+LIB	 += -lSDL2 -lSDL2_image
+
 
 SRCPATH = srcs/
 
 SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gl_handling/glfw_init.c \
+		$(SRCPATH)sdl_stuff/sdl_mgr.c		\
+		$(SRCPATH)parser/parsing_1.c		\
+		$(SRCPATH)parser/parsing_2.c		\
+		$(SRCPATH)parser/parsing_3.c		\
 
 INCPATH	=	includes/
 
 INC	=		$(INCPATH)objects/object.h \
-			$(INCPATH)gl_handling/gl_includes.h
+			$(INCPATH)gl_handling/gl_includes.h \
+			$(INCPATH)sdl_stuff/sdl_mgr.h		\
 
 OBJ = $(SRC:.c=.o)
 
@@ -65,7 +75,7 @@ fclean: clean
 
 re: fclean all
 
-ext: ext/glfw ext/glew
+ext: ext/glfw ext/glew ext/SDL2 ext/SDL2_Image
 
 
 ext/glfw:
@@ -87,5 +97,32 @@ ext/glew:
 		#(cd ext/glew \
 		#&& $(MAKE) -C auto && cd build && $(HOME)/.brew/bin/cmake ./cmake  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
 		@echo "$(VERT)~> [ GLEW library set up. ]$(NCOL)"
+
+ext/SDL2:
+		rm -fr ext/SDL2
+		mkdir -p ext/SDL2/junk
+		rm -fr  SDL2-2.0.7
+		curl -O http://www.libsdl.org/release/SDL2-2.0.7.tar.gz
+		@echo "$(VERT)~> [ SDL library downloaded. ]$(NCOL)"
+		tar xf SDL2-2.0.7.tar.gz
+		( cd SDL2-2.0.7 \
+		&& ./configure --prefix=$(shell pwd)/ext/SDL2/ \
+		&& $(MAKE) && $(MAKE) install )
+		mv -f SDL2-2.0.7.tar.gz SDL2-2.0.7 ext/SDL2/junk
+		@echo "$(VERT)~> [ SDL library set up. ]$(NCOL)"
+
+ext/SDL2_Image:
+		rm -fr ext/SDL2_Image
+		mkdir -p ext/SDL2_Image/junk
+		rm -fr SDL2_image-2.0.2
+		curl -O http://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.2.tar.gz
+		@echo "$(VERT)~> [ SDL_Image library downloaded. ]$(NCOL)"
+		tar xf SDL2_image-2.0.2.tar.gz
+		( export SDL2_CONFIG='$(shell pwd)/ext/SDL2/bin/sdl2-config' \
+		&& cd SDL2_image-2.0.2 \
+		&& ./configure --prefix=$(shell pwd)/ext/SDL2_Image/ \
+		&& $(MAKE) && $(MAKE) install );
+		mv -f SDL2_image-2.0.2.tar.gz SDL2_image-2.0.2 ext/SDL2_Image/junk
+		@echo "$(VERT)~> [ SDL_Image library set up. ]$(NCOL)"
 
 .PHONY: clean all re fclean

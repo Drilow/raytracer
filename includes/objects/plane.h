@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   plane.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 16:56:03 by adleau           ###   ########.fr       */
+/*   Created: 2018/04/28 16:48:46 by adleau            #+#    #+#             */
+/*   Updated: 2018/04/28 16:49:04 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
-# define OBJECT_H
-# include <geometry/geometry.h>
-# include <stddef.h>
+#ifndef PLANE_H
+# define PLANE_H
 
-typedef struct		s_obj
+typedef struct		s_plane
 {
-	int				type;
-	t_rpoint		position;
-	void			*obj;
-	t_rgb			color;
-	struct s_obj	*next;
-}					t_obj;
+	t_rpoint		vector;
+	t_rpoint		p;
+}					t_plane;
 
 #endif

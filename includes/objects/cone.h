@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   cone.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 16:56:03 by adleau           ###   ########.fr       */
+/*   Created: 2018/04/28 16:49:23 by adleau            #+#    #+#             */
+/*   Updated: 2018/04/28 16:49:28 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
-# define OBJECT_H
-# include <geometry/geometry.h>
-# include <stddef.h>
+#ifndef		CONE_H
+# define	CONE_H
 
-typedef struct		s_obj
+typedef struct		s_cone
 {
-	int				type;
-	t_rpoint		position;
-	void			*obj;
-	t_rgb			color;
-	struct s_obj	*next;
-}					t_obj;
+	t_rpoint		summit;
+	t_rpoint		vector;
+	double			angle;
+	t_bool			infinite;
+}					t_cone;
 
 #endif
