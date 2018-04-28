@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 15:49:17 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 16:58:49 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 18:54:10 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 # else
 # include <CL/cl.h>
 # endif
-# include <objects/optics.h>
+# include <objects/object.h>
+# include <geometry/geometry.h>
+# include <sdl_stuff/sdl_mgr.h>
 
 typedef struct		s_rt
 {

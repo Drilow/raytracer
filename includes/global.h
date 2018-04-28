@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 16:57:38 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 19:34:10 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <sdl_stuff/sdl_mgr.h>
 # include <scene/scene_list.h>
 # include <rt.h>
+# include <geometry/geometry.h>
+# include <stdbool.h>
 
 typedef struct			s_global
 {
@@ -25,5 +27,8 @@ typedef struct			s_global
 	char				running;
 	t_rt				r;
 }						t_global;
+
+void					usage(char *s, int i);
+void					ft_exit(char *msg_error, int i);
 
 #endif

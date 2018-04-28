@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:47:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 16:48:34 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 18:34:34 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ typedef struct		s_poly_obj
 	t_vertex			*vertices;
 	struct s_poly_obj	*next;
 }					t_poly_obj;
+
+t_poly_obj		*parse_obj(char *scene_line);
 
 #endif

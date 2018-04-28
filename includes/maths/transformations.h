@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder.h                                         :+:      :+:    :+:   */
+/*   transformations.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/28 16:49:50 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 20:06:15 by adleau           ###   ########.fr       */
+/*   Created: 2018/04/28 19:29:36 by adleau            #+#    #+#             */
+/*   Updated: 2018/04/28 19:40:17 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CYLINDER_H
-# define CYLINDER_H
-# include <stdbool.h>
+#ifndef TRANSFORMATIONS_H
+# define TRANSFORMATIONS_H
 
-typedef struct		s_cylinder
-{
-	t_rpoint		summit;
-	t_rpoint		vector;
-	double			radius;
-	bool			infinite;
-}					t_cylinder;
-
-bool			get_cylinder(char *s, t_cylinder *c, int *index);
-t_rpoint		get_cyc_eq_factors(t_ray ray, t_cylinder *c);
+void			rotate_obj(void *o, int type, t_rpoint angle);
+void			translate_obj(void *o, int type, t_rpoint translation);
+void			rotate(t_rpoint *p, t_rpoint angle);
+bool				ft_solve_equation(t_rpoint factors, t_dpoint *result);
 
 #endif

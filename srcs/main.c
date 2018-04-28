@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 17:21:52 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 19:57:56 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <global.h>
 #include <cl_inc/cl_defs.h>
 #include <geometry/geometry.h>
-#include <rt.h>
+#include <extra/extra_defs.h>
 #include <libft.h>
 #include <parser/parser.h>
 #define EVENT_PTR g_global.sdl_mgr.event
@@ -32,11 +32,6 @@ void	ft_exit(char *msg_error, int i)
 		ft_putstr("\n");
 	}
 	exit(i);
-}
-void			usage(char *s, int i)
-{
-	ft_putendl(s);
-	ft_exit("usage : ./rtv1 [scene]", i);
 }
 
 void			draw(void)

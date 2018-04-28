@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extra_defs.h                                       :+:      :+:    :+:   */
+/*   ft_delta.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/28 17:17:06 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 18:56:59 by adleau           ###   ########.fr       */
+/*   Created: 2015/05/06 12:12:58 by alacrois          #+#    #+#             */
+/*   Updated: 2018/04/28 19:58:45 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXTRA_DEFS_H
-# define EXTRA_DEFS_H
-# include <geometry/geometry.h>
+#include <geometry/geometry.h>
 
-t_rgb	ft_rgb(int r, int g, int b, int alpha);
-void	usage(char *s, int i);
-#endif
+double		ft_delta(t_point a, t_point b)
+{
+	return (sqrt(((a.x - b.x) * (a.x - b.x)) + ((a.y - b.y) * (a.y - b.y))));
+}

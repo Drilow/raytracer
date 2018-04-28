@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 16:56:03 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 18:29:31 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 # define OBJECT_H
 # include <geometry/geometry.h>
 # include <stddef.h>
+# include <objects/sphere.h>
+# include <objects/camera.h>
+# include <objects/cone.h>
+# include <objects/cylinder.h>
+# include <objects/optics.h>
+# include <objects/plane.h>
+# include <objects/poly_object.h>
+
 
 typedef struct		s_obj
 {

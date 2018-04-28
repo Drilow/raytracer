@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_3.c                                        :+:      :+:    :+:   */
+/*   vector_fcts_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/02 20:51:38 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 17:58:32 by adleau           ###   ########.fr       */
+/*   Created: 2018/03/27 16:47:03 by alacrois          #+#    #+#             */
+/*   Updated: 2018/04/28 19:55:37 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <extra/extra_defs.h>
-#include <parser/parser.h>
+#include <geometry/geometry.h>
 
-bool		cmp_chars(char *s, char *o, int start)
+t_rpoint		vnorm_to_length(t_rpoint v, double len)
 {
-	int		is;
-	int		io;
+	t_rpoint	new;
 
-	is = start - 1;
-	io = -1;
-	while (o[++io] != '\0')
-	{
-		if (s[++is] != o[io])
-			return (false);
-	}
-	return (true);
+	v = vnorm(v);
+	new.x = v.x * len;
+	new.y = v.y * len;
+	new.z = v.z * len;
+	return (new);
+}
+
+double			vangle(t_rpoint v1, t_rpoint v2)
+{
+	double		angle;
+
+	angle = acos(scalar(vnorm(v1), vnorm(v2)));
+	return (angle);
 }

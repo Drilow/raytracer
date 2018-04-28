@@ -6,11 +6,15 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 17:18:08 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 18:56:33 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <global.h>
+#include <libft.h>
+#include <parser/parser.h>
 #include <extra/extra_defs.h>
+#include <objects/object.h>
 
 extern t_global g_global;
 
@@ -39,15 +43,15 @@ static t_obj	*malloc_object(int type)
 {
 	t_obj		*o;
 
-	o = (t_obj *)ft_malloc(sizeof(t_obj));
+	o = (t_obj *)malloc(sizeof(t_obj));
 	if (type == 1)
-		o->obj = (t_sphere *)ft_malloc(sizeof(t_sphere));
+		o->obj = (t_sphere *)malloc(sizeof(t_sphere));
 	else if (type == 2)
-		o->obj = (t_plane *)ft_malloc(sizeof(t_plane));
+		o->obj = (t_plane *)malloc(sizeof(t_plane));
 	else if (type == 3)
-		o->obj = (t_cone *)ft_malloc(sizeof(t_cone));
+		o->obj = (t_cone *)malloc(sizeof(t_cone));
 	else if (type == 4)
-		o->obj = (t_cylinder *)ft_malloc(sizeof(t_cylinder));
+		o->obj = (t_cylinder *)malloc(sizeof(t_cylinder));
 	o->type = type;
 	o->next = NULL;
 	return (o);
@@ -82,7 +86,7 @@ static void		add_to_list(void *o, int otype)
 	}
 }
 
-static t_bool	read_line(char *line)
+static bool	read_line(char *line)
 {
 	int			obj_type;
 	void		*new;
@@ -94,10 +98,10 @@ static t_bool	read_line(char *line)
 	else if (obj_type == -2)
 		return (true);
 	else if (obj_type == 5)
-		return (set_camera(r, line));
+		return (set_camera(line));
 	if (obj_type == 0)
 	{
-		new = (t_light *)ft_malloc(sizeof(t_light));
+		new = (t_light *)malloc(sizeof(t_light));
 		((t_light *)new)->next = NULL;
 	}
 	else
@@ -119,11 +123,11 @@ static t_bool	read_line(char *line)
 	}
 	if (obj_type != 6 && get_obj(line, new, &index, obj_type) == false)
 		return (false);
-	add_to_list(r, new, obj_type);
+	add_to_list(new, obj_type);
 	return (true);
 }
 
-t_bool			parse(char *file)
+bool			parse(char *file)
 {
 	int			fd;
 	char		*line;
@@ -133,10 +137,10 @@ t_bool			parse(char *file)
 		return (false);
 	g_global.r.objects = NULL;
 	g_global.r.lights = NULL;
-	while (ft_gnl(fd, &line) == 1)
+	while (get_next_line(fd, &line) == 1)
 	{
-		if (read_line(r, line) == false)
-			usage("Error : invalid file.");
+		if (read_line(line) == false)
+			usage("Error : invalid file.", 1);
 		free(line);
 	}
 	return (true);

@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_3.c                                        :+:      :+:    :+:   */
+/*   ft_rgb.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/02 20:51:38 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 17:58:32 by adleau           ###   ########.fr       */
+/*   Created: 2017/10/25 16:51:39 by alacrois          #+#    #+#             */
+/*   Updated: 2018/04/28 20:07:35 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <extra/extra_defs.h>
-#include <parser/parser.h>
+#include <global.h>
+#include <libft.h>
+#include <geometry/geometry.h>
 
-bool		cmp_chars(char *s, char *o, int start)
+t_rgb	ft_rgb(int r, int g, int b, int alpha)
 {
-	int		is;
-	int		io;
+	t_rgb	rgb;
 
-	is = start - 1;
-	io = -1;
-	while (o[++io] != '\0')
-	{
-		if (s[++is] != o[io])
-			return (false);
-	}
-	return (true);
+	rgb.r = (char)r;
+	rgb.g = (char)g;
+	rgb.b = (char)b;
+	rgb.trans = (char)alpha;
+	return (rgb);
+}
+
+void			usage(char *s, int i)
+{
+	ft_putendl(s);
+	ft_exit("usage : ./rtv1 [scene]", i);
 }
