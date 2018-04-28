@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 19:57:56 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 22:29:56 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,19 @@ void			init_global(int ac, char **av)
 	g_global.running = 1;
 }
 
+void			draw_func(void)
+{
+	sdl_loop_init();
+	// code
+	sdl_loop_end();
+}
+
 int				main(int __attribute__((unused))ac, char __attribute__((unused))**av)
 {
 	init_global(ac, av);
 	while (g_global.running)
 	{
+		draw_func();
 		if (SDL_PollEvent(&(EVENT_PTR)))
 		{
 			if (EVENT_PTR.type == SDL_QUIT || (EVENT_PTR.type == SDL_KEYDOWN && EVENT_PTR.key.keysym.sym == SDLK_ESCAPE))

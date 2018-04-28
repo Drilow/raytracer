@@ -6,12 +6,41 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:25:15 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 16:29:14 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 22:28:23 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sdl_stuff/sdl_mgr.h>
 #include <libft.h>
+#include <global.h>
+
+extern t_global	g_global;
+
+void			sdl_loop_init(void)
+{
+	if (g_global.sdl_mgr.tex)
+	{
+		SDL_DestroyTexture(g_global.sdl_mgr.tex);
+		g_global.sdl_mgr.tex = NULL;
+	}
+}
+
+void			sdl_loop_end(void)
+{
+	if (!(g_global.sdl_mgr.renderer))
+		if (!(g_global.sdl_mgr.renderer = SDL_CreateRenderer(g_global.sdl_mgr.screen,
+															 -1, SDL_RENDERER_ACCELERATED)))
+			exit(1);
+	if (!(g_global.sdl_mgr.tex))
+		if (!(g_global.sdl_mgr.tex =
+			  SDL_CreateTextureFromSurface(g_global.sdl_mgr.renderer, g_global.sdl_mgr.surf)))
+			exit(1);
+	SDL_RenderClear(g_global.sdl_mgr.renderer);
+	SDL_RenderCopy(g_global.sdl_mgr.renderer, g_global.sdl_mgr.tex, NULL, NULL);
+	SDL_RenderPresent(g_global.sdl_mgr.renderer);
+	SDL_DestroyTexture(g_global.sdl_mgr.tex);
+	g_global.sdl_mgr.tex = NULL;
+}
 
 void			init_sdl_wrap(t_sdl_wrapper *wrap)
 {
