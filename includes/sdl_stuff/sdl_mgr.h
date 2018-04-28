@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sdl_mgr.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:22:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 22:28:35 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 22:52:30 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define WIN_W 300
 # include <SDL.h>
 # include <SDL_image.h>
+# include <geometry/geometry.h>
 
 typedef struct			s_sdl_wrapper
 {
@@ -29,4 +30,5 @@ typedef struct			s_sdl_wrapper
 void					init_sdl_wrap(t_sdl_wrapper *wrap);
 void					sdl_loop_init(void);
 void					sdl_loop_end(void);
+void					draw_px(SDL_Surface *surf, int x, int y, t_rgb cols);
 #endif

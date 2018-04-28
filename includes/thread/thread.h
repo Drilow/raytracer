@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_px.c                                          :+:      :+:    :+:   */
+/*   thread.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/28 22:16:44 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 23:17:15 by Dagnear          ###   ########.fr       */
+/*   Created: 2018/04/28 13:03:48 by adleau            #+#    #+#             */
+/*   Updated: 2018/04/28 22:10:34 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sdl_stuff/sdl_mgr.h>
+#ifndef THREAD_H
+# define THREAD_H
+# include <sdl_stuff/sdl_mgr.h>
+# include <pthread.h>
+# define THREADS_NB 8
 
-void			draw_px(SDL_Surface *surf, int x, int y, t_rgb cols)
+
+typedef struct		s_thread
 {
-	//t_rgb		cols;
-	Uint32		col;
-	Uint32		*pxmem;
-
-	//cols.r = color >> 16;
-	//cols.g = color >> 8;
-	//cols.b = color;
-	col = SDL_MapRGB(surf->format,
-		cols.r, cols.g, cols.b);
-	pxmem = (Uint32*)surf->pixels +
-	(y * surf->pitch / surf->format->BytesPerPixel)
-	+ x;
-	*pxmem = col;
-}
+	t_sdl_wrapper			*e;
+	void			*data;
+	int				th_index;
+}					t_thread;
+#endif

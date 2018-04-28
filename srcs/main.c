@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 22:29:56 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 22:38:13 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <extra/extra_defs.h>
 #include <libft.h>
 #include <parser/parser.h>
+#include <display/display.h>
 #define EVENT_PTR g_global.sdl_mgr.event
 
 
@@ -95,6 +96,7 @@ void			draw_func(void)
 {
 	sdl_loop_init();
 	// code
+	draw_image(&(g_global.sdl_mgr));
 	sdl_loop_end();
 }
 

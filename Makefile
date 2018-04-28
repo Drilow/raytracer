@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
+#    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/04/28 20:11:24 by adleau           ###   ########.fr        #
+#    Updated: 2018/04/28 23:27:27 by Dagnear          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,12 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)geometry/rpoint_fcts.c	\
 		$(SRCPATH)maths/vector_fcts_1.c	\
 		$(SRCPATH)maths/vector_fcts_2.c	\
+		$(SRCPATH)display/display.c 	\
+		$(SRCPATH)raytracing/raytracing.c 	\
+		$(SRCPATH)raytracing/colors.c 	\
+		$(SRCPATH)sdl_stuff/draw_px.c 	\
+		$(SRCPATH)raytracing/collision/normal_collision_vector.c 	\
+		$(SRCPATH)raytracing/collision/obj_collision.c 	\
 
 INCPATH	=	includes/
 

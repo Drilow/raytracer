@@ -43,7 +43,8 @@ static t_obj	*malloc_object(int type)
 {
 	t_obj		*o;
 
-	o = (t_obj *)malloc(sizeof(t_obj));
+	if (!(o = (t_obj *)malloc(sizeof(t_obj))))
+	  exit(1);
 	if (type == 1)
 		o->obj = (t_sphere *)malloc(sizeof(t_sphere));
 	else if (type == 2)
@@ -101,7 +102,8 @@ static bool	read_line(char *line)
 		return (set_camera(line));
 	if (obj_type == 0)
 	{
-		new = (t_light *)malloc(sizeof(t_light));
+	  if (!(new = (t_light *)malloc(sizeof(t_light))))
+	      exit(1);
 		((t_light *)new)->next = NULL;
 	}
 	else

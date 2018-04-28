@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:51:22 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 20:04:49 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 23:24:40 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,6 @@ double				vangle(t_rpoint v1, t_rpoint v2);
 double				ft_delta(t_point a, t_point b);
 int					ft_deltasq(t_point a, t_point b);
 double				deltasq(t_rpoint a, t_rpoint b);
+double			point_to_line_distance(t_rpoint p, t_rpoint line_p, \
+				t_rpoint line_v);
 #endif

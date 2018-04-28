@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 19:29:36 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 19:40:17 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/28 23:19:38 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TRANSFORMATIONS_H
 # define TRANSFORMATIONS_H
+
+#include <geometry/geometry.h>
+#include <stdbool.h>
 
 void			rotate_obj(void *o, int type, t_rpoint angle);
 void			translate_obj(void *o, int type, t_rpoint translation);
