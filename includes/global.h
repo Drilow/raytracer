@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 19:34:10 by adleau           ###   ########.fr       */
+/*   Updated: 2018/04/29 00:36:48 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct			s_global
 	t_sdl_wrapper		sdl_mgr;
 	char				running;
 	t_rt				r;
+	int					drawn;
 }						t_global;
 
 void					usage(char *s, int i);
