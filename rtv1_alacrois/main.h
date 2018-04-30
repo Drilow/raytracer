@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:09:05 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/27 17:48:49 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/04/30 18:15:23 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,17 @@
 # define WIN_SIZE_X 600
 # define WIN_SIZE_Y 400
 # define WIN_TITLE "rtv1"
-# define THREADS_NB 8
+# define RT_THREADS_NB 8
+# define THREADS_NB RT_THREADS_NB
+# define OBJ_THREADS_NB 8
 # define PI M_PI
 # define FOV (PI / 3)
-//# define BRIGHTNESS 0.050
 # define BRIGHTNESS 0.055
 //# define SHINING_FACTOR 0.75
 # define SHINING_FACTOR 0
 //# define AMBIENT_LIGHT 0.1
 # define AMBIENT_LIGHT 0
 # define LIGHT_DISTANCE_FACTOR 2000
-
-typedef struct		s_thread
-{
-	t_env			*e;
-	void			*data;
-	int				th_index;
-}					t_thread;
 
 typedef struct		s_ray
 {
@@ -81,12 +75,13 @@ typedef struct		s_face
 typedef struct		s_vertex
 {
   t_rpoint			p;
-  struct s_vertex	*next;
+	t_plane			pl;
+	struct s_vertex	*next;
 }					t_vertex;
 
 typedef struct		s_poly_obj
 {
-  t_face					f;
+	double					max_d;
   t_vertex					*vertices;
 	struct s_poly_obj		*next;
 }					t_poly_obj;
@@ -124,10 +119,21 @@ typedef struct		s_rtv1
 
 typedef struct		s_collision
 {
+	t_bool			c;
 	t_rpoint		p;
 	t_rpoint		normal;
 	t_obj			*o;
 }					t_collision;
+
+typedef struct      s_thread
+{
+    t_env           *e;
+//  void            *data;
+    int             th_index;
+    t_ray           ray;
+    t_poly_obj      *po;
+    t_collision     *col;
+}                   t_thread;
 
 t_bool				set_camera(t_rtv1 *r, char *line);
 
@@ -158,6 +164,7 @@ t_bool				get_light(char *s, t_light *l, int *index);
 t_bool				get_obj(char *s, void *o, int *index, int type);
 t_bool				parse(t_rtv1 *r, char *file);
 t_poly_obj			*parse_obj(char *scene_line);
+void				set_obj(t_obj *o);
 void				usage(char *s);
 
 t_bool				get_next_rpoint(char *s, t_rpoint *p, int *index);

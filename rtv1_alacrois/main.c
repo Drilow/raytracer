@@ -6,38 +6,21 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:14:32 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/27 16:29:04 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/04/30 18:59:31 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
 /*
-static void			add_poly_obj(t_obj *o)
-{
-	while (o->next != NULL)
-		o = o->next;
-	o->next = (t_obj *)ft_malloc(sizeof(t_obj));
-	o->next->type = 5;
-	o->next->position = set_rpoint(-2, 0, 0);
-	o->next->color = ft_rgb(100, 100, 200, 0);
-	o->next->obj = (t_poly_obj *)ft_malloc(sizeof(t_poly_obj));
-	o->next->next = NULL;
+===== TO DO LIST =====
+- terminer parsing des .obj dans les scenes (couleurs + rotation + translation)
+- checks memory leaks
+- fix la brillance
+- corriger le foncitonnement de poly_obj_collision en multithreading (que ca affiche le truc correctement quoi...)
+- gerer la couleur de facon plus opti ? (avec int au lieu de t_rgb)
+- et plein d'autres trucs (completer le parsing .obj avec les textures, gerer les reflets, transparence, nouveaux objets (torus ?) etc)
 
-	((t_poly_obj *)o->next->obj)->vertices = (t_vertex *)ft_malloc(sizeof(t_vertex));
-	((t_poly_obj *)o->next->obj)->vertices->next = (t_vertex *)ft_malloc(sizeof(t_vertex));
-	((t_poly_obj *)o->next->obj)->vertices->next->next = (t_vertex *)ft_malloc(sizeof(t_vertex));
-
-//	((t_poly_obj *)o->next->obj)->f.p1 = set_rpoint(2, 0, 12);
-//	((t_poly_obj *)o->next->obj)->f.p2 = set_rpoint(7, 0, 12);
-//	((t_poly_obj *)o->next->obj)->f.p3 = set_rpoint(4, -2, 15);
-
-	((t_poly_obj *)o->next->obj)->vertices->p = set_rpoint(2, 0, 12);
-    ((t_poly_obj *)o->next->obj)->vertices->next->p = set_rpoint(7, 0, 12);
-    ((t_poly_obj *)o->next->obj)->vertices->next->next->p = set_rpoint(4, -2, 15);
-	((t_poly_obj *)o->next->obj)->vertices->next->next->next = NULL;
-	((t_poly_obj *)o->next->obj)->next = NULL;
-}
 */
 
 static t_env		*init_env(t_rtv1 *r)
@@ -59,7 +42,9 @@ static void			init_ray(t_point p, t_rtv1 *r)
 {
 	r->rays[p.y][p.x].p = r->cam_position;
 	r->rays[p.y][p.x].vector.x = p.x - (WIN_SIZE_X / 2);
-	r->rays[p.y][p.x].vector.y = p.y - (WIN_SIZE_Y / 2);
+//	r->rays[p.y][p.x].vector.y = p.y - (WIN_SIZE_Y / 2);
+// Et on remet les y a l'endroit (ca augmente vers le haut quoi...) :
+	r->rays[p.y][p.x].vector.y = -p.y + (WIN_SIZE_Y / 2);
 	r->rays[p.y][p.x].vector.z = r->screen_distance;
 }
 
@@ -87,7 +72,6 @@ static t_env		*init(int ac, char **av)
 	}
 	if (parse(r, av[1]) == false)
 		usage("Error : invalid argument.");
-//	add_poly_obj(r->objects);
 	e = init_env(r);
 	return (e);
 }
