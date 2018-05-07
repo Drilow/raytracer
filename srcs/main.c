@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/29 00:38:58 by adleau           ###   ########.fr       */
+/*   Updated: 2018/05/07 18:05:35 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void			init_ray(t_point p)
 {
 	g_global.r.rays[p.y][p.x].p = g_global.r.cam_position;
 	g_global.r.rays[p.y][p.x].vector.x = p.x - (WIN_W / 2);
-	g_global.r.rays[p.y][p.x].vector.y = p.y - (WIN_H / 2);
+	g_global.r.rays[p.y][p.x].vector.y = -p.y + (WIN_H / 2);
 	g_global.r.rays[p.y][p.x].vector.z = g_global.r.screen_distance;
 }
 
