@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/29 00:26:25 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/05/07 18:43:00 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,6 +253,46 @@ static char		*get_file_name(char *line)
 	}
 	file[index] = '\0';
 	return (file);
+}
+
+static void		get_face_maxd(t_vertex *f, double *d)
+{
+	double		tmp_d;
+	double		tmp;
+
+	tmp_d = 0;
+	while (f != NULL)
+	{
+		tmp = sqrt(deltasq(set_rpoint(0, 0, 0), f->p));
+		if (tmp_d < tmp)
+			tmp_d = tmp;
+		f = f->next;
+	}
+	if (tmp_d > *d)
+		*d = tmp_d;
+}
+
+void			set_obj(t_obj *o)
+{
+	t_poly_obj	*tmp;
+	t_vertex	*face;
+	t_rpoint	pos;
+	double		tmp_d;
+
+	tmp = (t_poly_obj *)o->obj;
+	tmp_d = 0;
+	while (tmp != NULL)
+	{
+		face = tmp->vertices;
+		pos = o->position;
+		get_face_maxd(face, &tmp_d);
+		face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
+        face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
+		tmp = tmp->next;
+	}
+	((t_poly_obj *)o->obj)->max_d = tmp_d;
+// Check distance max :
+//printf("max_d = %f\n", ((t_poly_obj *)o->obj)->max_d);
 }
 
 t_poly_obj		*parse_obj(char *scene_line)
