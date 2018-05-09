@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:09:05 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/30 18:15:23 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/09 21:47:37 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 # include "libft/libft.h"
 # include <pthread.h>
 
-# define WIN_SIZE_X 600
-# define WIN_SIZE_Y 400
+# define WIN_SIZE_X 400
+# define WIN_SIZE_Y 250
 # define WIN_TITLE "rtv1"
 # define RT_THREADS_NB 8
 # define THREADS_NB RT_THREADS_NB
 # define OBJ_THREADS_NB 8
 # define PI M_PI
 # define FOV (PI / 3)
-# define BRIGHTNESS 0.055
+# define BRIGHTNESS 0.065
 //# define SHINING_FACTOR 0.75
-# define SHINING_FACTOR 0
+# define SHINING_FACTOR 9
 //# define AMBIENT_LIGHT 0.1
 # define AMBIENT_LIGHT 0
 # define LIGHT_DISTANCE_FACTOR 2000
