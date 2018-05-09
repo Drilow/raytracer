@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 13:03:48 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 23:19:47 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/05/09 23:03:34 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 # include <rt.h>
 #include <stdbool.h>
 
-# define BRIGHTNESS 0.055
-//# define SHINING_FACTOR 0.75
-# define SHINING_FACTOR 0
+# define BRIGHTNESS 0.065
+# define SHINING_FACTOR 9
 //# define AMBIENT_LIGHT 0.1
 # define AMBIENT_LIGHT 0
 # define LIGHT_DISTANCE_FACTOR 2000

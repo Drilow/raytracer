@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   colors.c                                           :+:      :+:    :+:   */
+/*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 23:16:18 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/05/09 22:50:07 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raytracing/collision.h>
 #include <extra/extra_defs.h>
 
-//static double		angle_factor(t_obj *o, t_rpoint p, t_rpoint lsrc)
 static double		angle_factor(t_collision c, t_rpoint lsrc)
 {
 	double			angle;
@@ -27,88 +26,109 @@ static double		angle_factor(t_collision c, t_rpoint lsrc)
 	else if (angle > (PI / 2))
 		return (AMBIENT_LIGHT);
 	af = ((PI / 2) - angle) / (PI / 2);
-//	af = pow(af, (1 + SHINING_FACTOR));
-//	af = af + AMBIENT_LIGHT;
 	return (af);
 }
 
-static t_rpoint		add_color(t_rpoint lc, t_light *l, double afactor)
+// Moyenne entre 2 couleurs a et b selon une ponderation indique par f (entre 0 et 1)
+// 0 -> a, 1 -> b
+static t_rpoint		average(t_rpoint a, t_rpoint b, double f)
 {
-	t_rpoint		new_lc;
-	t_rpoint		diff;
-	t_rpoint		tmp_lc;
-	double			max;
+	t_rpoint		average;
 
-	tmp_lc = set_rpoint(((double)l->color.r * afactor * BRIGHTNESS), \
-						((double)l->color.g * afactor * BRIGHTNESS), \
-						((double)l->color.b * afactor * BRIGHTNESS));
-	max = tmp_lc.x;
-	if (max < tmp_lc.y)
-        max = tmp_lc.y;
-    if (max < tmp_lc.z)
-        max = tmp_lc.z;
-	diff.x = max - tmp_lc.x;
-	diff.y = max - tmp_lc.y;
-	diff.z = max - tmp_lc.z;
-	afactor = 1;
-	tmp_lc = set_rpoint(tmp_lc.x + (diff.x * pow(afactor, 1)),	\
-						tmp_lc.y + (diff.y * pow(afactor, 1)),	\
-						tmp_lc.z + (diff.z * pow(afactor, 1)));
-	new_lc = set_rpoint(lc.x + tmp_lc.x, lc.y + tmp_lc.y, lc.z + tmp_lc.z);
-	return (new_lc);
+	average.x = (a.x * (1 - f)) + (b.x * f);
+	average.y = (a.y * (1 - f)) + (b.y * f);
+	average.z = (a.z * (1 - f)) + (b.z * f);
+	return (average);
 }
 
-//static t_rpoint		get_light_color(t_rtv1 *r, t_obj *o, t_rpoint p)
-static t_rpoint		get_light_color(t_rt *r, t_collision c)
+static double		rgb_min(t_rgb c)
 {
-	t_rpoint		lc;
-//	t_light_clr		lc;
-//	t_rpoint		tmpp;
+	if (c.r > c.g)
+		c.r = c.g;
+	if (c.r > c.b)
+		c.r = c.b;
+	return ((double)c.r);
+}
+
+static double		rpoint_max(t_rpoint p)
+{
+	if (p.x < p.y)
+		p.x = p.y;
+    if (p.x < p.z)
+		p.x = p.z;
+    return (p.x);
+}
+
+static t_rpoint		color_to_add(t_rpoint oclr, t_rgb lclr, double af)
+{
+	t_rpoint		tmp;
+	t_rpoint		lclr_factors;
+	t_rpoint		cta;
+
+	lclr_factors.x = (double)lclr.r / rgb_min(lclr);
+	lclr_factors.y = (double)lclr.g / rgb_min(lclr);
+	lclr_factors.z = (double)lclr.b / rgb_min(lclr);
+	tmp = set_rpoint((oclr.x * (double)lclr.r), \
+					 (oclr.y * (double)lclr.g), \
+					 (oclr.z * (double)lclr.b));
+	cta = average(tmp, set_rpoint(rpoint_max(tmp) * lclr_factors.x, 
+								  rpoint_max(tmp) * lclr_factors.y,
+								  rpoint_max(tmp) * lclr_factors.z), af);
+	return (cta);
+}
+
+static t_rpoint		add_color(t_rpoint c, t_rpoint oclr, t_light *l, double af)
+{
+	t_rpoint		new_c;
+	t_rpoint		tmp_c;
+	double			shining;
+
+	shining = pow(af, 1 + SHINING_FACTOR);
+	tmp_c = color_to_add(oclr, l->color, shining);
+	tmp_c = set_rpoint(tmp_c.x * af * BRIGHTNESS, \
+					   tmp_c.y * af * BRIGHTNESS, \
+					   tmp_c.z * af * BRIGHTNESS);
+	new_c = set_rpoint(c.x + tmp_c.x, c.y + tmp_c.y, c.z + tmp_c.z);
+	return (new_c);
+}
+
+static t_rpoint		get_color(t_rt *r, t_collision c)
+{
+	t_rpoint		color;
+	t_rpoint		ocolor;
 	t_obj			*otmp;
 	t_light			*l;
 	double			afactor;
 	t_collision		tmpc;
 
-//	lc.clr = set_rpoint(0, 0, 0);
-	lc = set_rpoint(0, 0, 0);
-//	lc.shining = 0;
+	color = set_rpoint(0, 0, 0);
+	ocolor = set_rpoint((double)c.o->color.r, (double)c.o->color.g, \
+						(double)c.o->color.b);
 	l = r->lights;
 	while (l != NULL)
 	{
 		otmp = r->objects;
-//		afactor = angle_factor(c.o, c.p, l->source);
 		afactor = angle_factor(c, l->source);
 		while (otmp != NULL)
 		{
-//			if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), \
-//			otmp, &tmpp) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpp))
 			tmpc.o = otmp;
-//			tmpc.p = tmpp;
 			if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
 				afactor = 0;
 			otmp = otmp->next;
 		}
-//		lc.clr = add_color(lc, l, afactor);
-		lc = add_color(lc, l, afactor);
-//		lc.shining = (lc.shining + afactor) / 2;
-/*
-		lc = set_rpoint(lc.x + ((double)l->color.r * afactor * BRIGHTNESS), \
-		lc.y + ((double)l->color.g * afactor * BRIGHTNESS), \
-		lc.z + ((double)l->color.b * afactor * BRIGHTNESS));
-*/
+		color = add_color(color, ocolor, l, afactor);
 		l = l->next;
 	}
-	return (lc);
+	return (color);
 }
 
-static t_rgb		get_color(t_rgb ocolor, t_rpoint lc, double df)
+static t_rgb		get_final_color(t_rpoint c, double df)
 {
 	t_rgb			color;
 	t_rpoint		tmp;
 	double			max;
 
-	tmp = set_rpoint((double)ocolor.r * lc.x / df, \
-		(double)ocolor.g * lc.y / df, (double)ocolor.b * lc.z / df);
+	tmp = set_rpoint(c.x / df, c.y / df, c.z / df);
 	max = tmp.x;
 	if (max < tmp.y)
 		max = tmp.y;
@@ -127,19 +147,16 @@ static t_rgb		get_color(t_rgb ocolor, t_rpoint lc, double df)
 	return (color);
 }
 
-//t_rgb				get_ray_color(t_rtv1 *r, t_obj *o, t_rpoint p)
 t_rgb				get_ray_color(t_rt *r, t_collision c)
 {
 	t_rgb			color;
-	t_rpoint		lc;
-//	t_light_clr		lc;
+	t_rpoint		tmp_color;
 	double			distance_factor;
 
-//	lc = get_light_color(r, c.o, c.p);
-	lc = get_light_color(r, c);
+	tmp_color = get_color(r, c);
 	distance_factor = deltasq(r->cam_position, c.p) / LIGHT_DISTANCE_FACTOR;
 	if (distance_factor < 1)
 		distance_factor = 1;
-	color = get_color(c.o->color, lc, distance_factor);
+	color = get_final_color(tmp_color, distance_factor);
 	return (color);
 }
