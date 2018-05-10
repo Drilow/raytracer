@@ -6,14 +6,14 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:22:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/05/10 09:20:22 by adleau           ###   ########.fr       */
+/*   Updated: 2018/05/10 13:29:47 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SDL_MGR_H
 # define SDL_MGR_H
-# define WIN_H 300
-# define WIN_W 300
+# define WIN_H 250
+# define WIN_W 400
 # include <SDL.h>
 # include <geometry/geometry.h>
 
