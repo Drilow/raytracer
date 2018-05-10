@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/05/10 09:20:46 by adleau           ###   ########.fr       */
+/*   Updated: 2018/05/10 12:17:59 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 # include <rt.h>
 # include <geometry/geometry.h>
 # include <stdbool.h>
+# include <cl_inc/cl_defs.h>
 
 typedef struct			s_global
 {
 	t_scene_list		scene_list;
 	t_sdl_wrapper		sdl_mgr;
+	t_cl_mgr			cl_mgr;
 	char				running;
 	t_rt				r;
 	int					drawn;

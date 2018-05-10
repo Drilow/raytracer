@@ -6,17 +6,12 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 15:49:17 by adleau            #+#    #+#             */
-/*   Updated: 2018/05/05 13:18:51 by adleau           ###   ########.fr       */
+/*   Updated: 2018/05/10 11:59:17 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		RT_H
 # define	RT_H
-# if defined(__APPLE__) || defined(__MACOSX)
-# include <OpenCL/opencl.h>
-# else
-# include <CL/cl.h>
-# endif
 # include <objects/object.h>
 # include <geometry/geometry.h>
 # include <sdl_stuff/sdl_mgr.h>

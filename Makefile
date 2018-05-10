@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/05/10 09:31:01 by adleau           ###   ########.fr        #
+#    Updated: 2018/05/10 12:19:04 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra -O3
 
-LDFLAGS =  -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+LDFLAGS =  -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework OpenCL
 LDFLAGS += `ext/SDL2/bin/sdl2-config --cflags --libs -lSDL2`
 
 LIB	 :=  -L./ext/SDL2/lib -I./ext/SDL2/include/SDL2

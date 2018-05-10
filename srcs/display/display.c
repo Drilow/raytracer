@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/05/05 14:20:28 by adleau           ###   ########.fr       */
+/*   Updated: 2018/05/10 12:39:26 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 #include <geometry/geometry.h>
 
 extern t_global	g_global;
+
+void			draw_cl(void)
+{
+
+}
 
 static void		*draw_image_core(void *arg)
 {

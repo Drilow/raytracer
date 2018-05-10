@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/05/10 09:30:42 by adleau           ###   ########.fr       */
+/*   Updated: 2018/05/10 12:45:07 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <parser/parser.h>
 #include <display/display.h>
 #define EVENT_PTR g_global.sdl_mgr.event
-
+#define CL_MGR g_global.cl_mgr
 
 t_global		g_global;
 
@@ -41,6 +41,19 @@ static void			init_ray(t_point p)
 	g_global.r.rays[p.y][p.x].vector.y = p.y - (WIN_H / 2);
 	g_global.r.rays[p.y][p.x].vector.y = -p.y + (WIN_H / 2);
 	g_global.r.rays[p.y][p.x].vector.z = g_global.r.screen_distance;
+}
+
+static void		init_cl(void)
+{
+	CL_MGR.gpu = 1;
+	if ((CL_MGR.cl_err = clGetDeviceIDs(NULL, CL_MGR.gpu ? CL_DEVICE_TYPE_GPU : CL_DEVICE_TYPE_CPU, 1, &(CL_MGR.device_id), NULL)))
+		usage("Error: Failed to create a device group!", 1);
+	if (!(CL_MGR.context = clCreateContext(0, 1, &(CL_MGR.device_id), NULL, NULL, &(CL_MGR.cl_err))))
+		usage("Error: Failed to create a compute context!", 1);
+	if (!(CL_MGR.commands = clCreateCommandQueue(CL_MGR.context, CL_MGR.device_id, 0, &(CL_MGR.cl_err))))
+		usage("Error: Failed to create a command queue!", 1);
+	if (!(CL_MGR.px_arr = (int*)clCreateBuffer(CL_MGR.context,  CL_MEM_READ_ONLY,  sizeof(int) * WIN_H * WIN_W, NULL, NULL)))
+		usage("Error: Failed to create CL buffers!", 1);
 }
 
 static void		init_rt(int ac, char **av)
@@ -70,6 +83,7 @@ void			init_global(int ac, char **av)
 {
 	g_global.drawn = 1;
 	init_sdl_wrap(&(g_global.sdl_mgr));
+	init_cl();
 	init_rt(ac, av);
 	g_global.running = 1;
 }
@@ -77,7 +91,6 @@ void			init_global(int ac, char **av)
 void			draw_func(void)
 {
 	sdl_loop_init();
-	// code
 	draw_image(&(g_global.sdl_mgr));
 	sdl_loop_end();
 }
