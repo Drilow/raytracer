@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/29 00:26:25 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/05/10 10:52:23 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,36 +56,28 @@ static bool	get_next_double(char *line, int *index, double *a)
 
   sign = 1;
   tmp = 0;
-//  ft_putendl("1.1");
   while (line[*index] != '-' && ft_isdigit(line[*index]) == 0 && \
 		 line[*index] != '\0')
 	(*index)++;
-//  ft_putendl("1.2");
   if (line[*index] == '-')
 	{
 	  sign = -1;
 	  (*index)++;
 	}
-//  ft_putendl("1.3");
   if (line[*index] == '\0')
 	return (false);
   if (ft_isdigit(line[*index]) == 0)
 	return (get_next_double(line, index, a));
-//  ft_putendl("1.4");
   while (ft_isdigit(line[*index]) == 1)
 	{
-//		ft_putendl("1.4.1");
 	  tmp = (tmp * 10) + (double)(line[*index] - '0');
 	  (*index)++;
 	}
-//  ft_putendl("1.4.2");
   if (line[*index] != '.')
 	{
 	  *a = tmp * sign;
-//	  ft_putendl("1.4.3");
 	  return (true);
 	}
-//  ft_putendl("1.5");
   (*index)++;
   digit_index = 1;
   while (ft_isdigit(line[*index]) == 1)
@@ -94,7 +86,6 @@ static bool	get_next_double(char *line, int *index, double *a)
 	  (*index)++;
 	  digit_index++;
 	}
-//  ft_putendl("6");
   *a = tmp * sign;
   return (true);
 }
@@ -118,7 +109,6 @@ static bool	add_vertex(t_vertex **v_list, char *line)
   t_vertex		*tmp;
   t_vertex		*new;
 
-//  ft_putendl("add_vertex");
   new = malloc_vertex();
   if (parse_vertex(new, line) == false)
 	return (false);
@@ -161,7 +151,6 @@ static bool	parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
   t_vertex		*vertices;
   int			v_nb;
 
-//  ft_putendl("1");
   v_index = 0;
   line_index = 0;
   vertices = NULL;
@@ -169,10 +158,8 @@ static bool	parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
   while (get_next_double(line, &line_index, &v_index) == true)
 	{
 	  v_nb++;
-//	  ft_putendl("2");
 	  if (vertices == NULL)
 		{
-//			ft_putendl("3");
 		  vertices = malloc_vertex();
 		  face->vertices = vertices;
 		  if (get_vertex(v_list, (int)v_index, vertices) == false)
@@ -180,18 +167,13 @@ static bool	parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
 		}
 	  else
 		{
-//			ft_putendl("4");
 		  while (vertices->next != NULL)
 			vertices = vertices->next;
-//		  ft_putendl("4.1");
 		  vertices->next = malloc_vertex();
-//		  ft_putendl("4.2");
 		  if (get_vertex(v_list, (int)v_index, vertices->next) == false)
 			  return (false);
-//		  ft_putendl("4.3");
 		}
 	}
-//  ft_putendl("5");
   if (v_nb < 3)
 	return (false);
   return (true);
@@ -202,23 +184,18 @@ static bool	add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
   t_poly_obj   	*tmp;
   t_poly_obj	*new;
 
-//  ft_putendl("add_face");
   new = malloc_po();
-//  ft_putendl("1");
   if (parse_face(new, line, v_list) == false)
 	return (false);
-//  ft_putendl("2");
   if (*obj == NULL)
 	*obj = new;
   else
 	{
-//		ft_putendl("3");
 	  tmp = *obj;
 	  while (tmp->next != NULL)
 		tmp = tmp->next;
 	  tmp->next = new;
 	}
-//  ft_putendl("4");
   return (true);
 }
 
@@ -255,6 +232,44 @@ static char		*get_file_name(char *line)
 	return (file);
 }
 
+static void		get_face_maxd(t_vertex *f, double *d)
+{
+	double		tmp_d;
+	double		tmp;
+
+	tmp_d = 0;
+	while (f != NULL)
+	{
+		tmp = sqrt(deltasq(set_rpoint(0, 0, 0), f->p));
+		if (tmp_d < tmp)
+			tmp_d = tmp;
+		f = f->next;
+	}
+	if (tmp_d > *d)
+		*d = tmp_d;
+}
+
+void			set_obj(t_obj *o)
+{
+	t_poly_obj	*tmp;
+	t_vertex	*face;
+	t_rpoint	pos;
+	double		tmp_d;
+
+	tmp = (t_poly_obj *)o->obj;
+	tmp_d = 0;
+	while (tmp != NULL)
+	{
+		face = tmp->vertices;
+		pos = o->position;
+		get_face_maxd(face, &tmp_d);
+		face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
+        face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
+		tmp = tmp->next;
+	}
+	((t_poly_obj *)o->obj)->max_d = tmp_d;
+}
+
 t_poly_obj		*parse_obj(char *scene_line)
 {
   t_poly_obj	*obj;
@@ -266,34 +281,26 @@ t_poly_obj		*parse_obj(char *scene_line)
 
   obj = NULL;
   v_list = NULL;
-//  ft_putendl("1");
   file = get_file_name(scene_line);
-  // ft_putendl("2");
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		ft_exit("Couldn't open obj file", 1);
-//		return (NULL);
 	i = 0;
 	while (get_next_line(fd, &line) == 1)
 	{
 	  if (read_line(&obj, &v_list, line) == false)
 	  {
-//	  return (NULL);
 		  free(line);
 		  if (v_list != NULL)
 			  free_vlist(&v_list);
-//		  printf("Lalalala\n");
 		  ft_putstr("Parsing ended at line ");
 		  ft_putnbr(i);
 		  ft_putstr("\n");
 		  return (obj);
 	  }
 	  i++;
-//	  ft_putendl("2.2");
-//	  printf("%d\n", i++);
 		free(line);
 	}
-//	ft_putendl("3");
 	free_vlist(&v_list);
   return (obj);
 }

@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 18:29:31 by adleau           ###   ########.fr       */
+/*   Updated: 2018/05/10 10:56:08 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@ typedef struct		s_obj
 	t_rgb			color;
 	struct s_obj	*next;
 }					t_obj;
+
+void			set_obj(t_obj *o);
 
 #endif

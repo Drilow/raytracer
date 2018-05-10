@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 18:56:33 by adleau           ###   ########.fr       */
+/*   Updated: 2018/05/10 10:54:01 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ static bool	read_line(char *line)
 	index = 0;
 	if (obj_type == 6)
 	{
-//		((t_obj *)new)->obj = parse_obj(line + (sizeof(char) * 4));
 		((t_obj *)new)->obj = parse_obj(line);
 		index = 4;
 		while (line[index] != ' ')
@@ -121,7 +120,7 @@ static bool	read_line(char *line)
 		if (((t_obj *)new)->obj == NULL || get_next_rpoint(line, &(((t_obj *)new)->position), &index) == false)
 			return (false);
 		((t_obj *)new)->color = ft_rgb(170, 130, 120, 0);
-//		return (true);
+		set_obj((t_obj *)new);
 	}
 	if (obj_type != 6 && get_obj(line, new, &index, obj_type) == false)
 		return (false);

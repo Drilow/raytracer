@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
+/*   Updated: 2018/05/05 14:20:28 by adleau           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libft.h>
 #include <thread/thread.h>
 #include <rt.h>
@@ -35,9 +47,8 @@ static void		*draw_image_core(void *arg)
 		{
 			tmp = ray_tracing(r, r->rays[p.y][p.x]);
 			if (tmp.o != NULL)
-				draw_px(e->surf, p.x, p.y, \
+				draw_px(e->surf, p.x, p.y,		\
 				get_ray_color(r, tmp));
-//				get_ray_color(r, tmp.o, tmp.p));
 			else
 				draw_px(e->surf, p.x, p.y, ft_rgb(0, 0, 0, 0));
 		}

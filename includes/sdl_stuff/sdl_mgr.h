@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:22:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/29 00:38:04 by adleau           ###   ########.fr       */
+/*   Updated: 2018/05/10 09:20:22 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 # define WIN_H 300
 # define WIN_W 300
 # include <SDL.h>
-# include <SDL_image.h>
 # include <geometry/geometry.h>
 
 typedef struct			s_sdl_wrapper
 {
 	SDL_Window			*screen;
 	SDL_Surface			*surf;
+	void				*surf2;
 	SDL_Renderer		*renderer;
 	SDL_Texture			*tex;
 	SDL_Event			event;

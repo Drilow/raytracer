@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:09:05 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/09 21:47:37 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/10 10:01:07 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define OBJ_THREADS_NB 8
 # define PI M_PI
 # define FOV (PI / 3)
-# define BRIGHTNESS 0.065
+# define BRIGHTNESS 0.055
 //# define SHINING_FACTOR 0.75
 # define SHINING_FACTOR 9
 //# define AMBIENT_LIGHT 0.1

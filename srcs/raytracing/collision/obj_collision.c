@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:30:52 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 23:30:53 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/05/10 10:08:48 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,11 @@ static t_rpoint	add_rpoints(t_rpoint a, t_rpoint b)
 
 static bool	face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision *col)
 {
-	t_plane		pl;
 	t_rpoint	tmp;
 	double		a;
 	t_vertex	*tmpv;
 
-//	pl.p = f.p1;
-//	pl.vector = cross_product(get_vector(f.p1, f.p2), get_vector(f.p1, f.p3));
-	pl.p = face->p;
-	pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
-	pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
-	if (plane_collision(ray, &pl, &tmp) == false)
+	if (plane_collision(ray, &(face->pl), &tmp) == false)
 		return (false);
 	tmpv = face;
 	a = 0;
@@ -41,16 +35,10 @@ static bool	face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision 
 		a = a + vangle(get_vector(tmp, add_rpoints(pos, tmpv->p)), get_vector(tmp, add_rpoints(pos, tmpv->next->p)));
 		tmpv = tmpv->next;
 	}
-//	a = a + vangle(get_vector(tmp, tmpv->p), get_vector(tmp, face->p));
 	a = a + vangle(get_vector(tmp, add_rpoints(pos, tmpv->p)), get_vector(tmp, add_rpoints(pos, face->p)));
-/*
-	a = vangle(get_vector(tmp, f.p1), get_vector(tmp, f.p2)) + \
-		vangle(get_vector(tmp, f.p2), get_vector(tmp, f.p3)) + \
-		vangle(get_vector(tmp, f.p3), get_vector(tmp, f.p1));
-*/
 	if (a < (2 * PI) * 0.999999 || a > (2 * PI) * 1.000001)
 		return (false);
-	col->normal = pl.vector;
+	col->normal = face->pl.vector;
 	col->p = tmp;
 	return (true);
 }
@@ -64,7 +52,8 @@ bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col)
 
 	d = -1;
 	potmp = po;
-//	ft_putendl("1");
+		if (point_to_line_distance(col->o->position, ray.p, ray.vector) > po->max_d)
+		return (false);
 	while (potmp != NULL)
 	{
 		if (face_collision(ray, col->o->position, potmp->vertices, &tmp) == true && (d == -1 || deltasq(ray.p, tmp.p) < d))
@@ -77,7 +66,6 @@ bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col)
 
 	if (d == -1)
 		return (false);
-//	ft_putendl("2");
 	*col = fcol;
 	return (true);
 }
