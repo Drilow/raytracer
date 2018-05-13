@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:30:52 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/07 19:55:58 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/13 19:31:58 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool	face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision 
 
 //	pl.p = f.p1;
 //	pl.vector = cross_product(get_vector(f.p1, f.p2), get_vector(f.p1, f.p3));
-	pl.p = face->p;
+//	pl.p = face->p;
 	pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
 	pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 	if (plane_collision(ray, &pl, &tmp) == false)
@@ -57,6 +57,7 @@ static bool	face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision 
 }
 */
 
+
 static bool		face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision *col)
 {
 	t_rpoint	tmp;
@@ -80,6 +81,7 @@ static bool		face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision
 	return (true);
 }
 
+
 bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col)
 {
 	t_collision	fcol;
@@ -89,13 +91,17 @@ bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col)
 
 	d = -1;
 	potmp = po;
+	tmp.o = col->o;
 	if (point_to_line_distance(col->o->position, ray.p, ray.vector) > po->max_d)
 		return (false);
 	while (potmp != NULL)
 	{
 		if (face_collision(ray, col->o->position, potmp->vertices, &tmp) == true && (d == -1 || deltasq(ray.p, tmp.p) < d))
 		{
-			fcol = tmp;
+//			fcol = tmp;
+			fcol.o = tmp.o;
+			fcol.p = tmp.p;
+			fcol.normal = tmp.normal;
 			d = deltasq(ray.p, tmp.p);
 		}
 		potmp = potmp->next;
@@ -103,7 +109,9 @@ bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col)
 
 	if (d == -1)
 		return (false);
-	*col = fcol;
+//	*col = fcol;
+	col->p = fcol.p;
+	col->normal = fcol.normal;
 	return (true);
 }
 

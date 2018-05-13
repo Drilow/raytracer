@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/09 22:50:07 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/13 20:18:32 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,10 @@ t_rgb				get_ray_color(t_rt *r, t_collision c)
 
 	tmp_color = get_color(r, c);
 	distance_factor = deltasq(r->cam_position, c.p) / LIGHT_DISTANCE_FACTOR;
-	if (distance_factor < 1)
+//	if (distance_factor < 1)
 		distance_factor = 1;
 	color = get_final_color(tmp_color, distance_factor);
+//	if (c.o->type == 2 && color.g < 50)
+//		printf("Olalala !\n");
 	return (color);
 }

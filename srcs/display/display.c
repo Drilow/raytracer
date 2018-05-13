@@ -9,6 +9,49 @@
 
 extern t_global	g_global;
 
+/*
+//static void			*draw_image_core(void *arg)
+void				draw_image(t_sdl_wrapper *e)
+{
+//	t_thread		th;
+//	t_sdl_wrapper	*e;
+	t_point			p;
+	t_rt			*r;
+	t_collision		tmp;
+
+//	th = *((t_thread *)arg);
+//	e = th.e;
+	r = &g_global.r;
+//	p.x = th.th_index;
+	p.x = 0;
+	while (p.x < WIN_W)
+	{
+		p.y = -1;
+//		if (th.th_index == 0)
+//		{
+			ft_putnbr(p.x);
+			ft_putstr(" / ");
+			ft_putnbr(WIN_W);
+			ft_putstr("\n");
+//		}
+		while (++p.y < WIN_H)
+		{
+			tmp = ray_tracing(r, r->rays[p.y][p.x]);
+			if (tmp.o != NULL)
+				draw_px(e->surf, p.x, p.y, \
+						get_ray_color(r, tmp));
+//get_ray_color(r, tmp.o, tmp.p));
+			else
+				draw_px(e->surf, p.x, p.y, ft_rgb(0, 0, 0, 0));
+		}
+//		p.x = p.x + THREADS_NB;
+		p.x++;
+	}
+	g_global.drawn = 0;
+}
+*/
+
+
 static void		*draw_image_core(void *arg)
 {
 	t_thread	th;
@@ -16,6 +59,7 @@ static void		*draw_image_core(void *arg)
 	t_point		p;
 	t_rt		*r;
 	t_collision	tmp;
+	t_rgb		tmpclr;
 
 	th = *((t_thread *)arg);
 	e = th.e;
@@ -24,6 +68,7 @@ static void		*draw_image_core(void *arg)
 	while (p.x < WIN_W)
 	{
 		p.y = -1;
+
 		if (th.th_index == 0)
 		{
 			ft_putnbr(p.x);
@@ -31,15 +76,28 @@ static void		*draw_image_core(void *arg)
 			ft_putnbr(WIN_W);
 			ft_putstr("\n");
 		}
+
 		while (++p.y < WIN_H)
 		{
 			tmp = ray_tracing(r, r->rays[p.y][p.x]);
 			if (tmp.o != NULL)
+			{
+				tmpclr = get_ray_color(r, tmp);
+				if (tmp.o->type == 2 && tmpclr.g < 50 && p.y > 200)
+				{
+					printf("incorrect pixel : x= %d & y= %d\n", p.x, p.y);
+					printf("rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
+				}
 				draw_px(e->surf, p.x, p.y, \
 				get_ray_color(r, tmp));
 //				get_ray_color(r, tmp.o, tmp.p));
+			}
 			else
+			{
+//				if (p.y > 120)
+//					printf("Black pixel : x=%d & y=%d\n", p.x, p.y);
 				draw_px(e->surf, p.x, p.y, ft_rgb(0, 0, 0, 0));
+			}
 		}
 		p.x = p.x + THREADS_NB;
 	}
