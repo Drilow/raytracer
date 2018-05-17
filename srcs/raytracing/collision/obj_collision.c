@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:30:52 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/13 19:31:58 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/17 20:37:32 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static bool		face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision
 		tmpv = tmpv->next;
 	}
 	a = a + vangle(get_vector(tmp, add_rpoints(pos, tmpv->p)), get_vector(tmp, add_rpoints(pos, face->p)));
-	if (a < (2 * PI) * 0.999999 || a > (2 * PI) * 1.000001)
+//	if (a < (2 * PI) * 0.999999 || a > (2 * PI) * 1.000001)
+	if (a < (2 * PI * 0.9999999999))
 		return (false);
 	col->normal = face->pl.vector;
 	col->p = tmp;

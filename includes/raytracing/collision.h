@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 13:03:48 by adleau            #+#    #+#             */
-/*   Updated: 2018/05/09 23:03:34 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/17 19:49:54 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ bool				collision(t_ray ray, t_collision *c);
 t_rpoint			normal_collision_vector(t_collision c);
 t_collision			ray_tracing(t_rt *r, t_ray ray);
 
-t_rgb				get_ray_color(t_rt *r, t_collision c);
+//t_rgb				get_ray_color(t_rt *r, t_collision c);
+t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug);
 #endif

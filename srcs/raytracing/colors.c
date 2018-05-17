@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/13 20:18:32 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/17 20:13:47 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static t_rpoint		add_color(t_rpoint c, t_rpoint oclr, t_light *l, double af)
 	return (new_c);
 }
 
-static t_rpoint		get_color(t_rt *r, t_collision c)
+static t_rpoint		get_color(t_rt *r, t_collision c, bool debug)
 {
 	t_rpoint		color;
 	t_rpoint		ocolor;
@@ -109,16 +109,26 @@ static t_rpoint		get_color(t_rt *r, t_collision c)
 	{
 		otmp = r->objects;
 		afactor = angle_factor(c, l->source);
+		if (debug == true)
+            printf("afactor = %f\n", afactor);
 		while (otmp != NULL)
 		{
 			tmpc.o = otmp;
 			if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
+			{
 				afactor = 0;
+				if (debug == true)
+				{
+					printf("collision ! obj type = %d\n", otmp->type);
+				}
+			}
 			otmp = otmp->next;
 		}
 		color = add_color(color, ocolor, l, afactor);
 		l = l->next;
 	}
+//	if (debug == true)
+//		printf("\n");
 	return (color);
 }
 
@@ -147,13 +157,15 @@ static t_rgb		get_final_color(t_rpoint c, double df)
 	return (color);
 }
 
-t_rgb				get_ray_color(t_rt *r, t_collision c)
+t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug)
 {
 	t_rgb			color;
 	t_rpoint		tmp_color;
 	double			distance_factor;
 
-	tmp_color = get_color(r, c);
+	tmp_color = get_color(r, c, debug);
+	if (debug == true)
+		printf("get_ray_color : rgb(%f, %f, %f)\n", tmp_color.x, tmp_color.y, tmp_color.z);
 	distance_factor = deltasq(r->cam_position, c.p) / LIGHT_DISTANCE_FACTOR;
 //	if (distance_factor < 1)
 		distance_factor = 1;

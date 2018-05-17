@@ -82,14 +82,19 @@ static void		*draw_image_core(void *arg)
 			tmp = ray_tracing(r, r->rays[p.y][p.x]);
 			if (tmp.o != NULL)
 			{
-				tmpclr = get_ray_color(r, tmp);
+				if ((p.x == 361 || p.x == 360) && p.y == 209)
+					tmpclr = get_ray_color(r, tmp, true);
+				else
+					tmpclr = get_ray_color(r, tmp, false);
 				if (tmp.o->type == 2 && tmpclr.g < 50 && p.y > 200)
 				{
-					printf("incorrect pixel : x= %d & y= %d\n", p.x, p.y);
+					printf("incorrect pixel (%d, %d) : ", p.x, p.y);
 					printf("rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
 				}
+				if (p.x == 361 && p.y == 209)
+					printf("correct(361, 209) : rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
 				draw_px(e->surf, p.x, p.y, \
-				get_ray_color(r, tmp));
+						get_ray_color(r, tmp, false));
 //				get_ray_color(r, tmp.o, tmp.p));
 			}
 			else

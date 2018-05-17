@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:51:39 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 20:07:35 by adleau           ###   ########.fr       */
+/*   Updated: 2018/05/17 19:35:00 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ t_rgb	ft_rgb(int r, int g, int b, int alpha)
 {
 	t_rgb	rgb;
 
-	rgb.r = (char)r;
-	rgb.g = (char)g;
-	rgb.b = (char)b;
-	rgb.trans = (char)alpha;
+	rgb.r = (unsigned char)r;
+	rgb.g = (unsigned char)g;
+	rgb.b = (unsigned char)b;
+	rgb.trans = (unsigned char)alpha;
 	return (rgb);
 }
 
