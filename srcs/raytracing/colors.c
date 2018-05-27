@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/17 20:13:47 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/27 16:29:40 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,13 +114,13 @@ static t_rpoint		get_color(t_rt *r, t_collision c, bool debug)
 		while (otmp != NULL)
 		{
 			tmpc.o = otmp;
-			if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
+			if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc, debug) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
 			{
 				afactor = 0;
-				if (debug == true)
-				{
-					printf("collision ! obj type = %d\n", otmp->type);
-				}
+//				if (debug == true)
+//				{
+//					printf("collision ! obj type = %d\n", otmp->type);
+//				}
 			}
 			otmp = otmp->next;
 		}
@@ -164,8 +164,8 @@ t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug)
 	double			distance_factor;
 
 	tmp_color = get_color(r, c, debug);
-	if (debug == true)
-		printf("get_ray_color : rgb(%f, %f, %f)\n", tmp_color.x, tmp_color.y, tmp_color.z);
+//	if (debug == true)
+//		printf("get_ray_color : rgb(%f, %f, %f)\n", tmp_color.x, tmp_color.y, tmp_color.z);
 	distance_factor = deltasq(r->cam_position, c.p) / LIGHT_DISTANCE_FACTOR;
 //	if (distance_factor < 1)
 		distance_factor = 1;

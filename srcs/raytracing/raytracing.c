@@ -6,14 +6,14 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:11:40 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/13 19:32:04 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/27 14:40:58 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raytracing/collision.h>
 
 //t_bool				collision(t_ray ray, t_obj *o, t_rpoint *p)
-bool					collision(t_ray ray, t_collision *c)
+bool					collision(t_ray ray, t_collision *c, bool test)
 {
 	t_obj				*o;
 	t_rpoint			*p;
@@ -32,12 +32,12 @@ bool					collision(t_ray ray, t_collision *c)
 			cylinder_collision(ray, (t_cylinder *)o->obj, p) == true)
 		return (true);
 	else if (o->type == 6 && \
-			 poly_obj_collision(ray, (t_poly_obj *)o->obj, c) == true)
+			 poly_obj_collision(ray, (t_poly_obj *)o->obj, c, test) == true)
         return (true);
 	return (false);
 }
 
-t_collision			ray_tracing(t_rt *r, t_ray ray)
+t_collision			ray_tracing(t_rt *r, t_ray ray, bool test)
 {
 	t_collision		c;
 	t_rpoint		p;
@@ -54,7 +54,7 @@ t_collision			ray_tracing(t_rt *r, t_ray ray)
 //		if (collision(ray, tmp, &p) == true)
 		tmpc.o = tmp;
 		tmpc.p = p;
-		if (collision(ray, &tmpc) == true)
+		if (collision(ray, &tmpc, test) == true)
 		{
 			if (c.o == NULL || (deltasq(ray.p, tmpc.p) < deltasq(ray.p, c.p)))
 			{

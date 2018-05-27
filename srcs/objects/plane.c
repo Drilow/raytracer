@@ -6,12 +6,11 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:42:16 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 22:58:57 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/05/27 16:18:48 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <objects/object.h>
-#include <stdbool.h>
 
 bool			plane_collision(t_ray ray, t_plane *pl, t_rpoint *p)
 {

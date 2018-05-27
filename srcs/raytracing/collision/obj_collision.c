@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:30:52 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/17 20:37:32 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/27 16:31:28 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <objects/object.h>
 #include <maths/transformations.h>
 #include <raytracing/collision.h>
+
+#include <stdbool.h>
 
 static t_rpoint	add_rpoints(t_rpoint a, t_rpoint b)
 {
@@ -58,14 +60,19 @@ static bool	face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision 
 */
 
 
-static bool		face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision *col)
+static bool		face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision *col, bool test)
 {
 	t_rpoint	tmp;
 	double		a;
+//	double		atmp;
 	t_vertex	*tmpv;
 
+//	if (test == true)
+//		printf("debug1\n");
 	if (plane_collision(ray, &(face->pl), &tmp) == false)
 		return (false);
+//	if (test == true)
+//		printf("debug2\n");
 	tmpv = face;
 	a = 0;
 	while (tmpv->next != NULL)
@@ -73,17 +80,26 @@ static bool		face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision
 		a = a + vangle(get_vector(tmp, add_rpoints(pos, tmpv->p)), get_vector(tmp, add_rpoints(pos, tmpv->next->p)));
 		tmpv = tmpv->next;
 	}
+//	atmp = a;
+//	if (test == true)
+//		printf("a = %f\n", a);
 	a = a + vangle(get_vector(tmp, add_rpoints(pos, tmpv->p)), get_vector(tmp, add_rpoints(pos, face->p)));
 //	if (a < (2 * PI) * 0.999999 || a > (2 * PI) * 1.000001)
-	if (a < (2 * PI * 0.9999999999))
+	if (a < (2 * PI * 0.9999999999) || isnan(a) != 0)
 		return (false);
+//	if (test == true)
+//       printf("debug3\n");
 	col->normal = face->pl.vector;
 	col->p = tmp;
+//	if (test == true)
+//		printf("face_collision == true, a = %f, atmp = %f\n", a, atmp);
+	if (test == true)
+		return (true);
 	return (true);
 }
 
 
-bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col)
+bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col, bool test)
 {
 	t_collision	fcol;
 	t_collision	tmp;
@@ -97,7 +113,7 @@ bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col)
 		return (false);
 	while (potmp != NULL)
 	{
-		if (face_collision(ray, col->o->position, potmp->vertices, &tmp) == true && (d == -1 || deltasq(ray.p, tmp.p) < d))
+		if (face_collision(ray, col->o->position, potmp->vertices, &tmp, test) == true && (d == -1 || deltasq(ray.p, tmp.p) < d))
 		{
 //			fcol = tmp;
 			fcol.o = tmp.o;

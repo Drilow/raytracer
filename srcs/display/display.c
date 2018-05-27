@@ -59,7 +59,7 @@ static void		*draw_image_core(void *arg)
 	t_point		p;
 	t_rt		*r;
 	t_collision	tmp;
-	t_rgb		tmpclr;
+//	t_rgb		tmpclr;
 
 	th = *((t_thread *)arg);
 	e = th.e;
@@ -79,20 +79,21 @@ static void		*draw_image_core(void *arg)
 
 		while (++p.y < WIN_H)
 		{
-			tmp = ray_tracing(r, r->rays[p.y][p.x]);
+			tmp = ray_tracing(r, r->rays[p.y][p.x], false);
 			if (tmp.o != NULL)
 			{
-				if ((p.x == 361 || p.x == 360) && p.y == 209)
-					tmpclr = get_ray_color(r, tmp, true);
-				else
-					tmpclr = get_ray_color(r, tmp, false);
-				if (tmp.o->type == 2 && tmpclr.g < 50 && p.y > 200)
-				{
-					printf("incorrect pixel (%d, %d) : ", p.x, p.y);
-					printf("rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
-				}
-				if (p.x == 361 && p.y == 209)
-					printf("correct(361, 209) : rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
+//				if ((p.x == 361 || p.x == 360) && p.y == 209)
+//				if (p.x == 360 && p.y == 209)
+//					tmpclr = get_ray_color(r, tmp, true);
+//				else
+//					tmpclr = get_ray_color(r, tmp, false);
+//				if (tmp.o->type == 2 && tmpclr.g < 50 && p.y > 200)
+//				{
+//					printf("incorrect pixel (%d, %d) : ", p.x, p.y);
+//					printf("rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
+//				}
+//				if (p.x == 361 && p.y == 209)
+//					printf("correct(361, 209) : rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
 				draw_px(e->surf, p.x, p.y, \
 						get_ray_color(r, tmp, false));
 //				get_ray_color(r, tmp.o, tmp.p));
