@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 15:49:17 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 18:54:10 by adleau           ###   ########.fr       */
+/*   Updated: 2018/06/04 18:08:08 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct		s_rt
 	t_ray			rays[WIN_H][WIN_W];
 	t_obj			*objects;
 	t_light			*lights;
+	t_rgb			ambient_light;
 }					t_rt;
 
 

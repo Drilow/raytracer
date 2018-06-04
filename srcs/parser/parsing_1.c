@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/07 18:39:03 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:24:05 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int		get_object_type(char *s)
 		return (5);
 	if (cmp_chars(s, "obj", 0) == true)
         return (6);
+	if (cmp_chars(s, "ambient light", 0) == true)
+        return (7);
 	if (cmp_chars(s, "//", 0) == true)
 		return (-2);
 	return (-1);
@@ -87,6 +89,24 @@ static void		add_to_list(void *o, int otype)
 	}
 }
 
+static bool	set_ambient_light(char *line)
+{
+	int		index;
+	t_rgb	alight;
+
+	index = 0;
+	if (get_next_nb(line, &index, NULL, &(alight.r)) == false)
+		return (false);
+	if (get_next_nb(line, &index, NULL, &(alight.g)) == false)
+		return (false);
+	if (get_next_nb(line, &index, NULL, &(alight.b)) == false)
+		return (false);
+	if (get_next_nb(line, &index, NULL, &(alight.trans)) == false)
+		return (false);
+	g_global.r.ambient_light = alight;
+	return (true);
+}
+
 static bool	read_line(char *line)
 {
 	int			obj_type;
@@ -100,6 +120,8 @@ static bool	read_line(char *line)
 		return (true);
 	else if (obj_type == 5)
 		return (set_camera(line));
+	else if (obj_type == 7)
+		return (set_ambient_light(line));
 	if (obj_type == 0)
 	{
 	  if (!(new = (t_light *)malloc(sizeof(t_light))))
@@ -140,6 +162,7 @@ bool			parse(char *file)
 		return (false);
 	g_global.r.objects = NULL;
 	g_global.r.lights = NULL;
+	g_global.r.ambient_light = ft_rgb(0, 0, 0, 0);
 	while (get_next_line(fd, &line) == 1)
 	{
 		if (read_line(line) == false)

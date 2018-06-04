@@ -6,12 +6,15 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/27 16:29:40 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/06/04 18:59:38 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <raytracing/collision.h>
+#include <global.h>
 #include <extra/extra_defs.h>
+
+extern t_global g_global;
 
 static double		angle_factor(t_collision c, t_rpoint lsrc)
 {
@@ -20,11 +23,13 @@ static double		angle_factor(t_collision c, t_rpoint lsrc)
 
 	angle = vangle(get_vector(c.p, lsrc), normal_collision_vector(c));
 	if (angle < 0 || angle > PI)
-		return (AMBIENT_LIGHT);
+		return (0);
+//		return (AMBIENT_LIGHT);
 	else if (angle > (PI / 2) && c.o->type == 2)
 		angle = PI - angle;
 	else if (angle > (PI / 2))
-		return (AMBIENT_LIGHT);
+		return (0);
+//		return (AMBIENT_LIGHT);
 	af = ((PI / 2) - angle) / (PI / 2);
 	return (af);
 }
@@ -85,9 +90,9 @@ static t_rpoint		add_color(t_rpoint c, t_rpoint oclr, t_light *l, double af)
 
 	shining = pow(af, 1 + SHINING_FACTOR);
 	tmp_c = color_to_add(oclr, l->color, shining);
-	tmp_c = set_rpoint(tmp_c.x * af * BRIGHTNESS, \
-					   tmp_c.y * af * BRIGHTNESS, \
-					   tmp_c.z * af * BRIGHTNESS);
+	tmp_c = set_rpoint(tmp_c.x * af * BRIGHTNESS + g_global.r.ambient_light.r, \
+					   tmp_c.y * af * BRIGHTNESS + g_global.r.ambient_light.g, \
+					   tmp_c.z * af * BRIGHTNESS + g_global.r.ambient_light.b);
 	new_c = set_rpoint(c.x + tmp_c.x, c.y + tmp_c.y, c.z + tmp_c.z);
 	return (new_c);
 }

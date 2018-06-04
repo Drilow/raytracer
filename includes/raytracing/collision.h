@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 13:03:48 by adleau            #+#    #+#             */
-/*   Updated: 2018/05/27 14:51:37 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/06/04 17:53:34 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define BRIGHTNESS 0.065
 # define SHINING_FACTOR 9
 //# define AMBIENT_LIGHT 0.1
-# define AMBIENT_LIGHT 0
+# define AMBIENT_LIGHT 12
 # define LIGHT_DISTANCE_FACTOR 2000
 
 typedef struct		s_collision
