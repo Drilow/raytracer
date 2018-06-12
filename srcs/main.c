@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/05/07 19:49:23 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/06/12 15:40:02 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static void		init_rt(int ac, char **__attribute__((unused))av)
 
 void			init_global(int ac, char **av)
 {
+//	ft_putendl("debug1");
 	g_global.drawn = 1;
 	init_sdl_wrap(&(g_global.sdl_mgr));
 	init_rt(ac, av);

@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/04 18:59:38 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/06/12 15:41:09 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,11 @@ static t_rpoint		add_color(t_rpoint c, t_rpoint oclr, t_light *l, double af)
 	tmp_c = set_rpoint(tmp_c.x * af * BRIGHTNESS + g_global.r.ambient_light.r, \
 					   tmp_c.y * af * BRIGHTNESS + g_global.r.ambient_light.g, \
 					   tmp_c.z * af * BRIGHTNESS + g_global.r.ambient_light.b);
+/*
+	tmp_c = set_rpoint(tmp_c.x * af * BRIGHTNESS, \
+                       tmp_c.y * af * BRIGHTNESS, \
+                       tmp_c.z * af * BRIGHTNESS);
+*/
 	new_c = set_rpoint(c.x + tmp_c.x, c.y + tmp_c.y, c.z + tmp_c.z);
 	return (new_c);
 }
