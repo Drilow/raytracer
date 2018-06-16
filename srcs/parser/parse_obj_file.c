@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/07 18:43:00 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/06/16 19:26:42 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -336,4 +336,30 @@ t_poly_obj		*parse_obj(char *scene_line)
 //	ft_putendl("3");
 	free_vlist(&v_list);
   return (obj);
+}
+
+bool			get_cube(char *s, t_obj *c, int *index)
+{
+    double		size;
+	t_rpoint	*p;
+	t_poly_obj	*o;
+	t_vertex	*t;
+
+    if (get_next_rpoint(s, &(obj->position), &index) == false ||
+		get_next_nb(s, index, &size, NULL) == false)
+        return (false);
+	if (!(p = (t_rpoint *)malloc(sizeof(t_rpoint) * 8)))
+		exit(1);
+// Changer la distance au centre :
+	p[0] = set_rpoint(size, size, size);
+	p[1] = set_rpoint(size, size, -size);
+	p[2] = set_rpoint(size, -size, size);
+	p[3] = set_rpoint(size, -size, -size);
+	p[4] = set_rpoint(-size, size, size);
+	p[5] = set_rpoint(-size, size, -size);
+	p[6] = set_rpoint(-size, -size, size);
+	p[7] = set_rpoint(-size, -size, -size);
+	c->obj = malloc_po();
+
+    return (true);
 }

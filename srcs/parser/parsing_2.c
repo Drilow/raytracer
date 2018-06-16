@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 17:04:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 19:30:20 by adleau           ###   ########.fr       */
+/*   Updated: 2018/06/16 18:29:11 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ static int		transform(char *s, t_rpoint *p, int *index)
 	return (0);
 }
 
-static bool	get_obj_core(char *s, t_obj *obj, int *index, t_rgb *clr)
+/*
+bool			get_obj_core(char *s, t_obj *obj, int *index, t_rgb *clr)
 {
 	t_rgb		*color;
 
@@ -100,6 +101,7 @@ static bool	get_obj_core(char *s, t_obj *obj, int *index, t_rgb *clr)
 		return (false);
 	return (true);
 }
+*/
 
 bool			get_obj(char *s, void *o, int *index, int type)
 {
