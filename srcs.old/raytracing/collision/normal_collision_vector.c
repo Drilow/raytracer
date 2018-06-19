@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:37:03 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/19 19:40:41 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/04/28 23:23:59 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_rpoint				normal_collision_vector(t_collision c)
 		ncv = get_cone_ncv((t_cone *)c.o->obj, c.p);
 	if (c.o->type == 4)
 		ncv = get_cylinder_ncv((t_cylinder *)c.o->obj, c.p);
-	if (c.o->type == 6 || (c.o->type / 10) == 6)
+	if (c.o->type == 6)
 		ncv = c.normal;
 	return (ncv);
 }

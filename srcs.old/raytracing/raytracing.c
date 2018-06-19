@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:11:40 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/19 19:04:20 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/27 14:40:58 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool					collision(t_ray ray, t_collision *c, bool test)
 	else if (o->type == 4 && \
 			cylinder_collision(ray, (t_cylinder *)o->obj, p) == true)
 		return (true);
-	else if ((o->type == 6 || (o->type / 10) == 6) && \
+	else if (o->type == 6 && \
 			 poly_obj_collision(ray, (t_poly_obj *)o->obj, c, test) == true)
         return (true);
 	return (false);

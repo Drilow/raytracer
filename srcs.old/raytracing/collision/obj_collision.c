@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:30:52 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/19 19:22:08 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/05/27 16:31:28 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include <raytracing/collision.h>
 
 #include <stdbool.h>
-
-#include <libft.h>
 
 static t_rpoint	add_rpoints(t_rpoint a, t_rpoint b)
 {
@@ -127,14 +125,10 @@ bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col, bool test
 	}
 
 	if (d == -1)
-	{
-//		ft_putendl("false");
 		return (false);
-	}
 //	*col = fcol;
 	col->p = fcol.p;
 	col->normal = fcol.normal;
-//	ft_putendl("true");
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/19 19:33:34 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/06/16 19:26:42 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdlib.h>
 #include <libft.h>
 #include <fcntl.h>
-#include <parser/parser.h>
 
 static t_poly_obj	*malloc_po(void)
 {
@@ -57,28 +56,36 @@ static bool	get_next_double(char *line, int *index, double *a)
 
   sign = 1;
   tmp = 0;
+//  ft_putendl("1.1");
   while (line[*index] != '-' && ft_isdigit(line[*index]) == 0 && \
 		 line[*index] != '\0')
 	(*index)++;
+//  ft_putendl("1.2");
   if (line[*index] == '-')
 	{
 	  sign = -1;
 	  (*index)++;
 	}
+//  ft_putendl("1.3");
   if (line[*index] == '\0')
 	return (false);
   if (ft_isdigit(line[*index]) == 0)
 	return (get_next_double(line, index, a));
+//  ft_putendl("1.4");
   while (ft_isdigit(line[*index]) == 1)
 	{
+//		ft_putendl("1.4.1");
 	  tmp = (tmp * 10) + (double)(line[*index] - '0');
 	  (*index)++;
 	}
+//  ft_putendl("1.4.2");
   if (line[*index] != '.')
 	{
 	  *a = tmp * sign;
+//	  ft_putendl("1.4.3");
 	  return (true);
 	}
+//  ft_putendl("1.5");
   (*index)++;
   digit_index = 1;
   while (ft_isdigit(line[*index]) == 1)
@@ -87,6 +94,7 @@ static bool	get_next_double(char *line, int *index, double *a)
 	  (*index)++;
 	  digit_index++;
 	}
+//  ft_putendl("6");
   *a = tmp * sign;
   return (true);
 }
@@ -330,62 +338,19 @@ t_poly_obj		*parse_obj(char *scene_line)
   return (obj);
 }
 
-static t_vertex	*add_cube_face(t_rpoint f, t_rpoint pos)
-{
-  t_vertex		*face;
-
-  face = malloc_vertex();
-  face->next = malloc_vertex();
-  face->next->next = malloc_vertex();
-  face->next->next->next = malloc_vertex();
-  // assign "pl"
-  if (f.x != 0)
-	{
-	  face->p = set_rpoint(f.x, -f.x, -f.x);
-	  face->next->p = set_rpoint(f.x, -f.x, f.x);
-	  face->next->next->p = set_rpoint(f.x, f.x, f.x);
-	  face->next->next->next->p = set_rpoint(f.x, f.x, -f.x);
-	}
-  else if (f.y != 0)
-	{
-	  face->p = set_rpoint(-f.y, f.y, -f.y);
-	  face->next->p = set_rpoint(f.y, f.y, -f.y);
-	  face->next->next->p = set_rpoint(f.y, f.y, f.y);
-	  face->next->next->next->p = set_rpoint(-f.y, f.y, f.y);
-	}
-  else if (f.z != 0)
-	{
-	  face->p = set_rpoint(-f.z, -f.z, f.z);
-	  face->next->p = set_rpoint(-f.z, f.z, f.z);
-	  face->next->next->p = set_rpoint(f.z, f.z, f.z);
-	  face->next->next->next->p = set_rpoint(f.z, -f.z, f.z);
-	}
-
-  face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
-  face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
-//  face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
-  return (face);
-}
-
 bool			get_cube(char *s, t_obj *c, int *index)
 {
     double		size;
-	//	t_rpoint	*p;
+	t_rpoint	*p;
 	t_poly_obj	*o;
-	double		maxd;
-//	t_vertex	*t;
+	t_vertex	*t;
 
-    if (get_next_rpoint(s, &(c->position), index) == false ||
+    if (get_next_rpoint(s, &(obj->position), &index) == false ||
 		get_next_nb(s, index, &size, NULL) == false)
         return (false);
-	//	if (!(p = (t_rpoint *)malloc(sizeof(t_rpoint) * 8)))
-	//		exit(1);
-// distance au centre :
-//	size = pow((size / 2), (1 / 3));
-	size = size / 2;
-	maxd = sqrt(3 * size * size);
-	printf("size = %f\n", size);
-	/*
+	if (!(p = (t_rpoint *)malloc(sizeof(t_rpoint) * 8)))
+		exit(1);
+// Changer la distance au centre :
 	p[0] = set_rpoint(size, size, size);
 	p[1] = set_rpoint(size, size, -size);
 	p[2] = set_rpoint(size, -size, size);
@@ -394,26 +359,7 @@ bool			get_cube(char *s, t_obj *c, int *index)
 	p[5] = set_rpoint(-size, size, -size);
 	p[6] = set_rpoint(-size, -size, size);
 	p[7] = set_rpoint(-size, -size, -size);
-	*/
 	c->obj = malloc_po();
-	o = c->obj;
-	o->max_d = maxd;;
-	o->vertices = add_cube_face(set_rpoint(0, 0, size), c->position);
 
-	o->next = malloc_po();
-	o = o->next;
-	o->vertices = add_cube_face(set_rpoint(0, 0, -size), c->position);
-	o->next = malloc_po();
-	o = o->next;
-	o->vertices = add_cube_face(set_rpoint(0, size, 0), c->position);
-	o->next = malloc_po();
-	o = o->next;
-	o->vertices = add_cube_face(set_rpoint(0, -size, 0), c->position);
-	o->next = malloc_po();
-	o = o->next;
-	o->vertices = add_cube_face(set_rpoint(size, 0, 0), c->position);
-	o->next = malloc_po();
-	o = o->next;
-	o->vertices = add_cube_face(set_rpoint(-size, 0, 0), c->position);
     return (true);
 }
