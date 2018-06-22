@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/04/30 18:02:18 by alacrois         ###   ########.fr        #
+#    Updated: 2018/06/22 23:08:57 by alacrois         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)maths/vector_fcts_1.c	\
 		$(SRCPATH)maths/vector_fcts_2.c	\
 		$(SRCPATH)display/display.c 	\
+		$(SRCPATH)display/antialiasing.c \
 		$(SRCPATH)raytracing/raytracing.c 	\
 		$(SRCPATH)raytracing/colors.c 	\
 		$(SRCPATH)sdl_stuff/draw_px.c 	\

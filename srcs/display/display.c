@@ -6,6 +6,7 @@
 #include <global.h>
 #include <extra/extra_defs.h>
 #include <geometry/geometry.h>
+#include <display/display.h>
 
 extern t_global	g_global;
 
@@ -132,5 +133,7 @@ void			draw_image(t_sdl_wrapper *e)
 		if (pthread_join(threads[i], NULL) != 0)
 			ft_exit("Thread could not be joined.", 1);
 	}
+	if (ANTIALIASING == 1)
+		antialiasing(e);
 	g_global.drawn = 0;
 }
