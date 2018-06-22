@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 20:51:38 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/16 19:04:21 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/06/22 22:05:26 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ static bool		get_obj_core_2(char *s, t_obj *obj, int *index)
 		return (false);
 	if (obj->type == 66 && \
 		get_cube(s, obj, index) == false)
+		return (false);
+	if (obj->type == 67 && \
+		get_tetrahedron(s, obj, index) == false)
 		return (false);
 	return (true);
 }

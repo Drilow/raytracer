@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/06/19 18:52:43 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/06/22 22:07:25 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ bool			get_obj_core(char *s, t_obj *obj, int *index, t_rgb *clr);
 bool			get_obj(char *s, void *o, int *index, int type);
 void			set_obj(t_obj *o);
 bool			get_cube(char *s, t_obj *c, int *index);
+bool			get_tetrahedron(char *s, t_obj *t, int *index);
 #endif

@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/22 21:13:13 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/06/22 22:02:18 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int		get_object_type(char *s)
         return (6);
 	if (cmp_chars(s, "cube", 0) == true)
 		return (66);
+	if (cmp_chars(s, "tetrahedron", 0) == true)
+		return (67);
 	if (cmp_chars(s, "ambient light", 0) == true)
         return (7);
 	if (cmp_chars(s, "//", 0) == true)
