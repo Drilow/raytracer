@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/16 17:51:42 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/06/22 21:13:13 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static int		get_object_type(char *s)
         return (7);
 	if (cmp_chars(s, "//", 0) == true)
 		return (-2);
+	ft_putendl(s);
 	return (-1);
 }
 

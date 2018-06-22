@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 18:38:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 19:38:59 by adleau           ###   ########.fr       */
+/*   Updated: 2018/06/22 21:13:19 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <objects/object.h>
 #include <parser/parser.h>
 #include <maths/transformations.h>
+
+#include <libft.h>
 
 extern t_global g_global;
 
