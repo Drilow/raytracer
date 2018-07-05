@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 22:52:03 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/29 17:00:56 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/07/05 02:57:01 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,9 @@ static t_rgb	get_pixel(SDL_Surface *surf, int x, int y)
 	Uint32		*intpixel;
 	Uint8		components[3];
 
-	printf("x = %d, y = %d\n", x, y);
-	ft_putendl("debug 1");
 	intpixel = (Uint32*)surf->pixels +
 		(y * surf->pitch / surf->format->BytesPerPixel) + x;
-	printf("*intpixel = %u\n", *intpixel);
-	if (*intpixel > 4294967295)
-		ft_exit("C'est trop grand !!!", 0);
-//	if (*intpixel < 0)
-	//       ft_exit("C'est trop petit !!!", 0);
-	ft_putendl("debug 2");
 	SDL_GetRGB(*intpixel, surf->format, &(components[0]), &(components[1]), &(components[2]));
-//	SDL_GetRGB(0, surf->format, &(components[0]), &(components[1]), &(components[2]));
-	ft_putendl("debug 3");
 	pixel.r = components[0];
 	pixel.g = components[1];
 	pixel.b = components[2];
@@ -55,20 +45,16 @@ void			antialiasing(t_sdl_wrapper *e)
 	t_point		p;
 	t_rgb		new_color;
 
-//	ft_putendl("debug 1");
 	p.y = -1;
-	while (p.y++ < WIN_H)
+	while (++p.y < WIN_H)
 	{
 		p.x = -1;
-//		ft_putendl("debug 2");
 		while (++p.x < WIN_W)
 		{
-//			ft_putendl("debug 1");
 			new_color = get_pixel(e->surf, p.x, p.y);
-//			ft_putendl("debug 2");
+//			if (p.x % 5 == 0)
+//				new_color = ft_rgb(0, 0, 255, 0);
 			draw_px(e->surf, p.x, p.y, new_color);
-//			ft_putendl("debug 3");
 		}
 	}
-//	ft_putendl("debug 3");
 }
