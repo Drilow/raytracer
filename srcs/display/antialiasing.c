@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 22:52:03 by alacrois          #+#    #+#             */
-/*   Updated: 2018/07/05 02:57:01 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/07/05 05:12:49 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,143 @@ static t_rgb	get_pixel(SDL_Surface *surf, int x, int y)
 	return (pixel);
 }
 
+static t_rgb	two_colors_average(t_rgb a, t_rgb b)
+{
+	return (ft_rgb((a.r + b.r) / 2, (a.g + b.g) / 2, (a.b + b.b) / 2, \
+				   (a.trans + b.trans) / 2));
+}
+
+
+static t_rgb	color_average(t_rgb *colors, int size)
+{
+	int			i;
+	t_rgb		ca;
+
+	i = -1;
+	ca = ft_rgb(0, 0, 0, 0);
+	while (++i)
+		ca = ft_rgb(ca.r + (colors[i].r / size), ca.g + (colors[i].g / size), \
+			ca.b + (colors[i].b / size), ca.trans + (colors[i].trans / size));
+	return (ca);
+}
+
+static double	colorcmp(t_rgb a, t_rgb b)
+{
+	t_rpoint	cmp;
+
+	cmp.x = 1 - ((double)ft_abs(a.r - b.r) / 255);
+	cmp.y = 1 - ((double)ft_abs(a.g - b.g) / 255);
+	cmp.z = 1 - ((double)ft_abs(a.b - b.b) / 255);
+//	printf("colorcmp = %f\n", (cmp.x + cmp.y + cmp.z) / 3);
+	return ((cmp.x + cmp.y + cmp.z) / 3);
+}
+
+static int		detect_edge(t_point p, t_sdl_wrapper *e)
+{
+	t_rgb		pix;
+	t_rgb		adjacent[4];
+	int			i;
+
+	pix = get_pixel(e->surf, p.x, p.y);
+	i = -1;
+	while (++i < 4)
+		adjacent[i] = pix;
+	if (p.y > 0)
+		adjacent[0] = get_pixel(e->surf, p.x, p.y - 1);
+	if (p.x + 1 < WIN_W)
+		adjacent[1] = get_pixel(e->surf, p.x + 1, p.y);
+	if (p.y + 1 < WIN_H)
+		adjacent[1] = get_pixel(e->surf, p.x, p.y + 1);
+	if (p.x > 0)
+		adjacent[3] = get_pixel(e->surf, p.x - 1, p.y);
+	if (colorcmp(adjacent[0], adjacent[1]) > AA_UPPER_THRESHOLD && \
+		colorcmp(pix, two_colors_average(adjacent[0], adjacent[1])) < AA_LOWER_THRESHOLD)
+		return (1);
+	if (colorcmp(adjacent[1], adjacent[2]) > AA_UPPER_THRESHOLD && \
+		colorcmp(pix, two_colors_average(adjacent[1], adjacent[2])) < AA_LOWER_THRESHOLD)
+		return (1);
+	if (colorcmp(adjacent[2], adjacent[3]) > AA_UPPER_THRESHOLD && \
+		colorcmp(pix, two_colors_average(adjacent[2], adjacent[3])) < AA_LOWER_THRESHOLD)
+		return (1);
+	if (colorcmp(adjacent[3], adjacent[0]) > AA_UPPER_THRESHOLD && \
+		colorcmp(pix, two_colors_average(adjacent[3], adjacent[0])) < AA_LOWER_THRESHOLD)
+		return (1);
+	return (0);
+}
+
+static void		apply_aa(t_point p, t_sdl_wrapper *e, t_rgb **pixdup)
+//static void		apply_aa(t_point p, t_sdl_wrapper *e, t_rgb[WIN_H][WIN_W] pixdup)
+{
+	t_rgb		pix;
+	t_rgb		adj[8];
+	int			i;
+
+	pix = pixdup[p.y][p.x];
+	i = -1;
+	while (++i < 8)
+		adj[i] = pixdup[p.y][p.x];
+	if (p.y > 0 && p.x > 0)
+		adj[0] = pixdup[p.y - 1][p.x - 1];
+	if (p.y > 0)
+		adj[1] = pixdup[p.y - 1][p.x];
+	if (p.y > 0 && p.x + 1 < WIN_W)
+		adj[2] = pixdup[p.y - 1][p.x + 1];
+	if (p.x + 1 < WIN_W)
+		adj[3] = pixdup[p.y][p.x + 1];
+	if (p.y + 1 < WIN_H && p.x + 1 < WIN_W)
+		adj[4] = pixdup[p.y + 1][p.x + 1];
+	if (p.y + 1 < WIN_H)
+		adj[5] = pixdup[p.y + 1][p.x];
+	if (p.y + 1 < WIN_H && p.x > 0)
+        adj[6] = pixdup[p.y + 1][p.x - 1];
+	if (p.x > 0)
+        adj[7] = pixdup[p.y][p.x - 1];
+//	draw_px(e->surf, p.x, p.y, two_colors_average(pix, color_average(adj, 8)));
+//	draw_px(e->surf, p.x, p.y, color_average(adj, 8));
+	draw_px(e->surf, p.x, p.y, two_colors_average(two_colors_average(pix, color_average(adj, 8)), pix));
+//	draw_px(e->surf, p.x, p.y, ft_rgb(255, 75, 175, 0));
+}
+
 void			antialiasing(t_sdl_wrapper *e)
 {
 	t_point		p;
-	t_rgb		new_color;
+//	t_rgb		new_color;
+	int			aa[WIN_H][WIN_W];
+//	t_rgb		pixdup[WIN_H][WIN_W];
+	t_rgb		**pixdup;
 
+	printf("ut = %f && lt = %f\n", AA_UPPER_THRESHOLD, AA_LOWER_THRESHOLD);
+	p.y = -1;
+//	pixdup = (t_rgb **)ft_malloc(sizeof(t_rgb *) * WIN_H);
+	if (!(pixdup = (t_rgb **)malloc(sizeof(t_rgb *) * WIN_H)))
+		ft_exit("malloc error", 0);
+	while (++p.y < WIN_H)
+	{
+		p.x = -1;
+//		pixdup[p.y] = (t_rgb *)ft_malloc(sizeof(t_rgb) * WIN_W);
+		if (!(pixdup[p.y] = (t_rgb *)malloc(sizeof(t_rgb) * WIN_W)))
+			ft_exit("malloc error", 0);
+		while (++p.x < WIN_W)
+		{
+			pixdup[p.y][p.x] = get_pixel(e->surf, p.x, p.y);
+			aa[p.y][p.x] = detect_edge(p, e);
+//			if (aa[p.y][p.x] == 1)
+//				ft_putendl("edge !");
+//			draw_px(e->surf, p.x, p.y, new_color);
+		}
+	}
 	p.y = -1;
 	while (++p.y < WIN_H)
 	{
 		p.x = -1;
 		while (++p.x < WIN_W)
 		{
-			new_color = get_pixel(e->surf, p.x, p.y);
-//			if (p.x % 5 == 0)
-//				new_color = ft_rgb(0, 0, 255, 0);
-			draw_px(e->surf, p.x, p.y, new_color);
+			if (aa[p.y][p.x] == 1)
+			{
+				apply_aa(p, e, (t_rgb **)pixdup);
+//				ft_putendl("edge");
+			}
 		}
 	}
+	// FREE pixdup !
 }

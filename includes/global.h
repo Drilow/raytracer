@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/06/22 23:09:28 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/07/05 05:08:16 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdbool.h>
 
 # define ANTIALIASING 1
-# define AA_LOWER_TRHESHOLD 0.15
-# define AA_UPPER_THRESHOLD 0.85
+# define AA_LOWER_THRESHOLD 0.30
+# define AA_UPPER_THRESHOLD 0.70
 
 typedef struct			s_global
 {
