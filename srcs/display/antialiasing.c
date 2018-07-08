@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 22:52:03 by alacrois          #+#    #+#             */
-/*   Updated: 2018/07/05 05:12:49 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/07/08 16:45:02 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ static t_rgb	get_pixel(SDL_Surface *surf, int x, int y)
 	return (pixel);
 }
 
-static t_rgb	two_colors_average(t_rgb a, t_rgb b)
+static t_rgb	two_colors_average(t_rgb a, t_rgb b, double ratio)
 {
-	return (ft_rgb((a.r + b.r) / 2, (a.g + b.g) / 2, (a.b + b.b) / 2, \
-				   (a.trans + b.trans) / 2));
+	return (ft_rgb((a.r * ratio) + (b.r * (1 - ratio)), \
+				   (a.g * ratio) + (b.g * (1 - ratio)), \
+				   (a.b * ratio) + (b.b * (1 - ratio)), \
+				   (a.trans * ratio) + (b.trans * (1 - ratio))));
 }
 
 
@@ -90,16 +92,16 @@ static int		detect_edge(t_point p, t_sdl_wrapper *e)
 	if (p.x > 0)
 		adjacent[3] = get_pixel(e->surf, p.x - 1, p.y);
 	if (colorcmp(adjacent[0], adjacent[1]) > AA_UPPER_THRESHOLD && \
-		colorcmp(pix, two_colors_average(adjacent[0], adjacent[1])) < AA_LOWER_THRESHOLD)
+		colorcmp(pix, two_colors_average(adjacent[0], adjacent[1], 0.5)) < AA_LOWER_THRESHOLD)
 		return (1);
 	if (colorcmp(adjacent[1], adjacent[2]) > AA_UPPER_THRESHOLD && \
-		colorcmp(pix, two_colors_average(adjacent[1], adjacent[2])) < AA_LOWER_THRESHOLD)
+		colorcmp(pix, two_colors_average(adjacent[1], adjacent[2], 0.5)) < AA_LOWER_THRESHOLD)
 		return (1);
 	if (colorcmp(adjacent[2], adjacent[3]) > AA_UPPER_THRESHOLD && \
-		colorcmp(pix, two_colors_average(adjacent[2], adjacent[3])) < AA_LOWER_THRESHOLD)
+		colorcmp(pix, two_colors_average(adjacent[2], adjacent[3], 0.5)) < AA_LOWER_THRESHOLD)
 		return (1);
 	if (colorcmp(adjacent[3], adjacent[0]) > AA_UPPER_THRESHOLD && \
-		colorcmp(pix, two_colors_average(adjacent[3], adjacent[0])) < AA_LOWER_THRESHOLD)
+		colorcmp(pix, two_colors_average(adjacent[3], adjacent[0], 0.5)) < AA_LOWER_THRESHOLD)
 		return (1);
 	return (0);
 }
@@ -131,10 +133,11 @@ static void		apply_aa(t_point p, t_sdl_wrapper *e, t_rgb **pixdup)
         adj[6] = pixdup[p.y + 1][p.x - 1];
 	if (p.x > 0)
         adj[7] = pixdup[p.y][p.x - 1];
-//	draw_px(e->surf, p.x, p.y, two_colors_average(pix, color_average(adj, 8)));
+	draw_px(e->surf, p.x, p.y, two_colors_average(pix, color_average(adj, 8), 0.3));
 //	draw_px(e->surf, p.x, p.y, color_average(adj, 8));
-	draw_px(e->surf, p.x, p.y, two_colors_average(two_colors_average(pix, color_average(adj, 8)), pix));
-//	draw_px(e->surf, p.x, p.y, ft_rgb(255, 75, 175, 0));
+//	draw_px(e->surf, p.x, p.y, two_colors_average(two_colors_average(pix, color_average(adj, 8), 0.5), pix, 0.5));
+//	draw_px(e->surf, p.x, p.y, ft_rgb(255, 0, 175, 0));
+//	draw_px(e->surf, p.x, p.y, pix);
 }
 
 void			antialiasing(t_sdl_wrapper *e)
@@ -142,18 +145,15 @@ void			antialiasing(t_sdl_wrapper *e)
 	t_point		p;
 //	t_rgb		new_color;
 	int			aa[WIN_H][WIN_W];
-//	t_rgb		pixdup[WIN_H][WIN_W];
 	t_rgb		**pixdup;
 
 	printf("ut = %f && lt = %f\n", AA_UPPER_THRESHOLD, AA_LOWER_THRESHOLD);
 	p.y = -1;
-//	pixdup = (t_rgb **)ft_malloc(sizeof(t_rgb *) * WIN_H);
 	if (!(pixdup = (t_rgb **)malloc(sizeof(t_rgb *) * WIN_H)))
 		ft_exit("malloc error", 0);
 	while (++p.y < WIN_H)
 	{
 		p.x = -1;
-//		pixdup[p.y] = (t_rgb *)ft_malloc(sizeof(t_rgb) * WIN_W);
 		if (!(pixdup[p.y] = (t_rgb *)malloc(sizeof(t_rgb) * WIN_W)))
 			ft_exit("malloc error", 0);
 		while (++p.x < WIN_W)
@@ -174,7 +174,6 @@ void			antialiasing(t_sdl_wrapper *e)
 			if (aa[p.y][p.x] == 1)
 			{
 				apply_aa(p, e, (t_rgb **)pixdup);
-//				ft_putendl("edge");
 			}
 		}
 	}
