@@ -6,12 +6,11 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/06/29 16:05:35 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/07/22 15:15:47 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-//#include <gl_handling/gl_includes.h>
 #include <objects/object.h>
 #include <global.h>
 #include <cl_inc/cl_defs.h>
@@ -20,10 +19,8 @@
 #include <libft.h>
 #include <parser/parser.h>
 #include <display/display.h>
-
 #include <sdl_stuff/sdl_mgr.h>
 #define EVENT_PTR g_global.sdl_mgr.event
-
 
 t_global		g_global;
 
@@ -37,25 +34,6 @@ void	ft_exit(char *msg_error, int i)
 	exit(i);
 }
 
-void			draw(void)
-{
-	glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
-	glColor3f(1.0f, 0.0f, 0.0f); // Red 0.0-1.0
-	glVertex2f(-0.3, -0.3);
-	glVertex2f(-0.3, 0.3);
-	glColor3f(0.0f, 1.0f, 0.0f); // green 0.0-1.0
-	glVertex2f(0.3, 0.3);
-	glVertex2f(0.3, -0.3);
-	glEnd();
-	glBegin(GL_TRIANGLES);              // Each set of 4 vertices form a quad
-	glColor3ub(255, 255, 255); // 0-255
-	glVertex2f(-0.3, -0.3);
-	glVertex2f(-0.3, 0.3);
-	glVertex2f(0.3, 0.3);
-	glEnd();
-	glFlush();  // Render now
-}
-
 static void			init_ray(t_point p)
 {
 	g_global.r.rays[p.y][p.x].p = g_global.r.cam_position;
@@ -64,7 +42,7 @@ static void			init_ray(t_point p)
 	g_global.r.rays[p.y][p.x].vector.z = g_global.r.screen_distance;
 }
 
-static void		init_rt(int ac, char **__attribute__((unused))av)
+static void		__attribute__((unused))init_rt(int ac, char **__attribute__((unused))av)
 {
 	t_point			p;
 
@@ -89,10 +67,13 @@ static void		init_rt(int ac, char **__attribute__((unused))av)
 
 void			init_global(int ac, char **av)
 {
+	(void)ac;
+	(void)av;
 //	ft_putendl("debug1");
 	g_global.drawn = 1;
-	init_sdl_wrap(&(g_global.sdl_mgr));
-	init_rt(ac, av);
+//	init_sdl_wrap(&(g_global.sdl_mgr));
+	init_gtk(ac, av);
+//	init_rt(ac, av);
 	g_global.running = 1;
 }
 
@@ -104,10 +85,14 @@ void			draw_func(void)
 	sdl_loop_end();
 }
 
+
 int				main(int __attribute__((unused))ac, char __attribute__((unused))**av)
 {
 	init_global(ac, av);
-	while (g_global.running)
+
+//	build_ui();
+
+/*	while (g_global.running)
 	{
 		if (g_global.drawn == 1)
 			draw_func();
@@ -119,7 +104,7 @@ int				main(int __attribute__((unused))ac, char __attribute__((unused))**av)
 //				keyup_events_w3d(wolf);
 		}
 
-	}
+		}*/
 	// getting scenes
 /*  init_glfw();
 // initializing glfw

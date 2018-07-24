@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/22 22:02:18 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/07/17 18:29:39 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <parser/parser.h>
 #include <extra/extra_defs.h>
 #include <objects/object.h>
+#include <fcntl.h>
 
 extern t_global g_global;
 

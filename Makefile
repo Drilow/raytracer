@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/06/22 23:08:57 by alacrois         ###   ########.fr        #
+#    Updated: 2018/07/22 15:23:40 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,20 +20,20 @@ NAME = rt
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -O3
+CFLAGS = -Wall -Werror -Wextra -O3 $(shell pkg-config --cflags gtk+-3.0)
 
-LDFLAGS =  -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
-LDFLAGS += `ext/SDL2/bin/sdl2-config --cflags --libs -lSDL2 -lSDL2_image`
+LDFLAGS = 	-framework IOKit -framework CoreVideo $(shell pkg-config --libs gtk+-3.0)
+LDFLAGS +=	`ext/SDL2/bin/sdl2-config --cflags --libs -lSDL2 -lSDL2_image`
 
-LIB	 :=  -L./ext/glfw/build/src/ -I./ext/glfw/include/GLFW/  -L./ext/glew/build/lib/ -I./ext/glew/include/ -I/usr/local/include -I/opt/X11/include -L/usr/local/lib -I/opt/X11/lib
-LIB	 +=  -L./ext/SDL2/lib -I./ext/SDL2/include/SDL2
-LIB	 += -L./ext/SDL2_Image/lib -I./ext/SDL2_Image/include/SDL2
-LIB	 += -lSDL2 -lSDL2_image
+LIB	 :=  -L./ext/SDL2/lib -I./ext/SDL2/include/SDL2
+LIB	 +=-lSDL2
 
 
 SRCPATH = srcs/
 
 SRC =   $(SRCPATH)main.c \
+		$(SRCPATH)gtk/base_screen.c			\
+		$(SRCPATH)gtk/main_screen.c			\
 		$(SRCPATH)maths/transformations.c	\
 		$(SRCPATH)maths/ft_solve_equation.c	\
 		$(SRCPATH)maths/ft_delta.c			\
@@ -76,7 +76,7 @@ all: ext $(NAME)
 $(NAME): $(OBJ) $(INC)
 		make -C libft/
 		@echo "$(VERT)~> [ libft library made. ]$(NCOL)"
-		$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -Iincludes/ $(LDFLAGS) -Ilibft/ -Llibft/ -lft $(LIB) ./ext/glew/build/lib/libGLEW.a
+		$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -Iincludes/ $(LDFLAGS) -Ilibft/ -Llibft/ -lft $(LIB)
 		@echo "$(VERT)~> [ binary file '$(NAME)' made. ]$(NCOL)"
 
 %.o: %.c
@@ -101,28 +101,7 @@ fclean: clean
 
 re: fclean all
 
-ext: ext/glfw ext/glew ext/SDL2 ext/SDL2_Image
-
-
-ext/glfw:
-		rm -fr ext/glfw
-		git clone https://github.com/glfw/glfw.git ext/glfw
-		@echo "$(VERT)~> [ glfw3 library downloaded. ]$(NCOL)"
-		#( cd ext/glfw && mkdir build && cd build \
-		#&& cmake ..  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
-		( cd ext/glfw && mkdir build && cd build \
-		&& $(HOME)/.brew/bin/cmake ..  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
-		@echo "$(VERT)~> [ glfw3 library set up. ]$(NCOL)"
-
-ext/glew:
-		rm -fr ext/glew
-		git clone https://github.com/nigels-com/glew.git ext/glew
-		@echo "$(VERT)~> [ GLEW library downloaded. ]$(NCOL)"
-		#(cd ext/glew \
-		#&& $(MAKE) -C auto && cd build && cmake ./cmake  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
-		(cd ext/glew \
-		&& $(MAKE) -C auto && cd build && $(HOME)/.brew/bin/cmake ./cmake  -DCMAKE_C_FLAGS="-Wno-deprecated" && make)
-		@echo "$(VERT)~> [ GLEW library set up. ]$(NCOL)"
+ext: ext/SDL2 #ext/SDL2_Image
 
 ext/SDL2:
 		rm -fr ext/SDL2

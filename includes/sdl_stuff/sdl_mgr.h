@@ -6,16 +6,15 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:22:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/06/04 17:26:54 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/07/17 19:18:37 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SDL_MGR_H
 # define SDL_MGR_H
-# define WIN_H 900
-# define WIN_W 1600
+# define WIN_H 450
+# define WIN_W 800
 # include <SDL.h>
-# include <SDL_image.h>
 # include <geometry/geometry.h>
 
 typedef struct			s_sdl_wrapper
