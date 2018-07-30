@@ -6,42 +6,24 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/07/22 15:22:44 by adleau           ###   ########.fr       */
+/*   Updated: 2018/07/30 07:19:34 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBAL_H
 # define GLOBAL_H
 # include <sdl_stuff/sdl_mgr.h>
+# include <gtk_mgr/gtk_mgr.h>
 # include <scene/scene_list.h>
 # include <rt.h>
 # include <geometry/geometry.h>
 # include <stdbool.h>
 # include <gtk/gtk.h>
 
+# define DATA g_global.sdl_mgr.surf
 # define ANTIALIASING 1
 # define AA_LOWER_THRESHOLD 0.30
 # define AA_UPPER_THRESHOLD 0.70
-
-typedef struct			s_gtk_buttons
-{
-	GtkWidget			*button;
-	GtkWidget			*box;
-	GtkWidget			*icon;
-	GtkWidget			*mouseover;
-}						t_gtk_buttons;
-
-typedef struct			s_gtk_grid
-{
-	GtkWidget			*grid;
-	t_gtk_buttons		*buttons;
-}						t_gtk_grid;
-
-typedef struct			s_gtk_mgr
-{
-	GtkWidget			*main_win;
-	t_gtk_grid			grid;
-}						t_gtk_mgr;
 
 typedef struct			s_global
 {
