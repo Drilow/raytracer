@@ -43,6 +43,11 @@ void			rotate(t_rpoint *p, t_rpoint angle)
 	}
 }
 
+static void		rotate_poly_obj(t_obj *o, t_rpoint angle)
+{
+
+}
+
 void			rotate_obj(void *o, int type, t_rpoint angle)
 {
 	t_obj		*obj;
@@ -55,6 +60,8 @@ void			rotate_obj(void *o, int type, t_rpoint angle)
 		rotate(&(((t_cone *)obj->obj)->vector), angle);
 	if (type == 4)
 		rotate(&(((t_cylinder *)obj->obj)->vector), angle);
+	if (type == 6 || type / 10 == 6)
+	  rotate_poly_obj(obj, angle);
 }
 
 void			translate_obj(void *o, int type, t_rpoint translation)
@@ -74,6 +81,8 @@ void			translate_obj(void *o, int type, t_rpoint translation)
 		data = &(((t_cone *)obj->obj)->summit);
 	if (type == 4)
 		data = &(((t_cylinder *)obj->obj)->summit);
+	if (type == 6 || type / 10 == 6)
+	  data = &(obj->position);
 	data->x = data->x + translation.x;
 	data->y = data->y + translation.y;
 	data->z = data->z + translation.z;

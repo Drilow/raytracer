@@ -151,7 +151,11 @@ static bool	read_line(char *line)
 		set_obj((t_obj *)new);
 //		return (true);
 	}
+	/*
 	if (obj_type != 6 && get_obj(line, new, &index, obj_type) == false)
+		return (false);
+	*/
+	if (get_obj(line, new, &index, obj_type) == false)
 		return (false);
 	add_to_list(new, obj_type);
 	return (true);

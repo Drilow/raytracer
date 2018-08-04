@@ -31,6 +31,7 @@ bool			cmp_chars(char *s, char *o, int start)
 
 static bool		get_obj_core_2(char *s, t_obj *obj, int *index)
 {
+  /*
 	if (obj->type == 1 && \
 		get_sphere(s, (t_sphere *)obj->obj, index) == false)
 		return (false);
@@ -42,6 +43,25 @@ static bool		get_obj_core_2(char *s, t_obj *obj, int *index)
 		return (false);
 	if (obj->type == 4 && \
 		get_cylinder(s, (t_cylinder *)obj->obj, index) == false)
+		return (false);
+	if (obj->type == 66 && \
+		get_cube(s, obj, index) == false)
+		return (false);
+	if (obj->type == 67 && \
+		get_tetrahedron(s, obj, index) == false)
+		return (false);
+  */
+  if (obj->type == 1 && \
+		get_sphere(s, obj, index) == false)
+		return (false);
+	if (obj->type == 2 && \
+		get_plane(s, obj, index) == false)
+		return (false);
+	if (obj->type == 3 && \
+		get_cone(s, obj, index) == false)
+		return (false);
+	if (obj->type == 4 && \
+		get_cylinder(s, obj, index) == false)
 		return (false);
 	if (obj->type == 66 && \
 		get_cube(s, obj, index) == false)
