@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/07/30 07:15:17 by adleau           ###   ########.fr        #
+#    Updated: 2018/08/03 09:32:31 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCPATH = srcs/
 SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/base_screen.c			\
 		$(SRCPATH)gtk/main_screen.c			\
+		$(SRCPATH)gtk/init_variables.c		\
 		$(SRCPATH)maths/transformations.c	\
 		$(SRCPATH)maths/ft_solve_equation.c	\
 		$(SRCPATH)maths/ft_delta.c			\

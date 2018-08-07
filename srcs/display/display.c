@@ -7,6 +7,8 @@
 #include <extra/extra_defs.h>
 #include <geometry/geometry.h>
 #include <display/display.h>
+#define PIXMAP g_global.gtk_mgr.pixmap
+#define GTKMGR g_global.gtk_mgr
 
 extern t_global	g_global;
 
@@ -80,7 +82,7 @@ static void		*draw_image_core(void *arg)
 
 		while (++p.y < WIN_H)
 		{
-			tmp = ray_tracing(r, r->rays[p.y][p.x], false);
+			tmp = ray_tracing(r, g_global.r.rays[p.y][p.x], false);
 			if (tmp.o != NULL)
 			{
 //				if ((p.x == 361 || p.x == 360) && p.y == 209)
@@ -95,7 +97,7 @@ static void		*draw_image_core(void *arg)
 //				}
 //				if (p.x == 361 && p.y == 209)
 //					printf("correct(361, 209) : rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
-				draw_px(e->surf, p.x, p.y, \
+				draw_px_new(GTKMGR.buf, p.x, p.y, \
 						get_ray_color(r, tmp, false));
 //				get_ray_color(r, tmp.o, tmp.p));
 			}
@@ -103,7 +105,7 @@ static void		*draw_image_core(void *arg)
 			{
 //				if (p.y > 120)
 //					printf("Black pixel : x=%d & y=%d\n", p.x, p.y);
-				draw_px(e->surf, p.x, p.y, ft_rgb(0, 0, 0, 0));
+				draw_px_new(GTKMGR.buf, p.x, p.y, ft_rgb(0, 0, 0, 0));
 			}
 		}
 		p.x = p.x + THREADS_NB;
@@ -123,7 +125,7 @@ void			draw_image(t_sdl_wrapper *e)
 		th_arg[i].e = e;
 		th_arg[i].th_index = i;
 		if (pthread_create(&(threads[i]), NULL, draw_image_core, \
-			&th_arg[i]) != 0)
+						   &th_arg[i]) != 0)
 			ft_exit("Thread could not be created.", 1);
 		i++;
 	}
@@ -135,5 +137,6 @@ void			draw_image(t_sdl_wrapper *e)
 	}
 	if (ANTIALIASING == 1)
 		antialiasing(e);
+	printf("mabite\n");
 	g_global.drawn = 0;
 }

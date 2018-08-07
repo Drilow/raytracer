@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/07/30 07:19:34 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/03 10:53:41 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 
 typedef struct			s_global
 {
-	t_scene_list		scene_list;
 	t_gtk_mgr			gtk_mgr;
 	t_sdl_wrapper		sdl_mgr;
 	char				running;

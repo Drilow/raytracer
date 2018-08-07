@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/07/30 07:18:18 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/07 08:58:33 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,15 @@ static void		__attribute__((unused))init_rt(int __attribute__((unused))ac, char 
 		while (++p.x < WIN_W)
 			init_ray(p);
 	}
-	if (!(DATA = malloc(sizeof(unsigned char) * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
-		exit(1);
 }
 
 void			init_global(int ac, char **av)
 {
 //	ft_putendl("debug1");
 	g_global.drawn = 1;
+	init_rt(ac, av);
 	init_sdl_wrap(&(g_global.sdl_mgr));
 	init_gtk(ac, av);
-	init_rt(ac, av);
 	g_global.running = 1;
 }
 
