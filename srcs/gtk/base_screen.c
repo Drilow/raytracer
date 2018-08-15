@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/15 15:36:07 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/15 15:48:17 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,19 +216,23 @@ void				handle_main_view(void)
 	GTKMGR.ui.main_view.buttonbox = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.grid), GTKMGR.ui.main_view.buttonbox);
 	GTKMGR.ui.main_view.add_button = gtk_button_new();
+	gtk_widget_set_tooltip_text(GTKMGR.ui.main_view.add_button, "add object");
 	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.add_button), "clicked", G_CALLBACK(add_view), NULL);
 	gtk_button_set_image(GTK_BUTTON(GTKMGR.ui.main_view.add_button), GTKMGR.ui.main_view.add_img);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.add_button);
 	GTKMGR.ui.main_view.filters_button = gtk_button_new();
+	gtk_widget_set_tooltip_text(GTKMGR.ui.main_view.filters_button, "filters");
 	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.filters_button), "clicked", G_CALLBACK(filters_view), NULL);
 	gtk_button_set_image(GTK_BUTTON(GTKMGR.ui.main_view.filters_button), GTKMGR.ui.main_view.filters_img);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.filters_button);
 	GTKMGR.ui.main_view.select_button = gtk_button_new();
+	gtk_widget_set_tooltip_text(GTKMGR.ui.main_view.select_button, "select object");
 	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.select_button), "clicked", G_CALLBACK(select_cb), NULL);
 	gtk_button_set_image(GTK_BUTTON(GTKMGR.ui.main_view.select_button), GTKMGR.ui.main_view.select_img);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.select_button);
 	GTKMGR.ui.main_view.export_button = gtk_button_new();
 	gtk_button_set_image(GTK_BUTTON(GTKMGR.ui.main_view.export_button), GTKMGR.ui.main_view.export_img);
+	gtk_widget_set_tooltip_text(GTKMGR.ui.main_view.export_button, "export to png format");
 	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.export_button), "clicked", G_CALLBACK(export_view), NULL);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.export_button);
 //	if (g_global.r.objects != NULL)
