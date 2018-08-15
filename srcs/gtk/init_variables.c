@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 09:30:07 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/07 13:00:56 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/15 01:37:01 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ static void			init_add_view(void)
 	GTKMGR.ui.add_view.rotate_x_spin = NULL;
 	GTKMGR.ui.add_view.rotate_y_spin = NULL;
 	GTKMGR.ui.add_view.rotate_z_spin = NULL;
-	GTKMGR.ui.add_view.scale_x_spin = NULL;
-	GTKMGR.ui.add_view.scale_y_spin = NULL;
-	GTKMGR.ui.add_view.scale_z_spin = NULL;
+	GTKMGR.ui.add_view.scale_spin = NULL;
 	GTKMGR.ui.add_view.ok_button = NULL;
 	GTKMGR.ui.add_view.cancel_button = NULL;
 
@@ -61,13 +59,12 @@ static void			init_main_view(void)
 	GTKMGR.ui.main_view.add_button = NULL;
 	GTKMGR.ui.main_view.filters_button = NULL;
 	GTKMGR.ui.main_view.select_button = NULL;
-	GTKMGR.ui.main_view.edit_button = NULL;
 	GTKMGR.ui.main_view.export_button = NULL;
 	GTKMGR.ui.main_view.render_area = NULL;
+	GTKMGR.ui.main_view.event_box = NULL;
 	GTKMGR.ui.main_view.add_img = NULL;
 	GTKMGR.ui.main_view.filters_img = NULL;
 	GTKMGR.ui.main_view.select_img = NULL;
-	GTKMGR.ui.main_view.edit_img = NULL;
 	GTKMGR.ui.main_view.export_img = NULL;
 }
 
@@ -82,7 +79,16 @@ static void			init_base_view(void)
 
 void				init_gtk_variables(void)
 {
+	int				y;
+
+	y = -1;
 	PIXMAP = NULL;
+	GTKMGR.checker = NULL;
+	if (!(GTKMGR.checker = malloc(sizeof(t_obj**) * WIN_H)))
+		exit(1);
+	while (++y < WIN_H)
+		if (!(GTKMGR.checker[y] = malloc(sizeof(t_obj*) * WIN_W)))
+			exit(1);
 	init_base_view();
 	init_main_view();
 	init_add_view();

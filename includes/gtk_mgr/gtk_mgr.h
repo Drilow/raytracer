@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/07 12:50:35 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/15 01:37:22 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define GTK_MGR_H
 # include <gtk/gtk.h>
 # define UI_FILE "uiconfig/rt2.glade"
+
+struct s_obj;
 
 typedef struct				s_picker_view
 {
@@ -31,7 +33,7 @@ typedef struct				s_export_view
 
 typedef struct				s_filter_view
 {
-
+	GtkWidget				*win;
 }							t_filter_view;
 
 typedef struct				s_add_view
@@ -54,9 +56,7 @@ typedef struct				s_add_view
 	GtkWidget				*rotate_x_spin;
 	GtkWidget				*rotate_y_spin;
 	GtkWidget				*rotate_z_spin;
-	GtkWidget				*scale_x_spin;
-	GtkWidget				*scale_y_spin;
-	GtkWidget				*scale_z_spin;
+	GtkWidget				*scale_spin;
 	GtkWidget				*ok_button;
 	GtkWidget				*cancel_button;
 }							t_add_view;
@@ -72,11 +72,10 @@ typedef struct				s_main_view
 	GtkWidget				*filters_img;
 	GtkWidget				*select_button;
 	GtkWidget				*select_img;
-	GtkWidget				*edit_button;
-	GtkWidget				*edit_img;
 	GtkWidget				*export_button;
 	GtkWidget				*export_img;
 	GtkWidget				*render_area;
+	GtkWidget				*event_box;
 }							t_main_view;
 
 typedef struct				s_base_view
@@ -101,6 +100,8 @@ typedef struct				s_ui
 typedef struct				s_gtk_mgr
 {
 	cairo_surface_t			*pixmap;
+	struct s_obj			***checker;
+	struct s_obj			*selected_obj;
 	unsigned char			*buf;
 	t_ui					ui;
 }							t_gtk_mgr;

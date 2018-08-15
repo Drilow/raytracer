@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/07 08:58:33 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/15 15:22:44 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void			init_ray(t_point p)
 	g_global.r.rays[p.y][p.x].vector.z = g_global.r.screen_distance;
 }
 
-static void		__attribute__((unused))init_rt(int __attribute__((unused))ac, char **__attribute__((unused))av)
+ void			init_rt(void)
 {
 	t_point			p;
 
@@ -63,7 +63,7 @@ void			init_global(int ac, char **av)
 {
 //	ft_putendl("debug1");
 	g_global.drawn = 1;
-	init_rt(ac, av);
+	init_rt();
 	init_sdl_wrap(&(g_global.sdl_mgr));
 	init_gtk(ac, av);
 	g_global.running = 1;

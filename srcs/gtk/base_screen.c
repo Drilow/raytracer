@@ -6,12 +6,13 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/07 13:00:22 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/15 15:36:07 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
 #include <fcntl.h>
+#include <libft.h>
 #include <parser/parser.h>
 #define PIXMAP g_global.gtk_mgr.pixmap
 #define GTKMGR g_global.gtk_mgr
@@ -21,9 +22,48 @@ extern t_global		g_global;
 void			draw_image(t_sdl_wrapper *e);
 void				handle_main_view(void);
 
+int					check_png(char *s)
+{
+	int				i;
+
+	i = -1;
+	while (s[++i])
+		;
+	i -= 4;
+	if (ft_strcmp(s + i, ".png"))
+		return (0);
+	return (1);
+}
+
 void				export_view(void)
 {
-	cairo_surface_write_to_png(PIXMAP, "/tmp/test.png");
+	GtkWidget *dialog;
+	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_SAVE;
+	gint res;
+
+	dialog = gtk_file_chooser_dialog_new ("Export",
+										  GTK_WINDOW(GTKMGR.ui.export_view.dialog),
+										  action,
+										  "_Cancel",
+										  GTK_RESPONSE_CANCEL,
+										  "_Export",
+										  GTK_RESPONSE_ACCEPT,
+										  NULL);
+	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	if (res == GTK_RESPONSE_ACCEPT)
+	{
+		char *filename;
+		GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
+		filename = gtk_file_chooser_get_filename (chooser);
+		if (!check_png(filename))
+			cairo_surface_write_to_png(PIXMAP, ft_strjoin(filename, ".png"));
+		else
+			cairo_surface_write_to_png(PIXMAP, filename);
+		g_free (filename);
+	}
+	gtk_widget_destroy (dialog);
+
 }
 
 void				open_file(void)
@@ -47,40 +87,126 @@ void				open_file(void)
 		char *filename;
 		GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
 		filename = gtk_file_chooser_get_filename (chooser);
-		printf("%s\n", filename);
 		if (!parse(filename))
 			usage("Error : invalid argument.", 1);
-		printf("MESCOUILLES\n");
 		g_free (filename);
 	}
 	handle_main_view();
 	gtk_widget_destroy (dialog);
 }
+void				handle_drawing(void);
+
+static gboolean		clicked(GtkWidget __attribute__((unused))*widget, GdkEventButton *event,
+							gpointer __attribute__((unused))user_data)
+{
+    if (event->button == 1)
+	{
+		printf("%p %d %d\n",GTKMGR.checker[(int)event->y][(int)event->x],(int)event->y,(int)event->x);
+		GTKMGR.selected_obj = GTKMGR.checker[(int)event->y][(int)event->x];
+		t_sphere *o;
+		o = (t_sphere*)GTKMGR.selected_obj->obj;
+		o->radius += 1;
+		printf("%f\n", o->radius);
+		draw_image(&(g_global.sdl_mgr));
+		if (PIXMAP)
+			cairo_surface_destroy(PIXMAP);
+		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+		if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
+			exit(1);
+		cairo_surface_mark_dirty(PIXMAP);
+		gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
+//		GTKMGR.ui.main_view.render_area = gtk_image_new_from_surface(PIXMAP);
+	}
+	printf("aaaaa %f %f %d type %d || cam : %f %f %f\n", event->y, event->x, event->button, GTKMGR.selected_obj->type, g_global.r.cam_position.x, g_global.r.cam_position.y, g_global.r.cam_position.z);
+	if (GTKMGR.selected_obj)
+		printf("%d\n", GTKMGR.selected_obj->type);
+    return (true);
+}
+
+void				free_poly(t_poly_obj *p)
+{
+	(void)p;
+}
+
+void init_rt(void);
+
+void				destroy_scene(void)
+{
+	t_obj			*to_free;
+	t_obj			*tmp;
+
+	init_rt();
+	to_free = g_global.r.objects;
+	while (to_free)
+	{
+		tmp = to_free->next;
+		if (to_free->type == 6)
+			free_poly((t_poly_obj*)to_free->obj);
+		else if (to_free->obj)
+		{
+			free(to_free->obj);
+			to_free->obj = NULL;
+		}
+		if (to_free)
+		{
+			free(to_free);
+			to_free = NULL;
+		}
+	}
+}
 
 void				handle_drawing(void)
 {
-	printf("aallo %p\n", g_global.r.objects);
+	printf("aallo %p, cam : %f %f %f\n", g_global.r.objects, g_global.r.cam_position.x, g_global.r.cam_position.y, g_global.r.cam_position.z);
 	if (!(GTKMGR.buf = malloc(sizeof(unsigned char) * (WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
 		exit(1);
 	printf("a2llo\n");
 	draw_image(&(g_global.sdl_mgr));
+	printf("wow\n");
+	if (PIXMAP)
+	{
+		cairo_surface_destroy(PIXMAP);
+	}
 	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
 		exit(1);
-	printf("wow\n");
 	cairo_surface_mark_dirty(PIXMAP);
 	GTKMGR.ui.main_view.render_area = gtk_image_new_from_surface(PIXMAP);
-	gtk_grid_attach(GTK_GRID(GTKMGR.ui.main_view.grid), GTKMGR.ui.main_view.render_area, 0, 1, 1, 1);
+	GTKMGR.ui.main_view.event_box = gtk_event_box_new();
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.main_view.grid), GTKMGR.ui.main_view.event_box, 0, 1, 1, 1);
+	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.event_box), GTKMGR.ui.main_view.render_area);
+//	init_rt();
 }
 
-#include <libft.h>
+void				add_view(void)
+{
+	GTKMGR.ui.add_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+
+}
+
+void				filters_view(void)
+{
+	GTKMGR.ui.filter_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+
+}
+
+
+void				select_cb(void)
+{
+
+
+	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.event_box),
+					  "button_press_event",
+					  G_CALLBACK(clicked),
+					  GTKMGR.ui.main_view.render_area);
+	printf("bite\n");
+}
 
 void				handle_main_view(void)
 {
 	GTKMGR.ui.main_view.add_img = gtk_image_new_from_file("uiconfig/plus-sign-in-a-black-circle.png");
 	GTKMGR.ui.main_view.filters_img = gtk_image_new_from_file("uiconfig/filter.png");
-	GTKMGR.ui.main_view.select_img = gtk_image_new_from_file("uiconfig/select.png");
-	GTKMGR.ui.main_view.edit_img = gtk_image_new_from_file("uiconfig/new-file.png");
+	GTKMGR.ui.main_view.select_img = gtk_image_new_from_file("uiconfig/new-file.png");
 	GTKMGR.ui.main_view.export_img = gtk_image_new_from_file("uiconfig/scale-symbol.png");
 	GTKMGR.ui.main_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(GTKMGR.ui.main_view.win), GTK_WIN_POS_CENTER);
@@ -90,23 +216,24 @@ void				handle_main_view(void)
 	GTKMGR.ui.main_view.buttonbox = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.grid), GTKMGR.ui.main_view.buttonbox);
 	GTKMGR.ui.main_view.add_button = gtk_button_new();
+	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.add_button), "clicked", G_CALLBACK(add_view), NULL);
 	gtk_button_set_image(GTK_BUTTON(GTKMGR.ui.main_view.add_button), GTKMGR.ui.main_view.add_img);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.add_button);
 	GTKMGR.ui.main_view.filters_button = gtk_button_new();
+	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.filters_button), "clicked", G_CALLBACK(filters_view), NULL);
 	gtk_button_set_image(GTK_BUTTON(GTKMGR.ui.main_view.filters_button), GTKMGR.ui.main_view.filters_img);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.filters_button);
 	GTKMGR.ui.main_view.select_button = gtk_button_new();
+	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.select_button), "clicked", G_CALLBACK(select_cb), NULL);
 	gtk_button_set_image(GTK_BUTTON(GTKMGR.ui.main_view.select_button), GTKMGR.ui.main_view.select_img);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.select_button);
-	GTKMGR.ui.main_view.edit_button = gtk_button_new();
-	gtk_button_set_image(GTK_BUTTON(GTKMGR.ui.main_view.edit_button), GTKMGR.ui.main_view.edit_img);
-	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.edit_button);
 	GTKMGR.ui.main_view.export_button = gtk_button_new();
 	gtk_button_set_image(GTK_BUTTON(GTKMGR.ui.main_view.export_button), GTKMGR.ui.main_view.export_img);
 	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.export_button), "clicked", G_CALLBACK(export_view), NULL);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.export_button);
 //	if (g_global.r.objects != NULL)
 	handle_drawing();
+//	g_signal_connect(G_OBJECT(GTKMGR.ui.base_view.win), "destroy", G_CALLBACK(destroy_scene), NULL);
 	gtk_widget_show_all(GTKMGR.ui.main_view.win);
 }
 

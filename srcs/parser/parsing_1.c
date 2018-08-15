@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/03 18:46:47 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/15 15:17:23 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,5 +176,6 @@ bool			parse(char *file)
 //		printf("%s\n", line);
 		free(line);
 	}
+	close(fd);
 	return (true);
 }

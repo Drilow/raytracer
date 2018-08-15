@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/12 15:41:09 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/08/15 01:49:21 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static t_rpoint		color_to_add(t_rpoint oclr, t_rgb lclr, double af)
 	tmp = set_rpoint((oclr.x * (double)lclr.r), \
 					 (oclr.y * (double)lclr.g), \
 					 (oclr.z * (double)lclr.b));
-	cta = average(tmp, set_rpoint(rpoint_max(tmp) * lclr_factors.x, 
+	cta = average(tmp, set_rpoint(rpoint_max(tmp) * lclr_factors.x,
 								  rpoint_max(tmp) * lclr_factors.y,
 								  rpoint_max(tmp) * lclr_factors.z), af);
 	return (cta);
@@ -102,7 +102,7 @@ static t_rpoint		add_color(t_rpoint c, t_rpoint oclr, t_light *l, double af)
 	return (new_c);
 }
 
-static t_rpoint		get_color(t_rt *r, t_collision c, bool debug)
+static t_rpoint		get_color(t_rt *r, t_collision c, t_point checker, bool debug)
 {
 	t_rpoint		color;
 	t_rpoint		ocolor;
@@ -124,7 +124,7 @@ static t_rpoint		get_color(t_rt *r, t_collision c, bool debug)
 		while (otmp != NULL)
 		{
 			tmpc.o = otmp;
-			if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc, debug) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
+			if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc, checker, debug) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
 			{
 				afactor = 0;
 //				if (debug == true)
@@ -172,8 +172,11 @@ t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug)
 	t_rgb			color;
 	t_rpoint		tmp_color;
 	double			distance_factor;
+	t_point			checker;
 
-	tmp_color = get_color(r, c, debug);
+	checker.x = -1;
+	checker.y = -1;
+	tmp_color = get_color(r, c, checker, debug);
 //	if (debug == true)
 //		printf("get_ray_color : rgb(%f, %f, %f)\n", tmp_color.x, tmp_color.y, tmp_color.z);
 	distance_factor = deltasq(r->cam_position, c.p) / LIGHT_DISTANCE_FACTOR;

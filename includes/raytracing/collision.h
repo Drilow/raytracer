@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 13:03:48 by adleau            #+#    #+#             */
-/*   Updated: 2018/06/04 17:53:34 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/08/15 01:50:42 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ bool				cylinder_collision(t_ray ray, t_cylinder *c, t_rpoint *p);
 bool				poly_obj_collision(t_ray ray, t_poly_obj *po, \
 									   t_collision *col, bool test);
 //t_bool				collision(t_ray ray, t_obj *o, t_rpoint *p);
-bool				collision(t_ray ray, t_collision *c, bool test);
+bool				collision(t_ray ray, t_collision *c, t_point checker, bool test);
 t_rpoint			normal_collision_vector(t_collision c);
-t_collision			ray_tracing(t_rt *r, t_ray ray, bool test);
+t_collision			ray_tracing(t_rt *r, t_ray ray, t_point checker, bool test);
 
 //t_rgb				get_ray_color(t_rt *r, t_collision c);
 t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug);

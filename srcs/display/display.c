@@ -82,7 +82,7 @@ static void		*draw_image_core(void *arg)
 
 		while (++p.y < WIN_H)
 		{
-			tmp = ray_tracing(r, g_global.r.rays[p.y][p.x], false);
+			tmp = ray_tracing(r, g_global.r.rays[p.y][p.x], p, false);
 			if (tmp.o != NULL)
 			{
 //				if ((p.x == 361 || p.x == 360) && p.y == 209)
@@ -97,8 +97,9 @@ static void		*draw_image_core(void *arg)
 //				}
 //				if (p.x == 361 && p.y == 209)
 //					printf("correct(361, 209) : rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
+				GTKMGR.checker[p.y][p.x] = tmp.o;
 				draw_px_new(GTKMGR.buf, p.x, p.y, \
-						get_ray_color(r, tmp, false));
+							get_ray_color(r, tmp, false));
 //				get_ray_color(r, tmp.o, tmp.p));
 			}
 			else
