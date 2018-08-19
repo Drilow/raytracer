@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:45:24 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 19:38:21 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/19 16:50:44 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,12 @@ void			rotate(t_rpoint *p, t_rpoint angle)
 	}
 }
 
+/*
 static void		rotate_poly_obj(t_obj *o, t_rpoint angle)
 {
 
 }
+*/
 
 void			rotate_obj(void *o, int type, t_rpoint angle)
 {
@@ -60,8 +62,8 @@ void			rotate_obj(void *o, int type, t_rpoint angle)
 		rotate(&(((t_cone *)obj->obj)->vector), angle);
 	if (type == 4)
 		rotate(&(((t_cylinder *)obj->obj)->vector), angle);
-	if (type == 6 || type / 10 == 6)
-	  rotate_poly_obj(obj, angle);
+//	if (type == 6 || type / 10 == 6)
+//	  rotate_poly_obj(obj, angle);
 }
 
 void			translate_obj(void *o, int type, t_rpoint translation)

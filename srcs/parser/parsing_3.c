@@ -6,12 +6,14 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 20:51:38 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/22 22:05:26 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/08/19 17:53:19 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <extra/extra_defs.h>
 #include <parser/parser.h>
+
+#include <libft.h>
 
 bool			cmp_chars(char *s, char *o, int start)
 {
@@ -28,6 +30,22 @@ bool			cmp_chars(char *s, char *o, int start)
 	return (true);
 }
 
+
+static bool		get_poly_obj(char *s, t_obj *o, int *i)
+{
+//	int			i;
+
+	o->obj = parse_obj(s);
+	*i = 4;
+	while (s[*i] != ' ')
+		(*i)++;
+	if (o->obj == NULL)
+		ft_putendl("((t_obj *)new)->obj == NULL\n");
+	if (o->obj == NULL || get_next_rpoint(s, &(o->position), i) == false)
+		return (false);
+	set_obj(o);
+	return (true);
+}
 
 static bool		get_obj_core_2(char *s, t_obj *obj, int *index)
 {
@@ -62,6 +80,9 @@ static bool		get_obj_core_2(char *s, t_obj *obj, int *index)
 		return (false);
 	if (obj->type == 4 && \
 		get_cylinder(s, obj, index) == false)
+		return (false);
+	if (obj->type == 6 && \
+		get_poly_obj(s, obj, index) == false)
 		return (false);
 	if (obj->type == 66 && \
 		get_cube(s, obj, index) == false)

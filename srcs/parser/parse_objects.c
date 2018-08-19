@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:38:19 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 19:31:28 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/19 17:14:19 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ bool			get_cylinder(char *s, t_obj *o, int *index)
   while (s[i] != 'I' && s[i] != '\0')
 	i++;
   c->infinite = cmp_chars(s, "INF", i);
-  o-position = c->summit;
+  o->position = c->summit;
   return (true);
 }
 
