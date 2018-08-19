@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/15 15:22:44 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/19 15:23:36 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include <libft.h>
 #include <parser/parser.h>
 #include <display/display.h>
-#include <sdl_stuff/sdl_mgr.h>
 #define EVENT_PTR g_global.sdl_mgr.event
 
 t_global		g_global;
@@ -64,18 +63,10 @@ void			init_global(int ac, char **av)
 //	ft_putendl("debug1");
 	g_global.drawn = 1;
 	init_rt();
-	init_sdl_wrap(&(g_global.sdl_mgr));
 	init_gtk(ac, av);
 	g_global.running = 1;
 }
 
-void			draw_func(void)
-{
-	sdl_loop_init();
-	// code
-	draw_image(&(g_global.sdl_mgr));
-	sdl_loop_end();
-}
 
 
 int				main(int __attribute__((unused))ac, char __attribute__((unused))**av)

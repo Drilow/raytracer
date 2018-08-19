@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/18 18:11:51 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/19 15:21:33 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 extern t_global		g_global;
 
-void			draw_image(t_sdl_wrapper *e);
+void				draw_image(void);
 void				handle_main_view(void);
 
 int					check_png(char *s)
@@ -105,7 +105,7 @@ static gboolean		clicked(GtkWidget __attribute__((unused))*widget, GdkEventButto
 		{
 			GTKMGR.selected_obj = GTKMGR.checker[(int)event->y][(int)event->x];
 			edit_win(GTKMGR.selected_obj);
-			draw_image(&(g_global.sdl_mgr));
+			draw_image();
 			if (PIXMAP)
 				cairo_surface_destroy(PIXMAP);
 			PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
@@ -156,7 +156,7 @@ void				handle_drawing(void)
 	if (!(GTKMGR.buf = malloc(sizeof(unsigned char) * (WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
 		exit(1);
 	printf("a2llo\n");
-	draw_image(&(g_global.sdl_mgr));
+	draw_image();
 	printf("wow\n");
 	if (PIXMAP)
 	{

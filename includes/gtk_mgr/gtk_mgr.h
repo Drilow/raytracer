@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/18 18:13:23 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/19 15:32:49 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # define UI_FILE "uiconfig/rt2.glade"
 
 struct s_obj;
+struct s_rgb;
+
+typedef struct s_rgb		t_rgb;
+typedef struct s_obj		t_obj;
 
 typedef struct				s_picker_view
 {
@@ -108,6 +112,7 @@ typedef struct				s_gtk_mgr
 	t_ui					ui;
 }							t_gtk_mgr;
 
+void						draw_px(unsigned char *buf, int x, int y, t_rgb cols);;
 void						init_gtk_variables(void);
 void						edit_win(t_obj *o);
 #endif

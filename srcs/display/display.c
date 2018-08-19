@@ -1,7 +1,6 @@
 #include <libft.h>
 #include <thread/thread.h>
 #include <rt.h>
-#include <sdl_stuff/sdl_mgr.h>
 #include <raytracing/collision.h>
 #include <global.h>
 #include <extra/extra_defs.h>
@@ -58,14 +57,12 @@ void				draw_image(t_sdl_wrapper *e)
 static void		*draw_image_core(void *arg)
 {
 	t_thread	th;
-	t_sdl_wrapper		*e;
 	t_point		p;
 	t_rt		*r;
 	t_collision	tmp;
 //	t_rgb		tmpclr;
 
 	th = *((t_thread *)arg);
-	e = th.e;
 	r = &g_global.r;
 	p.x = th.th_index;
 	while (p.x < WIN_W)
@@ -98,7 +95,7 @@ static void		*draw_image_core(void *arg)
 //				if (p.x == 361 && p.y == 209)
 //					printf("correct(361, 209) : rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
 				GTKMGR.checker[p.y][p.x] = tmp.o;
-				draw_px_new(GTKMGR.buf, p.x, p.y, \
+				draw_px(GTKMGR.buf, p.x, p.y, \
 							get_ray_color(r, tmp, false));
 //				get_ray_color(r, tmp.o, tmp.p));
 			}
@@ -106,7 +103,7 @@ static void		*draw_image_core(void *arg)
 			{
 //				if (p.y > 120)
 //					printf("Black pixel : x=%d & y=%d\n", p.x, p.y);
-				draw_px_new(GTKMGR.buf, p.x, p.y, ft_rgb(0, 0, 0, 0));
+				draw_px(GTKMGR.buf, p.x, p.y, ft_rgb(0, 0, 0, 0));
 			}
 		}
 		p.x = p.x + THREADS_NB;
@@ -114,7 +111,7 @@ static void		*draw_image_core(void *arg)
 	pthread_exit(NULL);
 }
 
-void			draw_image(t_sdl_wrapper *e)
+void			draw_image(void)
 {
 	pthread_t	threads[THREADS_NB];
 	t_thread	th_arg[THREADS_NB];
@@ -123,7 +120,6 @@ void			draw_image(t_sdl_wrapper *e)
 	i = 0;
 	while (i < THREADS_NB)
 	{
-		th_arg[i].e = e;
 		th_arg[i].th_index = i;
 		if (pthread_create(&(threads[i]), NULL, draw_image_core, \
 						   &th_arg[i]) != 0)
@@ -137,7 +133,7 @@ void			draw_image(t_sdl_wrapper *e)
 			ft_exit("Thread could not be joined.", 1);
 	}
 	if (ANTIALIASING == 1)
-		antialiasing(e);
+		antialiasing();
 	printf("mabite\n");
 	g_global.drawn = 0;
 }

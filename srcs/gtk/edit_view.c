@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/18 18:12:13 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/19 15:22:20 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,37 @@
 #define PIXMAP g_global.gtk_mgr.pixmap
 #define GTKMGR g_global.gtk_mgr
 
+extern t_global		g_global;
 
 static void			edit_sphere_view(t_sphere *s)
 {
-
+	(void)s;
 }
 
 static void			edit_plane_view(t_plane *p)
 {
-
+	(void)p;
 }
 
 static void			edit_cone_view(t_cone *c)
 {
-
+	(void)c;
 }
 
 static void			edit_cylinder_view(t_cylinder *c)
 {
-
+	(void)c;
 }
 
 static void			edit_poly_view(t_poly_obj *p)
 {
-
+	(void)p;
 }
 
 void				edit_win(t_obj *o)
 {
-	GTKMGR.ui.add_view.win = gtk_window_new(GTK_WIN_POS_MOUSE);
+	GTKMGR.ui.add_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_position(GTK_WINDOW(GTKMGR.ui.add_view.win), GTK_WIN_POS_MOUSE);
 	gtk_window_set_position(GTK_WINDOW(GTKMGR.ui.add_view.win), GTK_WIN_POS_CENTER);
 	gtk_window_set_title(GTK_WINDOW(GTKMGR.ui.add_view.win), "raytracer");
 	GTKMGR.ui.add_view.grid = gtk_grid_new();
