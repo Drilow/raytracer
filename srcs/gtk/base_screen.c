@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/15 15:48:17 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/18 18:11:51 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,30 +96,25 @@ void				open_file(void)
 }
 void				handle_drawing(void);
 
-static gboolean		clicked(GtkWidget __attribute__((unused))*widget, GdkEventButton *event,
-							gpointer __attribute__((unused))user_data)
+
+static gboolean		clicked(GtkWidget __attribute__((unused))*widget, GdkEventButton *event, gpointer __attribute__((unused))data)
 {
     if (event->button == 1)
 	{
-		printf("%p %d %d\n",GTKMGR.checker[(int)event->y][(int)event->x],(int)event->y,(int)event->x);
-		GTKMGR.selected_obj = GTKMGR.checker[(int)event->y][(int)event->x];
-		t_sphere *o;
-		o = (t_sphere*)GTKMGR.selected_obj->obj;
-		o->radius += 1;
-		printf("%f\n", o->radius);
-		draw_image(&(g_global.sdl_mgr));
-		if (PIXMAP)
-			cairo_surface_destroy(PIXMAP);
-		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
-		if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-			exit(1);
-		cairo_surface_mark_dirty(PIXMAP);
-		gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
-//		GTKMGR.ui.main_view.render_area = gtk_image_new_from_surface(PIXMAP);
+		if (GTKMGR.checker[(int)event->y][(int)event->x])
+		{
+			GTKMGR.selected_obj = GTKMGR.checker[(int)event->y][(int)event->x];
+			edit_win(GTKMGR.selected_obj);
+			draw_image(&(g_global.sdl_mgr));
+			if (PIXMAP)
+				cairo_surface_destroy(PIXMAP);
+			PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+			if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
+				exit(1);
+			cairo_surface_mark_dirty(PIXMAP);
+			gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
+		}
 	}
-	printf("aaaaa %f %f %d type %d || cam : %f %f %f\n", event->y, event->x, event->button, GTKMGR.selected_obj->type, g_global.r.cam_position.x, g_global.r.cam_position.y, g_global.r.cam_position.z);
-	if (GTKMGR.selected_obj)
-		printf("%d\n", GTKMGR.selected_obj->type);
     return (true);
 }
 
@@ -180,7 +175,6 @@ void				handle_drawing(void)
 
 void				add_view(void)
 {
-	GTKMGR.ui.add_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
 }
 

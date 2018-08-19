@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/15 01:37:22 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/18 18:13:23 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ typedef struct				s_add_view
 {
 	GtkWidget				*win;
 	GtkWidget				*grid;
+	GtkWidget				*buttonbox;
 	GtkWidget				*sphere_button;
+	GtkWidget				*plane_button;
 	GtkWidget				*cylinder_button;
 	GtkWidget				*cone_button;
 	GtkWidget				*obj_file_button;
@@ -107,5 +109,5 @@ typedef struct				s_gtk_mgr
 }							t_gtk_mgr;
 
 void						init_gtk_variables(void);
-
+void						edit_win(t_obj *o);
 #endif
