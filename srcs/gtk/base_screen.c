@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/21 14:01:53 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/21 15:32:18 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void				export_view(void)
 	gint res;
 
 	dialog = gtk_file_chooser_dialog_new ("Export",
-										  GTK_WINDOW(GTKMGR.ui.export_view.dialog),
+										  GTK_WINDOW(GTKMGR.ui.main_view.win),
 										  action,
 										  "_Cancel",
 										  GTK_RESPONSE_CANCEL,
@@ -73,7 +73,7 @@ void				open_file(void)
 	gint res;
 
 	dialog = gtk_file_chooser_dialog_new ("Open File",
-										  GTK_WINDOW(GTKMGR.ui.picker_view.dialog),
+										  GTK_WINDOW(GTKMGR.ui.base_view.win),
 										  action,
 										  "_Cancel",
 										  GTK_RESPONSE_CANCEL,

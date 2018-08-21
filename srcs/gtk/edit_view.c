@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/21 13:57:09 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/21 15:23:33 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ static void			edit_sphere_view(t_sphere *s)
 	ADD_VIEW.translate_img = gtk_image_new_from_file("uiconfig/move.png");
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_img, 0, 3, 1, 1);
 	printf("wololo\n");
-	adj_mv_x = gtk_adjustment_new(s->center.x, 0, 1000, .5, 1, 10);
+	adj_mv_x = gtk_adjustment_new(s->center.x, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.translate_x_spin = gtk_spin_button_new(adj_mv_x, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_x_spin, 1, 3, 1, 1);
 	printf("wololo\n");
-	adj_mv_y = gtk_adjustment_new(s->center.y, 0, 1000, .5, 1, 10);
+	adj_mv_y = gtk_adjustment_new(s->center.y, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.translate_y_spin = gtk_spin_button_new(adj_mv_y, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_y_spin, 2, 3, 1, 1);
 	printf("wololo\n");
-	adj_mv_z = gtk_adjustment_new(s->center.z, 0, 1000, .5, 1, 10);
+	adj_mv_z = gtk_adjustment_new(s->center.z, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.translate_z_spin = gtk_spin_button_new(adj_mv_z, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_z_spin, 3, 3, 1, 1);
 	printf("wololo\n");
@@ -154,7 +154,9 @@ void				edit_win(t_obj *o)
                                       "_Cancel",
                                       GTK_RESPONSE_REJECT,
 														  NULL);
+	gtk_window_set_transient_for(GTK_WINDOW(ADD_VIEW.win), GTK_WINDOW(GTKMGR.ui.main_view.win));
 	printf("WQEQWEQWEQWE\n");
+	gtk_window_set_attached_to(GTK_WINDOW(ADD_VIEW.win), GTKMGR.ui.main_view.add_button);
 	gtk_window_set_position(GTK_WINDOW(GTKMGR.ui.add_view.win), GTK_WIN_POS_MOUSE);
 	content_area = gtk_dialog_get_content_area(GTK_DIALOG(ADD_VIEW.win));
 	GTKMGR.ui.add_view.grid = gtk_grid_new();
