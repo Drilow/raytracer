@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/21 03:15:34 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/21 13:42:09 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct				s_gtk_mgr
 	struct s_obj			***checker;
 	struct s_obj			*selected_obj;
 	unsigned char			*buf;
+	char					editmode;
 	t_ui					ui;
 }							t_gtk_mgr;
 

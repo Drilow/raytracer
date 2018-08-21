@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 09:30:07 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/15 01:37:01 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/21 13:42:26 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void				init_gtk_variables(void)
 	y = -1;
 	PIXMAP = NULL;
 	GTKMGR.checker = NULL;
+	GTKMGR.editmode = 0;
 	if (!(GTKMGR.checker = malloc(sizeof(t_obj**) * WIN_H)))
 		exit(1);
 	while (++y < WIN_H)

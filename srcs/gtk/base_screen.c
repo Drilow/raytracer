@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/21 11:27:41 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/21 14:01:53 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void				open_file(void)
 	handle_main_view();
 	gtk_widget_destroy (dialog);
 }
+
 void				handle_drawing(void);
 
 
@@ -104,7 +105,8 @@ static gboolean		clicked(GtkWidget __attribute__((unused))*widget, GdkEventButto
 		if (GTKMGR.checker[(int)event->y][(int)event->x])
 		{
 			GTKMGR.selected_obj = GTKMGR.checker[(int)event->y][(int)event->x];
-			edit_win(GTKMGR.selected_obj);
+			if (GTKMGR.editmode)
+				edit_win(GTKMGR.selected_obj);
 		}
 	}
     return (true);
@@ -162,7 +164,6 @@ void				handle_drawing(void)
 	GTKMGR.ui.main_view.event_box = gtk_event_box_new();
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.main_view.grid), GTKMGR.ui.main_view.event_box, 0, 1, 1, 1);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.event_box), GTKMGR.ui.main_view.render_area);
-//	init_rt();
 }
 
 void				add_view(void)
@@ -176,16 +177,30 @@ void				filters_view(void)
 
 }
 
+void				do_nothing(void)
+{
+	;
+}
 
 void				select_cb(void)
 {
-
-
-	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.event_box),
-					  "button_press_event",
-					  G_CALLBACK(clicked),
-					  GTKMGR.ui.main_view.render_area);
-	printf("bite\n");
+	if (GTKMGR.editmode == 0)
+	{
+		GTKMGR.editmode = 1;
+		gtk_widget_set_state_flags(GTKMGR.ui.main_view.select_button, GTK_STATE_FLAG_CHECKED, true);
+		g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.event_box),
+						 "button_press_event",
+						 G_CALLBACK(clicked),
+						 GTKMGR.ui.main_view.render_area);
+	}
+	else
+	{
+		gtk_widget_set_state_flags(GTKMGR.ui.main_view.select_button, GTK_STATE_FLAG_NORMAL, true);
+		g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.event_box),
+						 "button_press_event",
+						 do_nothing, NULL);
+		GTKMGR.editmode = 0;
+	}
 }
 
 void				handle_main_view(void)
@@ -221,9 +236,7 @@ void				handle_main_view(void)
 	gtk_widget_set_tooltip_text(GTKMGR.ui.main_view.export_button, "export to png format");
 	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.export_button), "clicked", G_CALLBACK(export_view), NULL);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.export_button);
-//	if (g_global.r.objects != NULL)
 	handle_drawing();
-//	g_signal_connect(G_OBJECT(GTKMGR.ui.base_view.win), "destroy", G_CALLBACK(destroy_scene), NULL);
 	gtk_widget_show_all(GTKMGR.ui.main_view.win);
 }
 

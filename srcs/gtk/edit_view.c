@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/21 12:26:51 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/21 13:57:09 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void				edit_win(t_obj *o)
                                       "_Cancel",
                                       GTK_RESPONSE_REJECT,
 														  NULL);
+	printf("WQEQWEQWEQWE\n");
 	gtk_window_set_position(GTK_WINDOW(GTKMGR.ui.add_view.win), GTK_WIN_POS_MOUSE);
 	content_area = gtk_dialog_get_content_area(GTK_DIALOG(ADD_VIEW.win));
 	GTKMGR.ui.add_view.grid = gtk_grid_new();
