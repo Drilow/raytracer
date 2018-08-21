@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/08/19 15:36:44 by adleau           ###   ########.fr        #
+#    Updated: 2018/08/21 11:41:51 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME = rt
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -O3 $(shell pkg-config --cflags gtk+-3.0)
+CFLAGS = -Wall -Werror -Wextra -O3 $(shell pkg-config --cflags gtk+-3.0) #-g -fsanitize=address
 
 LDFLAGS = 	-framework IOKit -framework CoreVideo $(shell pkg-config --libs gtk+-3.0)
 

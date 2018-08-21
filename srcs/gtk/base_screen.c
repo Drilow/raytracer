@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/19 15:21:33 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/21 11:27:41 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,6 @@ static gboolean		clicked(GtkWidget __attribute__((unused))*widget, GdkEventButto
 		{
 			GTKMGR.selected_obj = GTKMGR.checker[(int)event->y][(int)event->x];
 			edit_win(GTKMGR.selected_obj);
-			draw_image();
-			if (PIXMAP)
-				cairo_surface_destroy(PIXMAP);
-			PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
-			if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-				exit(1);
-			cairo_surface_mark_dirty(PIXMAP);
-			gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
 		}
 	}
     return (true);

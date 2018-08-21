@@ -134,6 +134,5 @@ void			draw_image(void)
 	}
 	if (ANTIALIASING == 1)
 		antialiasing();
-	printf("mabite\n");
 	g_global.drawn = 0;
 }

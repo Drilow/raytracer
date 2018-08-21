@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/19 15:32:49 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/21 03:15:34 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ typedef struct				s_add_view
 	GtkWidget				*cylinder_button;
 	GtkWidget				*cone_button;
 	GtkWidget				*obj_file_button;
+	GtkWidget				*sphere_img;
+	GtkWidget				*plane_img;
+	GtkWidget				*cylinder_img;
+	GtkWidget				*cone_img;
+	GtkWidget				*obj_file_img;
 	GtkWidget				*x_label;
 	GtkWidget				*y_label;
 	GtkWidget				*z_label;
