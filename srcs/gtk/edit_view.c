@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/21 15:23:33 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/21 16:01:45 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,16 +148,18 @@ void				edit_win(t_obj *o)
 	ADD_VIEW.obj_file_img = gtk_image_new_from_file("uiconfig/poly_obj.png");
 	GTKMGR.ui.add_view.win = gtk_dialog_new_with_buttons ("My dialog",
 														  GTK_WINDOW(GTKMGR.ui.main_view.win),
-                                       GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                      "_OK",
-                                      GTK_RESPONSE_ACCEPT,
-                                      "_Cancel",
-                                      GTK_RESPONSE_REJECT,
+														  GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+														  "_OK",
+														  GTK_RESPONSE_ACCEPT,
+														  "_Cancel",
+														  GTK_RESPONSE_REJECT,
 														  NULL);
 	gtk_window_set_transient_for(GTK_WINDOW(ADD_VIEW.win), GTK_WINDOW(GTKMGR.ui.main_view.win));
 	printf("WQEQWEQWEQWE\n");
-	gtk_window_set_attached_to(GTK_WINDOW(ADD_VIEW.win), GTKMGR.ui.main_view.add_button);
-	gtk_window_set_position(GTK_WINDOW(GTKMGR.ui.add_view.win), GTK_WIN_POS_MOUSE);
+	gint wx, wy;
+	gtk_widget_translate_coordinates(GTKMGR.ui.main_view.select_button, gtk_widget_get_toplevel(GTKMGR.ui.main_view.select_button), 0, 0, &wx, &wy);
+	printf("%D %D\n", wx, wy);
+	gtk_window_move(GTK_WINDOW(ADD_VIEW.win), wx, wy);
 	content_area = gtk_dialog_get_content_area(GTK_DIALOG(ADD_VIEW.win));
 	GTKMGR.ui.add_view.grid = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(content_area), GTKMGR.ui.add_view.grid);
