@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 22:52:03 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/19 15:36:04 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/19 15:49:39 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,6 @@ static t_rgb	get_pixel(unsigned char *buf, int x, int y)
 	px.b = ptr[2];
 	px.trans = 0;
 	return (px);
-/*	t_rgb		pixel;
-	Uint32		*intpixel;
-	Uint8		components[3];
-
-	intpixel = (Uint32*)surf->pixels +
-		(y * surf->pitch / surf->format->BytesPerPixel) + x;
-	SDL_GetRGB(*intpixel, surf->format, &(components[0]), &(components[1]), &(components[2]));
-	pixel.r = components[0];
-	pixel.g = components[1];
-	pixel.b = components[2];
-	pixel.trans = 0;
-	return (pixel);*/
 }
 
 static t_rgb	two_colors_average(t_rgb a, t_rgb b, double ratio)
