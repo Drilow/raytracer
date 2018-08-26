@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:30:52 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/19 19:22:08 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/08/26 18:29:56 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static bool		face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision
 
 //	if (test == true)
 //		printf("debug1\n");
-	if (plane_collision(ray, &(face->pl), &tmp) == false)
+	if (plane_collision(ray, &(face->pl), set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z), &tmp) == false)
 		return (false);
 //	if (test == true)
 //		printf("debug2\n");
