@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/08/21 11:41:51 by adleau           ###   ########.fr        #
+#    Updated: 2018/08/26 18:21:03 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ INC	=		$(INCPATH)objects/object.h \
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
+
 
 $(NAME): $(OBJ) $(INC)
 		make -C libft/
