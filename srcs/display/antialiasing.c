@@ -6,12 +6,11 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 22:52:03 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/19 15:49:39 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/26 17:29:33 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <display/display.h>
-#include <global.h>
 #include <global.h>
 #include <gtk/gtk.h>
 #include <stdio.h>
@@ -50,6 +49,9 @@ static t_rgb	two_colors_average(t_rgb a, t_rgb b, double ratio)
 }
 
 
+/*
+Fonction inutile pour l'instant :
+
 static t_rgb	color_average(t_rgb *colors, int size)
 {
 	int			i;
@@ -57,21 +59,25 @@ static t_rgb	color_average(t_rgb *colors, int size)
 
 	i = -1;
 	ca = ft_rgb(0, 0, 0, 0);
-	while (++i)
+	while (++i < size)
 		ca = ft_rgb(ca.r + (colors[i].r / size), ca.g + (colors[i].g / size), \
 			ca.b + (colors[i].b / size), ca.trans + (colors[i].trans / size));
 	return (ca);
 }
+*/
 
 static double	colorcmp(t_rgb a, t_rgb b)
 {
 	t_rpoint	cmp;
+	double		clr_cmp;
+	double		brightness_cmp;
 
 	cmp.x = 1 - ((double)ft_abs(a.r - b.r) / 255);
 	cmp.y = 1 - ((double)ft_abs(a.g - b.g) / 255);
 	cmp.z = 1 - ((double)ft_abs(a.b - b.b) / 255);
-//	printf("colorcmp = %f\n", (cmp.x + cmp.y + cmp.z) / 3);
-	return ((cmp.x + cmp.y + cmp.z) / 3);
+	clr_cmp = (cmp.x + cmp.y + cmp.z) / 3;
+	brightness_cmp = 1 - ((double)ft_abs(a.r + a.g + a.b - b.r - b.g - b.b) / 765);
+	return (clr_cmp * 0.80 + brightness_cmp * 0.20);
 }
 
 static int		detect_edge(t_point p)
@@ -107,8 +113,35 @@ static int		detect_edge(t_point p)
 	return (0);
 }
 
+
+static t_rgb	new_color(t_rgb pix, t_rgb *adj)
+{
+	int			adj1;
+	int			adj2;
+	double		diff;
+	int			i;
+
+	diff = 1;
+	i = 1;
+	while (i < 8)
+	{
+		if (colorcmp(pix, adj[i]) < diff)
+		{
+			diff = colorcmp(pix, adj[i]);
+			adj1 = i;
+		}
+		i = i + 2;
+	}
+	adj2 = (adj1 - 2) % 8;
+	if (colorcmp(pix, adj[(adj1 + 2) % 8]) < colorcmp(pix, adj[(adj1 - 2) % 8]))
+		adj2 = (adj1 + 2) % 8;
+	if (colorcmp(adj[adj1], adj[adj2]) < 0.6)
+		return (pix);
+	return (two_colors_average(pix, \
+			two_colors_average(adj[adj1], adj[adj2], 0.5), AA_MIX_RATIO));
+}
+
 static void		apply_aa(t_point p, t_rgb **pixdup)
-//static void		apply_aa(t_point p, t_rgb[WIN_H][WIN_W] pixdup)
 {
 	t_rgb		pix;
 	t_rgb		adj[8];
@@ -134,21 +167,29 @@ static void		apply_aa(t_point p, t_rgb **pixdup)
         adj[6] = pixdup[p.y + 1][p.x - 1];
 	if (p.x > 0)
         adj[7] = pixdup[p.y][p.x - 1];
-	draw_px(GTKMGR.buf, p.x, p.y, two_colors_average(pix, color_average(adj, 8), 0.3));
+	draw_px(GTKMGR.buf, p.x, p.y, new_color(pix, adj));
 //	draw_px(GTKMGR.buf, p.x, p.y, color_average(adj, 8));
 //	draw_px(GTKMGR.buf, p.x, p.y, two_colors_average(two_colors_average(pix, color_average(adj, 8), 0.5), pix, 0.5));
 //	draw_px(GTKMGR.buf, p.x, p.y, ft_rgb(255, 0, 175, 0));
 //	draw_px(GTKMGR.buf, p.x, p.y, pix);
 }
 
-void			antialiasing(void)
+static void		free_pixdup(t_rgb **pixdup)
 {
 	t_point		p;
-//	t_rgb		new_color;
+
+	p.y = -1;
+	while (++p.y < WIN_H)
+		free(pixdup[p.y]);
+	free(pixdup);
+}
+
+static void		antialiasing_core(void)
+{
+	t_point		p;
 	int			aa[WIN_H][WIN_W];
 	t_rgb		**pixdup;
 
-	printf("ut = %f && lt = %f\n", AA_UPPER_THRESHOLD, AA_LOWER_THRESHOLD);
 	p.y = -1;
 	if (!(pixdup = (t_rgb **)malloc(sizeof(t_rgb *) * WIN_H)))
 		ft_exit("malloc error", 0);
@@ -178,5 +219,14 @@ void			antialiasing(void)
 			}
 		}
 	}
-	// FREE pixdup !
+	free_pixdup(pixdup);
+}
+
+void			antialiasing(void)
+{
+	int			i;
+
+	i = -1;
+	while (++i < AA_ITERATIONS)
+		antialiasing_core();
 }

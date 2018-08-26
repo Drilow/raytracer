@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/15 15:17:23 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/26 17:25:51 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ static bool	read_line(char *line)
 	else
 		new = malloc_object(obj_type);
 	index = 0;
+/*
 	if (obj_type == 6)
 	{
 //		((t_obj *)new)->obj = parse_obj(line + (sizeof(char) * 4));
@@ -152,7 +153,12 @@ static bool	read_line(char *line)
 		set_obj((t_obj *)new);
 //		return (true);
 	}
+*/
+	/*
 	if (obj_type != 6 && get_obj(line, new, &index, obj_type) == false)
+		return (false);
+	*/
+	if (get_obj(line, new, &index, obj_type) == false)
 		return (false);
 	add_to_list(new, obj_type);
 	return (true);

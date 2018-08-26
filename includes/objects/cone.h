@@ -6,13 +6,14 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:49:23 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 20:02:07 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/19 17:01:21 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		CONE_H
 # define	CONE_H
 # include <stdbool.h>
+# include <objects/object.h>
 
 typedef struct		s_cone
 {
@@ -22,6 +23,6 @@ typedef struct		s_cone
 	bool			infinite;
 }					t_cone;
 
-bool			get_cone(char *s, t_cone *c, int *index);
+bool			get_cone(char *s, t_obj *o, int *index);
 bool			get_cc_eq_factors(t_ray ray, t_cone *c, t_rpoint *f);
 #endif

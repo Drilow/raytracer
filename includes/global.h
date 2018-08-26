@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/19 14:45:26 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/26 17:19:17 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@
 # include <gtk/gtk.h>
 # define DATA g_global.sdl_mgr.surf
 # define ANTIALIASING 1
-# define AA_LOWER_THRESHOLD 0.30
-# define AA_UPPER_THRESHOLD 0.70
+# define AA_ITERATIONS 4
+# define AA_LOWER_THRESHOLD 0.9
+# define AA_UPPER_THRESHOLD 0.1
+# define AA_MIX_RATIO 0.8
 
 typedef struct			s_global
 {
