@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/15 01:49:21 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/27 11:19:14 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static t_rpoint		add_color(t_rpoint c, t_rpoint oclr, t_light *l, double af)
 	return (new_c);
 }
 
-static t_rpoint		get_color(t_rt *r, t_collision c, t_point checker, bool debug)
+static t_rpoint		get_color(t_rt *r, t_collision c, bool debug)
 {
 	t_rpoint		color;
 	t_rpoint		ocolor;
@@ -124,7 +124,7 @@ static t_rpoint		get_color(t_rt *r, t_collision c, t_point checker, bool debug)
 		while (otmp != NULL)
 		{
 			tmpc.o = otmp;
-			if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc, checker, debug) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
+			if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc, debug) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
 			{
 				afactor = 0;
 //				if (debug == true)
@@ -176,7 +176,7 @@ t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug)
 
 	checker.x = -1;
 	checker.y = -1;
-	tmp_color = get_color(r, c, checker, debug);
+	tmp_color = get_color(r, c, debug);
 //	if (debug == true)
 //		printf("get_ray_color : rgb(%f, %f, %f)\n", tmp_color.x, tmp_color.y, tmp_color.z);
 	distance_factor = deltasq(r->cam_position, c.p) / LIGHT_DISTANCE_FACTOR;

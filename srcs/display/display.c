@@ -79,7 +79,7 @@ static void		*draw_image_core(void *arg)
 
 		while (++p.y < WIN_H)
 		{
-			tmp = ray_tracing(r, g_global.r.rays[p.y][p.x], p, false);
+			tmp = ray_tracing(r, g_global.r.rays[p.y][p.x], false);
 			if (tmp.o != NULL)
 			{
 //				if ((p.x == 361 || p.x == 360) && p.y == 209)

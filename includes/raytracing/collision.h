@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 13:03:48 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/15 01:50:42 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/27 11:17:26 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ typedef struct		s_collision
 
 bool				find_collisions(t_rpoint factors, t_dpoint *solutions);
 
-bool				sphere_collision(t_ray ray, t_sphere *s, t_rpoint *p);
-bool				plane_collision(t_ray ray, t_plane *pl, t_rpoint *p);
-bool				get_cc_eq_factors(t_ray ray, t_cone *c, t_rpoint *f);
-bool				cone_collision(t_ray ray, t_cone *c, t_rpoint *p);
-t_rpoint			get_cyc_eq_factors(t_ray ray, t_cylinder *c);
-bool				cylinder_collision(t_ray ray, t_cylinder *c, t_rpoint *p);
+//bool				sphere_collision(t_ray ray, t_sphere *s, t_rpoint *p);
+//bool				plane_collision(t_ray ray, t_plane *pl, t_rpoint *p);
+//bool				get_cc_eq_factors(t_ray ray, t_cone *c, t_rpoint *f);
+//bool				cone_collision(t_ray ray, t_cone *c, t_rpoint *p);
+//t_rpoint			get_cyc_eq_factors(t_ray ray, t_cylinder *c);
+//bool				cylinder_collision(t_ray ray, t_cylinder *c, t_rpoint *p);
 bool				poly_obj_collision(t_ray ray, t_poly_obj *po, \
 									   t_collision *col, bool test);
 //t_bool				collision(t_ray ray, t_obj *o, t_rpoint *p);
-bool				collision(t_ray ray, t_collision *c, t_point checker, bool test);
+bool				collision(t_ray ray, t_collision *c, bool test);
 t_rpoint			normal_collision_vector(t_collision c);
-t_collision			ray_tracing(t_rt *r, t_ray ray, t_point checker, bool test);
+t_collision			ray_tracing(t_rt *r, t_ray ray, bool test);
 
 //t_rgb				get_ray_color(t_rt *r, t_collision c);
 t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug);

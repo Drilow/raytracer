@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/19 17:35:30 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/08/26 20:10:18 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ typedef struct		s_obj
 
 typedef struct      s_sphere
 {
-    t_rpoint        center;
+//    t_rpoint        center;
     double          radius;
 }                   t_sphere;
 
 typedef struct      s_cone
 {
-    t_rpoint        summit;
+//    t_rpoint        summit;
     t_rpoint        vector;
     double          angle;
     bool            infinite;
@@ -52,7 +52,7 @@ typedef struct      s_cone
 
 typedef struct      s_cylinder
 {
-    t_rpoint        summit;
+//    t_rpoint        summit;
     t_rpoint        vector;
     double          radius;
     bool            infinite;
@@ -61,7 +61,7 @@ typedef struct      s_cylinder
 typedef struct      s_plane
 {
     t_rpoint        vector;
-    t_rpoint        p;
+//    t_rpoint        p;
 }                   t_plane;
 
 typedef struct      s_vertex
@@ -81,15 +81,18 @@ typedef struct      s_poly_obj
 t_poly_obj			*parse_obj(char *scene_line);
 
 bool				get_plane(char *s, t_obj *o, int *index);
-bool				plane_collision(t_ray ray, t_plane *pl, t_rpoint *p);
+bool				plane_collision(t_ray ray, t_plane *pl, t_rpoint pos, \
+					t_rpoint *p);
 
 bool				get_cylinder(char *s, t_obj *o, int *index);
-t_rpoint			get_cyc_eq_factors(t_ray ray, t_cylinder *c);
+t_rpoint			get_cyc_eq_factors(t_ray ray, t_cylinder *c, t_rpoint pos);
+bool                cylinder_collision(t_ray ray, t_obj *c, t_rpoint *p);
 
 bool				get_cone(char *s, t_obj *o, int *index);
-bool				get_cc_eq_factors(t_ray ray, t_cone *c, t_rpoint *f);
+bool				get_cc_eq_factors(t_ray ray, t_obj *c, t_rpoint *f);
+bool                cone_collision(t_ray ray, t_obj *c, t_rpoint *p);
 
 bool				get_sphere(char *s, t_obj *o, int *index);
-bool				sphere_collision(t_ray ray, t_sphere *s, t_rpoint *p);
+bool				sphere_collision(t_ray ray, t_obj *s, t_rpoint *p);
 
 #endif

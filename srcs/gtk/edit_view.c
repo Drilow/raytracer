@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/22 15:16:20 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/27 11:15:08 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,6 @@ void				deactivate_buttons(GtkWidget *except)
 void				validate_sphere(t_sphere *s)
 {
 	s->radius = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin));
-	s->center.x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
-	s->center.y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_y_spin));
-	s->center.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
 	draw_image();
 	if (PIXMAP)
 		cairo_surface_destroy(PIXMAP);
@@ -51,7 +48,15 @@ void				validate_sphere(t_sphere *s)
 	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
 }
 
-static void			edit_sphere_view(t_sphere *s)
+void				validate_edit(t_obj *o)
+{
+	o->position.x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
+	o->position.y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_y_spin));
+	o->position.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
+
+}
+
+static void			edit_sphere_view(t_obj *o)
 {
 	GtkAdjustment	*adj_scale;
 	GtkAdjustment	*adj_mv_x;
@@ -60,20 +65,20 @@ static void			edit_sphere_view(t_sphere *s)
 
 	deactivate_buttons(ADD_VIEW.sphere_button);
 	gtk_widget_set_state_flags(ADD_VIEW.sphere_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
-	adj_scale = gtk_adjustment_new(s->radius, 0, 1000, .5, 1, 10);
+	adj_scale = gtk_adjustment_new(((t_sphere*)(o->obj))->radius, 0, 1000, .5, 1, 10);
 	ADD_VIEW.scale_spin = gtk_spin_button_new(adj_scale, 1, 4);
 	ADD_VIEW.scale_img = gtk_image_new_from_file("uiconfig/ruler.png");
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.scale_img, 0, 1, 1, 1);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.scale_spin, 1, 1, 3, 1);
 	ADD_VIEW.translate_img = gtk_image_new_from_file("uiconfig/move.png");
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_img, 0, 3, 1, 1);
-	adj_mv_x = gtk_adjustment_new(s->center.x, -1000, 1000, .5, 1, 10);
+	adj_mv_x = gtk_adjustment_new(o->position.x, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.translate_x_spin = gtk_spin_button_new(adj_mv_x, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_x_spin, 1, 3, 1, 1);
-	adj_mv_y = gtk_adjustment_new(s->center.y, -1000, 1000, .5, 1, 10);
+	adj_mv_y = gtk_adjustment_new(o->position.y, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.translate_y_spin = gtk_spin_button_new(adj_mv_y, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_y_spin, 2, 3, 1, 1);
-	adj_mv_z = gtk_adjustment_new(s->center.z, -1000, 1000, .5, 1, 10);
+	adj_mv_z = gtk_adjustment_new(o->position.z, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.translate_z_spin = gtk_spin_button_new(adj_mv_z, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_z_spin, 3, 3, 1, 1);
 }
@@ -110,7 +115,7 @@ static void			actual_edit_view(t_obj *o)
 {
 	gtk_window_set_title(GTK_WINDOW(GTKMGR.ui.add_view.win), "Edit Object");
 	if (o->type == 1)
-		edit_sphere_view((t_sphere*)o->obj);
+		edit_sphere_view(o);
 	else if (o->type == 2)
 		edit_plane_view((t_plane*)o->obj);
 	else if (o->type == 3)
@@ -123,21 +128,17 @@ static void			actual_edit_view(t_obj *o)
 
 void				set_default_values(t_obj *o, t_rpoint p)
 {
+	o->position = p;
 	if (o->type == 1)
-	{
 		((t_sphere*)o->obj)->radius = 2;
-		((t_sphere*)o->obj)->center = p;
-	}
 	else if (o->type == 2)
 	{
 		((t_plane*)o->obj)->vector.x = 1;
 		((t_plane*)o->obj)->vector.y = 1;
 		((t_plane*)o->obj)->vector.z = 1;
-		((t_plane*)o->obj)->p = p;
 	}
 	else if (o->type == 3)
 	{
-		((t_cone*)o->obj)->summit = p;
 		((t_cone*)o->obj)->vector.x = 1;
 		((t_cone*)o->obj)->vector.y = 1;
 		((t_cone*)o->obj)->vector.z = 1;
@@ -146,31 +147,12 @@ void				set_default_values(t_obj *o, t_rpoint p)
 	}
 	else if (o->type == 4)
 	{
-		((t_cylinder*)o->obj)->summit = p;
 		((t_cylinder*)o->obj)->vector.x = 1;
 		((t_cylinder*)o->obj)->vector.y = 1;
 		((t_cylinder*)o->obj)->vector.z = 1;
 		((t_cylinder*)o->obj)->radius = 2;
 		((t_cylinder*)o->obj)->infinite = true;
 	}
-}
-
-t_rpoint			get_coords(t_obj *o)
-{
-	t_rpoint		def;
-
-	if (o->type == 1)
-		return (((t_sphere*)o->obj)->center);
-	else if (o->type == 2)
-		return (((t_plane*)o->obj)->p);
-	else if (o->type == 3)
-		return (((t_cone*)o->obj)->summit);
-	else if (o->type == 4)
-		return (((t_cylinder*)o->obj)->summit);
-	def.x = 0;
-	def.y = 0;
-	def.z = 0;
-	return (def);
 }
 
 void				create_object(t_obj *o, int type)
@@ -189,7 +171,7 @@ void				create_object(t_obj *o, int type)
 	else if (type == 4)
 		tmp->obj = (t_cylinder*)malloc(sizeof(t_cylinder));
 	tmp->type = type;
-	p = get_coords(o);
+	p = o->position;
 	set_default_values(tmp, p);
 	free(o->obj);
 	o->type = type;
@@ -261,7 +243,7 @@ g_signal_connect(G_OBJECT(ADD_VIEW.cylinder_button), "clicked", G_CALLBACK(switc
 	if (gtk_dialog_run(GTK_DIALOG(ADD_VIEW.win)) == GTK_RESPONSE_ACCEPT)
 	{
 		if (o->type == 1)
-			validate_sphere((t_sphere*)o->obj);
+			validate_edit(o);
 		gtk_widget_destroy(ADD_VIEW.win);
 	}
 }
