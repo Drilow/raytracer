@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/21 16:01:45 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/22 15:16:20 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,17 @@ void				deactivate_buttons(GtkWidget *except)
 void				validate_sphere(t_sphere *s)
 {
 	s->radius = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin));
-	printf("doko %f\n", s->radius);
 	s->center.x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
-	printf("doko\n");
 	s->center.y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_y_spin));
-	printf("doko\n");
 	s->center.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
-	printf("doko\n");
 	draw_image();
 	if (PIXMAP)
 		cairo_surface_destroy(PIXMAP);
-	printf("doko1\n");
 	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
-	printf("doko\n");
 	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
 		exit(1);
-	printf("doko\n");
 	cairo_surface_mark_dirty(PIXMAP);
-	printf("doko\n");
 	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
-	printf("doko3\n");
 }
 
 static void			edit_sphere_view(t_sphere *s)
@@ -68,30 +59,23 @@ static void			edit_sphere_view(t_sphere *s)
 	GtkAdjustment	*adj_mv_z;
 
 	deactivate_buttons(ADD_VIEW.sphere_button);
-	gtk_widget_set_state_flags(ADD_VIEW.sphere_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE ,true);
+	gtk_widget_set_state_flags(ADD_VIEW.sphere_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
 	adj_scale = gtk_adjustment_new(s->radius, 0, 1000, .5, 1, 10);
 	ADD_VIEW.scale_spin = gtk_spin_button_new(adj_scale, 1, 4);
 	ADD_VIEW.scale_img = gtk_image_new_from_file("uiconfig/ruler.png");
-	printf("wololo %f\n", s->radius);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.scale_img, 0, 1, 1, 1);
-	printf("wololo\n");
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.scale_spin, 1, 1, 3, 1);
-	printf("wololo\n");
 	ADD_VIEW.translate_img = gtk_image_new_from_file("uiconfig/move.png");
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_img, 0, 3, 1, 1);
-	printf("wololo\n");
 	adj_mv_x = gtk_adjustment_new(s->center.x, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.translate_x_spin = gtk_spin_button_new(adj_mv_x, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_x_spin, 1, 3, 1, 1);
-	printf("wololo\n");
 	adj_mv_y = gtk_adjustment_new(s->center.y, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.translate_y_spin = gtk_spin_button_new(adj_mv_y, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_y_spin, 2, 3, 1, 1);
-	printf("wololo\n");
 	adj_mv_z = gtk_adjustment_new(s->center.z, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.translate_z_spin = gtk_spin_button_new(adj_mv_z, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_z_spin, 3, 3, 1, 1);
-	printf("wololo\n");
 }
 
 static void			edit_plane_view(t_plane *p)
@@ -137,6 +121,89 @@ static void			actual_edit_view(t_obj *o)
 		edit_poly_view((t_poly_obj*)o->obj);
 }
 
+void				set_default_values(t_obj *o, t_rpoint p)
+{
+	if (o->type == 1)
+	{
+		((t_sphere*)o->obj)->radius = 2;
+		((t_sphere*)o->obj)->center = p;
+	}
+	else if (o->type == 2)
+	{
+		((t_plane*)o->obj)->vector.x = 1;
+		((t_plane*)o->obj)->vector.y = 1;
+		((t_plane*)o->obj)->vector.z = 1;
+		((t_plane*)o->obj)->p = p;
+	}
+	else if (o->type == 3)
+	{
+		((t_cone*)o->obj)->summit = p;
+		((t_cone*)o->obj)->vector.x = 1;
+		((t_cone*)o->obj)->vector.y = 1;
+		((t_cone*)o->obj)->vector.z = 1;
+		((t_cone*)o->obj)->angle = 60;
+		((t_cone*)o->obj)->infinite = true;
+	}
+	else if (o->type == 4)
+	{
+		((t_cylinder*)o->obj)->summit = p;
+		((t_cylinder*)o->obj)->vector.x = 1;
+		((t_cylinder*)o->obj)->vector.y = 1;
+		((t_cylinder*)o->obj)->vector.z = 1;
+		((t_cylinder*)o->obj)->radius = 2;
+		((t_cylinder*)o->obj)->infinite = true;
+	}
+}
+
+t_rpoint			get_coords(t_obj *o)
+{
+	t_rpoint		def;
+
+	if (o->type == 1)
+		return (((t_sphere*)o->obj)->center);
+	else if (o->type == 2)
+		return (((t_plane*)o->obj)->p);
+	else if (o->type == 3)
+		return (((t_cone*)o->obj)->summit);
+	else if (o->type == 4)
+		return (((t_cylinder*)o->obj)->summit);
+	def.x = 0;
+	def.y = 0;
+	def.z = 0;
+	return (def);
+}
+
+void				create_object(t_obj *o, int type)
+{
+	t_obj			*tmp;
+	t_rpoint		p;
+
+	if (!(tmp = (t_obj*)malloc(sizeof(t_obj))))
+		exit(1);
+	if (type == 1)
+		tmp->obj = (t_sphere*)malloc(sizeof(t_sphere));
+	else if (type == 2)
+		tmp->obj = (t_plane*)malloc(sizeof(t_plane));
+	else if (type == 3)
+		tmp->obj = (t_cone*)malloc(sizeof(t_cone));
+	else if (type == 4)
+		tmp->obj = (t_cylinder*)malloc(sizeof(t_cylinder));
+	tmp->type = type;
+	p = get_coords(o);
+	set_default_values(tmp, p);
+	free(o->obj);
+	o->type = type;
+	o->obj = tmp->obj;
+}
+
+void				switch_type(t_obj *o, int type)
+{
+	if (o->type == type)
+		return ;
+//	destroy_interface_for_type(o);
+	create_object(o, type);
+}
+
 void				edit_win(t_obj *o)
 {
 	GtkWidget		*content_area;
@@ -155,10 +222,8 @@ void				edit_win(t_obj *o)
 														  GTK_RESPONSE_REJECT,
 														  NULL);
 	gtk_window_set_transient_for(GTK_WINDOW(ADD_VIEW.win), GTK_WINDOW(GTKMGR.ui.main_view.win));
-	printf("WQEQWEQWEQWE\n");
 	gint wx, wy;
 	gtk_widget_translate_coordinates(GTKMGR.ui.main_view.select_button, gtk_widget_get_toplevel(GTKMGR.ui.main_view.select_button), 0, 0, &wx, &wy);
-	printf("%D %D\n", wx, wy);
 	gtk_window_move(GTK_WINDOW(ADD_VIEW.win), wx, wy);
 	content_area = gtk_dialog_get_content_area(GTK_DIALOG(ADD_VIEW.win));
 	GTKMGR.ui.add_view.grid = gtk_grid_new();
@@ -166,22 +231,22 @@ void				edit_win(t_obj *o)
 	GTKMGR.ui.add_view.buttonbox = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.buttonbox, 0, 0, 4, 1);
 	ADD_VIEW.sphere_button = gtk_button_new();
-	g_signal_connect(G_OBJECT(ADD_VIEW.sphere_button), "clicked", G_CALLBACK(edit_sphere_view), o);
+	g_signal_connect(G_OBJECT(ADD_VIEW.sphere_button), "clicked", G_CALLBACK(switch_type), NULL);
 	gtk_widget_set_tooltip_text(ADD_VIEW.sphere_button, "Sphere");
 	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.sphere_button), ADD_VIEW.sphere_img);
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.sphere_button);
 	ADD_VIEW.plane_button = gtk_button_new();
-	g_signal_connect(G_OBJECT(ADD_VIEW.plane_button), "clicked", G_CALLBACK(edit_plane_view), o);
+	g_signal_connect(G_OBJECT(ADD_VIEW.plane_button), "clicked", G_CALLBACK(switch_type), NULL);
 	gtk_widget_set_tooltip_text(ADD_VIEW.plane_button, "Plane");
 	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.plane_button), ADD_VIEW.plane_img);
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.plane_button);
 	ADD_VIEW.cone_button = gtk_button_new();
-	g_signal_connect(G_OBJECT(ADD_VIEW.cone_button), "clicked", G_CALLBACK(edit_cone_view), o);
+g_signal_connect(G_OBJECT(ADD_VIEW.cone_button), "clicked", G_CALLBACK(switch_type), NULL);
 	gtk_widget_set_tooltip_text(ADD_VIEW.cone_button, "Cone");
 	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.cone_button), ADD_VIEW.cone_img);
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.cone_button);
 	ADD_VIEW.cylinder_button = gtk_button_new();
-	g_signal_connect(G_OBJECT(ADD_VIEW.cylinder_button), "clicked", G_CALLBACK(edit_cylinder_view), o);
+g_signal_connect(G_OBJECT(ADD_VIEW.cylinder_button), "clicked", G_CALLBACK(switch_type), NULL);
 	gtk_widget_set_tooltip_text(ADD_VIEW.cylinder_button, "Cylinder");
 	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.cylinder_button), ADD_VIEW.cylinder_img);
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.cylinder_button);
