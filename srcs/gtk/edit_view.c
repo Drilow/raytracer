@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/27 14:24:48 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/27 16:36:35 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,27 +207,61 @@ void				create_object(t_obj *o, int type)
 	if (!(tmp = (t_obj*)malloc(sizeof(t_obj))))
 		exit(1);
 	if (type == 1)
+	{
 		tmp->obj = (t_sphere*)malloc(sizeof(t_sphere));
+		tmp->type = 1;
+	}
 	else if (type == 2)
+	{
 		tmp->obj = (t_plane*)malloc(sizeof(t_plane));
+		tmp->type = 2;
+	}
 	else if (type == 3)
+	{
 		tmp->obj = (t_cone*)malloc(sizeof(t_cone));
+		tmp->type = 3;
+	}
 	else if (type == 4)
+	{
 		tmp->obj = (t_cylinder*)malloc(sizeof(t_cylinder));
-	tmp->type = type;
+		tmp->type = 4;
+	}
 	p = o->position;
 	set_default_values(tmp, p);
-	free(o->obj);
-	o->type = type;
+//	free(o->obj);
+	o->type = tmp->type;
 	o->obj = tmp->obj;
 }
 
-void				switch_type(t_obj *o, int type)
+void				switch_type(GtkButton *button)
 {
-	if (o->type == type)
-		return ;
+	t_obj			*o;
+	int				type;
+
+	type = ADD_VIEW.sw.o->type;
+	o = ADD_VIEW.sw.o;
 //	destroy_interface_for_type(o);
-	create_object(o, type);
+	if (button == GTK_BUTTON(ADD_VIEW.sphere_button))
+	{
+		edit_sphere_view((t_sphere*)o->obj);
+		ADD_VIEW.sw.type = 1;
+	}
+	else if (button == GTK_BUTTON(ADD_VIEW.plane_button))
+	{
+		edit_plane_view((t_plane*)o->obj);
+		ADD_VIEW.sw.type = 2;
+	}
+	else if (button == GTK_BUTTON(ADD_VIEW.cone_button))
+	{
+		edit_cone_view((t_cone*)o->obj);
+		ADD_VIEW.sw.type = 3;
+	}
+	else if (button == GTK_BUTTON(ADD_VIEW.cylinder_button))
+	{
+		edit_cylinder_view((t_cylinder*)o->obj);
+		ADD_VIEW.sw.type = 4;
+	}
+	create_object(o, ADD_VIEW.sw.type);
 }
 
 void				edit_win(t_obj *o)
@@ -249,6 +283,8 @@ void				edit_win(t_obj *o)
 														  NULL);
 	gtk_window_set_transient_for(GTK_WINDOW(ADD_VIEW.win), GTK_WINDOW(GTKMGR.ui.main_view.win));
 	gint wx, wy;
+
+	ADD_VIEW.sw.o = o;
 	gtk_widget_translate_coordinates(GTKMGR.ui.main_view.select_button, gtk_widget_get_toplevel(GTKMGR.ui.main_view.select_button), 0, 0, &wx, &wy);
 	gtk_window_move(GTK_WINDOW(ADD_VIEW.win), wx, wy);
 	content_area = gtk_dialog_get_content_area(GTK_DIALOG(ADD_VIEW.win));

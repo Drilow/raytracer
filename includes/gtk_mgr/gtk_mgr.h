@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/27 14:01:49 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/27 16:29:29 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ struct s_rgb;
 
 typedef struct s_rgb		t_rgb;
 typedef struct s_obj		t_obj;
+
+typedef struct				s_switcher
+{
+	t_obj					*o;
+	int						type;
+}							t_switcher;
 
 typedef struct				s_picker_view
 {
@@ -74,6 +80,7 @@ typedef struct				s_add_view
 	GtkWidget				*infinite;
 	GtkWidget				*ok_button;
 	GtkWidget				*cancel_button;
+	t_switcher				sw;
 }							t_add_view;
 
 typedef struct				s_main_view
