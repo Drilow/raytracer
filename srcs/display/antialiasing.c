@@ -15,7 +15,7 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <objects/object.h>
-#include <cl_inc/cl_defs.h>
+//#include <cl_inc/cl_defs.h>
 #include <geometry/geometry.h>
 #include <extra/extra_defs.h>
 #include <libft.h>

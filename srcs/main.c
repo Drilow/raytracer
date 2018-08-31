@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include <objects/object.h>
 #include <global.h>
-#include <cl_inc/cl_defs.h>
+//#include <cl_inc/cl_defs.h>
 #include <geometry/geometry.h>
 #include <extra/extra_defs.h>
 #include <libft.h>
