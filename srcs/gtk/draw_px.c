@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 22:16:44 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/19 15:32:36 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/31 04:55:06 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void				draw_px(unsigned char *buf, int x, int y, t_rgb cols)
 
 	stride = cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W);
 	ptr = buf + (y * stride) + x * 4;
-	ptr[0] = cols.r;
+	ptr[2] = cols.r;
 	ptr[1] = cols.g;
-	ptr[2] = cols.b;
+	ptr[0] = cols.b;
 }
