@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 22:52:03 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/26 17:29:33 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/31 05:13:26 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static t_rgb	get_pixel(unsigned char *buf, int x, int y)
 
 	stride = cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W);
 	ptr = buf + (y * stride) + x * 4;
-	px.r = ptr[0];
+	px.r = ptr[2];
 	px.g = ptr[1];
-	px.b = ptr[2];
+	px.b = ptr[0];
 	px.trans = 0;
 	return (px);
 }
