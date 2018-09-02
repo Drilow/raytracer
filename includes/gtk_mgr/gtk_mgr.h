@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/02 20:19:27 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 21:02:10 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ typedef struct				s_add_view
 	GtkWidget				*vector_img;
 	GtkWidget				*inf_img;
 	GtkWidget				*infinite;
+	GtkWidget				*angle_img;
+	GtkWidget				*angle_spin;
 	GtkWidget				*ok_button;
 	GtkWidget				*cancel_button;
 	t_switcher				sw;

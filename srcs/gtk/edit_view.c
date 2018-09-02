@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/02 20:59:04 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 21:10:44 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void				validate_cone(t_cone *c)
 	c->vector.x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.vector_x));
 	c->vector.y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.vector_y));
 	c->vector.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.vector_z));
-	c->angle = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin));
+	c->angle = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.angle_spin)) / 360;
 	c->infinite = gtk_switch_get_active(GTK_SWITCH(ADD_VIEW.infinite));
 }
 
@@ -125,9 +125,33 @@ static void			edit_plane_view(t_plane *p)
 
 static void			edit_cone_view(t_cone *c)
 {
+	GtkAdjustment	*adj;
+	GtkAdjustment	*adj_angle;
+
+	printf("%f\n", c->angle);
 	deactivate_buttons(ADD_VIEW.cone_button);
 	gtk_widget_set_state_flags(ADD_VIEW.cone_button,GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE ,true);
-	(void)c;
+	ADD_VIEW.vector_img = gtk_image_new_from_file("uiconfig/vector.png");
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_img, 0, 4, 1, 1);
+	adj = gtk_adjustment_new(c->vector.x, -1000, 1000, .5, 1, 10);
+	ADD_VIEW.vector_x = gtk_spin_button_new(adj, 1, 4);
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_x, 1, 4, 1, 1);
+	adj = gtk_adjustment_new(c->vector.y, -1000, 1000, .5, 1, 10);
+	ADD_VIEW.vector_y = gtk_spin_button_new(adj, 1, 4);
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_y, 2, 4, 1, 1);
+	adj = gtk_adjustment_new(c->vector.z, -1000, 1000, .5, 1, 10);
+	ADD_VIEW.vector_z = gtk_spin_button_new(adj, 1, 4);
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_z, 3, 4, 1, 1);
+	ADD_VIEW.inf_img = gtk_image_new_from_file("uiconfig/infinite.png");
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.inf_img, 0, 5, 1, 1);
+	ADD_VIEW.infinite = gtk_switch_new();
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.infinite, 1, 5, 1, 1);
+	gtk_switch_set_state(GTK_SWITCH(ADD_VIEW.infinite), c->infinite);
+	ADD_VIEW.angle_img = gtk_image_new_from_file("uiconfig/angle.png");
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.angle_img, 0, 6, 1, 1);
+	adj_angle = gtk_adjustment_new(c->angle * 360, 0, 360, 1, 1, 10);
+	ADD_VIEW.angle_spin = gtk_spin_button_new(adj_angle, 1, 4);
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.angle_spin, 1, 6, 1, 1);
 }
 
 static void			edit_cylinder_view(t_cylinder *c)
@@ -378,6 +402,6 @@ void				edit_win(t_obj *o)
 		gtk_widget_destroy(ADD_VIEW.win);
 	}
 	printf("RRRR %d || TYPE %d\n", r, o->type);
-	if (o->type == 1)
-		printf("x : %f, y : %f, z : %f, type : %d, radius : %f\n", o->position.x, o->position.y, o->position.z, o->type, ((t_sphere*)o->obj)->radius);
+	if (o->type == 3)
+		printf("x : %f, y : %f, z : %f, type : %d, radius : %f\n", o->position.x, o->position.y, o->position.z, o->type, ((t_cone*)o->obj)->angle);
 }
