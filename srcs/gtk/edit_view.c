@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/02 19:53:41 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 20:55:37 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,20 +96,12 @@ static void			edit_sphere_view(t_sphere *s)
 	GtkAdjustment	*adj_scale;
 
 	deactivate_buttons(ADD_VIEW.sphere_button);
-	if (ADD_VIEW.vector_x != NULL && ADD_VIEW.vector_y != NULL && ADD_VIEW.vector_z != NULL)
-	{
-		gtk_widget_destroy(ADD_VIEW.vector_x);
-		gtk_widget_destroy(ADD_VIEW.vector_y);
-		gtk_widget_destroy(ADD_VIEW.vector_z);
-		ADD_VIEW.vector_x = NULL;
-		ADD_VIEW.vector_y = NULL;
-		ADD_VIEW.vector_z = NULL;
-	}
 	gtk_widget_set_state_flags(ADD_VIEW.sphere_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
+	ADD_VIEW.scale_img = gtk_image_new_from_file("uiconfig/ruler.png");
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.scale_img, 0, 1, 1, 1);
 	adj_scale = gtk_adjustment_new(s->radius, 0, 1000, .5, 1, 10);
 	ADD_VIEW.scale_spin = gtk_spin_button_new(adj_scale, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.scale_spin, 1, 1, 3, 1);
-	printf("WTFBBQ\n");
 }
 
 static void			edit_plane_view(t_plane *p)
@@ -117,9 +109,9 @@ static void			edit_plane_view(t_plane *p)
 	GtkAdjustment	*adj;
 
 	deactivate_buttons(ADD_VIEW.plane_button);
-	if (ADD_VIEW.scale_spin != NULL)
-		gtk_widget_destroy(ADD_VIEW.scale_spin);
 	gtk_widget_set_state_flags(ADD_VIEW.plane_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE ,true);
+	ADD_VIEW.vector_img = gtk_image_new_from_file("uiconfig/vector.png");
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_img, 0, 1, 1, 1);
 	adj = gtk_adjustment_new(p->vector.x, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.vector_x = gtk_spin_button_new(adj, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_x, 1, 1, 1, 1);
@@ -129,7 +121,6 @@ static void			edit_plane_view(t_plane *p)
 	adj = gtk_adjustment_new(p->vector.z, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.vector_z = gtk_spin_button_new(adj, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_z, 3, 1, 1, 1);
-	printf("MY 2ND DICK\n");
 }
 
 static void			edit_cone_view(t_cone *c)
@@ -141,9 +132,32 @@ static void			edit_cone_view(t_cone *c)
 
 static void			edit_cylinder_view(t_cylinder *c)
 {
+	GtkAdjustment	*adj_scale;
+	GtkAdjustment	*adj;
+
 	deactivate_buttons(ADD_VIEW.cylinder_button);
 	gtk_widget_set_state_flags(ADD_VIEW.cylinder_button,GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE ,true);
-	(void)c;
+	ADD_VIEW.scale_img = gtk_image_new_from_file("uiconfig/ruler.png");
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.scale_img, 0, 1, 1, 1);
+	adj_scale = gtk_adjustment_new(c->radius, 0, 1000, .5, 1, 10);
+	ADD_VIEW.scale_spin = gtk_spin_button_new(adj_scale, 1, 4);
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.scale_spin, 1, 1, 3, 1);
+	ADD_VIEW.vector_img = gtk_image_new_from_file("uiconfig/vector.png");
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_img, 0, 4, 1, 1);
+	adj = gtk_adjustment_new(c->vector.x, -1000, 1000, .5, 1, 10);
+	ADD_VIEW.vector_x = gtk_spin_button_new(adj, 1, 4);
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_x, 1, 4, 1, 1);
+	adj = gtk_adjustment_new(c->vector.y, -1000, 1000, .5, 1, 10);
+	ADD_VIEW.vector_y = gtk_spin_button_new(adj, 1, 4);
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_y, 2, 4, 1, 1);
+	adj = gtk_adjustment_new(c->vector.z, -1000, 1000, .5, 1, 10);
+	ADD_VIEW.vector_z = gtk_spin_button_new(adj, 1, 4);
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_z, 3, 4, 1, 1);
+	ADD_VIEW.inf_img = gtk_image_new_from_file("uiconfig/inf.png");
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.inf_img, 0, 5, 1, 1);
+	ADD_VIEW.infinite = gtk_switch_new();
+	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.infinite, 1, 5, 1, 1);
+	gtk_switch_set_state(GTK_SWITCH(ADD_VIEW.infinite), c->infinite);
 }
 
 static void			edit_poly_view(t_poly_obj *p)
@@ -159,20 +173,18 @@ static void			actual_edit_view(t_obj *o)
 
 	if (!(ADD_VIEW.translate_x_spin) && !(ADD_VIEW.translate_y_spin) && !(ADD_VIEW.translate_z_spin))
 	{
-	gtk_window_set_title(GTK_WINDOW(GTKMGR.ui.add_view.win), "Edit Object");
-	ADD_VIEW.translate_img = gtk_image_new_from_file("uiconfig/move.png");
-	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_img, 0, 3, 1, 1);
-	adj_mv = gtk_adjustment_new(o->position.x, -1000, 1000, .5, 1, 10);
-	ADD_VIEW.translate_x_spin = gtk_spin_button_new(adj_mv, 1, 4);
-	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_x_spin, 1, 3, 1, 1);
-	adj_mv = gtk_adjustment_new(o->position.y, -1000, 1000, .5, 1, 10);
-	ADD_VIEW.translate_y_spin = gtk_spin_button_new(adj_mv, 1, 4);
-	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_y_spin, 2, 3, 1, 1);
-	adj_mv = gtk_adjustment_new(o->position.z, -1000, 1000, .5, 1, 10);
-	ADD_VIEW.translate_z_spin = gtk_spin_button_new(adj_mv, 1, 4);
-	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_z_spin, 3, 3, 1, 1);
-	ADD_VIEW.scale_img = gtk_image_new_from_file("uiconfig/ruler.png");
-	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.scale_img, 0, 1, 1, 1);
+		gtk_window_set_title(GTK_WINDOW(GTKMGR.ui.add_view.win), "Edit Object");
+		ADD_VIEW.translate_img = gtk_image_new_from_file("uiconfig/move.png");
+		gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_img, 0, 3, 1, 1);
+		adj_mv = gtk_adjustment_new(o->position.x, -1000, 1000, .5, 1, 10);
+		ADD_VIEW.translate_x_spin = gtk_spin_button_new(adj_mv, 1, 4);
+		gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_x_spin, 1, 3, 1, 1);
+		adj_mv = gtk_adjustment_new(o->position.y, -1000, 1000, .5, 1, 10);
+		ADD_VIEW.translate_y_spin = gtk_spin_button_new(adj_mv, 1, 4);
+		gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_y_spin, 2, 3, 1, 1);
+		adj_mv = gtk_adjustment_new(o->position.z, -1000, 1000, .5, 1, 10);
+		ADD_VIEW.translate_z_spin = gtk_spin_button_new(adj_mv, 1, 4);
+		gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_z_spin, 3, 3, 1, 1);
 	}
 	if (o->type == 1)
 		edit_sphere_view((t_sphere*)o->obj);
@@ -246,6 +258,27 @@ void				create_object(t_obj *o, int type)
 	o->obj = tmp->obj;
 }
 
+void				destroy_interface_for_type(int type)
+{
+	if (type == 1 || type == 4)
+	{
+		gtk_widget_destroy(ADD_VIEW.scale_img);
+		gtk_widget_destroy(ADD_VIEW.scale_spin);
+	}
+	if (type == 2 || type == 3 || type == 4)
+	{
+		gtk_widget_destroy(ADD_VIEW.vector_x);
+		gtk_widget_destroy(ADD_VIEW.vector_y);
+		gtk_widget_destroy(ADD_VIEW.vector_z);
+		gtk_widget_destroy(ADD_VIEW.vector_img);
+	}
+	if (type == 3 || type == 4)
+	{
+		gtk_widget_destroy(ADD_VIEW.infinite);
+		gtk_widget_destroy(ADD_VIEW.inf_img);
+	}
+}
+
 void				switch_type(GtkButton *button)
 {
 	t_obj			*o;
@@ -253,7 +286,7 @@ void				switch_type(GtkButton *button)
 
 	type = ADD_VIEW.sw.o->type;
 	o = ADD_VIEW.sw.o;
-//	destroy_interface_for_type(o);
+	destroy_interface_for_type(o->type);
 	if (button == GTK_BUTTON(ADD_VIEW.sphere_button))
 	{
 		ADD_VIEW.sw.type = 1;
@@ -283,6 +316,7 @@ void				edit_win(t_obj *o)
 {
 	GtkWidget		*content_area;
 
+	init_add_view();
 	ADD_VIEW.sphere_img = gtk_image_new_from_file("uiconfig/sphere.png");
 	ADD_VIEW.plane_img = gtk_image_new_from_file("uiconfig/plane.png");
 	ADD_VIEW.cone_img = gtk_image_new_from_file("uiconfig/cone.png");
@@ -318,12 +352,12 @@ void				edit_win(t_obj *o)
 	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.plane_button), ADD_VIEW.plane_img);
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.plane_button);
 	ADD_VIEW.cone_button = gtk_button_new();
-g_signal_connect(G_OBJECT(ADD_VIEW.cone_button), "clicked", G_CALLBACK(switch_type), NULL);
+	g_signal_connect(G_OBJECT(ADD_VIEW.cone_button), "clicked", G_CALLBACK(switch_type), NULL);
 	gtk_widget_set_tooltip_text(ADD_VIEW.cone_button, "Cone");
 	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.cone_button), ADD_VIEW.cone_img);
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.cone_button);
 	ADD_VIEW.cylinder_button = gtk_button_new();
-g_signal_connect(G_OBJECT(ADD_VIEW.cylinder_button), "clicked", G_CALLBACK(switch_type), NULL);
+	g_signal_connect(G_OBJECT(ADD_VIEW.cylinder_button), "clicked", G_CALLBACK(switch_type), NULL);
 	gtk_widget_set_tooltip_text(ADD_VIEW.cylinder_button, "Cylinder");
 	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.cylinder_button), ADD_VIEW.cylinder_img);
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.cylinder_button);
@@ -342,7 +376,6 @@ g_signal_connect(G_OBJECT(ADD_VIEW.cylinder_button), "clicked", G_CALLBACK(switc
 		printf("QUE QUOI?\n");
 		validate_edit(o);
 		gtk_widget_destroy(ADD_VIEW.win);
-		init_add_view();
 	}
 	printf("RRRR %d || TYPE %d\n", r, o->type);
 	if (o->type == 1)
