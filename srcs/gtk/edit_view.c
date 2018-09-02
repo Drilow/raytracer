@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/02 21:10:44 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 22:05:45 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,15 @@ void				validate_cylinder(t_cylinder *c)
 
 void				validate_edit(t_obj *o)
 {
+	GdkRGBA			*c;
+
+	if (!(c = (GdkRGBA*)malloc(sizeof(GdkRGBA))))
+		exit(1);
+	gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(ADD_VIEW.color), c);
+	o->color.r = (unsigned char)(c->red * 255);
+	o->color.g = (unsigned char)(c->green * 255);
+	o->color.b = (unsigned char)(c->blue * 255);
+	o->color.trans = (unsigned char)(c->alpha);
 	o->position.x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
 	o->position.y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_y_spin));
 	o->position.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
@@ -209,6 +218,18 @@ static void			actual_edit_view(t_obj *o)
 		adj_mv = gtk_adjustment_new(o->position.z, -1000, 1000, .5, 1, 10);
 		ADD_VIEW.translate_z_spin = gtk_spin_button_new(adj_mv, 1, 4);
 		gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.translate_z_spin, 3, 3, 1, 1);
+
+		GdkRGBA	*c;
+
+		if (!(c = (GdkRGBA*)malloc(sizeof(GdkRGBA))))
+			exit(1);
+		c->red = (gdouble)(o->color.r) / 255;
+		c->green = (gdouble)(o->color.g) / 255;
+		c->blue = (gdouble)(o->color.b) / 255;
+		c->alpha = 1;
+		ADD_VIEW.color = gtk_color_chooser_widget_new();
+		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(ADD_VIEW.color), c);
+		gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.color, 0, 7, 4, 1);
 	}
 	if (o->type == 1)
 		edit_sphere_view((t_sphere*)o->obj);
