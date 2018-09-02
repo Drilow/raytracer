@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 09:30:07 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/21 13:42:26 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 19:53:12 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void			init_picker_view(void)
 	GTKMGR.ui.picker_view.chooser = NULL;
 }
 
-static void			init_add_view(void)
+void			init_add_view(void)
 {
 	GTKMGR.ui.add_view.win = NULL;
 	GTKMGR.ui.add_view.grid = NULL;
