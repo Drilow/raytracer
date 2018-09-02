@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/21 15:32:18 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 18:27:10 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void				export_view(void)
 
 }
 
+void			init_rt(void);
+
 void				open_file(void)
 {
 	GtkWidget *dialog;
@@ -82,6 +84,7 @@ void				open_file(void)
 										  NULL);
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	init_rt();
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
 		char *filename;
@@ -125,7 +128,7 @@ void				destroy_scene(void)
 	t_obj			*tmp;
 
 	init_rt();
-	to_free = g_global.r.objects;
+	to_free = g_global.r->objects;
 	while (to_free)
 	{
 		tmp = to_free->next;
@@ -146,7 +149,7 @@ void				destroy_scene(void)
 
 void				handle_drawing(void)
 {
-	printf("aallo %p, cam : %f %f %f\n", g_global.r.objects, g_global.r.cam_position.x, g_global.r.cam_position.y, g_global.r.cam_position.z);
+	printf("aallo %p, cam : %f %f %f\n", g_global.r->objects, g_global.r->cam_position.x, g_global.r->cam_position.y, g_global.r->cam_position.z);
 	if (!(GTKMGR.buf = malloc(sizeof(unsigned char) * (WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
 		exit(1);
 	printf("a2llo\n");

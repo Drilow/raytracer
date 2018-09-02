@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/26 17:25:08 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 18:26:51 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,42 @@ void	ft_exit(char *msg_error, int i)
 
 static void			init_ray(t_point p)
 {
-	g_global.r.rays[p.y][p.x].p = g_global.r.cam_position;
-	g_global.r.rays[p.y][p.x].vector.x = p.x - (WIN_W / 2);
-	g_global.r.rays[p.y][p.x].vector.y = -p.y + (WIN_H / 2);
-	g_global.r.rays[p.y][p.x].vector.z = g_global.r.screen_distance;
+	g_global.r->rays[p.y][p.x].p = g_global.r->cam_position;
+	g_global.r->rays[p.y][p.x].vector.x = p.x - (WIN_W / 2);
+	g_global.r->rays[p.y][p.x].vector.y = -p.y + (WIN_H / 2);
+	g_global.r->rays[p.y][p.x].vector.z = g_global.r->screen_distance;
 }
 
- void			init_rt(void)
+void			setup_rt_lst(void)
+{
+	if (!(g_global.r = (t_rt*)malloc(sizeof(t_rt))))
+		exit(1);
+	g_global.first_scene = g_global.r;
+	g_global.r->next = NULL;
+}
+
+void			add_link_to_rt_list(void)
+{
+	t_rt		*tmp;
+
+	if (!(tmp = (t_rt*)malloc(sizeof(t_rt))))
+		exit(1);
+	g_global.r->next = tmp;
+	g_global.r = g_global.r->next;
+}
+
+void			init_rt(void)
 {
 	t_point			p;
 
-	g_global.r.cam_position.x = 0;
-	g_global.r.cam_position.y = 0;
-	g_global.r.cam_position.z = 0;
-	g_global.r.screen_distance = (WIN_W / 2) / tan(FOV / 2);
+	if (g_global.r == NULL)
+		setup_rt_lst();
+	else
+		add_link_to_rt_list();
+	g_global.r->cam_position.x = 0;
+	g_global.r->cam_position.y = 0;
+	g_global.r->cam_position.z = 0;
+	g_global.r->screen_distance = (WIN_W / 2) / tan(FOV / 2);
 	p.y = -1;
 	while (++p.y < WIN_H)
 	{
@@ -62,7 +84,7 @@ void			init_global(int ac, char **av)
 {
 //	ft_putendl("debug1");
 	g_global.drawn = 1;
-	init_rt();
+	g_global.r = NULL;
 	init_gtk(ac, av);
 	g_global.running = 1;
 }

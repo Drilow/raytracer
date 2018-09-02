@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/27 11:05:15 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 18:27:37 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,22 +73,22 @@ static void		add_to_list(void *o, int otype)
 
 	if (otype != 0)
 	{
-		if (g_global.r.objects == NULL)
-			g_global.r.objects = (t_obj *)o;
+		if (g_global.r->objects == NULL)
+			g_global.r->objects = (t_obj *)o;
 		else
 		{
-			otmp = g_global.r.objects;
+			otmp = g_global.r->objects;
 			while (otmp->next != NULL)
 				otmp = otmp->next;
 			otmp->next = (t_obj *)o;
 		}
 		return ;
 	}
-	if (g_global.r.lights == NULL)
-		g_global.r.lights = (t_light *)o;
+	if (g_global.r->lights == NULL)
+		g_global.r->lights = (t_light *)o;
 	else
 	{
-		ltmp = g_global.r.lights;
+		ltmp = g_global.r->lights;
 		while (ltmp->next != NULL)
 			ltmp = ltmp->next;
 		ltmp->next = (t_light *)o;
@@ -109,7 +109,7 @@ static bool	set_ambient_light(char *line)
 		return (false);
 	if (get_next_nb(line, &index, NULL, &(alight.trans)) == false)
 		return (false);
-	g_global.r.ambient_light = alight;
+	g_global.r->ambient_light = alight;
 	return (true);
 }
 
@@ -172,9 +172,9 @@ bool			parse(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (false);
-	g_global.r.objects = NULL;
-	g_global.r.lights = NULL;
-	g_global.r.ambient_light = ft_rgb(0, 0, 0, 0);
+	g_global.r->objects = NULL;
+	g_global.r->lights = NULL;
+	g_global.r->ambient_light = ft_rgb(0, 0, 0, 0);
 	while (get_next_line(fd, &line) == 1)
 	{
 		if (read_line(line) == false)

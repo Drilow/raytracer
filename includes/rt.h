@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 15:49:17 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/19 14:44:36 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 18:19:14 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct		s_rt
 	t_obj			*objects;
 	t_light			*lights;
 	t_rgb			ambient_light;
+	struct s_rt		*next;
 }					t_rt;
 
 

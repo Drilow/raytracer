@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/26 17:19:17 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 18:26:01 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <geometry/geometry.h>
 # include <stdbool.h>
 # include <gtk/gtk.h>
-# define DATA g_global.sdl_mgr.surf
 # define ANTIALIASING 1
 # define AA_ITERATIONS 4
 # define AA_LOWER_THRESHOLD 0.9
@@ -29,7 +28,8 @@ typedef struct			s_global
 {
 	t_gtk_mgr			gtk_mgr;
 	char				running;
-	t_rt				r;
+	t_rt				*r;
+	t_rt				*first_scene;
 	int					drawn;
 }						t_global;
 

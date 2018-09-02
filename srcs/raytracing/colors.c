@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/27 11:19:14 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 18:28:46 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ static t_rpoint		add_color(t_rpoint c, t_rpoint oclr, t_light *l, double af)
 
 	shining = pow(af, 1 + SHINING_FACTOR);
 	tmp_c = color_to_add(oclr, l->color, shining);
-	tmp_c = set_rpoint(tmp_c.x * af * BRIGHTNESS + g_global.r.ambient_light.r, \
-					   tmp_c.y * af * BRIGHTNESS + g_global.r.ambient_light.g, \
-					   tmp_c.z * af * BRIGHTNESS + g_global.r.ambient_light.b);
+	tmp_c = set_rpoint(tmp_c.x * af * BRIGHTNESS + g_global.r->ambient_light.r, \
+					   tmp_c.y * af * BRIGHTNESS + g_global.r->ambient_light.g, \
+					   tmp_c.z * af * BRIGHTNESS + g_global.r->ambient_light.b);
 /*
 	tmp_c = set_rpoint(tmp_c.x * af * BRIGHTNESS, \
                        tmp_c.y * af * BRIGHTNESS, \
