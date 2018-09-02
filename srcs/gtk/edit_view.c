@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/02 20:55:37 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 20:59:04 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ static void			edit_cylinder_view(t_cylinder *c)
 	adj = gtk_adjustment_new(c->vector.z, -1000, 1000, .5, 1, 10);
 	ADD_VIEW.vector_z = gtk_spin_button_new(adj, 1, 4);
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.vector_z, 3, 4, 1, 1);
-	ADD_VIEW.inf_img = gtk_image_new_from_file("uiconfig/inf.png");
+	ADD_VIEW.inf_img = gtk_image_new_from_file("uiconfig/infinite.png");
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.inf_img, 0, 5, 1, 1);
 	ADD_VIEW.infinite = gtk_switch_new();
 	gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.infinite, 1, 5, 1, 1);
