@@ -6,15 +6,15 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 09:30:07 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/02 19:53:12 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/06 03:43:38 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
 #include <fcntl.h>
 #include <parser/parser.h>
-#define PIXMAP g_global.gtk_mgr.pixmap
-#define GTKMGR g_global.gtk_mgr
+#define PIXMAP g_global.r->gtk_mgr.pixmap
+#define GTKMGR g_global.r->gtk_mgr
 
 extern t_global		g_global;
 
@@ -68,32 +68,14 @@ static void			init_main_view(void)
 	GTKMGR.ui.main_view.export_img = NULL;
 }
 
-static void			init_base_view(void)
-{
-	GTKMGR.ui.base_view.win = NULL;
-	GTKMGR.ui.base_view.grid = NULL;
-	GTKMGR.ui.base_view.open_button = NULL;
-	GTKMGR.ui.base_view.new_button = NULL;
-	GTKMGR.ui.base_view.exit_button = NULL;
-}
-
 void				init_gtk_variables(void)
 {
 	int				y;
 
 	y = -1;
-	PIXMAP = NULL;
-	GTKMGR.checker = NULL;
 	GTKMGR.editmode = 0;
-	if (!(GTKMGR.checker = malloc(sizeof(t_obj**) * WIN_H)))
-		exit(1);
-	while (++y < WIN_H)
-		if (!(GTKMGR.checker[y] = malloc(sizeof(t_obj*) * WIN_W)))
-			exit(1);
-	init_base_view();
 	init_main_view();
 	init_add_view();
 //	init_filter_view();
-//	init_export_view();
 	init_picker_view();
 }

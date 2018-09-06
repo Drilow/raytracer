@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 22:52:03 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/31 05:13:26 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/06 03:34:22 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include <extra/extra_defs.h>
 #include <libft.h>
 #include <parser/parser.h>
-#define GTKMGR g_global.gtk_mgr
-#define PIXMAP g_global.gtk_mgr.pixmap
+#define GTKMGR g_global.r->gtk_mgr
+#define PIXMAP g_global.r->gtk_mgr.pixmap
 
 extern t_global	g_global;
 

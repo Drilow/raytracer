@@ -6,16 +6,16 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/02 22:05:45 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/06 05:05:19 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
 #include <fcntl.h>
 #include <libft.h>
-#define PIXMAP g_global.gtk_mgr.pixmap
-#define GTKMGR g_global.gtk_mgr
-#define ADD_VIEW g_global.gtk_mgr.ui.add_view
+#define PIXMAP g_global.r->gtk_mgr.pixmap
+#define GTKMGR g_global.r->gtk_mgr
+#define ADD_VIEW g_global.r->gtk_mgr.ui.add_view
 
 extern t_global		g_global;
 
@@ -200,6 +200,34 @@ static void			edit_poly_view(t_poly_obj *p)
 	(void)p;
 }
 
+void				set_default_values(t_obj *o)
+{
+	if (o->type == 1)
+		((t_sphere*)o->obj)->radius = 2;
+	else if (o->type == 2)
+	{
+		((t_plane*)o->obj)->vector.x = 1;
+		((t_plane*)o->obj)->vector.y = 1;
+		((t_plane*)o->obj)->vector.z = 1;
+	}
+	else if (o->type == 3)
+	{
+		((t_cone*)o->obj)->vector.x = 1;
+		((t_cone*)o->obj)->vector.y = 1;
+		((t_cone*)o->obj)->vector.z = 1;
+		((t_cone*)o->obj)->angle = (double)60 / 360;
+		((t_cone*)o->obj)->infinite = true;
+	}
+	else if (o->type == 4)
+	{
+		((t_cylinder*)o->obj)->vector.x = 1;
+		((t_cylinder*)o->obj)->vector.y = 1;
+		((t_cylinder*)o->obj)->vector.z = 1;
+		((t_cylinder*)o->obj)->radius = 2;
+		((t_cylinder*)o->obj)->infinite = true;
+	}
+}
+
 static void			actual_edit_view(t_obj *o)
 {
 	GtkAdjustment	*adj_mv;
@@ -231,6 +259,15 @@ static void			actual_edit_view(t_obj *o)
 		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(ADD_VIEW.color), c);
 		gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.color, 0, 7, 4, 1);
 	}
+	if (o->type == -5)
+	{
+		o->type = 1;
+		o->next = g_global.r->objects;
+		g_global.r->objects = o;
+		if (!(o->obj = (t_sphere*)malloc(sizeof(t_sphere))))
+			exit(1);
+		set_default_values(o);
+	}
 	if (o->type == 1)
 		edit_sphere_view((t_sphere*)o->obj);
 	else if (o->type == 2)
@@ -241,34 +278,6 @@ static void			actual_edit_view(t_obj *o)
 		edit_cylinder_view((t_cylinder*)o->obj);
 	else if (o->type / 10 == 6 || o->type == 6)
 		edit_poly_view((t_poly_obj*)o->obj);
-}
-
-void				set_default_values(t_obj *o)
-{
-	if (o->type == 1)
-		((t_sphere*)o->obj)->radius = 2;
-	else if (o->type == 2)
-	{
-		((t_plane*)o->obj)->vector.x = 1;
-		((t_plane*)o->obj)->vector.y = 1;
-		((t_plane*)o->obj)->vector.z = 1;
-	}
-	else if (o->type == 3)
-	{
-		((t_cone*)o->obj)->vector.x = 1;
-		((t_cone*)o->obj)->vector.y = 1;
-		((t_cone*)o->obj)->vector.z = 1;
-		((t_cone*)o->obj)->angle = 60;
-		((t_cone*)o->obj)->infinite = true;
-	}
-	else if (o->type == 4)
-	{
-		((t_cylinder*)o->obj)->vector.x = 1;
-		((t_cylinder*)o->obj)->vector.y = 1;
-		((t_cylinder*)o->obj)->vector.z = 1;
-		((t_cylinder*)o->obj)->radius = 2;
-		((t_cylinder*)o->obj)->infinite = true;
-	}
 }
 
 void				create_object(t_obj *o, int type)
@@ -411,18 +420,11 @@ void				edit_win(t_obj *o)
 	gtk_widget_set_tooltip_text(ADD_VIEW.obj_file_button, "Obj File");
 	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.obj_file_button), ADD_VIEW.obj_file_img);
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.obj_file_button);
-	if (o)
-		actual_edit_view(o);
-	printf("MYDICKISHUGE\n");
+	actual_edit_view(o);
 	gtk_widget_show_all(ADD_VIEW.win);
-	int r;
-	if ((r = gtk_dialog_run(GTK_DIALOG(ADD_VIEW.win))) == GTK_RESPONSE_ACCEPT)
+	if (gtk_dialog_run(GTK_DIALOG(ADD_VIEW.win)) == GTK_RESPONSE_ACCEPT)
 	{
-		printf("QUE QUOI?\n");
 		validate_edit(o);
 		gtk_widget_destroy(ADD_VIEW.win);
 	}
-	printf("RRRR %d || TYPE %d\n", r, o->type);
-	if (o->type == 3)
-		printf("x : %f, y : %f, z : %f, type : %d, radius : %f\n", o->position.x, o->position.y, o->position.z, o->type, ((t_cone*)o->obj)->angle);
 }

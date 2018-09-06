@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/02 18:26:01 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/06 03:46:58 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,18 @@
 # define AA_UPPER_THRESHOLD 0.1
 # define AA_MIX_RATIO 0.8
 
+typedef struct				s_base_view
+{
+	GtkWidget				*win;
+	GtkWidget				*grid;
+	GtkWidget				*open_button;
+	GtkWidget				*new_button;
+	GtkWidget				*exit_button;
+}							t_base_view;
+
 typedef struct			s_global
 {
-	t_gtk_mgr			gtk_mgr;
+	t_base_view			base_view;
 	char				running;
 	t_rt				*r;
 	t_rt				*first_scene;

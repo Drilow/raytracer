@@ -6,8 +6,8 @@
 #include <extra/extra_defs.h>
 #include <geometry/geometry.h>
 #include <display/display.h>
-#define PIXMAP g_global.gtk_mgr.pixmap
-#define GTKMGR g_global.gtk_mgr
+#define PIXMAP g_global.r->gtk_mgr.pixmap
+#define GTKMGR g_global.r->gtk_mgr
 
 extern t_global	g_global;
 
@@ -94,7 +94,7 @@ static void		*draw_image_core(void *arg)
 //				}
 //				if (p.x == 361 && p.y == 209)
 //					printf("correct(361, 209) : rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
-				GTKMGR.checker[p.y][p.x] = tmp.o;
+				g_global.r->checker[p.y][p.x] = tmp.o;
 				draw_px(GTKMGR.buf, p.x, p.y, \
 							get_ray_color(r, tmp, false));
 //				get_ray_color(r, tmp.o, tmp.p));

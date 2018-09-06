@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/02 18:26:51 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/06 03:40:45 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <parser/parser.h>
 #include <display/display.h>
 #define EVENT_PTR g_global.sdl_mgr.event
+#define PIXMAP g_global.r->gtk_mgr.pixmap
 
 t_global		g_global;
 
@@ -59,6 +60,19 @@ void			add_link_to_rt_list(void)
 	g_global.r = g_global.r->next;
 }
 
+void			init_obj_tab(void)
+{
+	int			y;
+
+	y = -1;
+	g_global.r->checker = NULL;
+	if (!(g_global.r->checker = malloc(sizeof(t_obj**) * WIN_H)))
+		exit(1);
+	while (++y < WIN_H)
+		if (!(g_global.r->checker[y] = malloc(sizeof(t_obj*) * WIN_W)))
+			exit(1);
+}
+
 void			init_rt(void)
 {
 	t_point			p;
@@ -67,6 +81,8 @@ void			init_rt(void)
 		setup_rt_lst();
 	else
 		add_link_to_rt_list();
+	init_obj_tab();
+	PIXMAP = NULL;
 	g_global.r->cam_position.x = 0;
 	g_global.r->cam_position.y = 0;
 	g_global.r->cam_position.z = 0;
@@ -86,7 +102,6 @@ void			init_global(int ac, char **av)
 	g_global.drawn = 1;
 	g_global.r = NULL;
 	init_gtk(ac, av);
-	g_global.running = 1;
 }
 
 

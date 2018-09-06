@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/02 21:16:18 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/06 03:46:51 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,9 @@ typedef struct				s_main_view
 	GtkWidget				*event_box;
 }							t_main_view;
 
-typedef struct				s_base_view
-{
-	GtkWidget				*win;
-	GtkWidget				*grid;
-	GtkWidget				*open_button;
-	GtkWidget				*new_button;
-	GtkWidget				*exit_button;
-}							t_base_view;
 
 typedef struct				s_ui
 {
-	t_base_view				base_view;
 	t_main_view				main_view;
 	t_add_view				add_view;
 	t_filter_view			filter_view;
@@ -127,8 +118,6 @@ typedef struct				s_ui
 typedef struct				s_gtk_mgr
 {
 	cairo_surface_t			*pixmap;
-	struct s_obj			***checker;
-	struct s_obj			*selected_obj;
 	unsigned char			*buf;
 	char					editmode;
 	t_ui					ui;
