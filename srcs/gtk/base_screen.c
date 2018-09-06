@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/06 05:00:42 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/06 05:41:40 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,20 +101,69 @@ void				open_file(void)
 
 void				handle_drawing(void);
 
+void				outline_obj(t_obj *o)
+{
+	int				x;
+	int				y;
+
+	y = -1;
+	printf("DICKS\n");
+	while (++y < WIN_H)
+	{
+		x = -1;
+		while (++x < WIN_W)
+		{
+			if (g_global.r->checker[y][x] == o)
+			{
+				if (g_global.r->checker[y - 1][x] != o && y - 1 >= 0)
+				{
+					draw_px(GTKMGR.buf, x, y, ft_rgb(255, 0, 0, 0));
+					draw_px(GTKMGR.buf, x, y - 1, ft_rgb(255, 0, 0, 0));
+				}
+				if (g_global.r->checker[y + 1][x] != o && y + 1 < WIN_H)
+				{
+					draw_px(GTKMGR.buf, x, y, ft_rgb(255, 0, 0, 0));
+					draw_px(GTKMGR.buf, x, y + 1, ft_rgb(255, 0, 0, 0));
+				}
+				if (g_global.r->checker[y][x - 1] != o && x - 1 >= 0)
+				{
+					draw_px(GTKMGR.buf, x, y, ft_rgb(255, 0, 0, 0));
+					draw_px(GTKMGR.buf, x - 1, y, ft_rgb(255, 0, 0, 0));
+				}
+				if (g_global.r->checker[y][x + 1] != o && x + 1 < WIN_W)
+				{
+					draw_px(GTKMGR.buf, x, y, ft_rgb(255, 0, 0, 0));
+					draw_px(GTKMGR.buf, x + 1, y, ft_rgb(255, 0, 0, 0));
+				}
+				printf("WTFAK\n");
+			}
+		}
+	}
+	if (PIXMAP)
+		cairo_surface_destroy(PIXMAP);
+	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
+		exit(1);
+	cairo_surface_mark_dirty(PIXMAP);
+	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
+	printf("DICKS but at the end\n");
+}
 
 static gboolean		clicked(GtkWidget __attribute__((unused))*widget, GdkEventButton *event, gpointer __attribute__((unused))data)
 {
-    if (event->button == 1)
+	if (event->button == 1)
 	{
 		if (g_global.r->checker[(int)event->y][(int)event->x])
 		{
 			g_global.r->selected_obj = g_global.r->checker[(int)event->y][(int)event->x];
-//			if (GTKMGR.editmode)
 			if ((gtk_widget_get_state_flags(GTKMGR.ui.main_view.select_button) & GTK_STATE_FLAG_CHECKED))
+			{
+				outline_obj(g_global.r->selected_obj);
 				edit_win(g_global.r->selected_obj);
+			}
 		}
 	}
-    return (true);
+	return (true);
 }
 
 void				free_poly(t_poly_obj *p)
@@ -122,7 +171,7 @@ void				free_poly(t_poly_obj *p)
 	(void)p;
 }
 
-void init_rt(void);
+	void init_rt(void);
 
 void				destroy_scene(void)
 {
@@ -195,11 +244,8 @@ void				do_nothing(void)
 
 void				select_cb(void)
 {
-	printf("%d\n",(gtk_widget_get_state_flags(GTKMGR.ui.main_view.select_button) & GTK_STATE_FLAG_CHECKED));
 	if (!(gtk_widget_get_state_flags(GTKMGR.ui.main_view.select_button) & GTK_STATE_FLAG_CHECKED))
 	{
-		printf("COUCOU\n");
-//		GTKMGR.editmode = 1;
 		gtk_widget_set_state_flags(GTKMGR.ui.main_view.select_button, GTK_STATE_FLAG_CHECKED, false);
 		g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.event_box),
 						 "button_press_event",
@@ -284,7 +330,7 @@ static void			init_base_view(void)
 	g_global.base_view.open_button = NULL;
 	g_global.base_view.new_button = NULL;
 	g_global.base_view.exit_button = NULL;
-	}
+}
 
 void				handle_ui(void)
 {

@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/06 05:05:19 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/06 05:39:50 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,7 @@ static void			actual_edit_view(t_obj *o)
 		ADD_VIEW.color = gtk_color_chooser_widget_new();
 		gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(ADD_VIEW.color), c);
 		gtk_grid_attach(GTK_GRID(GTKMGR.ui.add_view.grid), GTKMGR.ui.add_view.color, 0, 7, 4, 1);
+		free(c);
 	}
 	if (o->type == -5)
 	{
@@ -366,6 +367,7 @@ void				switch_type(GtkButton *button)
 
 void			init_add_view(void);
 
+
 void				edit_win(t_obj *o)
 {
 	GtkWidget		*content_area;
@@ -422,9 +424,25 @@ void				edit_win(t_obj *o)
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.obj_file_button);
 	actual_edit_view(o);
 	gtk_widget_show_all(ADD_VIEW.win);
-	if (gtk_dialog_run(GTK_DIALOG(ADD_VIEW.win)) == GTK_RESPONSE_ACCEPT)
+
+	int		r = gtk_dialog_run(GTK_DIALOG(ADD_VIEW.win));
+
+	if (r == GTK_RESPONSE_ACCEPT)
 	{
 		validate_edit(o);
+		gtk_widget_destroy(ADD_VIEW.win);
+	}
+	else if (r == GTK_RESPONSE_REJECT)
+	{
+		printf("oh!\n");
+		draw_image();
+		if (PIXMAP)
+			cairo_surface_destroy(PIXMAP);
+		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+		if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
+			exit(1);
+		cairo_surface_mark_dirty(PIXMAP);
+		gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
 		gtk_widget_destroy(ADD_VIEW.win);
 	}
 }
