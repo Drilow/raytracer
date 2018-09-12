@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/12 08:05:16 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/12 08:43:27 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct				s_filter_view
 	GtkWidget				*buttonbox;
 	GtkWidget				*bw_button;
 	GtkWidget				*bw_img;
+	GtkWidget				*sepia_button;
+	GtkWidget				*sepia_img;
 
 }							t_filter_view;
 
