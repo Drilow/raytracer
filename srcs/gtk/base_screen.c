@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/06 05:41:40 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/12 08:21:52 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void				outline_obj(t_obj *o)
 	int				y;
 
 	y = -1;
-	printf("DICKS\n");
 	while (++y < WIN_H)
 	{
 		x = -1;
@@ -135,7 +134,6 @@ void				outline_obj(t_obj *o)
 					draw_px(GTKMGR.buf, x, y, ft_rgb(255, 0, 0, 0));
 					draw_px(GTKMGR.buf, x + 1, y, ft_rgb(255, 0, 0, 0));
 				}
-				printf("WTFAK\n");
 			}
 		}
 	}
@@ -146,7 +144,6 @@ void				outline_obj(t_obj *o)
 		exit(1);
 	cairo_surface_mark_dirty(PIXMAP);
 	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
-	printf("DICKS but at the end\n");
 }
 
 static gboolean		clicked(GtkWidget __attribute__((unused))*widget, GdkEventButton *event, gpointer __attribute__((unused))data)
@@ -200,12 +197,9 @@ void				destroy_scene(void)
 
 void				handle_drawing(void)
 {
-	printf("aallo %p, cam : %f %f %f\n", g_global.r->objects, g_global.r->cam_position.x, g_global.r->cam_position.y, g_global.r->cam_position.z);
 	if (!(GTKMGR.buf = malloc(sizeof(unsigned char) * (WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
 		exit(1);
-	printf("a2llo\n");
 	draw_image();
-	printf("wow\n");
 	if (PIXMAP)
 	{
 		cairo_surface_destroy(PIXMAP);
@@ -231,11 +225,6 @@ void				add_view(void)
 	edit_win(o);
 }
 
-void				filters_view(void)
-{
-	GTKMGR.ui.filter_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-
-}
 
 void				do_nothing(void)
 {
@@ -282,7 +271,7 @@ void				handle_main_view(void)
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.add_button);
 	GTKMGR.ui.main_view.filters_button = gtk_button_new();
 	gtk_widget_set_tooltip_text(GTKMGR.ui.main_view.filters_button, "filters");
-	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.filters_button), "clicked", G_CALLBACK(filters_view), NULL);
+	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.filters_button), "clicked", G_CALLBACK(filter_win), NULL);
 	gtk_button_set_image(GTK_BUTTON(GTKMGR.ui.main_view.filters_button), GTKMGR.ui.main_view.filters_img);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.filters_button);
 	GTKMGR.ui.main_view.select_button = gtk_button_new();

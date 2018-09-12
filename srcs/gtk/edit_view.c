@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/06 05:39:50 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/12 08:22:29 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void				validate_plane(t_plane *p)
 	p->vector.x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.vector_x));
 	p->vector.y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.vector_y));
 	p->vector.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.vector_z));
-	printf("TA MERE\n");
 }
 
 void				validate_cone(t_cone *c)
@@ -64,6 +63,18 @@ void				validate_cylinder(t_cylinder *c)
 	c->vector.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.vector_z));
 	c->radius = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin));
 	c->infinite = gtk_switch_get_active(GTK_SWITCH(ADD_VIEW.infinite));
+}
+
+void				redraw(void)
+{
+//	draw_image();
+	if (PIXMAP)
+		cairo_surface_destroy(PIXMAP);
+	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
+		exit(1);
+	cairo_surface_mark_dirty(PIXMAP);
+	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
 }
 
 void				validate_edit(t_obj *o)
@@ -90,14 +101,7 @@ void				validate_edit(t_obj *o)
 		validate_cylinder((t_cylinder*)o->obj);
 //	else if (o->type == 6 || o->type / 10 == 6)
 //		validate_poly_obj((t_poly_obj*)o->obj);
-	draw_image();
-	if (PIXMAP)
-		cairo_surface_destroy(PIXMAP);
-	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
-	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-		exit(1);
-	cairo_surface_mark_dirty(PIXMAP);
-	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
+	redraw();
 }
 
 static void			edit_sphere_view(t_sphere *s)
@@ -137,7 +141,6 @@ static void			edit_cone_view(t_cone *c)
 	GtkAdjustment	*adj;
 	GtkAdjustment	*adj_angle;
 
-	printf("%f\n", c->angle);
 	deactivate_buttons(ADD_VIEW.cone_button);
 	gtk_widget_set_state_flags(ADD_VIEW.cone_button,GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE ,true);
 	ADD_VIEW.vector_img = gtk_image_new_from_file("uiconfig/vector.png");
@@ -368,6 +371,24 @@ void				switch_type(GtkButton *button)
 void			init_add_view(void);
 
 
+void				handle_edit_validation(t_obj *o)
+{
+	int		r;
+
+	r = gtk_dialog_run(GTK_DIALOG(ADD_VIEW.win));
+
+	if (r == GTK_RESPONSE_ACCEPT)
+	{
+		validate_edit(o);
+		gtk_widget_destroy(ADD_VIEW.win);
+	}
+	else if (r == GTK_RESPONSE_REJECT)
+	{
+		draw_image();
+		gtk_widget_destroy(ADD_VIEW.win);
+	}
+}
+
 void				edit_win(t_obj *o)
 {
 	GtkWidget		*content_area;
@@ -378,14 +399,14 @@ void				edit_win(t_obj *o)
 	ADD_VIEW.cone_img = gtk_image_new_from_file("uiconfig/cone.png");
 	ADD_VIEW.cylinder_img = gtk_image_new_from_file("uiconfig/cylinder.png");
 	ADD_VIEW.obj_file_img = gtk_image_new_from_file("uiconfig/poly_obj.png");
-	GTKMGR.ui.add_view.win = gtk_dialog_new_with_buttons ("My dialog",
-														  GTK_WINDOW(GTKMGR.ui.main_view.win),
-														  GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-														  "_OK",
-														  GTK_RESPONSE_ACCEPT,
-														  "_Cancel",
-														  GTK_RESPONSE_REJECT,
-														  NULL);
+	GTKMGR.ui.add_view.win = gtk_dialog_new_with_buttons("Edit Object",
+														 GTK_WINDOW(GTKMGR.ui.main_view.win),
+														 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+														 "_OK",
+														 GTK_RESPONSE_ACCEPT,
+														 "_Cancel",
+														 GTK_RESPONSE_REJECT,
+														 NULL);
 	gtk_window_set_transient_for(GTK_WINDOW(ADD_VIEW.win), GTK_WINDOW(GTKMGR.ui.main_view.win));
 	gint wx, wy;
 
@@ -425,24 +446,5 @@ void				edit_win(t_obj *o)
 	actual_edit_view(o);
 	gtk_widget_show_all(ADD_VIEW.win);
 
-	int		r = gtk_dialog_run(GTK_DIALOG(ADD_VIEW.win));
-
-	if (r == GTK_RESPONSE_ACCEPT)
-	{
-		validate_edit(o);
-		gtk_widget_destroy(ADD_VIEW.win);
-	}
-	else if (r == GTK_RESPONSE_REJECT)
-	{
-		printf("oh!\n");
-		draw_image();
-		if (PIXMAP)
-			cairo_surface_destroy(PIXMAP);
-		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
-		if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-			exit(1);
-		cairo_surface_mark_dirty(PIXMAP);
-		gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
-		gtk_widget_destroy(ADD_VIEW.win);
-	}
+	handle_edit_validation(o);
 }

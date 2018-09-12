@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/06 03:46:51 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/12 08:05:16 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ typedef struct				s_export_view
 typedef struct				s_filter_view
 {
 	GtkWidget				*win;
+	GtkWidget				*grid;
+	GtkWidget				*buttonbox;
+	GtkWidget				*bw_button;
+	GtkWidget				*bw_img;
+
 }							t_filter_view;
 
 typedef struct				s_add_view
@@ -126,4 +131,7 @@ typedef struct				s_gtk_mgr
 void						draw_px(unsigned char *buf, int x, int y, t_rgb cols);;
 void						init_gtk_variables(void);
 void						edit_win(t_obj *o);
+void						filter_win(void);
+void						redraw(void);
+
 #endif

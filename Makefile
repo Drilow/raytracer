@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/08/26 18:21:03 by adleau           ###   ########.fr        #
+#    Updated: 2018/09/12 07:37:02 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCPATH = srcs/
 SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/base_screen.c			\
 		$(SRCPATH)gtk/main_screen.c			\
+		$(SRCPATH)gtk/filter_view.c			\
 		$(SRCPATH)gtk/edit_view.c			\
 		$(SRCPATH)gtk/init_variables.c		\
 		$(SRCPATH)maths/transformations.c	\
