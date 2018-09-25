@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/12 08:43:27 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/24 18:00:10 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ typedef struct				s_add_view
 	GtkWidget				*cancel_button;
 	GtkWidget				*color;
 	t_switcher				sw;
+	GtkWidget				*file_check;
+	GtkWidget				*same;
+	GtkWidget				*from_template;
 }							t_add_view;
 
 typedef struct				s_main_view
