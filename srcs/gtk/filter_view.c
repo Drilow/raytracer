@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/26 16:29:45 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/26 16:48:02 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ void			handle_filter_validation(void)
 void			deactivate_filter_buttons(GtkWidget *except)
 {
 	if (&(FILTER_VIEW.bw_button) != &except)
-		gtk_widget_set_state_flags(FILTER_VIEW.bw_button,GTK_STATE_FLAG_NORMAL ,true);
+		gtk_widget_set_state_flags(FILTER_VIEW.bw_button,GTK_STATE_FLAG_NORMAL, true);
 	if (&(FILTER_VIEW.sepia_button) != &except)
-		gtk_widget_set_state_flags(FILTER_VIEW.sepia_button,GTK_STATE_FLAG_NORMAL ,true);
+		gtk_widget_set_state_flags(FILTER_VIEW.sepia_button,GTK_STATE_FLAG_NORMAL, true);
 }
 
 
@@ -73,10 +73,10 @@ void			sepia(unsigned char *ptr)
 
 void			handle_filters(GtkButton *button)
 {
-	int				x;
-	int				y;
-	int				stride;
-	void			(*f)(unsigned char*);
+	int			x;
+	int			y;
+	int			stride;
+	void		(*f)(unsigned char*);
 
 
 	if (button == GTK_BUTTON(FILTER_VIEW.bw_button))
