@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 09:30:07 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/26 15:14:50 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/26 16:23:58 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ static void			init_main_view(void)
 void				init_gtk_variables(void)
 {
 	int				y;
-	GtkIconTheme	*theme;
-	gchar			*path;
+//	GtkIconTheme	*theme;
+//	gchar			*path;
 
 	y = -1;
 	GTKMGR.editmode = 0;

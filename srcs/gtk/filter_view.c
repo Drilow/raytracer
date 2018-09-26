@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/26 14:13:51 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/26 16:29:45 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ void			handle_filters(GtkButton *button)
 void			filter_win(void)
 {
 	GtkWidget	*content_area;
-	gint		wx;
-	gint		wy;
 
 	redraw(false);
 	FILTER_VIEW.bw_img = gtk_image_new_from_file("uiconfig/bw.png");
@@ -112,14 +110,12 @@ void			filter_win(void)
 														 GTK_RESPONSE_REJECT,
 														 NULL);
 	gtk_window_set_transient_for(GTK_WINDOW(FILTER_VIEW.win), GTK_WINDOW(GTKMGR.ui.main_view.win));
-	gtk_widget_translate_coordinates(GTKMGR.ui.main_view.select_button, gtk_widget_get_toplevel(GTKMGR.ui.main_view.select_button), 0, 0, &wx, &wy);
-	gtk_window_move(GTK_WINDOW(FILTER_VIEW.win), wx, wy);
+	gtk_window_set_position(GTK_WINDOW(FILTER_VIEW.win), GTK_WIN_POS_MOUSE);
 	content_area = gtk_dialog_get_content_area(GTK_DIALOG(FILTER_VIEW.win));
 	FILTER_VIEW.grid = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(content_area), FILTER_VIEW.grid);
 	FILTER_VIEW.buttonbox = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 	gtk_grid_attach(GTK_GRID(FILTER_VIEW.grid), FILTER_VIEW.buttonbox, 0, 0, 4, 1);
-
 	FILTER_VIEW.bw_button = gtk_button_new();
 	gtk_widget_set_tooltip_text(FILTER_VIEW.bw_button, "Black & White");
 	g_signal_connect(G_OBJECT(FILTER_VIEW.bw_button), "clicked", G_CALLBACK(handle_filters), NULL);

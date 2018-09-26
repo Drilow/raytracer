@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/26 14:09:34 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/26 16:27:49 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@ void				draw_image(void);
 void				deactivate_buttons(GtkWidget *except)
 {
 	if (&(ADD_VIEW.sphere_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.sphere_button,GTK_STATE_FLAG_NORMAL ,true);
+		gtk_widget_set_state_flags(ADD_VIEW.sphere_button, GTK_STATE_FLAG_NORMAL, true);
 	if (&(ADD_VIEW.plane_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.plane_button,GTK_STATE_FLAG_NORMAL ,true);
+		gtk_widget_set_state_flags(ADD_VIEW.plane_button, GTK_STATE_FLAG_NORMAL, true);
 	if (&(ADD_VIEW.cone_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.cone_button,GTK_STATE_FLAG_NORMAL ,true);
+		gtk_widget_set_state_flags(ADD_VIEW.cone_button, GTK_STATE_FLAG_NORMAL, true);
 	if (&(ADD_VIEW.cylinder_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.cylinder_button,GTK_STATE_FLAG_NORMAL ,true);
+		gtk_widget_set_state_flags(ADD_VIEW.cylinder_button, GTK_STATE_FLAG_NORMAL, true);
 	if (&(ADD_VIEW.obj_file_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.obj_file_button,GTK_STATE_FLAG_NORMAL ,true);
+		gtk_widget_set_state_flags(ADD_VIEW.obj_file_button, GTK_STATE_FLAG_NORMAL, true);
 
 }
 
@@ -157,11 +157,12 @@ static void			radio_toggle(GtkWidget *button, gpointer __attribute__((unused))da
 	char *b_state;
 	const char *button_label;
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
+	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON (button)))
 	{
 		ADD_VIEW.file_opener = gtk_button_new();
 		gtk_widget_set_tooltip_text(ADD_VIEW.file_opener, "Open obj File");
 		gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.file_opener, 1, 7, 1, 1);
+		g_signal_connect(G_OBJECT(ADD_VIEW.file_opener), "clicked", G_CALLBACK(open_poly_obj), NULL);
 		b_state = "on";
 	}
 	else {
@@ -169,7 +170,7 @@ static void			radio_toggle(GtkWidget *button, gpointer __attribute__((unused))da
 		g_print ("\n");
 	}
 
-	button_label = gtk_button_get_label (GTK_BUTTON (button));
+	button_label = gtk_button_get_label(GTK_BUTTON(button));
 	g_print ("%s was turned %s\n", button_label, b_state);
 }
 
@@ -204,7 +205,6 @@ static void			edit_poly_view(t_poly_obj __attribute__((unused))*p)
 	ADD_VIEW.file_check = gtk_radio_button_new_with_label(NULL, "From File");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.file_check, 0, 7, 1, 1);
 	g_signal_connect(G_OBJECT(ADD_VIEW.file_check), "toggled", G_CALLBACK(radio_toggle), NULL);
-	g_signal_connect(G_OBJECT(ADD_VIEW.file_opener), "clicked", G_CALLBACK(open_poly_obj), NULL);
 	gtk_radio_button_join_group(GTK_RADIO_BUTTON(ADD_VIEW.file_check), GTK_RADIO_BUTTON(ADD_VIEW.same));
 }
 
@@ -213,7 +213,7 @@ static void			edit_plane_view(t_plane *p)
 	GtkAdjustment	*adj;
 
 	deactivate_buttons(ADD_VIEW.plane_button);
-	gtk_widget_set_state_flags(ADD_VIEW.plane_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE ,true);
+	gtk_widget_set_state_flags(ADD_VIEW.plane_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
 	ADD_VIEW.vector_img = gtk_image_new_from_file("uiconfig/vector.png");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.vector_img, 0, 1, 1, 1);
 	adj = gtk_adjustment_new(p->vector.x, -1000, 1000, .5, 1, 10);
@@ -233,7 +233,7 @@ static void			edit_cone_view(t_cone *c)
 	GtkAdjustment	*adj_angle;
 
 	deactivate_buttons(ADD_VIEW.cone_button);
-	gtk_widget_set_state_flags(ADD_VIEW.cone_button,GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE ,true);
+	gtk_widget_set_state_flags(ADD_VIEW.cone_button,GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
 	ADD_VIEW.vector_img = gtk_image_new_from_file("uiconfig/vector.png");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.vector_img, 0, 4, 1, 1);
 	adj = gtk_adjustment_new(c->vector.x, -1000, 1000, .5, 1, 10);
@@ -263,7 +263,7 @@ static void			edit_cylinder_view(t_cylinder *c)
 	GtkAdjustment	*adj;
 
 	deactivate_buttons(ADD_VIEW.cylinder_button);
-	gtk_widget_set_state_flags(ADD_VIEW.cylinder_button,GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE ,true);
+	gtk_widget_set_state_flags(ADD_VIEW.cylinder_button,GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
 	ADD_VIEW.scale_img = gtk_image_new_from_file("uiconfig/ruler.png");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.scale_img, 0, 1, 1, 1);
 	adj_scale = gtk_adjustment_new(c->radius, 0, 1000, .5, 1, 10);
@@ -516,11 +516,8 @@ void				edit_win(t_obj *o)
 														 GTK_RESPONSE_REJECT,
 														 NULL);
 	gtk_window_set_transient_for(GTK_WINDOW(ADD_VIEW.win), GTK_WINDOW(GTKMGR.ui.main_view.win));
-	gint wx, wy;
-
+	gtk_window_set_position(GTK_WINDOW(ADD_VIEW.win), GTK_WIN_POS_MOUSE);
 	ADD_VIEW.sw.o = o;
-	gtk_widget_translate_coordinates(GTKMGR.ui.main_view.select_button, gtk_widget_get_toplevel(GTKMGR.ui.main_view.select_button), 0, 0, &wx, &wy);
-	gtk_window_move(GTK_WINDOW(ADD_VIEW.win), wx, wy);
 	content_area = gtk_dialog_get_content_area(GTK_DIALOG(ADD_VIEW.win));
 	ADD_VIEW.grid = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(content_area), ADD_VIEW.grid);
