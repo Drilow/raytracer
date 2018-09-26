@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/12 09:09:57 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/26 10:28:05 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void			handle_filter_validation(void)
 		printf("DOKO\n");
 		gtk_widget_destroy(FILTER_VIEW.win);
 		validate_filter();
-		redraw();
+//		redraw();
 	}
 	else if (r == GTK_RESPONSE_REJECT)
 	{

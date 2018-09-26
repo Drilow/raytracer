@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/24 18:15:26 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/26 10:34:18 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void				deactivate_buttons(GtkWidget *except)
 		gtk_widget_set_state_flags(ADD_VIEW.cylinder_button,GTK_STATE_FLAG_NORMAL ,true);
 	if (&(ADD_VIEW.obj_file_button) != &except)
 		gtk_widget_set_state_flags(ADD_VIEW.obj_file_button,GTK_STATE_FLAG_NORMAL ,true);
+
 }
 
 void				validate_sphere(t_sphere *s)
@@ -133,6 +134,16 @@ static void			edit_poly_view(t_poly_obj __attribute__((unused))*p)
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.same, 0, 5, 1, 1);
 	ADD_VIEW.from_template = gtk_radio_button_new_with_label(NULL, "From Template");
 	gtk_radio_button_join_group(GTK_RADIO_BUTTON(ADD_VIEW.from_template), GTK_RADIO_BUTTON(ADD_VIEW.same));
+	ADD_VIEW.cube = gtk_button_new();
+	ADD_VIEW.cube_img = gtk_image_new_from_file("uiconfig/cube.png");
+	gtk_widget_set_tooltip_text(ADD_VIEW.cube, "Cube");
+	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.cube), ADD_VIEW.cube_img);
+	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.cube, 1, 6, 1, 1);
+	ADD_VIEW.tetra = gtk_button_new();
+	ADD_VIEW.tetra_img = gtk_image_new_from_file("uiconfig/tetra.png");
+	gtk_widget_set_tooltip_text(ADD_VIEW.tetra, "Tetrahedron");
+	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.tetra), ADD_VIEW.tetra_img);
+	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.tetra, 2, 6, 1, 1);
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.from_template, 0, 6, 1, 1);
 	ADD_VIEW.file_check = gtk_radio_button_new_with_label(NULL, "From File");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.file_check, 0, 7, 1, 1);
@@ -327,6 +338,11 @@ void				create_object(t_obj *o, int type)
 		tmp->obj = (t_cylinder*)malloc(sizeof(t_cylinder));
 		tmp->type = 4;
 	}
+	else if (type == 6 || type / 10 == 6)
+	{
+		tmp->obj = (t_poly_obj*)malloc(sizeof(t_poly_obj));
+		tmp->type = 6;
+	}
 	set_default_values(tmp);
 	free(o->obj);
 	o->type = tmp->type;
@@ -349,8 +365,25 @@ void				destroy_interface_for_type(int type)
 	}
 	if (type == 3 || type == 4)
 	{
+		if (type == 3)
+		{
+			gtk_widget_destroy(ADD_VIEW.angle_img);
+			gtk_widget_destroy(ADD_VIEW.angle_spin);
+		}
 		gtk_widget_destroy(ADD_VIEW.infinite);
 		gtk_widget_destroy(ADD_VIEW.inf_img);
+	}
+	if (type == 6 || type / 10 == 6)
+	{
+		gtk_widget_destroy(ADD_VIEW.scale_img);
+		gtk_widget_destroy(ADD_VIEW.scale_spin);
+		gtk_widget_destroy(ADD_VIEW.file_check);
+		gtk_widget_destroy(ADD_VIEW.same);
+		gtk_widget_destroy(ADD_VIEW.from_template);
+		gtk_widget_destroy(ADD_VIEW.cube);
+		gtk_widget_destroy(ADD_VIEW.cube_img);
+		gtk_widget_destroy(ADD_VIEW.tetra);
+		gtk_widget_destroy(ADD_VIEW.tetra_img);
 	}
 }
 
@@ -361,6 +394,7 @@ void				switch_type(GtkButton *button)
 
 	type = ADD_VIEW.sw.o->type;
 	o = ADD_VIEW.sw.o;
+	printf("%d\n", o->type);
 	destroy_interface_for_type(o->type);
 	if (button == GTK_BUTTON(ADD_VIEW.sphere_button))
 	{
@@ -378,6 +412,8 @@ void				switch_type(GtkButton *button)
 	{
 		ADD_VIEW.sw.type = 4;
 	}
+	else if (button == GTK_BUTTON(ADD_VIEW.obj_file_button))
+		ADD_VIEW.sw.type = 6;
 	create_object(o, ADD_VIEW.sw.type);
 	if (o)
 		actual_edit_view(o);
@@ -456,7 +492,7 @@ void				edit_win(t_obj *o)
 	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.cylinder_button), ADD_VIEW.cylinder_img);
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.cylinder_button);
 	ADD_VIEW.obj_file_button = gtk_button_new();
-	g_signal_connect(G_OBJECT(ADD_VIEW.obj_file_button), "clicked", G_CALLBACK(edit_poly_view), o);
+	g_signal_connect(G_OBJECT(ADD_VIEW.obj_file_button), "clicked", G_CALLBACK(switch_type), NULL);
 	gtk_widget_set_tooltip_text(ADD_VIEW.obj_file_button, "Obj File");
 	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.obj_file_button), ADD_VIEW.obj_file_img);
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.obj_file_button);

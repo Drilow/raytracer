@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/12 08:21:52 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/26 09:56:29 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void				export_view(void)
 	GtkWidget *dialog;
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_SAVE;
 	gint res;
+	char			*dir;
 
 	dialog = gtk_file_chooser_dialog_new ("Export",
 										  GTK_WINDOW(GTKMGR.ui.main_view.win),
@@ -49,6 +50,10 @@ void				export_view(void)
 										  "_Export",
 										  GTK_RESPONSE_ACCEPT,
 										  NULL);
+	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
+		exit(1);
+	dir = getwd(dir);
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), ft_strjoin(dir, "/screens"));
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
@@ -70,9 +75,10 @@ void			init_rt(void);
 
 void				open_file(void)
 {
-	GtkWidget *dialog;
-	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
-	gint res;
+	GtkWidget				*dialog;
+	GtkFileChooserAction	action = GTK_FILE_CHOOSER_ACTION_OPEN;
+	gint					res;
+	char					*dir;
 
 	dialog = gtk_file_chooser_dialog_new ("Open File",
 										  GTK_WINDOW(g_global.base_view.win),
@@ -82,6 +88,10 @@ void				open_file(void)
 										  "_Open",
 										  GTK_RESPONSE_ACCEPT,
 										  NULL);
+	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
+		exit(1);
+	dir = getwd(dir);
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), ft_strjoin(dir, "/scenes"));
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 	res = gtk_dialog_run (GTK_DIALOG (dialog));
 	init_rt();
@@ -89,8 +99,8 @@ void				open_file(void)
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
 		char *filename;
-		GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
-		filename = gtk_file_chooser_get_filename (chooser);
+		GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
+		filename = gtk_file_chooser_get_filename(chooser);
 		if (!parse(filename))
 			usage("Error : invalid argument.", 1);
 		g_free (filename);
