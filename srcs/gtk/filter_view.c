@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/26 10:28:05 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/26 14:13:51 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,20 @@ void				draw_image(void);
 
 extern t_global		g_global;
 
-void				validate_filter(void)
+void			handle_filter_validation(void)
 {
+	int		r;
+
+	r = gtk_dialog_run(GTK_DIALOG(FILTER_VIEW.win));
+
+	if (r == GTK_RESPONSE_ACCEPT)
+	{
+		gtk_widget_destroy(FILTER_VIEW.win);
+	}
+	else if (r == GTK_RESPONSE_REJECT)
+	{
+		gtk_widget_destroy(FILTER_VIEW.win);
+	}
 
 }
 
@@ -66,6 +78,7 @@ void			handle_filters(GtkButton *button)
 	int				stride;
 	void			(*f)(unsigned char*);
 
+
 	if (button == GTK_BUTTON(FILTER_VIEW.bw_button))
 		f = black_white;
 	else if (button == GTK_BUTTON(FILTER_VIEW.sepia_button))
@@ -81,33 +94,13 @@ void			handle_filters(GtkButton *button)
 	}
 }
 
-void			handle_filter_validation(void)
-{
-	int		r;
-
-	r = gtk_dialog_run(GTK_DIALOG(FILTER_VIEW.win));
-
-	if (r == GTK_RESPONSE_ACCEPT)
-	{
-		printf("DOKO\n");
-		gtk_widget_destroy(FILTER_VIEW.win);
-		validate_filter();
-//		redraw();
-	}
-	else if (r == GTK_RESPONSE_REJECT)
-	{
-		gtk_widget_destroy(FILTER_VIEW.win);
-	}
-
-}
-
 void			filter_win(void)
 {
 	GtkWidget	*content_area;
 	gint		wx;
 	gint		wy;
 
-//	deactivate_filter_buttons(FILTER_VIEW.bw_button);
+	redraw(false);
 	FILTER_VIEW.bw_img = gtk_image_new_from_file("uiconfig/bw.png");
 	FILTER_VIEW.sepia_img = gtk_image_new_from_file("uiconfig/sepia.png");
 	FILTER_VIEW.win = gtk_dialog_new_with_buttons("Filters",

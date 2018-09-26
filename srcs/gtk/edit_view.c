@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/26 10:34:18 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/26 14:09:34 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,19 @@ void				validate_cylinder(t_cylinder *c)
 	c->infinite = gtk_switch_get_active(GTK_SWITCH(ADD_VIEW.infinite));
 }
 
-void				redraw(void)
+void				redraw(bool display)
 {
 	draw_image();
-	if (PIXMAP)
-		cairo_surface_destroy(PIXMAP);
-	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
-	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-		exit(1);
-	cairo_surface_mark_dirty(PIXMAP);
-	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
+	if (display == true)
+	{
+		if (PIXMAP)
+			cairo_surface_destroy(PIXMAP);
+		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+		if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
+			exit(1);
+		cairo_surface_mark_dirty(PIXMAP);
+		gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
+	}
 }
 
 void				validate_edit(t_obj *o)
@@ -102,7 +105,7 @@ void				validate_edit(t_obj *o)
 		validate_cylinder((t_cylinder*)o->obj);
 //	else if (o->type == 6 || o->type / 10 == 6)
 //		validate_poly_obj((t_poly_obj*)o->obj);
-	redraw();
+	redraw(true);
 }
 
 static void			edit_sphere_view(t_sphere *s)
@@ -117,6 +120,59 @@ static void			edit_sphere_view(t_sphere *s)
 	ADD_VIEW.scale_spin = gtk_spin_button_new(adj_scale, 1, 4);
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.scale_spin, 1, 1, 3, 1);
 }
+
+void				open_poly_obj(void)
+{
+	GtkWidget				*dialog;
+	GtkFileChooserAction	action = GTK_FILE_CHOOSER_ACTION_OPEN;
+	gint					res;
+	char					*dir;
+
+	dialog = gtk_file_chooser_dialog_new ("Open File",
+										  GTK_WINDOW(g_global.base_view.win),
+										  action,
+										  "_Cancel",
+										  GTK_RESPONSE_CANCEL,
+										  "_Open",
+										  GTK_RESPONSE_ACCEPT,
+										  NULL);
+	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
+		exit(1);
+	dir = getwd(dir);
+//	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), ft_strjoin(dir, "/scenes"));
+	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+	res = gtk_dialog_run(GTK_DIALOG(dialog));
+	if (res == GTK_RESPONSE_ACCEPT)
+	{
+		char *filename;
+		GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
+		filename = gtk_file_chooser_get_filename(chooser);
+		g_free (filename);
+	}
+	gtk_widget_destroy (dialog);
+}
+
+static void			radio_toggle(GtkWidget *button, gpointer __attribute__((unused))data)
+{
+	char *b_state;
+	const char *button_label;
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
+	{
+		ADD_VIEW.file_opener = gtk_button_new();
+		gtk_widget_set_tooltip_text(ADD_VIEW.file_opener, "Open obj File");
+		gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.file_opener, 1, 7, 1, 1);
+		b_state = "on";
+	}
+	else {
+		b_state = "off";
+		g_print ("\n");
+	}
+
+	button_label = gtk_button_get_label (GTK_BUTTON (button));
+	g_print ("%s was turned %s\n", button_label, b_state);
+}
+
 
 static void			edit_poly_view(t_poly_obj __attribute__((unused))*p)
 {
@@ -147,6 +203,8 @@ static void			edit_poly_view(t_poly_obj __attribute__((unused))*p)
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.from_template, 0, 6, 1, 1);
 	ADD_VIEW.file_check = gtk_radio_button_new_with_label(NULL, "From File");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.file_check, 0, 7, 1, 1);
+	g_signal_connect(G_OBJECT(ADD_VIEW.file_check), "toggled", G_CALLBACK(radio_toggle), NULL);
+	g_signal_connect(G_OBJECT(ADD_VIEW.file_opener), "clicked", G_CALLBACK(open_poly_obj), NULL);
 	gtk_radio_button_join_group(GTK_RADIO_BUTTON(ADD_VIEW.file_check), GTK_RADIO_BUTTON(ADD_VIEW.same));
 }
 
@@ -421,9 +479,6 @@ void				switch_type(GtkButton *button)
 	return ;
 }
 
-void			init_add_view(void);
-
-
 void				handle_edit_validation(t_obj *o)
 {
 	int		r;
@@ -498,6 +553,5 @@ void				edit_win(t_obj *o)
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.obj_file_button);
 	actual_edit_view(o);
 	gtk_widget_show_all(ADD_VIEW.win);
-
 	handle_edit_validation(o);
 }

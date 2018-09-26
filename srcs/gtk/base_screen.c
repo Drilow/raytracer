@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/26 09:56:29 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/26 11:17:25 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ void				export_view(void)
 
 void			init_rt(void);
 
-void				open_file(void)
+void			open_file(void)
 {
-	GtkWidget				*dialog;
-	GtkFileChooserAction	action = GTK_FILE_CHOOSER_ACTION_OPEN;
-	gint					res;
-	char					*dir;
+	GtkWidget *dialog;
+	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
+	gint res;
+	char *dir;
 
 	dialog = gtk_file_chooser_dialog_new ("Open File",
 										  GTK_WINDOW(g_global.base_view.win),

@@ -6,14 +6,14 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/26 10:10:18 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/26 14:08:20 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GTK_MGR_H
 # define GTK_MGR_H
 # include <gtk/gtk.h>
-# define UI_FILE "uiconfig/rt2.glade"
+# include <stdbool.h>
 
 struct s_obj;
 struct s_rgb;
@@ -100,6 +100,7 @@ typedef struct				s_add_view
 	GtkWidget				*cube_img;
 	GtkWidget				*tetra;
 	GtkWidget				*tetra_img;
+	GtkWidget				*file_opener;
 }							t_add_view;
 
 typedef struct				s_main_view
@@ -141,6 +142,7 @@ void						draw_px(unsigned char *buf, int x, int y, t_rgb cols);;
 void						init_gtk_variables(void);
 void						edit_win(t_obj *o);
 void						filter_win(void);
-void						redraw(void);
+void						redraw(bool display);
+void						init_add_view(void);
 
 #endif
