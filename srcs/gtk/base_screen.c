@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/27 12:21:23 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/27 15:08:32 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <parser/parser.h>
 #define PIXMAP g_global.r->gtk_mgr.pixmap
 #define GTKMGR g_global.r->gtk_mgr
+
+void				key_press_cb(GtkWidget __attribute__((unused))*w, GdkEventKey __attribute__((unused))*e, gpointer __attribute__((unused))user_data);
 
 extern t_global		g_global;
 
@@ -67,8 +69,8 @@ void				export_view(void)
 			cairo_surface_write_to_png(PIXMAP, filename);
 		g_free (filename);
 	}
+//	g_signal_connect(G_OBJECT(dialog), "key-press-event", G_CALLBACK(key_press_cb), NULL);
 	gtk_widget_destroy (dialog);
-
 }
 
 void			init_rt(void);
@@ -93,7 +95,8 @@ void			open_file(void)
 	dir = getwd(dir);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), ft_strjoin(dir, "/scenes"));
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	printf("WOLOLO\n");
+	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	init_rt();
 	init_gtk_variables();
 	if (res == GTK_RESPONSE_ACCEPT)
@@ -104,8 +107,9 @@ void			open_file(void)
 		if (!parse(filename))
 			usage("Error : invalid argument.", 1);
 		g_free (filename);
+		handle_main_view();
 	}
-	handle_main_view();
+//	g_signal_connect(G_OBJECT(dialog), "key-press-event", G_CALLBACK(key_press_cb), NULL);
 	gtk_widget_destroy (dialog);
 }
 
@@ -319,6 +323,7 @@ void				handle_base_view(void)
 	gtk_grid_attach(GTK_GRID(g_global.base_view.grid), g_global.base_view.open_button, 0, 0, 1, 1);
 	gtk_grid_attach(GTK_GRID(g_global.base_view.grid), g_global.base_view.new_button, 1, 0, 1, 1);
 	gtk_grid_attach(GTK_GRID(g_global.base_view.grid), g_global.base_view.exit_button, 0, 1, 2, 1);
+//	g_signal_connect(G_OBJECT(g_global.base_view.win), "key-press-event", G_CALLBACK(key_press_cb), NULL);
 	gtk_widget_show_all(g_global.base_view.win);
 }
 
@@ -329,6 +334,15 @@ static void			init_base_view(void)
 	g_global.base_view.open_button = NULL;
 	g_global.base_view.new_button = NULL;
 	g_global.base_view.exit_button = NULL;
+}
+
+void				key_press_cb(GtkWidget __attribute__((unused))*w, GdkEventKey __attribute__((unused))*e, gpointer __attribute__((unused))user_data)
+{
+//	printf("%d\n", gtk_accelerator_get_default_mod_mask());
+//	exit(1);
+	printf("BONDOUR\n");
+	if (e->keyval == 0x077 && gtk_accelerator_get_default_mod_mask() == 469762077)
+		gtk_widget_destroy(w);
 }
 
 void				handle_ui(void)

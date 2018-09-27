@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/26 16:48:02 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/27 16:09:30 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,47 @@ void			deactivate_filter_buttons(GtkWidget *except)
 
 void				black_white(unsigned char *ptr)
 {
+	unsigned char	tmpr;
+	unsigned char	tmpg;
+	unsigned char	tmpb;
+
+	tmpr = ptr[0];
+	tmpg = ptr[1];
+	tmpb = ptr[2];
 	gtk_widget_set_state_flags(FILTER_VIEW.bw_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
-	ptr[0] = (ptr[0] + ptr[1] + ptr[2]) / 3;
-	ptr[1] = (ptr[0] + ptr[1] + ptr[2]) / 3;
-	ptr[2] = (ptr[0] + ptr[1] + ptr[2]) / 3;
+	ptr[0] = (tmpr + tmpg + tmpb) / 3;
+	ptr[1] = (tmpr + tmpg + tmpb) / 3;
+	ptr[2] = (tmpr + tmpg + tmpb) / 3;
 }
 
 void			test(unsigned char *ptr)
 {
+	unsigned char	tmpr;
+	unsigned char	tmpg;
+	unsigned char	tmpb;
+
+	tmpr = ptr[0];
+	tmpg = ptr[1];
+	tmpb = ptr[2];
 	gtk_widget_set_state_flags(FILTER_VIEW.sepia_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
-	ptr[2] = ((float)ptr[2] * 0 + (float)ptr[1] * .2 + (float)ptr[0] * 0) / 3;
-	ptr[1] = ((float)ptr[2] * .2 + (float)ptr[1] * .2  + (float)ptr[0] * .2) / 3;
-	ptr[0] = ((float)ptr[2] * 0  + (float)ptr[1] * .2 + (float)ptr[0] * .2) / 3;
+	ptr[2] = ((float)tmpb * 0 + (float)tmpg * .2 + (float)tmpr * 0) / 3;
+	ptr[1] = ((float)tmpb * .2 + (float)tmpg * .2  + (float)tmpr * .2) / 3;
+	ptr[0] = ((float)tmpb * 0  + (float)tmpg * .2 + (float)tmpr * .2) / 3;
 }
 
 void			sepia(unsigned char *ptr)
 {
+	unsigned char	tmpr;
+	unsigned char	tmpg;
+	unsigned char	tmpb;
+
+	tmpr = ptr[0];
+	tmpg = ptr[1];
+	tmpb = ptr[2];
 	gtk_widget_set_state_flags(FILTER_VIEW.sepia_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
-	ptr[2] = ((float)ptr[0] * .131 + (float)ptr[1] * .534 + (float)ptr[2] * .272) / 3;
-	ptr[1] = ((float)ptr[0] * .168 + (float)ptr[1] * .686  + (float)ptr[2] * .349) / 3;
-	ptr[0] = ((float)ptr[0] * .189  + (float)ptr[1] * .769 + (float)ptr[2] * .393) / 3;
+	ptr[0] = ((float)tmpr * .131 + (float)tmpg * .534 + (float)tmpb * .272) / 3;
+	ptr[1] = ((float)tmpr * .168 + (float)tmpg * .686  + (float)tmpb * .349) / 3;
+	ptr[2] = ((float)tmpr * .189  + (float)tmpg * .769 + (float)tmpb * .393) / 3;
 }
 
 void			handle_filters(GtkButton *button)
