@@ -101,6 +101,7 @@ static void		*draw_image_core(void *arg)
 			}
 			else
 			{
+				g_global.r->checker[p.y][p.x] = NULL;
 //				if (p.y > 120)
 //					printf("Black pixel : x=%d & y=%d\n", p.x, p.y);
 				draw_px(GTKMGR.buf, p.x, p.y, ft_rgb(0, 0, 0, 0));

@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/27 13:46:40 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/27 17:26:35 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void				open_poly_obj(void)
 		char *filename;
 		GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
 		filename = gtk_file_chooser_get_filename(chooser);
-		g_free (filename);
+		g_free(filename);
 	}
 	gtk_widget_destroy (dialog);
 }
@@ -452,9 +452,7 @@ static void			actual_edit_view(t_obj *o)
 	else if (o->type == 4)
 		edit_cylinder_view((t_cylinder*)o->obj);
 	else if (o->type / 10 == 6 || o->type == 6)
-	{
 		edit_poly_view((t_poly_obj*)o->obj);
-	}
 }
 
 void				create_object(t_obj *o, int type)
