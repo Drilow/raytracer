@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/26 20:10:18 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/09/27 13:38:50 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct		s_obj
 	t_rpoint		position;
 	void			*obj;
 	t_rgb			color;
+	double			size;
 	struct s_obj	*next;
 }					t_obj;
 

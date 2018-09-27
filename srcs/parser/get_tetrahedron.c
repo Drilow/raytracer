@@ -66,7 +66,7 @@ static t_vertex       *add_t_face(int fnb, double size)
 	return (face);
 }
 
-bool			get_tetrahedron(t_rpoint position, double size, t_obj *t)
+bool			set_tetrahedron(t_rpoint position, double size, t_obj *t)
 {
 	t_poly_obj	*o;
 //	double		maxd;
@@ -91,5 +91,6 @@ bool			get_tetrahedron(t_rpoint position, double size, t_obj *t)
 	o->next = malloc_po();
 	o = o->next;
 	o->vertices = add_t_face(4, size);
+	t->size = size;
     return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/06 03:46:58 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/27 13:07:19 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,5 @@ void					usage(char *s, int i);
 void					ft_exit(char *msg_error, int i);
 void					init_gtk(int ac, char **av);
 void					main_screen(GtkApplication *app, gpointer user_data);
+
 #endif

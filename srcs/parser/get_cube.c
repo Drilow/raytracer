@@ -60,7 +60,7 @@ static t_vertex   *add_cube_face(t_rpoint f)
   return (face);
 }
 
-bool			get_cube(t_rpoint position, double size, t_obj *c)
+bool			set_cube(t_rpoint position, double size, t_obj *c)
 {
 	t_poly_obj	*o;
 	double		maxd;
@@ -89,5 +89,6 @@ bool			get_cube(t_rpoint position, double size, t_obj *c)
 	o->next = malloc_po();
 	o = o->next;
 	o->vertices = add_cube_face(set_rpoint(-size, 0, 0));
+	c->size = size;
     return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/26 20:20:49 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/09/27 13:42:37 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -379,6 +379,8 @@ bool			get_cube(char *s, t_obj *c, int *index)
         return (false);
 // distance au centre :
 	size = size / 2;
+	printf("%p\n", c);
+	c->size = size;
 	maxd = sqrt(3 * size * size);
 	c->obj = malloc_po();
 	o = c->obj;
@@ -460,6 +462,7 @@ bool			get_tetrahedron(char *s, t_obj *t, int *index)
     if (get_next_rpoint(s, &(t->position), index) == false ||
 		get_next_nb(s, index, &size, NULL) == false)
         return (false);
+	t->size = size;
 // distance au centre :
 //	size = size / 2;
 //	maxd = sqrt(3 * size * size);
