@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/27 13:07:19 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/01 18:13:27 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct				s_base_view
 	GtkWidget				*win;
 	GtkWidget				*grid;
 	GtkWidget				*open_button;
-	GtkWidget				*new_button;
 	GtkWidget				*exit_button;
 }							t_base_view;
 
