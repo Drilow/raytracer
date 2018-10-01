@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/27 17:26:14 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/01 16:36:37 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,40 +77,38 @@ void			init_rt(void);
 
 void			open_file(void)
 {
-	GtkWidget *dialog;
+	GtkFileChooserNative *native;
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
 	gint res;
 	char *dir;
 
-	dialog = gtk_file_chooser_dialog_new ("Open File",
-										  GTK_WINDOW(g_global.base_view.win),
-										  action,
-										  "_Cancel",
-										  GTK_RESPONSE_CANCEL,
-										  "_Open",
-										  GTK_RESPONSE_ACCEPT,
-										  NULL);
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
 		exit(1);
+	native = gtk_file_chooser_native_new ("Open File",
+										  GTK_WINDOW(g_global.base_view.win),
+										  action,
+										  "_Open",
+										  "_Cancel");
+
+	res = gtk_native_dialog_run (GTK_NATIVE_DIALOG(native));
 	dir = getwd(dir);
-	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), ft_strjoin(dir, "/scenes"));
-	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
-	printf("WOLOLO\n");
-	res = gtk_dialog_run(GTK_DIALOG(dialog));
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(native), ft_strjoin(dir, "/scenes"));
 	init_rt();
 	init_gtk_variables();
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
 		char *filename;
-		GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
+		GtkFileChooser *chooser = GTK_FILE_CHOOSER(native);
 		filename = gtk_file_chooser_get_filename(chooser);
+
 		if (!parse(filename))
 			usage("Error : invalid argument.", 1);
 		g_free (filename);
 		handle_main_view();
 	}
-//	g_signal_connect(G_OBJECT(dialog), "key-press-event", G_CALLBACK(key_press_cb), NULL);
-	gtk_widget_destroy (dialog);
+	else
+		g_object_unref(native);
+	g_object_unref(native);
 }
 
 void				handle_drawing(void);
