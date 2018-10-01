@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/01 16:36:37 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/01 18:01:05 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #define PIXMAP g_global.r->gtk_mgr.pixmap
 #define GTKMGR g_global.r->gtk_mgr
 
-void				key_press_cb(GtkWidget __attribute__((unused))*w, GdkEventKey __attribute__((unused))*e, gpointer __attribute__((unused))user_data);
 
 extern t_global		g_global;
 
@@ -37,12 +36,19 @@ int					check_png(char *s)
 	return (1);
 }
 
+
+void				on_key_press(GtkWidget *w, GdkEventKey *event)
+{
+	if (event->keyval == GDK_KEY_Escape)
+		gtk_widget_destroy(w);
+}
+
 void				export_view(void)
 {
 	GtkWidget *dialog;
 	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_SAVE;
 	gint res;
-	char			*dir;
+	char            *dir;
 
 	dialog = gtk_file_chooser_dialog_new ("Export",
 										  GTK_WINDOW(GTKMGR.ui.main_view.win),
@@ -69,8 +75,8 @@ void				export_view(void)
 			cairo_surface_write_to_png(PIXMAP, filename);
 		g_free (filename);
 	}
-//	g_signal_connect(G_OBJECT(dialog), "key-press-event", G_CALLBACK(key_press_cb), NULL);
-	gtk_widget_destroy (dialog);
+	else
+		gtk_widget_destroy(dialog);
 }
 
 void			init_rt(void);
@@ -108,7 +114,6 @@ void			open_file(void)
 	}
 	else
 		g_object_unref(native);
-	g_object_unref(native);
 }
 
 void				handle_drawing(void);
@@ -297,6 +302,7 @@ void				handle_main_view(void)
 	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.export_button), "clicked", G_CALLBACK(export_view), NULL);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.buttonbox), GTKMGR.ui.main_view.export_button);
 	handle_drawing();
+	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.win), "key-press-event", G_CALLBACK(on_key_press), NULL);
 	gtk_widget_show_all(GTKMGR.ui.main_view.win);
 }
 
@@ -321,7 +327,7 @@ void				handle_base_view(void)
 	gtk_grid_attach(GTK_GRID(g_global.base_view.grid), g_global.base_view.open_button, 0, 0, 1, 1);
 	gtk_grid_attach(GTK_GRID(g_global.base_view.grid), g_global.base_view.new_button, 1, 0, 1, 1);
 	gtk_grid_attach(GTK_GRID(g_global.base_view.grid), g_global.base_view.exit_button, 0, 1, 2, 1);
-//	g_signal_connect(G_OBJECT(g_global.base_view.win), "key-press-event", G_CALLBACK(key_press_cb), NULL);
+	g_signal_connect(G_OBJECT(g_global.base_view.win), "key-press-event", G_CALLBACK(on_key_press), NULL);
 	gtk_widget_show_all(g_global.base_view.win);
 }
 
@@ -332,15 +338,6 @@ static void			init_base_view(void)
 	g_global.base_view.open_button = NULL;
 	g_global.base_view.new_button = NULL;
 	g_global.base_view.exit_button = NULL;
-}
-
-void				key_press_cb(GtkWidget __attribute__((unused))*w, GdkEventKey __attribute__((unused))*e, gpointer __attribute__((unused))user_data)
-{
-//	printf("%d\n", gtk_accelerator_get_default_mod_mask());
-//	exit(1);
-	printf("BONDOUR\n");
-	if (e->keyval == 0x077 && gtk_accelerator_get_default_mod_mask() == 469762077)
-		gtk_widget_destroy(w);
 }
 
 void				handle_ui(void)
