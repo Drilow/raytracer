@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/10/01 15:39:42 by adleau           ###   ########.fr        #
+#    Updated: 2018/10/03 17:04:28 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)maths/ft_delta.c			\
 		$(SRCPATH)maths/ft_deltasq.c		\
 		$(SRCPATH)parser/get_tetrahedron.c	\
+		$(SRCPATH)parser/set_obj.c	\
 		$(SRCPATH)parser/get_cube.c	\
 		$(SRCPATH)parser/parsing_1.c		\
 		$(SRCPATH)parser/parsing_2.c		\

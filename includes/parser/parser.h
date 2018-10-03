@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/27 13:08:46 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/03 17:03:46 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ bool			get_cube(char *s, t_obj *c, int *index);
 bool			get_tetrahedron(char *s, t_obj *t, int *index);
 bool			set_cube(t_rpoint position, double size, t_obj *c);
 bool			set_tetrahedron(t_rpoint position, double size, t_obj *t);
+bool			validate_obj(t_rpoint pos, double size, char *path, t_obj *o);
 
 #endif

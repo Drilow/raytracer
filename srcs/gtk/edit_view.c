@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/03 16:51:03 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/03 17:06:41 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ void				validate_same_obj(t_obj *o)
 
 void				validate_from_file(char *path)
 {
-//	set_poly_obj(ADD_VIEW.sw.o->position, gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin)), ADD_VIEW.sw.o, path);
-	(void)path;
+	validate_obj(ADD_VIEW.sw.o->position, gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin)), path, ADD_VIEW.sw.o);
+	set_obj(ADD_VIEW.sw.o);
 }
 
 void				validate_poly_obj(t_obj *o)
@@ -113,6 +113,8 @@ void				validate_poly_obj(t_obj *o)
 		else if (o->type == 67)
 			validate_tetra();
 	}
+	else
+		validate_from_file(ADD_VIEW.obj_file_path);
 }
 
 void				redraw(bool display)
@@ -193,10 +195,8 @@ void				open_poly_obj(void)
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
-		char *filename;
 		GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
-		filename = gtk_file_chooser_get_filename(chooser);
-		g_free(filename);
+		ADD_VIEW.obj_file_path = gtk_file_chooser_get_filename(chooser);
 	}
 	gtk_widget_destroy (dialog);
 }

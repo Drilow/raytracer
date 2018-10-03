@@ -213,47 +213,7 @@ static bool	read_line(t_poly_obj **obj, t_vertex **v_list, char *line)
   return (false);
 }
 
-static void		get_face_maxd(t_vertex *f, double *d)
-{
-	double		tmp_d;
-	double		tmp;
-
-	tmp_d = 0;
-	while (f != NULL)
-	{
-		tmp = sqrt(deltasq(set_rpoint(0, 0, 0), f->p));
-		if (tmp_d < tmp)
-			tmp_d = tmp;
-		f = f->next;
-	}
-	if (tmp_d > *d)
-		*d = tmp_d;
-}
-
-void			set_obj(t_obj *o)
-{
-	t_poly_obj	*tmp;
-	t_vertex	*face;
-	t_rpoint	pos;
-	double		tmp_d;
-
-	tmp = (t_poly_obj *)o->obj;
-	tmp_d = 0;
-	while (tmp != NULL)
-	{
-		face = tmp->vertices;
-		pos = o->position;
-		get_face_maxd(face, &tmp_d);
-//		face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
-        face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
-		tmp = tmp->next;
-	}
-	((t_poly_obj *)o->obj)->max_d = tmp_d;
-// Check distance max :
-//printf("max_d = %f\n", ((t_poly_obj *)o->obj)->max_d);
-}
-
-bool			set_obj(t_rpoint pos, double size, char *path, t_obj *o)
+bool			validate_obj(t_rpoint pos, double size, char *path, t_obj *o)
 {
   t_poly_obj	*obj;
   t_vertex		*v_list;
