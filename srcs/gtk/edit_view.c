@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/03 17:06:41 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/03 17:48:02 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -584,8 +584,10 @@ void				handle_edit_validation(t_obj *o)
 
 void				handle_x_button(GtkWidget *w)
 {
-	if (w == ADD_VIEW.win)
+	if (g_global.r && w == ADD_VIEW.win)
 		draw_image();
+	if (w == g_global.base_view.win)
+		gtk_main_quit();
 	gtk_widget_destroy(w);
 	w = NULL;
 }

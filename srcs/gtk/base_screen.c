@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/03 16:55:24 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/03 17:47:27 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void				on_key_press(GtkWidget *w, GdkEventKey *event)
 {
 	if (event->keyval == GDK_KEY_Escape)
 		gtk_widget_destroy(w);
-	if (w == ADD_VIEW.win)
+	if (g_global.r && w == ADD_VIEW.win)
 		draw_image();
+	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
+		gtk_main_quit();
 }
 
 void				export_view(void)
@@ -317,7 +319,7 @@ void				handle_base_view(void)
 	g_global.base_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(g_global.base_view.win), GTK_WIN_POS_CENTER);
 	gtk_window_set_title(GTK_WINDOW(g_global.base_view.win), "raytracer");
-//	g_signal_connect(G_OBJECT(g_global.base_view.win), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+//	g_signal_connect(G_OBJECT(g_global.base_view.win), "destroy", G_CALLBACK(handle_base_exit), NULL);
 	g_global.base_view.grid = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(g_global.base_view.win), g_global.base_view.grid);
 	g_global.base_view.open_button = gtk_button_new();
@@ -326,7 +328,7 @@ void				handle_base_view(void)
 	g_global.base_view.exit_button = gtk_button_new_from_icon_name("application-exit", GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_label(GTK_BUTTON(g_global.base_view.exit_button), "Exit");
 	gtk_button_set_always_show_image(GTK_BUTTON(g_global.base_view.exit_button), true);
-//	g_signal_connect(G_OBJECT(g_global.base_view.exit_button), "clicked", G_CALLBACK(gtk_main_quit), NULL);
+	g_signal_connect(G_OBJECT(g_global.base_view.exit_button), "clicked", G_CALLBACK(gtk_main_quit), NULL);
 	gtk_grid_attach(GTK_GRID(g_global.base_view.grid), g_global.base_view.open_button, 0, 0, 2, 1);
 	gtk_grid_attach(GTK_GRID(g_global.base_view.grid), g_global.base_view.exit_button, 0, 1, 2, 1);
 	g_signal_connect(G_OBJECT(g_global.base_view.win), "key-press-event", G_CALLBACK(on_key_press), NULL);
@@ -344,6 +346,8 @@ static void			init_base_view(void)
 	g_global.base_view.exit_button = NULL;
 }
 
+void				init_add_view(void);
+
 void				handle_ui(void)
 {
 	handle_base_view();
@@ -352,6 +356,7 @@ void				handle_ui(void)
 void				init_gtk(int ac, char **av)
 {
 	init_base_view();
+	g_global.r = NULL;
 //	init_gtk_variables();
 	gtk_init(&ac, &av);
 	handle_ui();
