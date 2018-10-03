@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/01 18:10:27 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/03 16:44:57 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void				open_poly_obj(void)
 	gint					res;
 	char					*dir;
 
-	dialog = gtk_file_chooser_dialog_new ("Open File",
+	dialog = gtk_file_chooser_dialog_new("Open File",
 										  GTK_WINDOW(ADD_VIEW.win),
 										  action,
 										  "_Cancel",
@@ -216,7 +216,7 @@ void				add_tetra(void)
 	ADD_VIEW.sw.o->type = 67;
 }
 
-static void			radio_toggle(GtkWidget *button, gpointer __attribute__((unused))data)
+static void			radio_toggle(GtkWidget *button)
 {
 	if (button == ADD_VIEW.file_check)
 	{
@@ -582,6 +582,14 @@ void				handle_edit_validation(t_obj *o)
 	}
 }
 
+void				handle_x_button(GtkWidget *w)
+{
+	if (w == ADD_VIEW.win)
+		draw_image();
+	gtk_widget_destroy(w);
+	w = NULL;
+}
+
 void				edit_win(t_obj *o)
 {
 	GtkWidget		*content_area;
@@ -635,5 +643,7 @@ void				edit_win(t_obj *o)
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox), ADD_VIEW.obj_file_button);
 	actual_edit_view(o);
 	gtk_widget_show_all(ADD_VIEW.win);
+	g_signal_connect(G_OBJECT(ADD_VIEW.win), "key-press-event", G_CALLBACK(on_key_press), NULL);
+	g_signal_connect(G_OBJECT(ADD_VIEW.win), "delete-event", G_CALLBACK(handle_x_button), NULL);
 	handle_edit_validation(o);
 }

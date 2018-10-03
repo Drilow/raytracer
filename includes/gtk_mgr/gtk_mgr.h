@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/27 13:05:50 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/03 16:37:00 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,6 @@ void						edit_win(t_obj *o);
 void						filter_win(void);
 void						redraw(bool display);
 void						init_add_view(void);
+void						on_key_press(GtkWidget *w, GdkEventKey *event);
 
 #endif

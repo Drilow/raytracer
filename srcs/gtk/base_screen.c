@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/01 18:18:03 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/03 16:40:36 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <parser/parser.h>
 #define PIXMAP g_global.r->gtk_mgr.pixmap
 #define GTKMGR g_global.r->gtk_mgr
-
+#define ADD_VIEW g_global.r->gtk_mgr.ui.add_view
 
 extern t_global		g_global;
 
@@ -41,6 +41,8 @@ void				on_key_press(GtkWidget *w, GdkEventKey *event)
 {
 	if (event->keyval == GDK_KEY_Escape)
 		gtk_widget_destroy(w);
+	if (w == ADD_VIEW.win)
+		draw_image();
 }
 
 void				export_view(void)
