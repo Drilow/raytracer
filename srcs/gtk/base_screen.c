@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/03 16:40:36 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/03 16:55:24 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,6 +306,8 @@ void				handle_main_view(void)
 	handle_drawing();
 	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.win), "key-press-event", G_CALLBACK(on_key_press), NULL);
 	gtk_widget_show_all(GTKMGR.ui.main_view.win);
+	gtk_widget_destroy(g_global.base_view.win);
+	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.win), "destroy", G_CALLBACK(gtk_main_quit), NULL);
 }
 
 void				handle_base_view(void)
@@ -315,7 +317,7 @@ void				handle_base_view(void)
 	g_global.base_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(g_global.base_view.win), GTK_WIN_POS_CENTER);
 	gtk_window_set_title(GTK_WINDOW(g_global.base_view.win), "raytracer");
-	g_signal_connect(G_OBJECT(g_global.base_view.win), "destroy", G_CALLBACK(gtk_main_quit), NULL);
+//	g_signal_connect(G_OBJECT(g_global.base_view.win), "destroy", G_CALLBACK(gtk_main_quit), NULL);
 	g_global.base_view.grid = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(g_global.base_view.win), g_global.base_view.grid);
 	g_global.base_view.open_button = gtk_button_new();
@@ -324,10 +326,11 @@ void				handle_base_view(void)
 	g_global.base_view.exit_button = gtk_button_new_from_icon_name("application-exit", GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_label(GTK_BUTTON(g_global.base_view.exit_button), "Exit");
 	gtk_button_set_always_show_image(GTK_BUTTON(g_global.base_view.exit_button), true);
-	g_signal_connect(G_OBJECT(g_global.base_view.exit_button), "clicked", G_CALLBACK(gtk_main_quit), NULL);
+//	g_signal_connect(G_OBJECT(g_global.base_view.exit_button), "clicked", G_CALLBACK(gtk_main_quit), NULL);
 	gtk_grid_attach(GTK_GRID(g_global.base_view.grid), g_global.base_view.open_button, 0, 0, 2, 1);
 	gtk_grid_attach(GTK_GRID(g_global.base_view.grid), g_global.base_view.exit_button, 0, 1, 2, 1);
 	g_signal_connect(G_OBJECT(g_global.base_view.win), "key-press-event", G_CALLBACK(on_key_press), NULL);
+	g_signal_connect(G_OBJECT(g_global.base_view.win), "delete-event", G_CALLBACK(handle_x_button), NULL);
 /*	pbar = gtk_progress_bar_new();
 	gtk_grid_attach(GTK_GRID(g_global.base_view.grid), pbar, 0, 2, 2, 1);
 */	gtk_widget_show_all(g_global.base_view.win);
