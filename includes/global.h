@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/04 15:21:47 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/04 15:58:57 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,19 @@ void					edit_sphere_view(t_sphere *s);
 void					edit_plane_view(t_plane *p);
 void					edit_cone_view(t_cone *c);
 void					edit_cylinder_view(t_cylinder *c);
+void					handle_x_button(GtkWidget *w);
+void					switch_type(GtkButton *button);
+void					handle_edit_validation(t_obj *o);
+void					destroy_interface_for_type(int type);
+void					create_object(t_obj *o, int type);
+void					actual_edit_view(t_obj *o);
+void					set_default_values(t_obj *o);
+void					deactivate_buttons(GtkWidget *except);
+void					redraw(bool display);
+void					open_poly_obj(void);
+void					add_cube(void);
+void					add_tetra(void);
+void					radio_toggle(GtkWidget *button);
+void					edit_poly_view(void);
 
 #endif
