@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/04 15:06:56 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/04 17:36:42 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,6 @@ typedef struct				s_switcher
 	int						type;
 }							t_switcher;
 
-typedef struct				s_picker_view
-{
-	GtkWidget				*dialog;
-	GtkFileChooserAction	action;
-	GtkFileChooser			*chooser;
-}							t_picker_view;
-
-typedef struct				s_export_view
-{
-	GtkWidget				*dialog;
-	GtkFileChooserAction	*action;
-	GtkFileChooser			*chooser;
-}							t_export_view;
-
 typedef struct				s_filter_view
 {
 	GtkWidget				*win;
@@ -50,7 +36,6 @@ typedef struct				s_filter_view
 	GtkWidget				*bw_img;
 	GtkWidget				*sepia_button;
 	GtkWidget				*sepia_img;
-
 }							t_filter_view;
 
 typedef struct				s_add_view
@@ -127,8 +112,6 @@ typedef struct				s_ui
 	t_main_view				main_view;
 	t_add_view				add_view;
 	t_filter_view			filter_view;
-	t_export_view			export_view;
-	t_picker_view			picker_view;
 }							t_ui;
 
 typedef struct				s_gtk_mgr
@@ -150,5 +133,8 @@ void						handle_x_button(GtkWidget *w);
 void						validate_edit(t_obj *o);
 void						deactivate_buttons(GtkWidget *except);
 void						deactivate_buttons_from_tp(GtkWidget *except);
+void						handle_main_view(void);
+void						handle_main_view(void);
+void						add_view(void);
 
 #endif

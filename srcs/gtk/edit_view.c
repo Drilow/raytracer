@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/04 15:57:30 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/04 16:05:19 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 #define ADD_VIEW g_global.r->gtk_mgr.ui.add_view
 
 extern t_global		g_global;
-
-void				draw_image(void);
 
 void				actual_edit_view(t_obj *o)
 {
