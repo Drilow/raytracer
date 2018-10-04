@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/10/04 18:07:37 by adleau           ###   ########.fr        #
+#    Updated: 2018/10/04 18:19:54 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/edit_view.c			\
 		$(SRCPATH)gtk/export_view.c			\
 		$(SRCPATH)gtk/radio_button.c		\
+		$(SRCPATH)gtk/validate_objects.c	\
 		$(SRCPATH)gtk/poly_view.c			\
 		$(SRCPATH)gtk/gtk_handlers.c			\
 		$(SRCPATH)gtk/gtk_handlers2.c			\
