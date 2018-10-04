@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/01 18:13:27 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/04 15:21:47 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,13 @@ void					usage(char *s, int i);
 void					ft_exit(char *msg_error, int i);
 void					init_gtk(int ac, char **av);
 void					main_screen(GtkApplication *app, gpointer user_data);
+void					validate_sphere(t_sphere *s);
+void					validate_plane(t_plane *p);
+void					validate_cone(t_cone *c);
+void					validate_cylinder(t_cylinder *c);
+void					edit_sphere_view(t_sphere *s);
+void					edit_plane_view(t_plane *p);
+void					edit_cone_view(t_cone *c);
+void					edit_cylinder_view(t_cylinder *c);
 
 #endif

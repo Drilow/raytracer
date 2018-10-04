@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/03 17:47:27 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/04 15:40:06 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void				on_key_press(GtkWidget *w, GdkEventKey *event)
 {
 	if (event->keyval == GDK_KEY_Escape)
 		gtk_widget_destroy(w);
+	else if (event->keyval != GDK_KEY_Escape)
+		return ;
 	if (g_global.r && w == ADD_VIEW.win)
 		draw_image();
 	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
@@ -85,30 +87,41 @@ void				export_view(void)
 
 void			init_rt(void);
 
+void			dialog_keyhook(GtkWidget *w, GdkEventKey *event)
+{
+	if (event->keyval == GDK_KEY_Escape)
+		gtk_widget_destroy(w);
+	else
+		return ;
+}
+
 void			open_file(void)
 {
-	GtkFileChooserNative *native;
-	GtkFileChooserAction action = GTK_FILE_CHOOSER_ACTION_OPEN;
-	gint res;
-	char *dir;
+	GtkWidget				*dialog;
+	GtkFileChooserAction	action = GTK_FILE_CHOOSER_ACTION_OPEN;
+	gint					res;
+	char					*dir;
 
-	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
-		exit(1);
-	native = gtk_file_chooser_native_new ("Open File",
+	dialog = gtk_file_chooser_dialog_new("Open File",
 										  GTK_WINDOW(g_global.base_view.win),
 										  action,
+										  "_Cancel",
+										  GTK_RESPONSE_CANCEL,
 										  "_Open",
-										  "_Cancel");
-
-	res = gtk_native_dialog_run (GTK_NATIVE_DIALOG(native));
+										  GTK_RESPONSE_ACCEPT,
+										  NULL);
+	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
+		exit(1);
 	dir = getwd(dir);
-	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(native), ft_strjoin(dir, "/scenes"));
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), ft_strjoin(dir, "/scenes"));
 	init_rt();
 	init_gtk_variables();
+	g_signal_connect(G_OBJECT(dialog), "key-press-event", G_CALLBACK(dialog_keyhook), NULL);
+	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 	{
 		char *filename;
-		GtkFileChooser *chooser = GTK_FILE_CHOOSER(native);
+		GtkFileChooser *chooser = GTK_FILE_CHOOSER(dialog);
 		filename = gtk_file_chooser_get_filename(chooser);
 
 		if (!parse(filename))
@@ -117,7 +130,7 @@ void			open_file(void)
 		handle_main_view();
 	}
 	else
-		g_object_unref(native);
+		g_object_unref(dialog);
 }
 
 void				handle_drawing(void);
@@ -319,7 +332,6 @@ void				handle_base_view(void)
 	g_global.base_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(g_global.base_view.win), GTK_WIN_POS_CENTER);
 	gtk_window_set_title(GTK_WINDOW(g_global.base_view.win), "raytracer");
-//	g_signal_connect(G_OBJECT(g_global.base_view.win), "destroy", G_CALLBACK(handle_base_exit), NULL);
 	g_global.base_view.grid = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(g_global.base_view.win), g_global.base_view.grid);
 	g_global.base_view.open_button = gtk_button_new();
@@ -357,7 +369,6 @@ void				init_gtk(int ac, char **av)
 {
 	init_base_view();
 	g_global.r = NULL;
-//	init_gtk_variables();
 	gtk_init(&ac, &av);
 	handle_ui();
 	gtk_main();

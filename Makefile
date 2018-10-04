@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/10/03 17:50:27 by adleau           ###   ########.fr        #
+#    Updated: 2018/10/04 15:22:05 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/filter_view.c			\
 		$(SRCPATH)gtk/edit_view.c			\
 		$(SRCPATH)gtk/init_variables.c		\
+		$(SRCPATH)gtk/validation.c			\
+		$(SRCPATH)gtk/validate_base_obj.c	\
+		$(SRCPATH)gtk/edit_base_view.c	\
 		$(SRCPATH)maths/transformations.c	\
 		$(SRCPATH)maths/ft_solve_equation.c	\
 		$(SRCPATH)maths/ft_delta.c			\

@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/03 16:51:15 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/04 15:06:56 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,8 @@ void						redraw(bool display);
 void						init_add_view(void);
 void						on_key_press(GtkWidget *w, GdkEventKey *event);
 void						handle_x_button(GtkWidget *w);
+void						validate_edit(t_obj *o);
+void						deactivate_buttons(GtkWidget *except);
+void						deactivate_buttons_from_tp(GtkWidget *except);
 
 #endif
