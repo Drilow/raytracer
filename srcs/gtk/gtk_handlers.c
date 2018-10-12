@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:47:04 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/04 15:57:48 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/12 15:50:28 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,46 +21,11 @@
 
 extern t_global		g_global;
 
-void				handle_x_button(GtkWidget *w)
-{
-	if (g_global.r && w == ADD_VIEW.win)
-		draw_image();
-	if (w == g_global.base_view.win)
-		gtk_main_quit();
-	gtk_widget_destroy(w);
-	w = NULL;
-}
-
-void				switch_type(GtkButton *button)
-{
-	t_obj			*o;
-	int				type;
-
-	type = ADD_VIEW.sw.o->type;
-	o = ADD_VIEW.sw.o;
-	destroy_interface_for_type(o->type);
-	if (button == GTK_BUTTON(ADD_VIEW.sphere_button))
-		ADD_VIEW.sw.type = 1;
-	else if (button == GTK_BUTTON(ADD_VIEW.plane_button))
-		ADD_VIEW.sw.type = 2;
-	else if (button == GTK_BUTTON(ADD_VIEW.cone_button))
-		ADD_VIEW.sw.type = 3;
-	else if (button == GTK_BUTTON(ADD_VIEW.cylinder_button))
-		ADD_VIEW.sw.type = 4;
-	else if (button == GTK_BUTTON(ADD_VIEW.obj_file_button))
-		ADD_VIEW.sw.type = 6;
-	create_object(o, ADD_VIEW.sw.type);
-	if (o)
-		actual_edit_view(o);
-	gtk_widget_show_all(ADD_VIEW.win);
-}
-
 void				handle_edit_validation(t_obj *o)
 {
 	int		r;
 
 	r = gtk_dialog_run(GTK_DIALOG(ADD_VIEW.win));
-
 	if (r == GTK_RESPONSE_ACCEPT)
 	{
 		validate_edit(o);
@@ -71,6 +36,19 @@ void				handle_edit_validation(t_obj *o)
 		draw_image();
 		gtk_widget_destroy(ADD_VIEW.win);
 	}
+}
+
+void				destroy_ui_for_poly(void)
+{
+	gtk_widget_destroy(ADD_VIEW.scale_img);
+	gtk_widget_destroy(ADD_VIEW.scale_spin);
+	gtk_widget_destroy(ADD_VIEW.file_check);
+	gtk_widget_destroy(ADD_VIEW.same);
+	gtk_widget_destroy(ADD_VIEW.from_template);
+	gtk_widget_destroy(ADD_VIEW.cube);
+	gtk_widget_destroy(ADD_VIEW.cube_img);
+	gtk_widget_destroy(ADD_VIEW.tetra);
+	gtk_widget_destroy(ADD_VIEW.tetra_img);
 }
 
 void				destroy_interface_for_type(int type)
@@ -98,25 +76,11 @@ void				destroy_interface_for_type(int type)
 		gtk_widget_destroy(ADD_VIEW.inf_img);
 	}
 	if (type == 6 || type / 10 == 6)
-	{
-		gtk_widget_destroy(ADD_VIEW.scale_img);
-		gtk_widget_destroy(ADD_VIEW.scale_spin);
-		gtk_widget_destroy(ADD_VIEW.file_check);
-		gtk_widget_destroy(ADD_VIEW.same);
-		gtk_widget_destroy(ADD_VIEW.from_template);
-		gtk_widget_destroy(ADD_VIEW.cube);
-		gtk_widget_destroy(ADD_VIEW.cube_img);
-		gtk_widget_destroy(ADD_VIEW.tetra);
-		gtk_widget_destroy(ADD_VIEW.tetra_img);
-	}
+		destroy_ui_for_poly();
 }
 
-void				create_object(t_obj *o, int type)
+void				create_inner_obj_for_type(t_obj *tmp, int type)
 {
-	t_obj			*tmp;
-
-	if (!(tmp = (t_obj*)malloc(sizeof(t_obj))))
-		exit(1);
 	if (type == 1)
 	{
 		tmp->obj = (t_sphere*)malloc(sizeof(t_sphere));
@@ -142,6 +106,15 @@ void				create_object(t_obj *o, int type)
 		tmp->obj = (t_poly_obj*)malloc(sizeof(t_poly_obj));
 		tmp->type = 6;
 	}
+}
+
+void				create_object(t_obj *o, int type)
+{
+	t_obj			*tmp;
+
+	if (!(tmp = (t_obj*)malloc(sizeof(t_obj))))
+		exit(1);
+	create_inner_obj_for_type(tmp, type);
 	set_default_values(tmp);
 	free(o->obj);
 	o->type = tmp->type;

@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:04:16 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/04 15:05:58 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/12 15:27:47 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void				validate_plane(t_plane *p)
 	p->vector.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.vector_z));
 }
 
-
 void				validate_cone(t_cone *c)
 {
 	c->vector.x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.vector_x));
 	c->vector.y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.vector_y));
 	c->vector.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.vector_z));
-	c->angle = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.angle_spin)) / 360;
+	c->angle = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.angle_spin))
+	/ 360;
 	c->infinite = gtk_switch_get_active(GTK_SWITCH(ADD_VIEW.infinite));
 }
 

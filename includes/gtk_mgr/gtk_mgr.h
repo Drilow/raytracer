@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/04 18:19:01 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/12 15:37:07 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ void						validate_edit(t_obj *o);
 void						deactivate_buttons(GtkWidget *except);
 void						deactivate_buttons_from_tp(GtkWidget *except);
 void						handle_main_view(void);
-void						handle_main_view(void);
+void						handle_main_view_2(void);
+void						handle_main_view_3(void);
 void						add_view(void);
 void						validate_objects(t_obj *o);
 

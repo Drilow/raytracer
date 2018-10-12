@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/04 15:56:49 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/12 15:49:39 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@
 
 extern t_global		g_global;
 
+void				set_for_cone(t_obj *o)
+{
+	((t_cone*)o->obj)->vector.x = 1;
+	((t_cone*)o->obj)->vector.y = 1;
+	((t_cone*)o->obj)->vector.z = 1;
+	((t_cone*)o->obj)->angle = (double)60 / 360;
+	((t_cone*)o->obj)->infinite = true;
+}
+
 void				set_default_values(t_obj *o)
 {
 	if (o->type == 1)
@@ -32,13 +41,7 @@ void				set_default_values(t_obj *o)
 		((t_plane*)o->obj)->vector.z = 1;
 	}
 	else if (o->type == 3)
-	{
-		((t_cone*)o->obj)->vector.x = 1;
-		((t_cone*)o->obj)->vector.y = 1;
-		((t_cone*)o->obj)->vector.z = 1;
-		((t_cone*)o->obj)->angle = (double)60 / 360;
-		((t_cone*)o->obj)->infinite = true;
-	}
+		set_for_cone(o);
 	else if (o->type == 4)
 	{
 		((t_cylinder*)o->obj)->vector.x = 1;
@@ -54,16 +57,20 @@ void				set_default_values(t_obj *o)
 void				deactivate_buttons(GtkWidget *except)
 {
 	if (&(ADD_VIEW.sphere_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.sphere_button, GTK_STATE_FLAG_NORMAL, true);
+		gtk_widget_set_state_flags(ADD_VIEW.sphere_button,
+		GTK_STATE_FLAG_NORMAL, true);
 	if (&(ADD_VIEW.plane_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.plane_button, GTK_STATE_FLAG_NORMAL, true);
+		gtk_widget_set_state_flags(ADD_VIEW.plane_button,
+		GTK_STATE_FLAG_NORMAL, true);
 	if (&(ADD_VIEW.cone_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.cone_button, GTK_STATE_FLAG_NORMAL, true);
+		gtk_widget_set_state_flags(ADD_VIEW.cone_button,
+		GTK_STATE_FLAG_NORMAL, true);
 	if (&(ADD_VIEW.cylinder_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.cylinder_button, GTK_STATE_FLAG_NORMAL, true);
+		gtk_widget_set_state_flags(ADD_VIEW.cylinder_button,
+		GTK_STATE_FLAG_NORMAL, true);
 	if (&(ADD_VIEW.obj_file_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.obj_file_button, GTK_STATE_FLAG_NORMAL, true);
-
+		gtk_widget_set_state_flags(ADD_VIEW.obj_file_button,
+		GTK_STATE_FLAG_NORMAL, true);
 }
 
 void				redraw(bool display)
@@ -73,10 +80,13 @@ void				redraw(bool display)
 	{
 		if (PIXMAP)
 			cairo_surface_destroy(PIXMAP);
-		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf,
+		CAIRO_FORMAT_RGB24,
+		WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 		if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
 			exit(1);
 		cairo_surface_mark_dirty(PIXMAP);
-		gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area), PIXMAP);
+		gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
+		PIXMAP);
 	}
 }
