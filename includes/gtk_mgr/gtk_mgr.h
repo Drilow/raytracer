@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 15:37:07 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/12 17:02:58 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,11 @@ void						handle_main_view_2(void);
 void						handle_main_view_3(void);
 void						add_view(void);
 void						validate_objects(t_obj *o);
+void						black_white(unsigned char *ptr);
+void						sepia(unsigned char *ptr);
+void						get_color_values(t_rgb col, GdkRGBA *c);
+void						init_rt(void);
+void						open_file(void);
+
 
 #endif

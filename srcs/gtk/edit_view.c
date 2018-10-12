@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 16:04:57 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/12 16:34:16 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@
 #define ADD_VIEW g_global.r->gtk_mgr.ui.add_view
 
 extern t_global		g_global;
-
-void				get_color_values(t_rgb col, GdkRGBA *c)
-{
-	c->red = (gdouble)(col.r) / 255;
-	c->green = (gdouble)(col.g) / 255;
-	c->blue = (gdouble)(col.b) / 255;
-	c->alpha = 1;
-}
 
 void				handle_base_elems_edit(t_obj *o)
 {

@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/10/12 15:50:41 by adleau           ###   ########.fr        #
+#    Updated: 2018/10/12 17:02:27 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,14 @@ SRCPATH = srcs/
 
 SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/base_screen.c			\
+		$(SRCPATH)gtk/base_screen2.c		\
+		$(SRCPATH)gtk/base_screen3.c		\
 		$(SRCPATH)gtk/main_screen.c			\
 		$(SRCPATH)gtk/main_screen2.c		\
 		$(SRCPATH)gtk/main_screen3.c		\
+		$(SRCPATH)gtk/edit_sphere.c			\
 		$(SRCPATH)gtk/filter_view.c			\
+		$(SRCPATH)gtk/filter_functions.c	\
 		$(SRCPATH)gtk/edit_view.c			\
 		$(SRCPATH)gtk/export_view.c			\
 		$(SRCPATH)gtk/radio_button.c		\

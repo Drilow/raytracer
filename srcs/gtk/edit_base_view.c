@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:17:37 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/04 15:20:25 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/12 16:23:10 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,13 @@
 
 extern t_global		g_global;
 
-void				edit_sphere_view(t_sphere *s)
-{
-	GtkAdjustment	*adj_scale;
-
-	deactivate_buttons(ADD_VIEW.sphere_button);
-	gtk_widget_set_state_flags(ADD_VIEW.sphere_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
-	ADD_VIEW.scale_img = gtk_image_new_from_file("uiconfig/ruler.png");
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.scale_img, 0, 1, 1, 1);
-	adj_scale = gtk_adjustment_new(s->radius, 0, 1000, .5, 1, 10);
-	ADD_VIEW.scale_spin = gtk_spin_button_new(adj_scale, 1, 4);
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.scale_spin, 1, 1, 3, 1);
-}
-
 void				edit_plane_view(t_plane *p)
 {
 	GtkAdjustment	*adj;
 
 	deactivate_buttons(ADD_VIEW.plane_button);
-	gtk_widget_set_state_flags(ADD_VIEW.plane_button, GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
+	gtk_widget_set_state_flags(ADD_VIEW.plane_button,
+	GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
 	ADD_VIEW.vector_img = gtk_image_new_from_file("uiconfig/vector.png");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.vector_img, 0, 1, 1, 1);
 	adj = gtk_adjustment_new(p->vector.x, -1000, 1000, .5, 1, 10);
@@ -52,13 +40,22 @@ void				edit_plane_view(t_plane *p)
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.vector_z, 3, 1, 1, 1);
 }
 
+void				end_cone_view(t_cone *c)
+{
+	GtkAdjustment	*adj_angle;
+
+	adj_angle = gtk_adjustment_new(c->angle * 360, 0, 360, 1, 1, 10);
+	ADD_VIEW.angle_spin = gtk_spin_button_new(adj_angle, 1, 4);
+	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.angle_spin, 1, 6, 1, 1);
+}
+
 void				edit_cone_view(t_cone *c)
 {
 	GtkAdjustment	*adj;
-	GtkAdjustment	*adj_angle;
 
 	deactivate_buttons(ADD_VIEW.cone_button);
-	gtk_widget_set_state_flags(ADD_VIEW.cone_button,GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
+	gtk_widget_set_state_flags(ADD_VIEW.cone_button,
+	GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
 	ADD_VIEW.vector_img = gtk_image_new_from_file("uiconfig/vector.png");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.vector_img, 0, 4, 1, 1);
 	adj = gtk_adjustment_new(c->vector.x, -1000, 1000, .5, 1, 10);
@@ -77,9 +74,14 @@ void				edit_cone_view(t_cone *c)
 	gtk_switch_set_state(GTK_SWITCH(ADD_VIEW.infinite), c->infinite);
 	ADD_VIEW.angle_img = gtk_image_new_from_file("uiconfig/angle.png");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.angle_img, 0, 6, 1, 1);
-	adj_angle = gtk_adjustment_new(c->angle * 360, 0, 360, 1, 1, 10);
-	ADD_VIEW.angle_spin = gtk_spin_button_new(adj_angle, 1, 4);
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.angle_spin, 1, 6, 1, 1);
+	end_cone_view(c);
+}
+
+void				handle_switch(t_cylinder *c)
+{
+	ADD_VIEW.infinite = gtk_switch_new();
+	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.infinite, 1, 5, 1, 1);
+	gtk_switch_set_state(GTK_SWITCH(ADD_VIEW.infinite), c->infinite);
 }
 
 void				edit_cylinder_view(t_cylinder *c)
@@ -88,7 +90,8 @@ void				edit_cylinder_view(t_cylinder *c)
 	GtkAdjustment	*adj;
 
 	deactivate_buttons(ADD_VIEW.cylinder_button);
-	gtk_widget_set_state_flags(ADD_VIEW.cylinder_button,GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
+	gtk_widget_set_state_flags(ADD_VIEW.cylinder_button,
+	GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
 	ADD_VIEW.scale_img = gtk_image_new_from_file("uiconfig/ruler.png");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.scale_img, 0, 1, 1, 1);
 	adj_scale = gtk_adjustment_new(c->radius, 0, 1000, .5, 1, 10);
@@ -107,7 +110,5 @@ void				edit_cylinder_view(t_cylinder *c)
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.vector_z, 3, 4, 1, 1);
 	ADD_VIEW.inf_img = gtk_image_new_from_file("uiconfig/infinite.png");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.inf_img, 0, 5, 1, 1);
-	ADD_VIEW.infinite = gtk_switch_new();
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.infinite, 1, 5, 1, 1);
-	gtk_switch_set_state(GTK_SWITCH(ADD_VIEW.infinite), c->infinite);
+	handle_switch(c);
 }

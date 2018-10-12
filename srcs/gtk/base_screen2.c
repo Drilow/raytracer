@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_view.c                                      :+:      :+:    :+:   */
+/*   base_screen2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/04 17:37:49 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 16:51:52 by adleau           ###   ########.fr       */
+/*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
+/*   Updated: 2018/10/12 17:02:49 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,54 +21,62 @@
 
 extern t_global		g_global;
 
-int					check_png(char *s)
+void			on_key_press(GtkWidget *w, GdkEventKey *event)
 {
-	int				i;
-
-	i = -1;
-	while (s[++i])
-		;
-	i -= 4;
-	if (ft_strcmp(s + i, ".png"))
-		return (0);
-	return (1);
+	if (event->keyval == GDK_KEY_Escape)
+		gtk_widget_destroy(w);
+	else if (event->keyval != GDK_KEY_Escape)
+		return ;
+	if (g_global.r && w == ADD_VIEW.win)
+		draw_image();
+	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
+		gtk_main_quit();
 }
 
-void				end_export(GtkWidget *dialog)
+void			dialog_keyhook(GtkWidget *w, GdkEventKey *event)
 {
-	char			*filename;
-	GtkFileChooser	*chooser;
+	if (event->keyval == GDK_KEY_Escape)
+		gtk_widget_destroy(w);
+	else
+		return ;
+}
+
+void			end_open(GtkWidget *dialog)
+{
+	char					*filename;
+	GtkFileChooser			*chooser;
 
 	chooser = GTK_FILE_CHOOSER(dialog);
 	filename = gtk_file_chooser_get_filename(chooser);
-	if (!check_png(filename))
-		cairo_surface_write_to_png(PIXMAP, ft_strjoin(filename, ".png"));
-	else
-		cairo_surface_write_to_png(PIXMAP, filename);
+	if (!parse(filename))
+		usage("Error : invalid argument.", 1);
 	g_free(filename);
+	handle_main_view();
 }
 
-void				export_view(void)
+void			open_file(void)
 {
 	GtkWidget				*dialog;
 	GtkFileChooserAction	action;
 	gint					res;
 	char					*dir;
 
-	action = GTK_FILE_CHOOSER_ACTION_SAVE;
-	dialog = gtk_file_chooser_dialog_new("Export",
-	GTK_WINDOW(GTKMGR.ui.main_view.win),
-	action, "_Cancel", GTK_RESPONSE_CANCEL, "_Export",
-	GTK_RESPONSE_ACCEPT, NULL);
+	action = GTK_FILE_CHOOSER_ACTION_OPEN;
+	dialog = gtk_file_chooser_dialog_new("Open File",
+	GTK_WINDOW(g_global.base_view.win), action, "_Cancel",
+	GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
 		exit(1);
 	dir = getwd(dir);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
-	ft_strjoin(dir, "/screens"));
-	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
+	ft_strjoin(dir, "/scenes"));
+	init_rt();
+	init_gtk_variables();
+	g_signal_connect(G_OBJECT(dialog), "key-press-event",
+	G_CALLBACK(dialog_keyhook), NULL);
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
-		end_export(dialog);
+		end_open(dialog);
 	else
-		gtk_widget_destroy(dialog);
+		g_object_unref(dialog);
 }
