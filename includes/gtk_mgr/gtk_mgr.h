@@ -1,13 +1,12 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   gtk_mgr.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 14:37:49 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/15 17:00:23 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +148,7 @@ void						get_color_values(t_rgb col, GdkRGBA *c);
 void						init_rt(void);
 void						open_file(void);
 void						dialog_keyhook(GtkWidget *w, GdkEventKey *event);
-<<<<<<< HEAD
 void						init_scene_view(void);
 void						scene_win(void);
-=======
->>>>>>> d491c636d76758c3fb07f18253fceb4127faf412
 
 #endif
