@@ -15,12 +15,7 @@
 # define GTK_MGR_H
 # include <gtk/gtk.h>
 # include <stdbool.h>
-
-struct s_obj;
-struct s_rgb;
-
-typedef struct s_rgb		t_rgb;
-typedef struct s_obj		t_obj;
+# include <objects/object.h>
 
 typedef struct				s_switcher
 {
@@ -154,7 +149,10 @@ void						get_color_values(t_rgb col, GdkRGBA *c);
 void						init_rt(void);
 void						open_file(void);
 void						dialog_keyhook(GtkWidget *w, GdkEventKey *event);
+<<<<<<< HEAD
 void						init_scene_view(void);
 void						scene_win(void);
+=======
+>>>>>>> d491c636d76758c3fb07f18253fceb4127faf412
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 16:34:16 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/15 14:37:35 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void				edit_win_3(t_obj *o)
 	gtk_widget_show_all(ADD_VIEW.win);
 	g_signal_connect(G_OBJECT(ADD_VIEW.win), "delete-event",
 	G_CALLBACK(handle_x_button), NULL);
+	g_signal_connect(G_OBJECT(ADD_VIEW.win), "key-press-event",
+	G_CALLBACK(dialog_keyhook), NULL);
 	handle_edit_validation(o);
 }
 

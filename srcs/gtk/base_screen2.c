@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 17:02:49 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/15 14:40:43 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ void			on_key_press(GtkWidget *w, GdkEventKey *event)
 void			dialog_keyhook(GtkWidget *w, GdkEventKey *event)
 {
 	if (event->keyval == GDK_KEY_Escape)
+	{
+		if (w == ADD_VIEW.win)
+			redraw(false);
 		gtk_widget_destroy(w);
+	}
 	else
 		return ;
 }
@@ -69,9 +73,11 @@ void			open_file(void)
 		exit(1);
 	dir = getwd(dir);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
-	ft_strjoin(dir, "/scenes"));
+	(dir = ft_strjoin(dir, "/scenes")));
 	init_rt();
 	init_gtk_variables();
+	free(dir);
+	dir = NULL;
 	g_signal_connect(G_OBJECT(dialog), "key-press-event",
 	G_CALLBACK(dialog_keyhook), NULL);
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
