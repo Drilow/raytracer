@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtk_mgr.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/03 16:51:15 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/15 17:00:23 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,13 @@
 # define GTK_MGR_H
 # include <gtk/gtk.h>
 # include <stdbool.h>
-
-struct s_obj;
-struct s_rgb;
-
-typedef struct s_rgb		t_rgb;
-typedef struct s_obj		t_obj;
+# include <objects/object.h>
 
 typedef struct				s_switcher
 {
 	t_obj					*o;
 	int						type;
 }							t_switcher;
-
-typedef struct				s_picker_view
-{
-	GtkWidget				*dialog;
-	GtkFileChooserAction	action;
-	GtkFileChooser			*chooser;
-}							t_picker_view;
-
-typedef struct				s_export_view
-{
-	GtkWidget				*dialog;
-	GtkFileChooserAction	*action;
-	GtkFileChooser			*chooser;
-}							t_export_view;
 
 typedef struct				s_filter_view
 {
@@ -50,8 +31,14 @@ typedef struct				s_filter_view
 	GtkWidget				*bw_img;
 	GtkWidget				*sepia_button;
 	GtkWidget				*sepia_img;
-
 }							t_filter_view;
+
+typedef struct 				s_scene_view
+{
+    GtkWidget				*win;
+    GtkWidget 				*tree;
+    GtkWidget				*button;
+}							t_scene_view;
 
 typedef struct				s_add_view
 {
@@ -109,6 +96,7 @@ typedef struct				s_main_view
 	GtkWidget				*win;
 	GtkWidget				*grid;
 	GtkWidget				*buttonbox;
+	GtkWidget				*list_button;
 	GtkWidget				*add_button;
 	GtkWidget				*add_img;
 	GtkWidget				*filters_button;
@@ -127,8 +115,7 @@ typedef struct				s_ui
 	t_main_view				main_view;
 	t_add_view				add_view;
 	t_filter_view			filter_view;
-	t_export_view			export_view;
-	t_picker_view			picker_view;
+	t_scene_view			scene_view;
 }							t_ui;
 
 typedef struct				s_gtk_mgr
@@ -147,5 +134,21 @@ void						redraw(bool display);
 void						init_add_view(void);
 void						on_key_press(GtkWidget *w, GdkEventKey *event);
 void						handle_x_button(GtkWidget *w);
+void						validate_edit(t_obj *o);
+void						deactivate_buttons(GtkWidget *except);
+void						deactivate_buttons_from_tp(GtkWidget *except);
+void						handle_main_view(void);
+void						handle_main_view_2(void);
+void						handle_main_view_3(void);
+void						add_view(void);
+void						validate_objects(t_obj *o);
+void						black_white(unsigned char *ptr);
+void						sepia(unsigned char *ptr);
+void						get_color_values(t_rgb col, GdkRGBA *c);
+void						init_rt(void);
+void						open_file(void);
+void						dialog_keyhook(GtkWidget *w, GdkEventKey *event);
+void						init_scene_view(void);
+void						scene_win(void);
 
 #endif

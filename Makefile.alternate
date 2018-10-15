@@ -22,6 +22,7 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/base_screen.c			\
 		$(SRCPATH)gtk/main_screen.c			\
 		$(SRCPATH)gtk/edit_view.c			\
+		$(SRCPATH)gtk/export_view.c			\
 		$(SRCPATH)gtk/init_variables.c		\
 		$(SRCPATH)maths/transformations.c	\
 		$(SRCPATH)maths/ft_solve_equation.c	\

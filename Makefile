@@ -6,7 +6,11 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2018/10/15 13:44:16 by mabessir         ###   ########.fr        #
+=======
+#    Updated: 2018/10/15 13:48:59 by Dagnear          ###   ########.fr        #
+>>>>>>> 73c0a4097c07ef59e5453a6b8a62805051265733
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +32,28 @@ LDFLAGS = 	-framework IOKit -framework CoreVideo $(shell pkg-config --libs gtk+-
 SRCPATH = srcs/
 
 SRC =   $(SRCPATH)main.c \
+		$(SRCPATH)gtk/scene_view.c			\
 		$(SRCPATH)gtk/base_screen.c			\
+		$(SRCPATH)gtk/base_screen2.c		\
+		$(SRCPATH)gtk/base_screen3.c		\
 		$(SRCPATH)gtk/main_screen.c			\
+		$(SRCPATH)gtk/main_screen2.c		\
+		$(SRCPATH)gtk/main_screen3.c		\
+		$(SRCPATH)gtk/edit_sphere.c			\
 		$(SRCPATH)gtk/filter_view.c			\
+		$(SRCPATH)gtk/filter_functions.c	\
 		$(SRCPATH)gtk/edit_view.c			\
+		$(SRCPATH)gtk/export_view.c			\
+		$(SRCPATH)gtk/radio_button.c		\
+		$(SRCPATH)gtk/validate_objects.c	\
+		$(SRCPATH)gtk/poly_view.c			\
+		$(SRCPATH)gtk/gtk_handlers.c			\
+		$(SRCPATH)gtk/gtk_handlers2.c			\
+		$(SRCPATH)gtk/outline_obj.c			\
 		$(SRCPATH)gtk/init_variables.c		\
+		$(SRCPATH)gtk/validation.c			\
+		$(SRCPATH)gtk/validate_base_obj.c	\
+		$(SRCPATH)gtk/edit_base_view.c	\
 		$(SRCPATH)maths/transformations.c	\
 		$(SRCPATH)maths/ft_solve_equation.c	\
 		$(SRCPATH)maths/ft_delta.c			\

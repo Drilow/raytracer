@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/01 18:13:27 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/04 18:08:51 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,30 @@ typedef struct			s_global
 void					usage(char *s, int i);
 void					ft_exit(char *msg_error, int i);
 void					init_gtk(int ac, char **av);
-void					main_screen(GtkApplication *app, gpointer user_data);
+void					validate_sphere(t_sphere *s);
+void					validate_plane(t_plane *p);
+void					validate_cone(t_cone *c);
+void					validate_cylinder(t_cylinder *c);
+void					edit_sphere_view(t_sphere *s);
+void					edit_plane_view(t_plane *p);
+void					edit_cone_view(t_cone *c);
+void					edit_cylinder_view(t_cylinder *c);
+void					handle_x_button(GtkWidget *w);
+void					switch_type(GtkButton *button);
+void					handle_edit_validation(t_obj *o);
+void					destroy_interface_for_type(int type);
+void					create_object(t_obj *o, int type);
+void					actual_edit_view(t_obj *o);
+void					set_default_values(t_obj *o);
+void					deactivate_buttons(GtkWidget *except);
+void					redraw(bool display);
+void					open_poly_obj(void);
+void					add_cube(void);
+void					add_tetra(void);
+void					edit_poly_view(void);
+void					outline_obj(t_obj *o);
+void					export_view(void);
+void					handle_drawing(void);
+void					handle_radio_buttons(void);
 
 #endif
