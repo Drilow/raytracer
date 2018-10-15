@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_check_bool.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/31 14:41:42 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 11:54:41 by mabessir         ###   ########.fr       */
+/*   Created: 2018/06/28 12:34:09 by mabessir          #+#    #+#             */
+/*   Updated: 2018/10/15 16:48:30 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isdigit(int c)
+int		check_bool(t_json_file *file)
 {
-	if (c >= 48 && c <= 57)
+	const char *str;
+
+	str = file->str + file->pos;
+	if (!ft_strncmp(str, "true", 4))
 		return (1);
+	else if (!ft_strncmp(str, "false", 5))
+		return (2);
 	return (0);
 }

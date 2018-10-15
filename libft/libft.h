@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aleau <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 18:38:51 by aleau             #+#    #+#             */
-/*   Updated: 2017/12/22 00:36:51 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/15 11:54:09 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# include "../Libjson/includes/json.h"
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -93,5 +94,17 @@ t_uint			ft_isspace(char c);
 t_uint			ft_is_base(char c, char *base);
 int				ft_atoi_base(const char *str, int str_base);
 int				ft_abs(int n);
+double			ft_atof(const char *str);
+int				check_bool(t_json_file *file);
+int				check_null(t_json_file *file);
+void			*ft_free(void *ptr);
+char			*ft_readfile(int fd, char *path);
+int				ft_is_double(t_json_file *file);
+void			pass_spaces(t_json_file *file);
+void			pass_items(t_json_file *f);
+double			ft_powe(double nb);
+char			*ft_strjoini(char const *s1, char const *s2,
+				size_t i, size_t j);
+char			*ft_strmerge(char *src, char *dest, size_t i, size_t j);
 
 #endif

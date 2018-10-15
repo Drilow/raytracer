@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_check_null.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/31 14:41:42 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 11:54:41 by mabessir         ###   ########.fr       */
+/*   Created: 2018/05/10 15:53:45 by mabessir          #+#    #+#             */
+/*   Updated: 2018/10/15 11:44:51 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isdigit(int c)
+int		check_null(t_json_file *file)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
+	if (file->pos + 3 < file->len)
+	{
+		if ((file->str[file->pos] == 'n' || file->str[file->pos] == 'N') &&
+		(file->str[file->pos + 1] == 'u' || file->str[file->pos + 1] == 'U') &&
+		(file->str[file->pos + 2] == 'l' || file->str[file->pos + 2] == 'L') &&
+		(file->str[file->pos + 3] == 'l' || file->str[file->pos + 3] == 'L'))
+			return (1);
+	}
 	return (0);
 }

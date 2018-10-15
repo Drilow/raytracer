@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/31 14:41:42 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 11:54:41 by mabessir         ###   ########.fr       */
+/*   Created: 2018/06/28 10:38:44 by mabessir          #+#    #+#             */
+/*   Updated: 2018/10/15 11:45:49 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isdigit(int c)
+void	*ft_free(void *ptr)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
+	free(ptr);
+	ptr = NULL;
+	return (NULL);
 }

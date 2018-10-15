@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_powe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/31 14:41:42 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 11:54:41 by mabessir         ###   ########.fr       */
+/*   Created: 2018/09/20 11:23:55 by mabessir          #+#    #+#             */
+/*   Updated: 2018/10/15 11:50:07 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isdigit(int c)
+double	ft_powe(double nb)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
+	double	ret;
+	double	save;
+
+	ret = nb;
+	save = nb;
+	while (nb > 0 && nb--)
+		ret *= 10;
+	while (nb < 0 && nb++)
+		ret /= 10;
+	return (ret / save);
 }

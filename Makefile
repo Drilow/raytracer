@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
+#    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/10/03 17:50:27 by adleau           ###   ########.fr        #
+#    Updated: 2018/10/15 13:44:16 by mabessir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
 		make -C libft/
+		make -C Libjson/
 		@echo "$(VERT)~> [ libft library made. ]$(NCOL)"
 		$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -Iincludes/ $(LDFLAGS) -Ilibft/ -Llibft/ -lft $(LIB)
 		@echo "$(VERT)~> [ binary file '$(NAME)' made. ]$(NCOL)"
@@ -86,6 +87,7 @@ clean:
 		rm -rf $(OBJ)
 		@echo "$(JAUN)~> [ .o files erased. ]$(NCOL)"
 		make clean -C libft/
+		make clean -C Libjson/
 
 fclean: clean
 		rm -f $(NAME)

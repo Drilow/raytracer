@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_strmerge.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/08/31 14:41:42 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 11:54:41 by mabessir         ###   ########.fr       */
+/*   Created: 2018/10/04 10:57:01 by mabessir          #+#    #+#             */
+/*   Updated: 2018/10/15 11:48:58 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isdigit(int c)
+char	*ft_strmerge(char *src, char *dest, size_t i, size_t j)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
+	char	*ret;
+
+	ret = ft_strjoini(dest, src, j, i);
+	ft_strdel(&dest);
+	return (ret);
 }
