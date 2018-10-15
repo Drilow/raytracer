@@ -1,12 +1,13 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   gtk_mgr.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 13:48:15 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/10/15 14:37:49 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +15,18 @@
 # define GTK_MGR_H
 # include <gtk/gtk.h>
 # include <stdbool.h>
-# include <objects/object.h>
+
+struct s_obj;
+struct s_rgb;
+
+typedef struct s_rgb		t_rgb;
+typedef struct s_obj		t_obj;
 
 typedef struct				s_switcher
 {
 	t_obj					*o;
 	int						type;
 }							t_switcher;
-
-typedef struct 				s_scene_view
-{
-    GtkWidget				*win;
-    GtkWidget 				*tree;
-    GtkWidget				*button;
-}							t_scene_view;
 
 typedef struct				s_filter_view
 {
@@ -39,6 +38,13 @@ typedef struct				s_filter_view
 	GtkWidget				*sepia_button;
 	GtkWidget				*sepia_img;
 }							t_filter_view;
+
+typedef struct 				s_scene_view
+{
+    GtkWidget				*win;
+    GtkWidget 				*tree;
+    GtkWidget				*button;
+}							t_scene_view;
 
 typedef struct				s_add_view
 {
@@ -147,8 +153,8 @@ void						sepia(unsigned char *ptr);
 void						get_color_values(t_rgb col, GdkRGBA *c);
 void						init_rt(void);
 void						open_file(void);
+void						dialog_keyhook(GtkWidget *w, GdkEventKey *event);
 void						init_scene_view(void);
 void						scene_win(void);
-
 
 #endif

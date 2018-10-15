@@ -113,6 +113,26 @@ void 				append_column_with_text(GtkWidget *tree, char *text, GtkCellRenderer *r
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
 }
 
+/*static void checked_row(GtkCellRendererToggle *cell,
+               gchar *path_str,
+               gpointer data)
+{
+        // get the treemodel from somewhere
+        GtkTreeIter  iter;
+        GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
+        gboolean enabled;
+
+        gtk_tree_model_get_iter (GTK_TREE_MODEL(SCENE_VIEW.tree), &iter, path);
+        gtk_tree_model_get (GTK_TREE_MODEL(SCENE_VIEW.tree), &iter, CHECKED_COLUMN, &enabled, -1);
+        enabled ^= 1;
+
+  // do something with the new enabled value, and set the new
+  // enabled value in your treemodel
+        printf("jambon");
+
+        gtk_tree_path_free (path);
+}*/
+
 void				scene_win(void)
 {
 	GtkTreeStore *store;
@@ -157,6 +177,8 @@ void				scene_win(void)
                  NULL);
    append_column_with_text(SCENE_VIEW.tree, "Size", renderer, SIZE_COLUMN);
    renderer = gtk_cell_renderer_toggle_new ();
+   //g_signal_connect (G_OBJECT(renderer), "toggled", G_CALLBACK
+    //                                                  (checked_row), NULL);
    column = gtk_tree_view_column_new_with_attributes ("Checked out",
                                                       renderer,
                                                       "active", CHECKED_COLUMN,
