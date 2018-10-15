@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtk_mgr.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 17:02:58 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/15 13:48:15 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 # define GTK_MGR_H
 # include <gtk/gtk.h>
 # include <stdbool.h>
-
-struct s_obj;
-struct s_rgb;
-
-typedef struct s_rgb		t_rgb;
-typedef struct s_obj		t_obj;
+# include <objects/object.h>
 
 typedef struct				s_switcher
 {
 	t_obj					*o;
 	int						type;
 }							t_switcher;
+
+typedef struct 				s_scene_view
+{
+    GtkWidget				*win;
+    GtkWidget 				*tree;
+    GtkWidget				*button;
+}							t_scene_view;
 
 typedef struct				s_filter_view
 {
@@ -94,6 +96,7 @@ typedef struct				s_main_view
 	GtkWidget				*win;
 	GtkWidget				*grid;
 	GtkWidget				*buttonbox;
+	GtkWidget				*list_button;
 	GtkWidget				*add_button;
 	GtkWidget				*add_img;
 	GtkWidget				*filters_button;
@@ -112,6 +115,7 @@ typedef struct				s_ui
 	t_main_view				main_view;
 	t_add_view				add_view;
 	t_filter_view			filter_view;
+	t_scene_view			scene_view;
 }							t_ui;
 
 typedef struct				s_gtk_mgr
@@ -143,6 +147,8 @@ void						sepia(unsigned char *ptr);
 void						get_color_values(t_rgb col, GdkRGBA *c);
 void						init_rt(void);
 void						open_file(void);
+void						init_scene_view(void);
+void						scene_win(void);
 
 
 #endif
