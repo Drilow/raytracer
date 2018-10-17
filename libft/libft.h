@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/12 18:38:51 by aleau             #+#    #+#             */
-/*   Updated: 2018/10/15 11:54:09 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/16 13:10:01 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,7 @@ double			ft_powe(double nb);
 char			*ft_strjoini(char const *s1, char const *s2,
 				size_t i, size_t j);
 char			*ft_strmerge(char *src, char *dest, size_t i, size_t j);
+void			*ft_exit_object(t_json_value *val, t_json_object *obj);
+void			*ft_exit_array(t_json_value *val, t_json_array *arr);
 
 #endif

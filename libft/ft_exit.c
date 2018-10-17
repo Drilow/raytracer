@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   json_init.c                                        :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/07 13:58:11 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/17 13:35:12 by mabessir         ###   ########.fr       */
+/*   Created: 2018/10/16 10:50:58 by mabessir          #+#    #+#             */
+/*   Updated: 2018/10/16 13:09:55 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "includes/json.h"
+#include "libft.h"
 
-t_json_value	*json_init(char *str)
+void	*ft_exit_object(t_json_value *val, t_json_object *obj)
 {
-	t_json_value	*root;
-	t_json_file		file;
+	json_free(val);
+	json_free_object(obj);
+	return (NULL);
+}
 
-	if (str == NULL)
-		return (NULL);
-	file.str = (const char *)str;
-	file.len = ft_strlen(str);
-	file.pos = 0;
-	file.index = 0;
-	if ((root = new_json_value(&file, NULL)) == NULL)
-		return (NULL);
-	return (root);
+void	*ft_exit_array(t_json_value *val, t_json_array *arr)
+{
+	json_free(val);
+	json_free_array(arr);
+	return (NULL);
 }

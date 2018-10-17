@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 14:12:59 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/15 13:49:33 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/17 13:47:47 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 t_json_value	*new_json_value(t_json_file *file, t_json_value *parent)
 {
-	t_json_value_type type;
+	t_json_value_type	type;
+	unsigned long		index;
 
+	index = 0;
 	while (ft_isspace(file->str[file->pos]))
 		file->pos++;
 	type = get_json_value_type(file);
@@ -31,8 +33,8 @@ t_json_value	*new_json_value(t_json_file *file, t_json_value *parent)
 	if (type == string)
 		return (new_string(file, parent));
 	if (type == object)
-		return (new_object(file, parent));
+		return (new_object(file, parent, index));
 	if (type == array)
-		return (new_array(file, parent));
+		return (new_array(file, parent, index));
 	return (NULL);
 }

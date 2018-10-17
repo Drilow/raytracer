@@ -6,13 +6,13 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/28 12:27:09 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/15 11:53:47 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/16 13:08:26 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-double ft_atof_ispow(const char *str, double res, double neg)
+double	ft_atof_ispow(const char *str, double res, double neg)
 {
 	if (*str == '-')
 		return (res * neg * ft_powe((double)ft_atoi(++str)));

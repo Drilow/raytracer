@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 13:45:27 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/15 16:18:26 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/16 13:23:35 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <stdbool.h>
-#include <sys/types.h> 
-#include <sys/stat.h> 
+# include <sys/types.h>
+# include <sys/stat.h>
 
 typedef struct s_json_value	t_json_value;
 
@@ -92,9 +92,11 @@ t_json_string				*make_new_string(t_json_file *file);
 
 t_json_value_type			get_json_value_type(t_json_file *file);
 
-t_json_value				*new_object(t_json_file *f, t_json_value *parent);
+t_json_value				*new_object(t_json_file *f, t_json_value *parent,
+unsigned long index);
 
-t_json_value				*new_array(t_json_file *file, t_json_value *parent);
+t_json_value				*new_array(t_json_file *file, t_json_value *parent,
+unsigned long index);
 
 void						*json_get_values(t_json_value *value, int type);
 
