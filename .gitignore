@@ -54,5 +54,7 @@ dkms.conf
 
 *~
 
+settings.json
+.DS_STORE
 ext/*
 SDL2-*
