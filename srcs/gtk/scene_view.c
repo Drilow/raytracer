@@ -1,5 +1,6 @@
 #include <global.h>
 #include <parser/parser.h>
+#include <objects/object.h>
 #include <fcntl.h>
 #include <libft.h>
 #define PIXMAP g_global.r->gtk_mgr.pixmap
@@ -16,6 +17,7 @@ enum
    POS_Z_COLUMN,
    SIZE_COLUMN,
    CHECKED_COLUMN,
+   OBJ_REF,
    N_COLUMNS
 };
 
@@ -57,6 +59,7 @@ gtk_tree_store_set (store, &iter1,
                     POS_Z_COLUMN, obj->position.z,
                     SIZE_COLUMN, obj->size,
                     CHECKED_COLUMN, TRUE,
+                    OBJ_REF, (gpointer)obj,
                     -1);
 }
 
@@ -72,6 +75,7 @@ gtk_tree_store_set (store, &iter1,
                     POS_Z_COLUMN, light->source.z,
                     SIZE_COLUMN, (double)0,
                     CHECKED_COLUMN, TRUE,
+                    OBJ_REF, (gpointer)light,
                     -1);
 }
 
@@ -94,14 +98,13 @@ void 			populate_tree_model(GtkTreeStore *store)
 		tmp_lights = tmp_lights->next;
 	}
 	gtk_tree_store_append (store, &iter1, NULL);
-	gtk_tree_store_set (store, &iter1,
-					TYPE_COLUMN, "Camera",
+	gtk_tree_store_set (store, &iter1, TYPE_COLUMN, "Camera",
                     POS_X_COLUMN, g_global.r->cam_position.x,
                     POS_Y_COLUMN, g_global.r->cam_position.y,
                     POS_Z_COLUMN, g_global.r->cam_position.z,
                     SIZE_COLUMN, (double)0,
                     CHECKED_COLUMN, TRUE,
-                    -1);
+                    OBJ_REF, (gpointer)&g_global.r->cam_position, -1);
 }
 
 void 				append_column_with_text(GtkWidget *tree, char *text, GtkCellRenderer *renderer, int en_column)
@@ -117,7 +120,6 @@ void 				append_column_with_text(GtkWidget *tree, char *text, GtkCellRenderer *r
                gchar *path_str,
                gpointer data)
 {
-        // get the treemodel from somewhere
         GtkTreeIter  iter;
         GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
         gboolean enabled;
@@ -126,12 +128,29 @@ void 				append_column_with_text(GtkWidget *tree, char *text, GtkCellRenderer *r
         gtk_tree_model_get (GTK_TREE_MODEL(SCENE_VIEW.tree), &iter, CHECKED_COLUMN, &enabled, -1);
         enabled ^= 1;
 
-  // do something with the new enabled value, and set the new
-  // enabled value in your treemodel
         printf("jambon");
 
         gtk_tree_path_free (path);
 }*/
+
+void        select_handler(GtkTreeView *tree_view, GtkTreePath *path,
+  __attribute__((unused))GtkTreeViewColumn *column, __attribute__((unused))gpointer user_data)
+{
+  gpointer *obj;
+  GtkTreeModel *model;
+  GtkTreeIter iter;
+
+  if ((model = gtk_tree_view_get_model (tree_view)) == NULL)
+    return ;
+  if (gtk_tree_model_get_iter(model, &iter, path))
+    {
+            gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
+            printf("objet select : %d\n", ((t_obj*)obj)->type);
+            outline_obj(((t_obj*)obj));
+            edit_win(((t_obj*)obj));
+            g_print ("You selected obj %i\n", ((t_obj*)obj)->type);
+    }
+}
 
 void				scene_win(void)
 {
@@ -152,6 +171,7 @@ void				scene_win(void)
                                G_TYPE_DOUBLE,
                                G_TYPE_DOUBLE,
                                G_TYPE_BOOLEAN,
+                               G_TYPE_POINTER,
                                -1);
 
    populate_tree_model (store);
@@ -179,12 +199,14 @@ void				scene_win(void)
    renderer = gtk_cell_renderer_toggle_new ();
    //g_signal_connect (G_OBJECT(renderer), "toggled", G_CALLBACK
     //                                                  (checked_row), NULL);
-   column = gtk_tree_view_column_new_with_attributes ("Checked out",
+   column = gtk_tree_view_column_new_with_attributes ("Visible",
                                                       renderer,
                                                       "active", CHECKED_COLUMN,
                                                       NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (SCENE_VIEW.tree), column);
 
+  g_signal_connect(G_OBJECT(SCENE_VIEW.tree), "row-activated",
+    G_CALLBACK(select_handler), NULL);
 	gtk_container_add(GTK_CONTAINER(SCENE_VIEW.win), SCENE_VIEW.tree);
     gtk_widget_show_all(SCENE_VIEW.win);
 	return;

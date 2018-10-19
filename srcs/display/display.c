@@ -8,6 +8,7 @@
 #include <display/display.h>
 #define PIXMAP g_global.r->gtk_mgr.pixmap
 #define GTKMGR g_global.r->gtk_mgr
+#define PROGRESS_DATA g_global.r->gtk_mgr.ui.progress_data
 
 extern t_global	g_global;
 
@@ -75,6 +76,7 @@ static void		*draw_image_core(void *arg)
 			ft_putstr(" / ");
 			ft_putnbr(WIN_W);
 			ft_putstr("\n");
+			UpdateProgress(p.x, WIN_W);
 		}
 
 		while (++p.y < WIN_H)
@@ -119,6 +121,7 @@ void			draw_image(void)
 	int			i;
 
 	i = 0;
+	//progress_bar();
 	while (i < THREADS_NB)
 	{
 		th_arg[i].th_index = i;
