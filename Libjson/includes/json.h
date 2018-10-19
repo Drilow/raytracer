@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/07 13:45:27 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/16 13:23:35 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/19 15:11:58 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,6 @@ unsigned long index);
 
 t_json_value				*new_array(t_json_file *file, t_json_value *parent,
 unsigned long index);
-
-void						*json_get_values(t_json_value *value, int type);
-
-void						*json_get_big_values(t_json_value *value, int type);
-
-void						*json_get_num_values(t_json_value *value, int type);
 
 void						json_free(t_json_value *val);
 

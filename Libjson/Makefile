@@ -11,7 +11,6 @@ SRCS	 = 			json_fill_value.c \
 					json_new_array.c \
 					json_new_string.c \
 					json_new_value.c \
-					json_get_value.c \
 					json_free_value.c
 
 OBJ =				$(SRCS:.c=.o)

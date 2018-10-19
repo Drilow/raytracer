@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/10/17 13:29:20 by mabessir         ###   ########.fr        #
+#    Updated: 2018/10/18 17:16:57 by mabessir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,11 +94,11 @@ $(NAME): $(OBJ) $(INC)
 		make -C libft/
 		make -C Libjson/
 		@echo "$(VERT)~> [ libft library made. ]$(NCOL)"
-		$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -Iincludes/ $(LDFLAGS) -Ilibft/ -Llibft/ -lft $(LIB)
+		$(CC) $(CFLAGS) ./libft/libft.a ./Libjson/libjson.a $(OBJ) -o $(NAME) -Iincludes/ $(LDFLAGS) -Ilibft/ -I./Libjson/includes -Llibft/ -L./Libjson/ -lft $(LIB)
 		@echo "$(VERT)~> [ binary file '$(NAME)' made. ]$(NCOL)"
 
 %.o: %.c
-		$(CC) $(CFLAGS) $(LDLAGS) -o  $@ -c $< -Ilibft/ -Iincludes/ $(LIB)
+		$(CC) $(CFLAGS) $(LDLAGS) -o  $@ -c $< -Ilibft/ -ILibjson/includes -Iincludes/ $(LIB)
 
 clean:
 		rm -rf $(OBJ)

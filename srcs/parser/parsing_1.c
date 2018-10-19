@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/09/02 18:27:37 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/19 16:35:50 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <extra/extra_defs.h>
 #include <objects/object.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 extern t_global g_global;
 
@@ -52,7 +53,7 @@ static t_obj	*malloc_object(int type)
 	t_obj		*o;
 
 	if (!(o = (t_obj *)malloc(sizeof(t_obj))))
-	  exit(1);
+		exit(1);
 	if (type == 1)
 		o->obj = (t_sphere *)malloc(sizeof(t_sphere));
 	else if (type == 2)
@@ -131,7 +132,7 @@ static bool	read_line(char *line)
 	if (obj_type == 0)
 	{
 	  if (!(new = (t_light *)malloc(sizeof(t_light))))
-	      exit(1);
+	    exit(1);
 		((t_light *)new)->next = NULL;
 	}
 	else
@@ -166,20 +167,41 @@ static bool	read_line(char *line)
 
 bool			parse(char *file)
 {
-	int			fd;
-	char		*line;
+	int				fd;
+	char			*str;
+	char			*line;
+	t_json_value	*val;
+	unsigned long	*nb;
+	t_json_object	*obj;
 
+	nb = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (false);
 	g_global.r->objects = NULL;
 	g_global.r->lights = NULL;
 	g_global.r->ambient_light = ft_rgb(0, 0, 0, 0);
+	str = ft_readfile(fd, file);
+	if ((val = json_init(str)) == NULL)
+	{
+		ft_putendl("Parse failed.");
+		ft_free(str);
+		return (false);
+	}
+	ft_free(str);
+	obj = (t_json_object *)val->ptr;
+	while (nb++ < obj->nb)
+	{
+		if ((start_parse(obj,
+		get_obj_type(obj->pair[nb]->key->str), nb)) == false)
+			usage("Error : parse error\n", 1);
+	}
 	while (get_next_line(fd, &line) == 1)
 	{
 		if (read_line(line) == false)
 			usage("Error : invalid file.", 1);
-//		printf("%s\n", line);
+	
+		//printf("%s\n", line);
 		free(line);
 	}
 	close(fd);

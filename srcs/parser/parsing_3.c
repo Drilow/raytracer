@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 20:51:38 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/19 17:53:19 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/10/18 13:41:54 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <extra/extra_defs.h>
 #include <parser/parser.h>
-
 #include <libft.h>
 
 bool			cmp_chars(char *s, char *o, int start)

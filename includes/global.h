@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/04 18:08:51 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/18 17:09:10 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <gtk_mgr/gtk_mgr.h>
 # include <scene/scene_list.h>
 # include <rt.h>
+# include <json.h>
 # include <geometry/geometry.h>
 # include <stdbool.h>
 # include <gtk/gtk.h>
