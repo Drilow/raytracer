@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/20 10:30:01 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/20 11:36:21 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,6 @@ void			on_key_press(GtkWidget *w, GdkEventKey *event)
 	gtk_main_quit();
 }
 
-void			dialog_keyhook(GtkWidget *w, GdkEventKey *event)
-{
-	if (event->keyval == GDK_KEY_Escape)
-	{
-		if (w == ADD_VIEW.win)
-			redraw(false);
-		gtk_widget_destroy(w);
-	}
-//	else
-//		return ;
-}
 
 void			end_open(GtkWidget *dialog)
 {
@@ -118,7 +107,24 @@ void			end_open(GtkWidget *dialog)
 	if (!parse(filename))
 		usage("Error : invalid argument.", 1);
 	g_free(filename);
+	if (dialog)
+	{
+		gtk_widget_destroy(dialog);
+		dialog = NULL;
+	}
 	handle_main_view();
+}
+
+void			dialog_keyhook(GtkWidget *w, GdkEventKey *event)
+{
+	if (event->keyval == GDK_KEY_Escape)
+	{
+		if (w == ADD_VIEW.win)
+			redraw(false);
+		gtk_widget_destroy(w);
+	}
+	else if (event->keyval == 65421)
+		end_open(w);
 }
 
 void			open_file(void)
@@ -128,6 +134,7 @@ void			open_file(void)
 	gint					res;
 	char					*dir;
 
+	dialog = NULL;
 	action = GTK_FILE_CHOOSER_ACTION_OPEN;
 	dialog = gtk_file_chooser_dialog_new("Open File",
 	GTK_WINDOW(g_global.base_view.win), action, "_Cancel",
@@ -141,11 +148,15 @@ void			open_file(void)
 	init_gtk_variables();
 	free(dir);
 	dir = NULL;
+	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	g_signal_connect(G_OBJECT(dialog), "key-press-event",
 	G_CALLBACK(dialog_keyhook), NULL);
-	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
 		end_open(dialog);
 	else
-		g_object_unref(dialog);
+	{
+		if (dialog)
+			gtk_widget_destroy(dialog);
+		dialog = NULL;
+	}
 }
