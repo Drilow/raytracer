@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:37:49 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 16:51:52 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/20 11:37:57 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void				end_export(GtkWidget *dialog)
 	else
 		cairo_surface_write_to_png(PIXMAP, filename);
 	g_free(filename);
+	gtk_widget_destroy(dialog);
 }
 
 void				export_view(void)
