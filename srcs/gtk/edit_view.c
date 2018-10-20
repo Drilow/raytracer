@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/20 10:48:21 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/20 11:47:33 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void				handle_base_elems_edit(t_obj *o)
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.translate_z_spin,
 					3, 3, 1, 1);
 	if (!(c = (GdkRGBA*)malloc(sizeof(GdkRGBA))))
-		exit(1);
+		exit(1); // to fix
 	get_color_values(o->color, c);
 	ADD_VIEW.color = gtk_color_chooser_widget_new();
 	gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(ADD_VIEW.color), c);
@@ -63,7 +63,7 @@ void				actual_edit_view(t_obj *o)
 		o->next = g_global.r->objects;
 		g_global.r->objects = o;
 		if (!(o->obj = (t_sphere*)malloc(sizeof(t_sphere))))
-			exit(1);
+			exit(1); // to fix
 		set_default_values(o);
 	}
 	if (o->type == 1)

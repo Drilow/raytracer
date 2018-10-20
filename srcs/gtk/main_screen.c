@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:18:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 13:41:41 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/10/20 11:46:58 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void				add_view(void)
 	t_obj			*o;
 
 	if (!(o = (t_obj*)malloc(sizeof(t_obj))))
-		exit(1);
+		exit(1); // to fix
 	o->type = -5;
 	edit_win(o);
 }

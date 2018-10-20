@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:47:04 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 14:32:21 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/20 11:47:11 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void				create_object(t_obj *o, int type)
 	t_obj			*tmp;
 
 	if (!(tmp = (t_obj*)malloc(sizeof(t_obj))))
-		exit(1);
+		exit(1); // to fix
 	create_inner_obj_for_type(tmp, type);
 	set_default_values(tmp);
 	free(o->obj);

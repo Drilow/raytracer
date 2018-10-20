@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/20 11:36:21 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/20 11:47:50 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void			open_file(void)
 	GTK_WINDOW(g_global.base_view.win), action, "_Cancel",
 	GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
-		exit(1);
+		exit(1); // to fix
 	dir = getwd(dir);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
 	(dir = ft_strjoin(dir, "/scenes")));
