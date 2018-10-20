@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/19 20:30:45 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/10/20 10:30:01 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void			on_key_press(GtkWidget *w, GdkEventKey *event)
 	if (g_global.r && w == ADD_VIEW.win)
 		draw_image();
 	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
-		gtk_main_quit();
+	gtk_main_quit();
 }
 
 void			dialog_keyhook(GtkWidget *w, GdkEventKey *event)
@@ -104,8 +104,8 @@ void			dialog_keyhook(GtkWidget *w, GdkEventKey *event)
 			redraw(false);
 		gtk_widget_destroy(w);
 	}
-	else
-		return ;
+//	else
+//		return ;
 }
 
 void			end_open(GtkWidget *dialog)

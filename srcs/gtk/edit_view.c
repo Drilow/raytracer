@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 14:37:35 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/20 10:48:21 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ void				edit_win_3(t_obj *o)
 	gtk_container_add(GTK_CONTAINER(ADD_VIEW.buttonbox),
 	ADD_VIEW.obj_file_button);
 	actual_edit_view(o);
+	gtk_widget_grab_focus(gtk_dialog_get_widget_for_response(
+	GTK_DIALOG(ADD_VIEW.win), GTK_RESPONSE_ACCEPT));
 	gtk_widget_show_all(ADD_VIEW.win);
 	g_signal_connect(G_OBJECT(ADD_VIEW.win), "delete-event",
 	G_CALLBACK(handle_x_button), NULL);
-	g_signal_connect(G_OBJECT(ADD_VIEW.win), "key-press-event",
-	G_CALLBACK(dialog_keyhook), NULL);
 	handle_edit_validation(o);
 }
 
