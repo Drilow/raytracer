@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_light.c                                      :+:      :+:    :+:   */
+/*   parse_amb_light.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/19 16:17:00 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/22 16:00:38 by mabessir         ###   ########.fr       */
+/*   Created: 2018/10/22 15:17:09 by mabessir          #+#    #+#             */
+/*   Updated: 2018/10/22 16:00:58 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,9 @@ static	int		check_key(char *str)
 {
 	if (cmp_chars(str, "source", 0))
 		return (1);
-	if (cmp_chars(str, "color", 0))
-		return (2);
-	return (0)
 }
 
-static 	t_light			*put_info(t_json_array *arr, t_light *lights)
+static 	t_light			*put_info(t_json_array *arr, t_rgb *lights)
 {
 	int				*a;
 
@@ -54,35 +51,18 @@ static 	t_light			*put_info(t_json_array *arr, t_light *lights)
 static	void	get_info(t_json_value *val, int i)
 {
 	t_json_array	*arr;
-	t_light			*lights;
-	t_light			*ltmp;
+	t_rgb			alight;
 	unsigned long	num;
 
 	num = 0;
 	if (val->type != array)
 		return ;
 	arr = (t_json_array *)val->ptr;
-	if (!(lights = (t_light *)malloc(sizeof(t_light))))
-		return ;
-	((t_light *)lights)->next = NULL;
-	if (i == 1)
-		lights = put_info(arr);
-	if (i == 2)
-		lights->color = put_colors(arr, num);
-	if (g_global.r->lights == NULL)
-		g_global.r->lights = lights;
-	else
-	{
-		ltmp = g_global.r->lights;
-		while (ltmp->next != NULL)
-			ltmp = ltmp->next;
-		ltmp->next = lights;
-	}
+		alight = put_info(arr);
 }
 
 void			*parse_light(t_json_object *obj, unsigned long nb)
 {
-	t_json_light	*l;
 	t_json_object	*ol;
 	unsigned long	num;
 
@@ -95,7 +75,5 @@ void			*parse_light(t_json_object *obj, unsigned long nb)
 	{
 		if (check_key(ol->value[num]) == 1)
 			get_info(ol->value[num], 1);
-		if (check_key(ol->value[num]) == 2)
-			get_info(ol->value[num], 2);
 	}
 }

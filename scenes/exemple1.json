@@ -8,8 +8,7 @@
 				"color":[45,45,45,0]
 			},
 	"ambient light":{
-						"color":[10,10,10],
-						"trans":0
+						"color":[10,10,10, 0]
 					},
 	"objects":[
 				{
