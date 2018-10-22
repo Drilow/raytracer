@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 16:34:44 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/20 11:47:06 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void				redraw(bool display)
 		CAIRO_FORMAT_RGB24,
 		WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 		if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-			exit(1);
+			exit(1); // to fix
 		cairo_surface_mark_dirty(PIXMAP);
 		gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
 		PIXMAP);

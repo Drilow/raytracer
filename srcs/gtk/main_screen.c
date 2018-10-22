@@ -6,7 +6,11 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:18:24 by adleau            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/10/22 12:21:45 by Dagnear          ###   ########.fr       */
+=======
+/*   Updated: 2018/10/20 11:46:58 by adleau           ###   ########.fr       */
+>>>>>>> 99c9d7ab43d8b2b0a01a1df3b5095e745df703aa
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +30,7 @@ void				add_view(void)
 	t_obj			*o;
 
 	if (!(o = (t_obj*)malloc(sizeof(t_obj))))
-		exit(1);
+		exit(1); // to fix
 	o->type = -5;
 	edit_win(o);
 }

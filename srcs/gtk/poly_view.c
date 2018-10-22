@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:57:37 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/04 18:07:57 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/20 11:46:42 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void				open_poly_obj(void)
 	GTK_WINDOW(ADD_VIEW.win), action, "_Cancel",
 	GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
-		exit(1);
+		exit(1); // to fix
 	dir = getwd(dir);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
 	ft_strjoin(dir, "/obj_files"));

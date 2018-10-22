@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:37:49 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 16:51:52 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/20 11:45:47 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void				end_export(GtkWidget *dialog)
 	else
 		cairo_surface_write_to_png(PIXMAP, filename);
 	g_free(filename);
+	gtk_widget_destroy(dialog);
 }
 
 void				export_view(void)
@@ -61,10 +62,11 @@ void				export_view(void)
 	action, "_Cancel", GTK_RESPONSE_CANCEL, "_Export",
 	GTK_RESPONSE_ACCEPT, NULL);
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
-		exit(1);
+		exit(1); // to fix
 	dir = getwd(dir);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
 	ft_strjoin(dir, "/screens"));
+	free(dir);
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (res == GTK_RESPONSE_ACCEPT)

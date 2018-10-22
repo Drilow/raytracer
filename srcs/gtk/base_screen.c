@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 17:03:35 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/20 11:47:56 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			handle_drawing(void)
 {
 	if (!(GTKMGR.buf = malloc(sizeof(unsigned char)
 	* (WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
-		exit(1);
+		exit(1); // to fix
 	draw_image();
 	if (PIXMAP)
 	{
@@ -35,7 +35,7 @@ void			handle_drawing(void)
 	CAIRO_FORMAT_RGB24, WIN_W, WIN_H,
 	cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-		exit(1);
+		exit(1); // to fix
 	cairo_surface_mark_dirty(PIXMAP);
 	GTKMGR.ui.main_view.render_area = gtk_image_new_from_surface(PIXMAP);
 	GTKMGR.ui.main_view.event_box = gtk_event_box_new();

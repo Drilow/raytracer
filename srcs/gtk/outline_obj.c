@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:36:15 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/19 20:38:04 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/10/20 11:46:46 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void				outline_obj(t_obj *o)
 	CAIRO_FORMAT_RGB24, WIN_W, WIN_H,
 	cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-		exit(1);
+		exit(1); // to fix
 	cairo_surface_mark_dirty(PIXMAP);
 	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
 	PIXMAP);
