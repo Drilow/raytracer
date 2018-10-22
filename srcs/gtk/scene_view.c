@@ -47,12 +47,12 @@ void      init_scene_view(void)
   GTKMGR.ui.scene_view.tree = NULL;
 }
 
-void 			read_obj(GtkTreeStore *store, t_obj *obj)
+void 			read_obj(t_obj *obj)
 {
 	GtkTreeIter iter1;
 
-gtk_tree_store_append (store, &iter1, NULL);
-gtk_tree_store_set (store, &iter1,
+gtk_tree_store_append (SCENE_VIEW.store, &iter1, NULL);
+gtk_tree_store_set (SCENE_VIEW.store, &iter1,
                     TYPE_COLUMN, get_obj_type(obj->type),
                     POS_X_COLUMN, obj->position.x,
                     POS_Y_COLUMN, obj->position.y,
@@ -63,12 +63,12 @@ gtk_tree_store_set (store, &iter1,
                     -1);
 }
 
-void 			read_light(GtkTreeStore *store, t_light *light)
+void 			read_light(t_light *light)
 {
 	GtkTreeIter iter1;
 
-gtk_tree_store_append (store, &iter1, NULL);
-gtk_tree_store_set (store, &iter1,
+gtk_tree_store_append (SCENE_VIEW.store, &iter1, NULL);
+gtk_tree_store_set (SCENE_VIEW.store, &iter1,
                     TYPE_COLUMN, "Light",
                     POS_X_COLUMN, light->source.x,
                     POS_Y_COLUMN, light->source.y,
@@ -89,12 +89,12 @@ void 			populate_tree_model(GtkTreeStore *store)
 	tmp_lights = g_global.r->lights;
 	while (tmp_objs != NULL)
 	{
-		read_obj(store, tmp_objs);
+		read_obj(tmp_objs);
 		tmp_objs = tmp_objs->next;
 	}
 	while (tmp_lights != NULL)
 	{
-		read_light(store, tmp_lights);
+		read_light(tmp_lights);
 		tmp_lights = tmp_lights->next;
 	}
 	gtk_tree_store_append (store, &iter1, NULL);
@@ -116,22 +116,32 @@ void 				append_column_with_text(GtkWidget *tree, char *text, GtkCellRenderer *r
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
 }
 
-/*static void checked_row(GtkCellRendererToggle *cell,
-               gchar *path_str,
-               gpointer data)
+static void checked_row(__attribute__((unused))GtkCellRendererToggle *cell,
+               gchar __attribute__((unused))*path_str,
+               __attribute__((unused))gpointer data)
 {
-        GtkTreeIter  iter;
+ /* int r;
+        printf("bjr %d\n", gtk_cell_renderer_toggle_get_active(cell));
+        if ((r = gtk_cell_renderer_toggle_get_active(cell)) == true)
+            gtk_cell_renderer_toggle_set_active(cell, false);
+        else
+            gtk_cell_renderer_toggle_set_active(cell, true);
+        printf("slt %d\n", gtk_cell_renderer_toggle_get_active(cell));
+*/        GtkTreeIter  iter;
         GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
         gboolean enabled;
+        GtkTreeModel *model;
 
-        gtk_tree_model_get_iter (GTK_TREE_MODEL(SCENE_VIEW.tree), &iter, path);
-        gtk_tree_model_get (GTK_TREE_MODEL(SCENE_VIEW.tree), &iter, CHECKED_COLUMN, &enabled, -1);
-        enabled ^= 1;
-
-        printf("jambon");
+        model = NULL;
+        if ((model = gtk_tree_view_get_model (GTK_TREE_VIEW (SCENE_VIEW.tree))) == NULL)
+        return ;
+        gtk_tree_model_get_iter (model, &iter, path);
+        gtk_tree_model_get (model, &iter, CHECKED_COLUMN, &enabled, -1);
+        enabled = !enabled;
+   gtk_tree_store_set(SCENE_VIEW.store, &iter, CHECKED_COLUMN, enabled, -1);
 
         gtk_tree_path_free (path);
-}*/
+}
 
 void        select_handler(GtkTreeView *tree_view, GtkTreePath *path,
   __attribute__((unused))GtkTreeViewColumn *column, __attribute__((unused))gpointer user_data)
@@ -140,6 +150,7 @@ void        select_handler(GtkTreeView *tree_view, GtkTreePath *path,
   GtkTreeModel *model;
   GtkTreeIter iter;
 
+  model = NULL;
   if ((model = gtk_tree_view_get_model (tree_view)) == NULL)
     return ;
   if (gtk_tree_model_get_iter(model, &iter, path))
@@ -154,7 +165,7 @@ void        select_handler(GtkTreeView *tree_view, GtkTreePath *path,
 
 void				scene_win(void)
 {
-	GtkTreeStore *store;
+
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
 
@@ -164,7 +175,7 @@ void				scene_win(void)
 	gtk_window_set_transient_for(GTK_WINDOW(SCENE_VIEW.win), GTK_WINDOW(GTKMGR.ui.main_view.win));
 	gtk_window_set_position(GTK_WINDOW(SCENE_VIEW.win), GTK_WIN_POS_MOUSE);
 
-   store = gtk_tree_store_new (N_COLUMNS,
+   SCENE_VIEW.store = gtk_tree_store_new (N_COLUMNS,
                                G_TYPE_STRING,
                                G_TYPE_DOUBLE,
                                G_TYPE_DOUBLE,
@@ -174,9 +185,9 @@ void				scene_win(void)
                                G_TYPE_POINTER,
                                -1);
 
-   populate_tree_model (store);
-   SCENE_VIEW.tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (store));
-   g_object_unref (G_OBJECT (store));
+   populate_tree_model (SCENE_VIEW.store);
+   SCENE_VIEW.tree = gtk_tree_view_new_with_model (GTK_TREE_MODEL (SCENE_VIEW.store));
+   g_object_unref (G_OBJECT (SCENE_VIEW.store));
 
    renderer = gtk_cell_renderer_text_new ();
    g_object_set (G_OBJECT (renderer),
@@ -197,8 +208,9 @@ void				scene_win(void)
                  NULL);
    append_column_with_text(SCENE_VIEW.tree, "Size", renderer, SIZE_COLUMN);
    renderer = gtk_cell_renderer_toggle_new ();
-   //g_signal_connect (G_OBJECT(renderer), "toggled", G_CALLBACK
-    //                                                  (checked_row), NULL);
+   gtk_cell_renderer_toggle_set_activatable(GTK_CELL_RENDERER_TOGGLE(renderer), TRUE);
+   g_signal_connect (G_OBJECT(renderer), "toggled", G_CALLBACK
+                                                      (checked_row), NULL);
    column = gtk_tree_view_column_new_with_attributes ("Visible",
                                                       renderer,
                                                       "active", CHECKED_COLUMN,

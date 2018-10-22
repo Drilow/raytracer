@@ -72,11 +72,11 @@ static void		*draw_image_core(void *arg)
 
 		if (th.th_index == 0)
 		{
+			//g_idle_add(&updateProgress, p);
 			ft_putnbr(p.x);
 			ft_putstr(" / ");
 			ft_putnbr(WIN_W);
 			ft_putstr("\n");
-			UpdateProgress(p.x, WIN_W);
 		}
 
 		while (++p.y < WIN_H)
