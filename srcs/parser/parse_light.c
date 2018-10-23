@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:17:00 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/23 15:26:49 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/23 18:58:42 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static	void	get_info(t_json_value *val, int i)
 	if (i == 1)
 		lights = put_info(arr);
 	if (i == 2)
-		lights->color = put_colors(arr, num);
+		lights->color = get_obj_color(val);
 	if (g_global.r->lights == NULL)
 		g_global.r->lights = lights;
 	else
