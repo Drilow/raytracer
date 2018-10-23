@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 15:17:09 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/22 16:00:58 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/23 17:57:20 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <extra/extra_defs.h>
 #include <objects/object.h>
 #include <fcntl.h>
-#include <stdio.h>
 
 extern t_global g_global;
 
@@ -61,7 +60,7 @@ static	void	get_info(t_json_value *val, int i)
 		alight = put_info(arr);
 }
 
-void			*parse_light(t_json_object *obj, unsigned long nb)
+void			*parse_amblight(t_json_object *obj, unsigned long nb)
 {
 	t_json_object	*ol;
 	unsigned long	num;

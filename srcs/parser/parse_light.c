@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:17:00 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/22 16:00:38 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/23 15:26:49 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <extra/extra_defs.h>
 #include <objects/object.h>
 #include <fcntl.h>
-#include <stdio.h>
 
 extern t_global g_global;
 
