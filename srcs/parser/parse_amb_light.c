@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 15:17:09 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/23 17:57:20 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/23 18:35:42 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,39 +25,16 @@ static	int		check_key(char *str)
 		return (1);
 }
 
-static 	t_light			*put_info(t_json_array *arr, t_rgb *lights)
-{
-	int				*a;
-
-	if (arr->nb == 3)
-	{
-		a = (int *)arr->value[num++]->ptr;
-		lights->source->x = (double)*a;
-		a = (int *)arr->value[num++]->ptr;
-		lights->source->y = (double)*a;
-		a = (int *)arr->value[num]->ptr;
-		lights->source->z = (double)*a;
-	}
-	else 
-	{
-		lights->source->x = -30;
-		lights->source->y = 150;
-		lights->source->z = -100;
-	}
-	return (lights);
-}
-
-static	void	get_info(t_json_value *val, int i)
+static	void	get_info(t_json_value *val)
 {
 	t_json_array	*arr;
 	t_rgb			alight;
-	unsigned long	num;
 
-	num = 0;
-	if (val->type != array)
-		return ;
-	arr = (t_json_array *)val->ptr;
-		alight = put_info(arr);
+	arr = 0;
+	if (val->type == array)
+		arr = (t_json_array *)val->ptr;
+	alight = get_obj_color(arr);
+	g_global.r->ambient_light = alight;
 }
 
 void			*parse_amblight(t_json_object *obj, unsigned long nb)
@@ -73,6 +50,6 @@ void			*parse_amblight(t_json_object *obj, unsigned long nb)
 	while (num++ < ol->nb)
 	{
 		if (check_key(ol->value[num]) == 1)
-			get_info(ol->value[num], 1);
+			get_info(ol->value[num]);
 	}
 }

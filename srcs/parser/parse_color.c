@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 15:10:27 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/23 17:53:43 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/23 18:44:10 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ t_rgb		get_obj_color(t_json_value *val)
 	t_json_array *arr;
 
 	arr = 0 ;
-	color->g = 10;
-	color->b = 10;
+	color->r = 100;
+	color->g = 50;
+	color->b = 25;
 	color->trans = 0;
 	if (val->type == array)
 	{
