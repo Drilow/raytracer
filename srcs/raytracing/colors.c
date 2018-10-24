@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/09/02 18:28:46 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/24 17:52:06 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,24 +117,27 @@ static t_rpoint		get_color(t_rt *r, t_collision c, bool debug)
 	l = r->lights;
 	while (l != NULL)
 	{
-		otmp = r->objects;
-		afactor = angle_factor(c, l->source);
-		if (debug == true)
-            printf("afactor = %f\n", afactor);
-		while (otmp != NULL)
+		if (l->enabled == true)
 		{
-			tmpc.o = otmp;
-			if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc, debug) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
+			otmp = r->objects;
+			afactor = angle_factor(c, l->source);
+			if (debug == true)
+				printf("afactor = %f\n", afactor);
+			while (otmp != NULL)
 			{
-				afactor = 0;
+				tmpc.o = otmp;
+				if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc, debug) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
+				{
+					afactor = 0;
 //				if (debug == true)
 //				{
 //					printf("collision ! obj type = %d\n", otmp->type);
 //				}
+				}
+				otmp = otmp->next;
 			}
-			otmp = otmp->next;
+			color = add_color(color, ocolor, l, afactor);
 		}
-		color = add_color(color, ocolor, l, afactor);
 		l = l->next;
 	}
 //	if (debug == true)

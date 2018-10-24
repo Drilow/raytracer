@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:01:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/24 17:01:04 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/24 17:48:50 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef struct		s_rt
 {
-	t_gtk_mgr	gtk_mgr;
+	t_gtk_mgr		gtk_mgr;
 	t_rpoint		cam_position;
 	double			screen_distance;
 	t_ray			rays[WIN_H][WIN_W];

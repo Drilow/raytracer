@@ -126,6 +126,7 @@ static void checked_row(__attribute__((unused))GtkCellRendererToggle *cell,
 	GtkTreeModel *model;
 	gpointer		*obj;
 
+	obj = NULL;
 	model = NULL;
 	if ((model = gtk_tree_view_get_model (GTK_TREE_VIEW (SCENE_VIEW.tree))) == NULL)
         return ;
@@ -135,30 +136,38 @@ static void checked_row(__attribute__((unused))GtkCellRendererToggle *cell,
 	gtk_tree_store_set(SCENE_VIEW.store, &iter, CHECKED_COLUMN, enabled, -1);
 	if (gtk_tree_model_get_iter(model, &iter, path))
     {
-		gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
-		((t_obj*)obj)->enabled = enabled;
-    }
+		if (obj && ((t_obj*)obj)->type != 0)
+		{
+			gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
+			((t_obj*)obj)->enabled = enabled;
+		}
+		else
+			((t_light*)obj)->enabled = enabled; // a debug
+	}
 	redraw(true);
 	gtk_tree_path_free (path);
 }
 
 void        select_handler(GtkTreeView *tree_view, GtkTreePath *path,
-  __attribute__((unused))GtkTreeViewColumn *column, __attribute__((unused))gpointer user_data)
+						   __attribute__((unused))GtkTreeViewColumn *column, __attribute__((unused))gpointer user_data)
 {
-  gpointer *obj;
-  GtkTreeModel *model;
-  GtkTreeIter iter;
+	gpointer *obj;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
 
-  model = NULL;
-  if ((model = gtk_tree_view_get_model (tree_view)) == NULL)
-    return ;
-  if (gtk_tree_model_get_iter(model, &iter, path))
+	model = NULL;
+	if ((model = gtk_tree_view_get_model (tree_view)) == NULL)
+		return ;
+	if (gtk_tree_model_get_iter(model, &iter, path))
     {
-            gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
-            printf("objet select : %d\n", ((t_obj*)obj)->type);
+		gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
+		printf("objet select : %d\n", ((t_obj*)obj)->type);
+		if (((t_obj*)obj)->type != 0)
+		{
             outline_obj(((t_obj*)obj));
             edit_win(((t_obj*)obj));
-            g_print ("You selected obj %i\n", ((t_obj*)obj)->type);
+		}
+		g_print ("You selected obj %i\n", ((t_obj*)obj)->type);
     }
 }
 
