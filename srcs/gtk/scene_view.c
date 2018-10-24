@@ -116,6 +116,21 @@ void 				append_column_with_text(GtkWidget *tree, char *text, GtkCellRenderer *r
 	gtk_tree_view_append_column (GTK_TREE_VIEW (tree), column);
 }
 
+
+bool		go_throu_lights(t_light *curr)
+{
+	t_light	*tmp;
+
+	tmp = g_global.r->lights;
+	while (tmp)
+	{
+		if (curr == tmp)
+			return (true);
+		tmp = tmp->next;
+	}
+	return (false);
+}
+
 static void checked_row(__attribute__((unused))GtkCellRendererToggle *cell,
 						gchar __attribute__((unused))*path_str,
 						__attribute__((unused))gpointer data)
@@ -136,13 +151,20 @@ static void checked_row(__attribute__((unused))GtkCellRendererToggle *cell,
 	gtk_tree_store_set(SCENE_VIEW.store, &iter, CHECKED_COLUMN, enabled, -1);
 	if (gtk_tree_model_get_iter(model, &iter, path))
     {
-//		if (obj && ((t_obj*)obj)->type != 0)
-//		{
-			gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
+		gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
+		if (((t_obj*)obj)->type == 1
+			|| ((t_obj*)obj)->type == 1 || ((t_obj*)obj)->type == 2 || ((t_obj*)obj)->type == 3 || ((t_obj*)obj)->type == 4 ||
+			((t_obj*)obj)->type == 6 || ((t_obj*)obj)->type == 66 || ((t_obj*)obj)->type == 67)
+		{
 			((t_obj*)obj)->enabled = enabled;
-//		}
-//		else
-//			((t_light*)obj)->enabled = enabled; // a debug
+			printf("WOLOLA %p\n", ((t_obj*)obj)->obj);
+		}
+		else
+		{
+			if (go_throu_lights(((t_light*)obj)))
+				((t_light*)obj)->enabled = enabled; // a debug
+			printf("WOLOLO\n");
+		}
 	}
 	redraw(true);
 	gtk_tree_path_free (path);
