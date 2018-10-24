@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
+#    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/05/10 12:19:04 by adleau           ###   ########.fr        #
+<<<<<<< HEAD
+#    Updated: 2018/10/24 16:58:25 by adleau           ###   ########.fr        #
+=======
+#    Updated: 2018/10/20 09:57:22 by adleau           ###   ########.fr        #
+>>>>>>> merge_result
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,22 +24,42 @@ NAME = rt
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -O3
+CFLAGS = -Wall -Werror -Wextra -O3 $(shell pkg-config --cflags gtk+-3.0) -g #-fsanitize=address
 
-LDFLAGS =  -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo -framework OpenCL
-LDFLAGS += `ext/SDL2/bin/sdl2-config --cflags --libs -lSDL2`
-
-LIB	 :=  -L./ext/SDL2/lib -I./ext/SDL2/include/SDL2
-
+LDFLAGS = 	-framework IOKit -framework CoreVideo $(shell pkg-config --libs gtk+-3.0)
 
 SRCPATH = srcs/
 
 SRC =   $(SRCPATH)main.c \
+		$(SRCPATH)gtk/scene_view.c			\
+		$(SRCPATH)gtk/base_screen.c			\
+		$(SRCPATH)gtk/base_screen2.c		\
+		$(SRCPATH)gtk/base_screen3.c		\
+		$(SRCPATH)gtk/main_screen.c			\
+		$(SRCPATH)gtk/main_screen2.c		\
+		$(SRCPATH)gtk/main_screen3.c		\
+		$(SRCPATH)gtk/edit_sphere.c			\
+		$(SRCPATH)gtk/filter_view.c			\
+		$(SRCPATH)gtk/filter_functions.c	\
+		$(SRCPATH)gtk/edit_view.c			\
+		$(SRCPATH)gtk/export_view.c			\
+		$(SRCPATH)gtk/radio_button.c		\
+		$(SRCPATH)gtk/validate_objects.c	\
+		$(SRCPATH)gtk/poly_view.c			\
+		$(SRCPATH)gtk/gtk_handlers.c			\
+		$(SRCPATH)gtk/gtk_handlers2.c			\
+		$(SRCPATH)gtk/outline_obj.c			\
+		$(SRCPATH)gtk/init_variables.c		\
+		$(SRCPATH)gtk/validation.c			\
+		$(SRCPATH)gtk/validate_base_obj.c	\
+		$(SRCPATH)gtk/edit_base_view.c	\
 		$(SRCPATH)maths/transformations.c	\
 		$(SRCPATH)maths/ft_solve_equation.c	\
 		$(SRCPATH)maths/ft_delta.c			\
 		$(SRCPATH)maths/ft_deltasq.c		\
-		$(SRCPATH)sdl_stuff/sdl_mgr.c		\
+		$(SRCPATH)parser/get_tetrahedron.c	\
+		$(SRCPATH)parser/set_obj.c	\
+		$(SRCPATH)parser/get_cube.c	\
 		$(SRCPATH)parser/parsing_1.c		\
 		$(SRCPATH)parser/parsing_2.c		\
 		$(SRCPATH)parser/parsing_3.c		\
@@ -53,34 +77,41 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)maths/vector_fcts_1.c	\
 		$(SRCPATH)maths/vector_fcts_2.c	\
 		$(SRCPATH)display/display.c 	\
+		$(SRCPATH)display/antialiasing.c \
 		$(SRCPATH)raytracing/raytracing.c 	\
 		$(SRCPATH)raytracing/colors.c 	\
-		$(SRCPATH)sdl_stuff/draw_px.c 	\
+		$(SRCPATH)gtk/draw_px.c 	\
 		$(SRCPATH)raytracing/collision/normal_collision_vector.c 	\
 		$(SRCPATH)raytracing/collision/obj_collision.c 	\
 
 INCPATH	=	includes/
 
 INC	=		$(INCPATH)objects/object.h \
+<<<<<<< HEAD
 			$(INCPATH)sdl_stuff/sdl_mgr.h		\
+=======
+>>>>>>> merge_result
 
 OBJ = $(SRC:.c=.o)
 
-all: ext $(NAME)
+all: $(NAME)
+
 
 $(NAME): $(OBJ) $(INC)
 		make -C libft/
+		make -C Libjson/
 		@echo "$(VERT)~> [ libft library made. ]$(NCOL)"
 		$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -Iincludes/ $(LDFLAGS) -Ilibft/ -Llibft/ -lft $(LIB)
 		@echo "$(VERT)~> [ binary file '$(NAME)' made. ]$(NCOL)"
 
 %.o: %.c
-		$(CC) $(CFLAGS) $(LDLAGS) -o  $@ -c $< -Ilibft/ -Iincludes/ $(LIB) -Qunused-arguments
+		$(CC) $(CFLAGS) $(LDLAGS) -o  $@ -c $< -Ilibft/ -Iincludes/ $(LIB)
 
 clean:
 		rm -rf $(OBJ)
 		@echo "$(JAUN)~> [ .o files erased. ]$(NCOL)"
 		make clean -C libft/
+		make clean -C Libjson/
 
 fclean: clean
 		rm -f $(NAME)
@@ -96,6 +127,7 @@ fclean: clean
 
 re: fclean all
 
+<<<<<<< HEAD
 ext: ext/SDL2
 
 ext/SDL2:
@@ -111,4 +143,6 @@ ext/SDL2:
 		mv -f SDL2-2.0.7.tar.gz SDL2-2.0.7 ext/SDL2/junk
 		@echo "$(VERT)~> [ SDL library set up. ]$(NCOL)"
 
+=======
+>>>>>>> merge_result
 .PHONY: clean all re fclean

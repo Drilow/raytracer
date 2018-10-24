@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 18:38:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 19:38:59 by adleau           ###   ########.fr       */
+/*   Updated: 2018/09/02 18:28:00 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <parser/parser.h>
 #include <maths/transformations.h>
 
+#include <libft.h>
+
 extern t_global g_global;
 
 static bool	get_camera(char *s, t_rpoint *angle)
@@ -22,9 +24,9 @@ static bool	get_camera(char *s, t_rpoint *angle)
 	int			index;
 
 	index = 0;
-	if (get_next_nb(s, &index, &(g_global.r.cam_position.x), NULL) == false || \
-		get_next_nb(s, &index, &(g_global.r.cam_position.y), NULL) == false || \
-		get_next_nb(s, &index, &(g_global.r.cam_position.z), NULL) == false || \
+	if (get_next_nb(s, &index, &(g_global.r->cam_position.x), NULL) == false || \
+		get_next_nb(s, &index, &(g_global.r->cam_position.y), NULL) == false || \
+		get_next_nb(s, &index, &(g_global.r->cam_position.z), NULL) == false || \
 		get_next_nb(s, &index, &(angle->x), NULL) == false || \
 		get_next_nb(s, &index, &(angle->y), NULL) == false || \
 		get_next_nb(s, &index, &(angle->z), NULL) == false)
@@ -48,8 +50,8 @@ bool			set_camera(char *s)
 		p.x = -1;
 		while (++p.x < WIN_W)
 		{
-			g_global.r.rays[p.y][p.x].p = g_global.r.cam_position;
-			rotate(&(g_global.r.rays[p.y][p.x].vector), angle);
+			g_global.r->rays[p.y][p.x].p = g_global.r->cam_position;
+			rotate(&(g_global.r->rays[p.y][p.x].vector), angle);
 		}
 	}
 	return (true);

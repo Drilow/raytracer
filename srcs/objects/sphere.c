@@ -5,15 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2018/05/05 14:54:05 by adleau            #+#    #+#             */
 /*   Updated: 2018/05/05 14:54:06 by adleau           ###   ########.fr       */
+=======
+/*   Created: 2018/02/19 22:11:16 by alacrois          #+#    #+#             */
+/*   Updated: 2018/08/27 11:05:53 by adleau           ###   ########.fr       */
+>>>>>>> merge_result
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <rt.h>
 #include <maths/transformations.h>
 
-static t_rpoint		get_eq_factors(t_ray ray, t_sphere *sph)
+static t_rpoint		get_eq_factors(t_ray ray, t_obj *sph)
 {
 	t_rpoint		f;
 	t_rpoint		v;
@@ -23,8 +28,8 @@ static t_rpoint		get_eq_factors(t_ray ray, t_sphere *sph)
 
 	v = ray.vector;
 	c = ray.p;
-	s = sph->center;
-	rad = sph->radius;
+	s = sph->position;
+	rad = ((t_sphere *)sph->obj)->radius;
 	f.x = (v.x * v.x) + (v.y * v.y) + (v.z * v.z);
 	f.y = ((2 * v.x) * (c.x - s.x)) + ((2 * v.y) * (c.y - s.y)) \
 	+ ((2 * v.z) * (c.z - s.z));
@@ -35,7 +40,7 @@ static t_rpoint		get_eq_factors(t_ray ray, t_sphere *sph)
 	return (f);
 }
 
-bool				sphere_collision(t_ray ray, t_sphere *s, t_rpoint *p)
+bool				sphere_collision(t_ray ray, t_obj *s, t_rpoint *p)
 {
 	t_dpoint		solutions;
 	t_rpoint		eq_factors;

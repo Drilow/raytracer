@@ -6,7 +6,11 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/05/10 10:52:23 by adleau           ###   ########.fr       */
+=======
+/*   Updated: 2018/09/27 13:42:37 by adleau           ###   ########.fr       */
+>>>>>>> merge_result
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +19,7 @@
 #include <stdlib.h>
 #include <libft.h>
 #include <fcntl.h>
+#include <parser/parser.h>
 
 static t_poly_obj	*malloc_po(void)
 {
@@ -263,11 +268,20 @@ void			set_obj(t_obj *o)
 		face = tmp->vertices;
 		pos = o->position;
 		get_face_maxd(face, &tmp_d);
+<<<<<<< HEAD
 		face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
+=======
+//		face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
+>>>>>>> merge_result
         face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 		tmp = tmp->next;
 	}
 	((t_poly_obj *)o->obj)->max_d = tmp_d;
+<<<<<<< HEAD
+=======
+// Check distance max :
+//printf("max_d = %f\n", ((t_poly_obj *)o->obj)->max_d);
+>>>>>>> merge_result
 }
 
 t_poly_obj		*parse_obj(char *scene_line)
@@ -303,4 +317,159 @@ t_poly_obj		*parse_obj(char *scene_line)
 	}
 	free_vlist(&v_list);
   return (obj);
+}
+
+//static t_vertex	*add_cube_face(t_rpoint f, t_rpoint pos)
+static t_vertex   *add_cube_face(t_rpoint f)
+{
+  t_vertex		*face;
+
+  face = malloc_vertex();
+  face->next = malloc_vertex();
+  face->next->next = malloc_vertex();
+  face->next->next->next = malloc_vertex();
+  if (f.x != 0)
+	{
+	  face->p = set_rpoint(f.x, -f.x, -f.x);
+	  face->next->p = set_rpoint(f.x, -f.x, f.x);
+	  face->next->next->p = set_rpoint(f.x, f.x, f.x);
+	  face->next->next->next->p = set_rpoint(f.x, f.x, -f.x);
+	}
+  else if (f.y != 0)
+	{
+	  face->p = set_rpoint(-f.y, f.y, -f.y);
+	  face->next->p = set_rpoint(f.y, f.y, -f.y);
+	  face->next->next->p = set_rpoint(f.y, f.y, f.y);
+	  face->next->next->next->p = set_rpoint(-f.y, f.y, f.y);
+	}
+  else if (f.z != 0)
+	{
+	  face->p = set_rpoint(-f.z, -f.z, f.z);
+	  face->next->p = set_rpoint(-f.z, f.z, f.z);
+	  face->next->next->p = set_rpoint(f.z, f.z, f.z);
+	  face->next->next->next->p = set_rpoint(f.z, -f.z, f.z);
+	}
+
+//  face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
+  face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
+  if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
+	  face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
+  return (face);
+}
+
+bool			get_cube(char *s, t_obj *c, int *index)
+{
+    double		size;
+	t_poly_obj	*o;
+	double		maxd;
+
+    if (get_next_rpoint(s, &(c->position), index) == false ||
+		get_next_nb(s, index, &size, NULL) == false)
+        return (false);
+// distance au centre :
+	size = size / 2;
+	printf("%p\n", c);
+	c->size = size;
+	maxd = sqrt(3 * size * size);
+	c->obj = malloc_po();
+	o = c->obj;
+	o->max_d = maxd;;
+//	o->vertices = add_cube_face(set_rpoint(0, 0, size), c->position);
+	o->vertices = add_cube_face(set_rpoint(0, 0, size));
+
+	o->next = malloc_po();
+	o = o->next;
+	o->vertices = add_cube_face(set_rpoint(0, 0, -size));
+	o->next = malloc_po();
+	o = o->next;
+	o->vertices = add_cube_face(set_rpoint(0, size, 0));
+	o->next = malloc_po();
+	o = o->next;
+	o->vertices = add_cube_face(set_rpoint(0, -size, 0));
+	o->next = malloc_po();
+	o = o->next;
+	o->vertices = add_cube_face(set_rpoint(size, 0, 0));
+	o->next = malloc_po();
+	o = o->next;
+	o->vertices = add_cube_face(set_rpoint(-size, 0, 0));
+    return (true);
+}
+
+//++++++++++++++++++++++++++
+//++++++++++++++++++++++++++
+
+//static t_vertex		*add_t_face(int fnb, double size, t_rpoint pos)
+static t_vertex       *add_t_face(int fnb, double size)
+{
+	t_vertex		*face;
+	double			height;
+	double			h;
+
+	face = malloc_vertex();
+	face->next = malloc_vertex();
+	face->next->next = malloc_vertex();
+	height = sqrt((size * size) - (pow(size / 2, 2)));
+	h = height / 3;
+	if (fnb == 1)
+	{
+		face->p = set_rpoint(0, -h, 2 * h);
+		face->next->p = set_rpoint(size / 2, -h, -h);
+		face->next->next->p = set_rpoint(-size / 2, -h, -h);
+	}
+	else if (fnb == 2)
+	{
+		face->p = set_rpoint(0, -h, 2 * h);
+		face->next->p = set_rpoint(size / 2, -h, -h);
+		face->next->next->p = set_rpoint(0, 2 * h, 0);
+	}
+	else if (fnb == 3)
+	{
+		face->p = set_rpoint(0, -h, 2 * h);
+		face->next->p = set_rpoint(0, 2 * h, 0);
+		face->next->next->p = set_rpoint(-size / 2, -h, -h);
+	}
+	else if (fnb == 4)
+	{
+		face->p = set_rpoint(0, 2 * h, 0);
+		face->next->p = set_rpoint(size / 2, -h, -h);
+		face->next->next->p = set_rpoint(-size / 2, -h, -h);
+	}
+
+//	face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
+	face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
+	if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
+		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
+	return (face);
+}
+
+bool			get_tetrahedron(char *s, t_obj *t, int *index)
+{
+    double		size;
+	t_poly_obj	*o;
+//	double		maxd;
+
+    if (get_next_rpoint(s, &(t->position), index) == false ||
+		get_next_nb(s, index, &size, NULL) == false)
+        return (false);
+	t->size = size;
+// distance au centre :
+//	size = size / 2;
+//	maxd = sqrt(3 * size * size);
+	t->obj = malloc_po();
+	o = t->obj;
+// a faire : calculer valeur exact de maxd
+	o->max_d = size;
+//	o->vertices = add_t_face(1, size, t->position);
+	o->vertices = add_t_face(1, size);
+
+	o->next = malloc_po();
+	o = o->next;
+	o->vertices = add_t_face(2, size);
+	o->next = malloc_po();
+	o = o->next;
+	o->vertices = add_t_face(3, size);
+	o->next = malloc_po();
+	o = o->next;
+	o->vertices = add_t_face(4, size);
+    return (true);
 }

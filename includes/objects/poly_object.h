@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/28 16:47:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/05/10 10:56:02 by adleau           ###   ########.fr       */
+/*   Created: 2018/10/24 17:00:13 by adleau            #+#    #+#             */
+/*   Updated: 2018/10/24 17:00:29 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 # define POLY_OBJECT_H
 # include <objects/object.h>
 
-typedef struct		s_face
-{
-	t_rpoint		p1;
-	t_rpoint		p2;
-	t_rpoint		p3;
-}					t_face;
-
 typedef struct		s_vertex
 {
 	t_rpoint		p;
-	t_plane			pl;
-	struct s_vertex	*next;
+	t_plane         pl;
+  struct s_vertex	*next;
 }					t_vertex;
 
 typedef struct		s_poly_obj

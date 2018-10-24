@@ -6,7 +6,11 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/10 10:54:01 by adleau           ###   ########.fr       */
+<<<<<<< HEAD
+/*   Updated: 2018/10/24 16:57:39 by adleau           ###   ########.fr       */
+=======
+/*   Updated: 2018/09/02 18:27:37 by adleau           ###   ########.fr       */
+>>>>>>> merge_result
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +19,7 @@
 #include <parser/parser.h>
 #include <extra/extra_defs.h>
 #include <objects/object.h>
+#include <fcntl.h>
 
 extern t_global g_global;
 
@@ -34,8 +39,15 @@ static int		get_object_type(char *s)
 		return (5);
 	if (cmp_chars(s, "obj", 0) == true)
         return (6);
+	if (cmp_chars(s, "cube", 0) == true)
+		return (66);
+	if (cmp_chars(s, "tetrahedron", 0) == true)
+		return (67);
+	if (cmp_chars(s, "ambient light", 0) == true)
+        return (7);
 	if (cmp_chars(s, "//", 0) == true)
 		return (-2);
+	ft_putendl(s);
 	return (-1);
 }
 
@@ -65,26 +77,44 @@ static void		add_to_list(void *o, int otype)
 
 	if (otype != 0)
 	{
-		if (g_global.r.objects == NULL)
-			g_global.r.objects = (t_obj *)o;
+		if (g_global.r->objects == NULL)
+			g_global.r->objects = (t_obj *)o;
 		else
 		{
-			otmp = g_global.r.objects;
+			otmp = g_global.r->objects;
 			while (otmp->next != NULL)
 				otmp = otmp->next;
 			otmp->next = (t_obj *)o;
 		}
 		return ;
 	}
-	if (g_global.r.lights == NULL)
-		g_global.r.lights = (t_light *)o;
+	if (g_global.r->lights == NULL)
+		g_global.r->lights = (t_light *)o;
 	else
 	{
-		ltmp = g_global.r.lights;
+		ltmp = g_global.r->lights;
 		while (ltmp->next != NULL)
 			ltmp = ltmp->next;
 		ltmp->next = (t_light *)o;
 	}
+}
+
+static bool	set_ambient_light(char *line)
+{
+	int		index;
+	t_rgb	alight;
+
+	index = 0;
+	if (get_next_nb(line, &index, NULL, &(alight.r)) == false)
+		return (false);
+	if (get_next_nb(line, &index, NULL, &(alight.g)) == false)
+		return (false);
+	if (get_next_nb(line, &index, NULL, &(alight.b)) == false)
+		return (false);
+	if (get_next_nb(line, &index, NULL, &(alight.trans)) == false)
+		return (false);
+	g_global.r->ambient_light = alight;
+	return (true);
 }
 
 static bool	read_line(char *line)
@@ -100,6 +130,8 @@ static bool	read_line(char *line)
 		return (true);
 	else if (obj_type == 5)
 		return (set_camera(line));
+	else if (obj_type == 7)
+		return (set_ambient_light(line));
 	if (obj_type == 0)
 	{
 	  if (!(new = (t_light *)malloc(sizeof(t_light))))
@@ -109,20 +141,7 @@ static bool	read_line(char *line)
 	else
 		new = malloc_object(obj_type);
 	index = 0;
-	if (obj_type == 6)
-	{
-		((t_obj *)new)->obj = parse_obj(line);
-		index = 4;
-		while (line[index] != ' ')
-			index++;
-		if (((t_obj *)new)->obj == NULL)
-			printf("((t_obj *)new)->obj == NULL\n");
-		if (((t_obj *)new)->obj == NULL || get_next_rpoint(line, &(((t_obj *)new)->position), &index) == false)
-			return (false);
-		((t_obj *)new)->color = ft_rgb(170, 130, 120, 0);
-		set_obj((t_obj *)new);
-	}
-	if (obj_type != 6 && get_obj(line, new, &index, obj_type) == false)
+	if (get_obj(line, new, &index, obj_type) == false)
 		return (false);
 	add_to_list(new, obj_type);
 	return (true);
@@ -136,13 +155,16 @@ bool			parse(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (false);
-	g_global.r.objects = NULL;
-	g_global.r.lights = NULL;
+	g_global.r->objects = NULL;
+	g_global.r->lights = NULL;
+	g_global.r->ambient_light = ft_rgb(0, 0, 0, 0);
 	while (get_next_line(fd, &line) == 1)
 	{
 		if (read_line(line) == false)
 			usage("Error : invalid file.", 1);
+//		printf("%s\n", line);
 		free(line);
 	}
+	close(fd);
 	return (true);
 }

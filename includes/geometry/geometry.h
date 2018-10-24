@@ -6,13 +6,14 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:51:22 by adleau            #+#    #+#             */
-/*   Updated: 2018/04/28 23:24:40 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/05/27 16:27:55 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef		GEOMETRY_H
 # define	GEOMETRY_H
 # include <math.h>
+
 # define PI M_PI
 # define FOV (PI / 3)
 

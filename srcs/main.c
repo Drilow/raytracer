@@ -6,20 +6,24 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/05/10 12:45:07 by adleau           ###   ########.fr       */
+<<<<<<< HEAD
+/*   Updated: 2018/10/24 17:05:44 by adleau           ###   ########.fr       */
+=======
+/*   Updated: 2018/10/20 10:05:36 by adleau           ###   ########.fr       */
+>>>>>>> merge_result
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <objects/object.h>
 #include <global.h>
-#include <cl_inc/cl_defs.h>
 #include <geometry/geometry.h>
 #include <extra/extra_defs.h>
 #include <libft.h>
 #include <parser/parser.h>
 #include <display/display.h>
 #define EVENT_PTR g_global.sdl_mgr.event
-#define CL_MGR g_global.cl_mgr
+#define PIXMAP g_global.r->gtk_mgr.pixmap
 
 t_global		g_global;
 
@@ -33,41 +37,59 @@ void	ft_exit(char *msg_error, int i)
 	exit(i);
 }
 
-
 static void			init_ray(t_point p)
 {
-	g_global.r.rays[p.y][p.x].p = g_global.r.cam_position;
-	g_global.r.rays[p.y][p.x].vector.x = p.x - (WIN_W / 2);
-	g_global.r.rays[p.y][p.x].vector.y = p.y - (WIN_H / 2);
-	g_global.r.rays[p.y][p.x].vector.y = -p.y + (WIN_H / 2);
-	g_global.r.rays[p.y][p.x].vector.z = g_global.r.screen_distance;
+	g_global.r->rays[p.y][p.x].p = g_global.r->cam_position;
+	g_global.r->rays[p.y][p.x].vector.x = p.x - (WIN_W / 2);
+	g_global.r->rays[p.y][p.x].vector.y = -p.y + (WIN_H / 2);
+	g_global.r->rays[p.y][p.x].vector.z = g_global.r->screen_distance;
 }
 
-static void		init_cl(void)
+void			setup_rt_lst(void)
 {
-	CL_MGR.gpu = 1;
-	if ((CL_MGR.cl_err = clGetDeviceIDs(NULL, CL_MGR.gpu ? CL_DEVICE_TYPE_GPU : CL_DEVICE_TYPE_CPU, 1, &(CL_MGR.device_id), NULL)))
-		usage("Error: Failed to create a device group!", 1);
-	if (!(CL_MGR.context = clCreateContext(0, 1, &(CL_MGR.device_id), NULL, NULL, &(CL_MGR.cl_err))))
-		usage("Error: Failed to create a compute context!", 1);
-	if (!(CL_MGR.commands = clCreateCommandQueue(CL_MGR.context, CL_MGR.device_id, 0, &(CL_MGR.cl_err))))
-		usage("Error: Failed to create a command queue!", 1);
-	if (!(CL_MGR.px_arr = (int*)clCreateBuffer(CL_MGR.context,  CL_MEM_READ_ONLY,  sizeof(int) * WIN_H * WIN_W, NULL, NULL)))
-		usage("Error: Failed to create CL buffers!", 1);
+	if (!(g_global.r = (t_rt*)malloc(sizeof(t_rt))))
+		exit(1);
+	g_global.first_scene = g_global.r;
+	g_global.r->next = NULL;
 }
 
-static void		init_rt(int ac, char **av)
+void			add_link_to_rt_list(void)
+{
+	t_rt		*tmp;
+
+	if (!(tmp = (t_rt*)malloc(sizeof(t_rt))))
+		exit(1);
+	g_global.r->next = tmp;
+	g_global.r = g_global.r->next;
+}
+
+void			init_obj_tab(void)
+{
+	int			y;
+
+	y = -1;
+	g_global.r->checker = NULL;
+	if (!(g_global.r->checker = malloc(sizeof(t_obj**) * WIN_H)))
+		exit(1);
+	while (++y < WIN_H)
+		if (!(g_global.r->checker[y] = malloc(sizeof(t_obj*) * WIN_W)))
+			exit(1);
+}
+
+void			init_rt(void)
 {
 	t_point			p;
 
-	if (ac == 1)
-		usage("Error : argument missing.", 1);
-	else if (ac > 2)
-		usage("Error : too many arguments.", 1);
-	g_global.r.cam_position.x = 0;
-	g_global.r.cam_position.y = 0;
-	g_global.r.cam_position.z = 0;
-	g_global.r.screen_distance = (WIN_W / 2) / tan(FOV / 2);
+	if (g_global.r == NULL)
+		setup_rt_lst();
+	else
+		add_link_to_rt_list();
+	init_obj_tab();
+	PIXMAP = NULL;
+	g_global.r->cam_position.x = 0;
+	g_global.r->cam_position.y = 0;
+	g_global.r->cam_position.z = 0;
+	g_global.r->screen_distance = (WIN_W / 2) / tan(FOV / 2);
 	p.y = -1;
 	while (++p.y < WIN_H)
 	{
@@ -75,39 +97,18 @@ static void		init_rt(int ac, char **av)
 		while (++p.x < WIN_W)
 			init_ray(p);
 	}
-	if (parse(av[1]) == false)
-		usage("Error : invalid argument.", 1);
 }
 
 void			init_global(int ac, char **av)
 {
+//	ft_putendl("debug1");
 	g_global.drawn = 1;
-	init_sdl_wrap(&(g_global.sdl_mgr));
-	init_cl();
-	init_rt(ac, av);
-	g_global.running = 1;
-}
-
-void			draw_func(void)
-{
-	sdl_loop_init();
-	draw_image(&(g_global.sdl_mgr));
-	sdl_loop_end();
+	g_global.r = NULL;
+	init_gtk(ac, av);
 }
 
 int				main(int __attribute__((unused))ac, char __attribute__((unused))**av)
 {
 	init_global(ac, av);
-	while (g_global.running)
-	{
-		if (g_global.drawn == 1)
-			draw_func();
-		if (SDL_PollEvent(&(EVENT_PTR)))
-		{
-			if (EVENT_PTR.type == SDL_QUIT || (EVENT_PTR.type == SDL_KEYDOWN && EVENT_PTR.key.keysym.sym == SDLK_ESCAPE))
-				exit(1);
-//			else if (EVENT_PTR.type == SDL_KEYDOWN)
-		}
-	}
 	return (0);
 }

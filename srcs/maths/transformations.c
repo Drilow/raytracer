@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:45:24 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 19:38:21 by adleau           ###   ########.fr       */
+/*   Updated: 2018/08/31 02:58:20 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,27 @@ void			rotate(t_rpoint *p, t_rpoint angle)
 	}
 }
 
+
+static void		rotate_poly_obj(t_obj *o, t_rpoint angle)
+{
+	t_vertex	*tmpv;
+	t_poly_obj	*tmppo;
+
+	tmppo = (t_poly_obj *)o->obj;
+	while (tmppo != NULL)
+	{
+		tmpv = tmppo->vertices;
+		rotate(&(tmpv->pl.vector), angle);
+		while (tmpv != NULL)
+		{
+			rotate(&(tmpv->p), angle);
+			tmpv = tmpv->next;
+		}
+		tmppo = tmppo->next;
+	}
+}
+
+
 void			rotate_obj(void *o, int type, t_rpoint angle)
 {
 	t_obj		*obj;
@@ -55,25 +76,32 @@ void			rotate_obj(void *o, int type, t_rpoint angle)
 		rotate(&(((t_cone *)obj->obj)->vector), angle);
 	if (type == 4)
 		rotate(&(((t_cylinder *)obj->obj)->vector), angle);
+	if (type == 6 || type / 10 == 6)
+	  rotate_poly_obj(obj, angle);
 }
 
 void			translate_obj(void *o, int type, t_rpoint translation)
 {
 	t_rpoint	*data;
-	t_obj		*obj;
+//	t_obj		*obj;
 
 	if (type == 0)
 		data = &(((t_light *)o)->source);
 	else
-		obj = (t_obj *)o;
-	if (type == 1)
-		data = &(((t_sphere *)obj->obj)->center);
-	if (type == 2)
-		data = &(((t_plane *)obj->obj)->p);
-	if (type == 3)
-		data = &(((t_cone *)obj->obj)->summit);
-	if (type == 4)
-		data = &(((t_cylinder *)obj->obj)->summit);
+		data = &(((t_obj *)o)->position);
+//		obj = (t_obj *)o;
+/*
+//	if (type == 1)
+//		data = &(((t_sphere *)obj->obj)->center);
+//	if (type == 2)
+//		data = &(((t_plane *)obj->obj)->p);
+//	if (type == 3)
+//		data = &(((t_cone *)obj->obj)->summit);
+//	if (type == 4)
+//		data = &(((t_cylinder *)obj->obj)->summit);
+//	if (type == 6 || type / 10 == 6)
+//	  data = &(obj->position);
+*/
 	data->x = data->x + translation.x;
 	data->y = data->y + translation.y;
 	data->z = data->z + translation.z;
