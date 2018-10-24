@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:47:04 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/20 11:47:11 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/24 17:37:56 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void				handle_edit_validation(t_obj *o)
 	}
 	else if (r == GTK_RESPONSE_REJECT)
 	{
-		draw_image();
+		redraw(true);
 		gtk_widget_destroy(ADD_VIEW.win);
 	}
 }

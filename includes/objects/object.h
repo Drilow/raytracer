@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/24 17:08:18 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/24 17:30:32 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef struct		s_obj
 {
 	int				type;
+	bool			enabled;
 	t_rpoint		position;
 	void			*obj;
 	t_rgb			color;

@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/10/24 17:08:52 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/24 17:34:44 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static void		add_to_list(void *o, int otype)
 
 	if (otype != 0)
 	{
+		((t_obj*)o)->enabled = true;
 		if (g_global.r->objects == NULL)
 			g_global.r->objects = (t_obj *)o;
 		else

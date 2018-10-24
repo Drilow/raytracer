@@ -117,30 +117,29 @@ void 				append_column_with_text(GtkWidget *tree, char *text, GtkCellRenderer *r
 }
 
 static void checked_row(__attribute__((unused))GtkCellRendererToggle *cell,
-               gchar __attribute__((unused))*path_str,
-               __attribute__((unused))gpointer data)
+						gchar __attribute__((unused))*path_str,
+						__attribute__((unused))gpointer data)
 {
- /* int r;
-        printf("bjr %d\n", gtk_cell_renderer_toggle_get_active(cell));
-        if ((r = gtk_cell_renderer_toggle_get_active(cell)) == true)
-            gtk_cell_renderer_toggle_set_active(cell, false);
-        else
-            gtk_cell_renderer_toggle_set_active(cell, true);
-        printf("slt %d\n", gtk_cell_renderer_toggle_get_active(cell));
-*/        GtkTreeIter  iter;
-        GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
-        gboolean enabled;
-        GtkTreeModel *model;
+	GtkTreeIter  iter;
+	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
+	gboolean enabled;
+	GtkTreeModel *model;
+	gpointer		*obj;
 
-        model = NULL;
-        if ((model = gtk_tree_view_get_model (GTK_TREE_VIEW (SCENE_VIEW.tree))) == NULL)
+	model = NULL;
+	if ((model = gtk_tree_view_get_model (GTK_TREE_VIEW (SCENE_VIEW.tree))) == NULL)
         return ;
-        gtk_tree_model_get_iter (model, &iter, path);
-        gtk_tree_model_get (model, &iter, CHECKED_COLUMN, &enabled, -1);
-        enabled = !enabled;
-   gtk_tree_store_set(SCENE_VIEW.store, &iter, CHECKED_COLUMN, enabled, -1);
-
-        gtk_tree_path_free (path);
+	gtk_tree_model_get_iter (model, &iter, path);
+	gtk_tree_model_get (model, &iter, CHECKED_COLUMN, &enabled, -1);
+	enabled = !enabled;
+	gtk_tree_store_set(SCENE_VIEW.store, &iter, CHECKED_COLUMN, enabled, -1);
+	if (gtk_tree_model_get_iter(model, &iter, path))
+    {
+		gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
+		((t_obj*)obj)->enabled = enabled;
+    }
+	redraw(true);
+	gtk_tree_path_free (path);
 }
 
 void        select_handler(GtkTreeView *tree_view, GtkTreePath *path,
