@@ -215,7 +215,7 @@ void				scene_win(void)
                                                       renderer,
                                                       "active", CHECKED_COLUMN,
                                                       NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW (SCENE_VIEW.tree), column);
+	gtk_tree_view_append_column(GTK_TREE_VIEW(SCENE_VIEW.tree), column);
 
   g_signal_connect(G_OBJECT(SCENE_VIEW.tree), "row-activated",
     G_CALLBACK(select_handler), NULL);

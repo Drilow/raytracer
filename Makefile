@@ -6,11 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2018/10/24 16:58:25 by adleau           ###   ########.fr        #
-=======
-#    Updated: 2018/10/20 09:57:22 by adleau           ###   ########.fr        #
->>>>>>> merge_result
+#    Updated: 2018/10/24 17:07:21 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,10 +83,6 @@ SRC =   $(SRCPATH)main.c \
 INCPATH	=	includes/
 
 INC	=		$(INCPATH)objects/object.h \
-<<<<<<< HEAD
-			$(INCPATH)sdl_stuff/sdl_mgr.h		\
-=======
->>>>>>> merge_result
 
 OBJ = $(SRC:.c=.o)
 
@@ -127,22 +119,4 @@ fclean: clean
 
 re: fclean all
 
-<<<<<<< HEAD
-ext: ext/SDL2
-
-ext/SDL2:
-		rm -fr ext/SDL2
-		mkdir -p ext/SDL2/junk
-		rm -fr  SDL2-2.0.7
-		curl -O http://www.libsdl.org/release/SDL2-2.0.7.tar.gz
-		@echo "$(VERT)~> [ SDL library downloaded. ]$(NCOL)"
-		tar xf SDL2-2.0.7.tar.gz
-		( cd SDL2-2.0.7 \
-		&& ./configure --prefix=$(shell pwd)/ext/SDL2/ \
-		&& $(MAKE) && $(MAKE) install )
-		mv -f SDL2-2.0.7.tar.gz SDL2-2.0.7 ext/SDL2/junk
-		@echo "$(VERT)~> [ SDL library set up. ]$(NCOL)"
-
-=======
->>>>>>> merge_result
 .PHONY: clean all re fclean

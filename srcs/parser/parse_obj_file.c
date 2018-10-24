@@ -6,11 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/05/10 10:52:23 by adleau           ###   ########.fr       */
-=======
-/*   Updated: 2018/09/27 13:42:37 by adleau           ###   ########.fr       */
->>>>>>> merge_result
+/*   Updated: 2018/10/24 17:09:32 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,20 +264,10 @@ void			set_obj(t_obj *o)
 		face = tmp->vertices;
 		pos = o->position;
 		get_face_maxd(face, &tmp_d);
-<<<<<<< HEAD
-		face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
-=======
-//		face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
->>>>>>> merge_result
         face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 		tmp = tmp->next;
 	}
 	((t_poly_obj *)o->obj)->max_d = tmp_d;
-<<<<<<< HEAD
-=======
-// Check distance max :
-//printf("max_d = %f\n", ((t_poly_obj *)o->obj)->max_d);
->>>>>>> merge_result
 }
 
 t_poly_obj		*parse_obj(char *scene_line)
