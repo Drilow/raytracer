@@ -15,7 +15,6 @@ enum
    POS_X_COLUMN,
    POS_Y_COLUMN,
    POS_Z_COLUMN,
-   SIZE_COLUMN,
    CHECKED_COLUMN,
    OBJ_REF,
    N_COLUMNS
@@ -57,7 +56,6 @@ gtk_tree_store_set (SCENE_VIEW.store, &iter1,
                     POS_X_COLUMN, obj->position.x,
                     POS_Y_COLUMN, obj->position.y,
                     POS_Z_COLUMN, obj->position.z,
-                    SIZE_COLUMN, obj->size,
                     CHECKED_COLUMN, TRUE,
                     OBJ_REF, (gpointer)obj,
                     -1);
@@ -73,7 +71,6 @@ gtk_tree_store_set (SCENE_VIEW.store, &iter1,
                     POS_X_COLUMN, light->source.x,
                     POS_Y_COLUMN, light->source.y,
                     POS_Z_COLUMN, light->source.z,
-                    SIZE_COLUMN, (double)0,
                     CHECKED_COLUMN, TRUE,
                     OBJ_REF, (gpointer)light,
                     -1);
@@ -102,7 +99,6 @@ void 			populate_tree_model(GtkTreeStore *store)
                     POS_X_COLUMN, g_global.r->cam_position.x,
                     POS_Y_COLUMN, g_global.r->cam_position.y,
                     POS_Z_COLUMN, g_global.r->cam_position.z,
-                    SIZE_COLUMN, (double)0,
                     CHECKED_COLUMN, TRUE,
                     OBJ_REF, (gpointer)&g_global.r->cam_position, -1);
 }
@@ -210,7 +206,6 @@ void				scene_win(void)
                                G_TYPE_DOUBLE,
                                G_TYPE_DOUBLE,
                                G_TYPE_DOUBLE,
-                               G_TYPE_DOUBLE,
                                G_TYPE_BOOLEAN,
                                G_TYPE_POINTER,
                                -1);
@@ -232,11 +227,6 @@ void				scene_win(void)
    	append_column_with_text(SCENE_VIEW.tree, "Pos X", renderer, POS_X_COLUMN);
    	append_column_with_text(SCENE_VIEW.tree, "Pos Y", renderer, POS_Y_COLUMN);
    	append_column_with_text(SCENE_VIEW.tree, "Pos Z", renderer, POS_Z_COLUMN);
-   renderer = gtk_cell_renderer_text_new ();
-   g_object_set (G_OBJECT (renderer),
-                 "foreground", "blue",
-                 NULL);
-   append_column_with_text(SCENE_VIEW.tree, "Size", renderer, SIZE_COLUMN);
    renderer = gtk_cell_renderer_toggle_new ();
    gtk_cell_renderer_toggle_set_activatable(GTK_CELL_RENDERER_TOGGLE(renderer), TRUE);
    g_signal_connect (G_OBJECT(renderer), "toggled", G_CALLBACK
