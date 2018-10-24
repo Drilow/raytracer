@@ -136,13 +136,13 @@ static void checked_row(__attribute__((unused))GtkCellRendererToggle *cell,
 	gtk_tree_store_set(SCENE_VIEW.store, &iter, CHECKED_COLUMN, enabled, -1);
 	if (gtk_tree_model_get_iter(model, &iter, path))
     {
-		if (obj && ((t_obj*)obj)->type != 0)
-		{
+//		if (obj && ((t_obj*)obj)->type != 0)
+//		{
 			gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
 			((t_obj*)obj)->enabled = enabled;
-		}
-		else
-			((t_light*)obj)->enabled = enabled; // a debug
+//		}
+//		else
+//			((t_light*)obj)->enabled = enabled; // a debug
 	}
 	redraw(true);
 	gtk_tree_path_free (path);
