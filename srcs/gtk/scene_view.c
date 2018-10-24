@@ -16,6 +16,7 @@ enum
    POS_Y_COLUMN,
    POS_Z_COLUMN,
    CHECKED_COLUMN,
+   CHECKED_ACTIVE,
    OBJ_REF,
    N_COLUMNS
 };
@@ -57,6 +58,7 @@ gtk_tree_store_set (SCENE_VIEW.store, &iter1,
                     POS_Y_COLUMN, obj->position.y,
                     POS_Z_COLUMN, obj->position.z,
                     CHECKED_COLUMN, TRUE,
+                    CHECKED_ACTIVE, TRUE,
                     OBJ_REF, (gpointer)obj,
                     -1);
 }
@@ -72,6 +74,7 @@ gtk_tree_store_set (SCENE_VIEW.store, &iter1,
                     POS_Y_COLUMN, light->source.y,
                     POS_Z_COLUMN, light->source.z,
                     CHECKED_COLUMN, TRUE,
+                    CHECKED_ACTIVE, TRUE,
                     OBJ_REF, (gpointer)light,
                     -1);
 }
@@ -100,6 +103,7 @@ void 			populate_tree_model(GtkTreeStore *store)
                     POS_Y_COLUMN, g_global.r->cam_position.y,
                     POS_Z_COLUMN, g_global.r->cam_position.z,
                     CHECKED_COLUMN, TRUE,
+                    CHECKED_ACTIVE, FALSE,
                     OBJ_REF, (gpointer)&g_global.r->cam_position, -1);
 }
 
@@ -207,6 +211,7 @@ void				scene_win(void)
                                G_TYPE_DOUBLE,
                                G_TYPE_DOUBLE,
                                G_TYPE_BOOLEAN,
+                               G_TYPE_BOOLEAN,
                                G_TYPE_POINTER,
                                -1);
 
@@ -235,6 +240,7 @@ void				scene_win(void)
                                                       renderer,
                                                       "active", CHECKED_COLUMN,
                                                       NULL);
+   gtk_tree_view_column_add_attribute (column, renderer, "activatable", CHECKED_ACTIVE);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(SCENE_VIEW.tree), column);
 
   g_signal_connect(G_OBJECT(SCENE_VIEW.tree), "row-activated",
