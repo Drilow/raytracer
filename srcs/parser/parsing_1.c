@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/10/22 15:01:23 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/29 16:11:53 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,7 @@ bool			parse(char *file)
 	}
 	ft_free(str);
 	obj = (t_json_object *)val->ptr;
+	camera_init();
 	while (nb++ <= obj->nb)
 		start_parse(obj, get_obj_type(obj->pair[nb]->key->str), nb)
 	while (get_next_line(fd, &line) == 1)

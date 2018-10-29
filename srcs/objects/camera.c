@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 18:38:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/17 18:06:24 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/29 16:03:28 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,10 @@ static bool	get_camera(char *s, t_rpoint *angle)
 	return (true);
 }
 
-bool			set_camera(char *s)
+bool			set_camera(t_rpoint angle)
 {
-	t_rpoint	angle;
 	t_point		p;
 
-	if (get_camera(s, &angle) == false)
-		return (false);
 	angle.x = ((double)((int)angle.x % 360) / 360) * (2 * PI);
 	angle.y = ((double)((int)angle.y % 360) / 360) * (2 * PI);
 	angle.z = ((double)((int)angle.z % 360) / 360) * (2 * PI);

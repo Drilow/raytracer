@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:17:00 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/23 18:58:42 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/10/29 15:18:58 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ static	int		check_key(char *str)
 static 	t_light			*put_info(t_json_array *arr, t_light *lights)
 {
 	int				*a;
+	unsigned long	*num;
 
+	num = 0;
 	if (arr->nb == 3)
 	{
 		a = (int *)arr->value[num++]->ptr;
