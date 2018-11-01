@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/03 17:03:46 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/01 13:17:03 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ bool			get_tetrahedron(char *s, t_obj *t, int *index);
 bool			set_cube(t_rpoint position, double size, t_obj *c);
 bool			set_tetrahedron(t_rpoint position, double size, t_obj *t);
 bool			validate_obj(t_rpoint pos, double size, char *path, t_obj *o);
+bool			parse_object(t_json_object *obj, unsigned long nb);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_obj_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/09/27 13:42:37 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/01 11:19:31 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ static void			free_vlist(t_vertex **v_list)
   tmp = *v_list;
   while (tmp != NULL)
 	{
-	  tmp_next = tmp->next;
-	  free(tmp);
-	  tmp = tmp_next;
+		tmp_next = tmp->next;
+		free(tmp);
+		tmp = tmp_next;
 	}
 }
 
 static bool	get_next_double(char *line, int *index, double *a)
 {
-  double		sign;
-  double		tmp;
-  int			digit_index;
+	double		sign;
+	double		tmp;
+	int			digit_index;
 
   sign = 1;
   tmp = 0;
