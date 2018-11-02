@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/02 15:34:50 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/02 15:36:32 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ static 	bool	get_sphere_inf(t_json_object *obj, unsigned long nb)
 		return (false);
 	if (cmp_chars(obj->pair[1]->key->str, "pos", 0) == true)
 	{
-		if (get_inf(&obj, 3) == false)
+		if (get_inf(&o, 3) == false)
 			return (false);
 	}
 	if (cmp_chars(obj->pair[2]->key->str, "vector", 0) == true)
 	{
-		if (get_inf(&obj, 3) == false)
+		if (get_inf(&o, 3) == false)
 			return (false);
 	}
 	if (cmp_chars(obj->pair[3]->key->str, "angle", 0) == true)
