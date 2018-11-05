@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/02 15:36:32 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/05 11:59:48 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 #include <objects/object.h>
 #include <fcntl.h>
 
+static	bool	get_inf(t_obj *o,t_json_value *val, int i)
+{
+	double	*a;
+	t_json_array *arr;
+
+	if (val == NULL)
+		return (false);
+	if (val->type == number || val->type == integer)
+	{
+		a = (double *)val->ptr;
+		o->
+	}
+	return (true);
+}
 
 static	int		get_obj_type(t_json_pair *pair)
 {
@@ -36,35 +50,8 @@ static	int		get_obj_type(t_json_pair *pair)
 	if (cmp_chars(str, "cylinder", 0) == true)
 		return (4);
 	if (cmp_chars(str, "obj", 0) == true)
-		return (5);
+		return (6);
 	return (-1);
-}
-
-static 	bool	get_sphere_inf(t_json_object *obj, unsigned long nb)
-{
-	t_obj		o;
-	t_sphere	*sph;
-	bool		groboul;
-
-	if (obj->pair[nb]->value->type != array)
-		return (false);
-	if (cmp_chars(obj->pair[1]->key->str, "pos", 0) == true)
-	{
-		if (get_inf(&o, 3) == false)
-			return (false);
-	}
-	if (cmp_chars(obj->pair[2]->key->str, "vector", 0) == true)
-	{
-		if (get_inf(&o, 3) == false)
-			return (false);
-	}
-	if (cmp_chars(obj->pair[3]->key->str, "angle", 0) == true)
-	if ((cmp_chars(obj->pair[4]->key->str, "INF", 0) == true)
-	&& obj->pair[4]->value->type == bool)
-		groboul = (bool)obj->pair[4]->value->ptr;
-	if (cmp_chars(obj->pair[5]->key->str, "color", 0) == true)
-		o.color = get_obj_color(obj->pair[5]->value);
-	return (true);
 }
 
 static	bool	add_new_obj(t_json_array *list, unsigned long num)
