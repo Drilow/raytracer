@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 18:49:08 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/29 16:11:31 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:14:25 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static	int		check_key(char *str)
 		return (1);
 	if (cmp_chars(str, "angle", 0))
 		return (2);
-	return (0)
+	return (0);
 }
 
 static 	t_rpoint	camera_init(void)
@@ -44,10 +44,13 @@ static 	t_rpoint	camera_init(void)
 static 	t_rpoint		put_cam_info(t_json_array *arr)
 {
 	int				*a;
-	unsigned long	*num;
+	unsigned long	num;
 	t_rpoint		points;
 
 	num = 0;
+	points.x = 0;
+	points.y = 0;
+	points.z = 0;
 	if (arr->nb == 3)
 	{
 		a = (int *)arr->value[num++]->ptr;
@@ -58,7 +61,7 @@ static 	t_rpoint		put_cam_info(t_json_array *arr)
 		points.z = (double)*a;
 		return (points);
 	}
-	return (NULL);
+	return (points);
 }
 
 static	void	*get_info(t_json_value *val, int i, t_rpoint *angle)
@@ -79,19 +82,25 @@ static	void	*get_info(t_json_value *val, int i, t_rpoint *angle)
 	return (NULL);
 }
 
-void				*parse_camera(t_json_object *obj, unsigned long nb)
+void				parse_camera(t_json_object *obj, unsigned long nb)
 {
 	t_json_object	*o;
 	unsigned long	num;
-	t_rpoint		angle
+	t_rpoint		angle;
 
 	num = 0;
 	o = 0;
 	angle = camera_init();
 	if (obj->pair[nb]->value->type != 4)
-		return (set_camera(angle));
+	{
+		set_camera(angle);
+		return ;
+	}
 	if((o = (t_json_object *)obj->pair[nb]->value->ptr) == NULL)
-		return (set_camera(angle));
+	{
+		set_camera(angle);
+		return ;
+	}
 	while (num++ < o->nb)
 	{
 		if ((check_key(obj->pair[num]->key->str)) == 1)
@@ -99,5 +108,5 @@ void				*parse_camera(t_json_object *obj, unsigned long nb)
 		if ((check_key(obj->pair[num]->key->str)) == 2)
 			get_info(obj->pair[num]->value, 2, &angle);
 	}
-	return(set_camera(angle));
+	set_camera(angle);
 }

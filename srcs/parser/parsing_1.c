@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/01 13:11:06 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/07 15:56:50 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,10 @@ static int		get_object_type(char *s)
 {
 	if (cmp_chars(s, "light", 0) == true)
 		return (0);
-	if (cmp_chars(s, "sphere", 0) == true)
-		return (1);
-	if (cmp_chars(s, "plane", 0) == true)
-		return (2);
-	if (cmp_chars(s, "cone", 0) == true)
-		return (3);
-	if (cmp_chars(s, "cylinder", 0) == true)
-		return (4);
 	if (cmp_chars(s, "camera", 0) == true)
 		return (5);
-	if (cmp_chars(s, "obj", 0) == true)
-        return (6);
+	if (cmp_chars(s, "objects", 0) == true)
+        return (1);
 	if (cmp_chars(s, "cube", 0) == true)
 		return (66);
 	if (cmp_chars(s, "tetrahedron", 0) == true)
@@ -47,7 +39,7 @@ static int		get_object_type(char *s)
 	ft_putendl(s);
 	return (-1);
 }
-
+/*
 static t_obj	*malloc_object(int type)
 {
 	t_obj		*o;
@@ -65,8 +57,8 @@ static t_obj	*malloc_object(int type)
 	o->type = type;
 	o->next = NULL;
 	return (o);
-}
-
+}*/
+/*
 static void		add_to_list(void *o, int otype)
 {
 	t_obj		*otmp;
@@ -113,7 +105,8 @@ static bool	set_ambient_light(char *line)
 	g_global.r->ambient_light = alight;
 	return (true);
 }
-
+*/
+/*
 static bool	read_line(char *line)
 {
 	int			obj_type;
@@ -138,7 +131,7 @@ static bool	read_line(char *line)
 	else
 		new = malloc_object(obj_type);
 	index = 0;
-/*
+
 	if (obj_type == 6)
 	{
 //		((t_obj *)new)->obj = parse_obj(line + (sizeof(char) * 4));
@@ -158,20 +151,19 @@ static bool	read_line(char *line)
 	/*
 	if (obj_type != 6 && get_obj(line, new, &index, obj_type) == false)
 		return (false);
-	*/
+	*//*
 	if (get_obj(line, new, &index, obj_type) == false)
 		return (false);
 	add_to_list(new, obj_type);
 	return (true);
-}
-
+}*/
 bool			parse(char *file)
 {
 	int				fd;
 	char			*str;
-	char			*line;
+	//char			*line;
 	t_json_value	*val;
-	unsigned long	*nb;
+	unsigned long	nb;
 	t_json_object	*obj;
 
 	nb = 0;
@@ -191,15 +183,15 @@ bool			parse(char *file)
 	ft_free(str);
 	obj = (t_json_object *)val->ptr;
 	while (nb++ <= obj->nb)
-		start_parse(obj, get_obj_type(obj->pair[nb]->key->str), nb)
-	while (get_next_line(fd, &line) == 1)
+		start_parse(obj, get_object_type(obj->pair[nb]->key->str), nb);
+	/*while (get_next_line(fd, &line) == 1)
 	{
 		if (read_line(line) == false)
 			usage("Error : invalid file.", 1);
 	
 		//printf("%s\n", line);
 		free(line);
-	}
+	}*/
 	close(fd);
 	return (true);
 }

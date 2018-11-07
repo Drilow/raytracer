@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 18:38:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/29 16:03:28 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:10:57 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <libft.h>
 
 extern t_global g_global;
-
+/*
 static bool	get_camera(char *s, t_rpoint *angle)
 {
 	int			index;
@@ -33,7 +33,7 @@ static bool	get_camera(char *s, t_rpoint *angle)
 		return (false);
 	return (true);
 }
-
+*/
 bool			set_camera(t_rpoint angle)
 {
 	t_point		p;

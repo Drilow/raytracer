@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:09:05 by alacrois          #+#    #+#             */
-/*   Updated: 2018/05/09 21:47:37 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/11/07 14:25:28 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include <pthread.h>
+# include "Libjson/includes/json.h"
 
 # define WIN_SIZE_X 400
 # define WIN_SIZE_Y 250

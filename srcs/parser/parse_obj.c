@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/05 11:59:48 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:35:57 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <objects/object.h>
 #include <fcntl.h>
 
+extern t_global g_global;
+/*
 static	bool	get_inf(t_obj *o,t_json_value *val, int i)
 {
 	double	*a;
@@ -31,13 +33,13 @@ static	bool	get_inf(t_obj *o,t_json_value *val, int i)
 	}
 	return (true);
 }
-
+*/
 static	int		get_obj_type(t_json_pair *pair)
 {
 	t_json_string	*string;
 	char			*str;
 
-	if (pair->value->type != string)
+	if (pair->value->type != 7)
 		return (0);
 	string = (t_json_string *)pair->value->ptr;
 	str = (char *)string->str;
@@ -68,13 +70,30 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 		return (false);
 	i = get_obj_type(obj->pair[0]);
 	if (i == 1)
-		get_sphere_inf(obj, num)
+		get_sphere_inf(obj, num);
+	if (i == 2)
+		get_plane_inf(obj, num);
 	return (true);
 }
 
-bool	parse_object(t_json_object *obj, unsigned long nb, int type)
+void	put_inf_to_glob(t_obj *obj)
 {
-	t_json_array	list;
+	t_obj *otmp;
+
+	if (g_global.r->objects == NULL)
+		g_global.r->objects = (t_obj *)obj;
+	else
+	{
+		otmp = g_global.r->objects;
+		while (otmp->next != NULL)
+			otmp = otmp->next;
+		otmp->next = (t_obj *)obj;
+	}
+}
+
+bool	parse_object(t_json_object *obj, unsigned long nb)
+{
+	t_json_array	*list;
 	unsigned long	num;
 
 	num = 0;
@@ -82,7 +101,6 @@ bool	parse_object(t_json_object *obj, unsigned long nb, int type)
 		return (false);
 	list = (t_json_array *)obj->pair[nb]->value->ptr;
 	while (num++ < list->nb)
-		add_new_obj(list, num)
-	if () 
+		add_new_obj(list, num);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 15:17:09 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/23 18:35:42 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:24:04 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,14 @@ static	int		check_key(char *str)
 {
 	if (cmp_chars(str, "source", 0))
 		return (1);
+	return (0);
 }
 
 static	void	get_info(t_json_value *val)
 {
-	t_json_array	*arr;
 	t_rgb			alight;
 
-	arr = 0;
-	if (val->type == array)
-		arr = (t_json_array *)val->ptr;
-	alight = get_obj_color(arr);
+	alight = get_obj_color(val);
 	g_global.r->ambient_light = alight;
 }
 
@@ -49,7 +46,8 @@ void			*parse_amblight(t_json_object *obj, unsigned long nb)
 		return (NULL);
 	while (num++ < ol->nb)
 	{
-		if (check_key(ol->value[num]) == 1)
-			get_info(ol->value[num]);
+		if (check_key(ol->pair[num]->key->str) == 1)
+			get_info(ol->pair[num]->value);
 	}
+	return (NULL);
 }

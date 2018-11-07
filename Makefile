@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/10/18 17:16:57 by mabessir         ###   ########.fr        #
+#    Updated: 2018/11/07 16:27:01 by mabessir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,8 +58,16 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)parser/set_obj.c	\
 		$(SRCPATH)parser/get_cube.c	\
 		$(SRCPATH)parser/parsing_1.c		\
+		$(SRCPATH)parser/parse_1.c		\
+		$(SRCPATH)parser/parse_plane.c		\
+		$(SRCPATH)parser/parse_sphere.c		\
+		$(SRCPATH)parser/parse_camera.c		\
+		$(SRCPATH)parser/parse_light.c		\
+		$(SRCPATH)parser/parse_amb_light.c		\
+		$(SRCPATH)parser/parse_color.c		\
 		$(SRCPATH)parser/parsing_2.c		\
 		$(SRCPATH)parser/parsing_3.c		\
+		$(SRCPATH)parser/parse_obj.c		\
 		$(SRCPATH)parser/parse_objects.c		\
 		$(SRCPATH)parser/parse_obj_file.c		\
 		$(SRCPATH)objects/camera.c		\

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 15:10:27 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/23 18:44:10 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:25:11 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ extern t_global g_global;
 
 int			ft_cheeck(t_json_array *arr)
 {
-	int i;
+	unsigned long i;
 
 	i = 0;
 	while(i++ < arr->nb)
@@ -38,19 +38,20 @@ t_rgb		get_obj_color(t_json_value *val)
 	t_json_array *arr;
 
 	arr = 0 ;
-	color->r = 100;
-	color->g = 50;
-	color->b = 25;
-	color->trans = 0;
+	color.r = 100;
+	color.g = 50;
+	color.b = 25;
+	color.trans = 0;
 	if (val->type == array)
 	{
 		arr = (t_json_array *)val->ptr;
 		if (arr->nb == 4 && ft_cheeck(arr))
 		{
-			color->r  = *(int *)arr->value[0];
-			color->g  = *(int *)arr->value[1];
-			color->b  = *(int *)arr->value[2];
-			color->trans  = *(int *)arr->value[3];
+			color.r  = *(int *)arr->value[0];
+			color.g  = *(int *)arr->value[1];
+			color.b  = *(int *)arr->value[2];
+			color.trans  = *(int *)arr->value[3];
 		}
 	}
+	return (color);
 }
