@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/08 15:27:57 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/08 18:10:01 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@ void			*parse_amblight(t_json_object *obj, unsigned long nb);
 void			parse_light(t_json_object *obj, unsigned long nb);
 t_rgb			get_obj_color(t_json_value *val);
 bool			parse_object(t_json_object *obj, unsigned long nb);
-bool			get_plane_inf(t_json_object *obj, unsigned long nb);
+bool			get_plane_inf(t_json_object *obj);
 bool			get_sphere_inf(t_json_object *obj);
 t_obj			*malloc_object(int type);
+bool			get_cone_inf(t_json_object *obj);
 
 #endif

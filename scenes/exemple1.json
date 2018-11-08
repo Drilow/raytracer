@@ -7,12 +7,44 @@
 				"source":[100,-100,0],
 				"color":[75,75,75,0]
 			},
+	"light":{
+			"source":[0,0,0],
+			"color":[75,75,75,0]
+			},
 	"objects":[
 				{
 					"type":"sphere",
 					"pos":[-10,0,90],
 					"radius":10,
 					"color":[50,200,50,0]
+				},
+				{
+					"type":"plane",
+					"pos":[0,5,0],
+					"vector":[0,10,0],
+					"color":[0,0,0,0]
+				},
+				{
+					"type":"cone",
+					"pos":[10,10,10],
+					"vector":[2,2,-3],
+					"angle":10,
+					"INF":false,
+					"color":[25,150,150,0]
+				},
+				{
+					"type":"cube",
+					"pos":[4,-6,6],
+					"size":3,
+					"color":[100,100,100,0]
+				},
+				{
+					"type":"cylinder",
+					"pos":[-16,-1,15],
+					"vector":[-8,8,10],
+					"radius":2,
+					"rotate":[0,20,-10],
+					"color":[150,50,100,0]
 				}
 	]
 }

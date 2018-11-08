@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/08 15:28:07 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/08 18:09:44 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 	if (i == 1)
 		get_sphere_inf(obj);
 	if (i == 2)
-		get_plane_inf(obj, num);
+		get_plane_inf(obj);
+	if (i == 3)
+		get_cone_inf(obj);
 	return (true);
 }
 

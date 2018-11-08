@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 15:54:44 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/08 15:44:46 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/08 18:08:09 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,12 @@ bool		start_parse(t_json_object *obj, int type, unsigned long nb)
 		return (false);
 	}
 	if (type == 1)
-	{
 		parse_light(obj, nb);
-	}
 	if (type == 2)
-	{
 		parse_camera(obj, nb);
-	}
 	if (type == 3)
-	{
 		parse_object(obj, nb);
-	}
 	if (type == 4)
-	{
 		parse_amblight(obj, nb);
-	}
 	return (true);
 }

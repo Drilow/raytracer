@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:17:00 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/08 15:41:49 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/08 16:32:12 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void			parse_light(t_json_object *obj, unsigned long nb)
 	if (!(lights = (t_light *)malloc(sizeof(t_light))))
 		return ;
 	((t_light *)lights)->next = NULL;
-	while (num < ol->nb - 1)
+	while (num < ol->nb)
 	{
 		if (check_key(ol->pair[num]->key->str) == 1)
 			get_info(ol->pair[num]->value, 1, lights);
