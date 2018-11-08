@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 15:10:27 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/07 16:25:11 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/08 15:57:28 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ t_rgb		get_obj_color(t_json_value *val)
 	t_json_array *arr;
 
 	arr = 0 ;
-	color.r = 100;
-	color.g = 50;
-	color.b = 25;
+	color.r = 75;
+	color.g = 75;
+	color.b = 75;
 	color.trans = 0;
-	if (val->type == array)
+	if (val->type == 3)
 	{
 		arr = (t_json_array *)val->ptr;
 		if (arr->nb == 4 && ft_cheeck(arr))

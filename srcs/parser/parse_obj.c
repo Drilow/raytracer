@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/07 16:35:57 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/08 15:28:07 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 	unsigned long	*nb;
 
 	nb = 0;
-	if (list->value[num]->type != object)
+	if (list->value[num]->type != 4)
 		return (false);
 	obj = (t_json_object *)list->value[num]->ptr;
 	if (cmp_chars(obj->pair[0]->key->str, "type", 0) == false)
 		return (false);
 	i = get_obj_type(obj->pair[0]);
 	if (i == 1)
-		get_sphere_inf(obj, num);
+		get_sphere_inf(obj);
 	if (i == 2)
 		get_plane_inf(obj, num);
 	return (true);
@@ -97,10 +97,13 @@ bool	parse_object(t_json_object *obj, unsigned long nb)
 	unsigned long	num;
 
 	num = 0;
-	if (obj->pair[nb]->value->type == array)
+	if (obj->pair[nb]->value->type != 3)
 		return (false);
 	list = (t_json_array *)obj->pair[nb]->value->ptr;
-	while (num++ < list->nb)
+	while (num < list->nb)
+	{
 		add_new_obj(list, num);
+		num++;
+	}
 	return (true);
 }

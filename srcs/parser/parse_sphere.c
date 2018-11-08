@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 11:37:43 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/07 16:35:27 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/08 16:02:38 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@
 #include <objects/object.h>
 #include <fcntl.h>
 
-static	bool	get_inf(t_obj *o,t_json_value *val, t_sphere *sph)
+static	bool	get_inf(t_obj *o,t_json_value *val)
 {
 	int				*a;
 	t_json_array	*arr;
+	t_sphere		*sph;
 
+	sph = (t_sphere *)o->obj;
 	if (val == NULL)
 		return (false);
-	o->type = 1;
-	if (val->type == number || val->type == integer)
+	if (val->type == 5)
 	{
 		a = (int *)val->ptr;
-		sph->radius = *a; 
-		o->obj = (void *)sph;
+		sph->radius = (double)*a; 
 	}
-	if (val->type == array)
+	if (val->type == 3)
 	{
 		arr = (t_json_array *)val->ptr;
 		a = (int *)arr->value[0]->ptr;
@@ -44,25 +44,23 @@ static	bool	get_inf(t_obj *o,t_json_value *val, t_sphere *sph)
 	return (true);
 }
 
-bool	get_sphere_inf(t_json_object *obj, unsigned long nb)
+bool	get_sphere_inf(t_json_object *obj)
 {
-	t_obj		o;
-	t_sphere	sph;
+	t_obj		*o;
 
-	if (obj->pair[nb]->value->type != array)
-		return (false);
+	o = malloc_object(1);
 	if (cmp_chars(obj->pair[1]->key->str, "pos", 0) == true)
 	{
-		if (get_inf(&o, obj->pair[1]->value, &sph) == false)
+		if (get_inf(o, obj->pair[1]->value) == false)
 			return (false);
 	}
 	if (cmp_chars(obj->pair[2]->key->str, "radius", 0) == true)
 	{
-		if (get_inf(&o, obj->pair[2]->value, &sph) == false)
+		if (get_inf(o, obj->pair[2]->value) == false)
 			return (false);
 	}
 	if (cmp_chars(obj->pair[3]->key->str, "color", 0) == true)
-		o.color = get_obj_color(obj->pair[3]->value);
-	put_inf_to_glob(&o);
+		o->color = get_obj_color(obj->pair[3]->value);
+	put_inf_to_glob(o);
 	return (true);
 }

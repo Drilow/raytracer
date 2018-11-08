@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/07 15:56:50 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/08 13:32:16 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,24 @@ extern t_global g_global;
 static int		get_object_type(char *s)
 {
 	if (cmp_chars(s, "light", 0) == true)
-		return (0);
+		return (1);
 	if (cmp_chars(s, "camera", 0) == true)
-		return (5);
+		return (2);
 	if (cmp_chars(s, "objects", 0) == true)
-        return (1);
+        return (3);
 	if (cmp_chars(s, "cube", 0) == true)
-		return (66);
+		return (5);
 	if (cmp_chars(s, "tetrahedron", 0) == true)
-		return (67);
-	if (cmp_chars(s, "ambient light", 0) == true)
-        return (7);
+		return (6);
+	if (cmp_chars(s, "ambientlight", 0) == true)
+        return (4);
 	if (cmp_chars(s, "//", 0) == true)
 		return (-2);
 	ft_putendl(s);
 	return (-1);
 }
-/*
-static t_obj	*malloc_object(int type)
+
+t_obj	*malloc_object(int type)
 {
 	t_obj		*o;
 
@@ -57,7 +57,7 @@ static t_obj	*malloc_object(int type)
 	o->type = type;
 	o->next = NULL;
 	return (o);
-}*/
+}
 /*
 static void		add_to_list(void *o, int otype)
 {
@@ -182,8 +182,11 @@ bool			parse(char *file)
 	}
 	ft_free(str);
 	obj = (t_json_object *)val->ptr;
-	while (nb++ <= obj->nb)
+	while (nb < obj->nb)
+	{
 		start_parse(obj, get_object_type(obj->pair[nb]->key->str), nb);
+		nb++;
+	}
 	/*while (get_next_line(fd, &line) == 1)
 	{
 		if (read_line(line) == false)

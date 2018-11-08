@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:17:00 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/07 18:06:46 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/08 15:41:49 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static 	t_light			*put_info(t_json_array *arr, t_light *lights)
 	}
 	else 
 	{
-		lights->source.x = -30;
-		lights->source.y = 150;
-		lights->source.z = -100;
+		lights->source.x = 100;
+		lights->source.y = -100;
+		lights->source.z = 0;
 	}
 	return (lights);
 }
@@ -83,7 +83,7 @@ void			parse_light(t_json_object *obj, unsigned long nb)
 	if (!(lights = (t_light *)malloc(sizeof(t_light))))
 		return ;
 	((t_light *)lights)->next = NULL;
-	while (num < ol->nb)
+	while (num < ol->nb - 1)
 	{
 		if (check_key(ol->pair[num]->key->str) == 1)
 			get_info(ol->pair[num]->value, 1, lights);
@@ -92,9 +92,7 @@ void			parse_light(t_json_object *obj, unsigned long nb)
 		num++;
 	}
 	if (g_global.r->lights == NULL)
-	{
 		g_global.r->lights = lights;
-	}
 	else
 	{
 		ltmp = g_global.r->lights;
@@ -102,5 +100,4 @@ void			parse_light(t_json_object *obj, unsigned long nb)
 			ltmp = ltmp->next;
 		ltmp->next = lights;
 	}
-		printf("ok2\n");
 }

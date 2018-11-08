@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 18:49:08 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/07 16:14:25 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/08 15:41:16 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static 	t_rpoint	camera_init(void)
 {
 	t_rpoint	angle;
 
-	g_global.r->cam_position.x = -20;
+	g_global.r->cam_position.x = 0;
 	g_global.r->cam_position.y = 0;
-	g_global.r->cam_position.z = -30;
+	g_global.r->cam_position.z = 0;
 	angle.x = 0;
-	angle.y = -10;
+	angle.y = 0;
 	angle.z = 0;
 	return(angle);
 }

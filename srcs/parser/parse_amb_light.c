@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 15:17:09 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/07 16:24:04 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/08 11:38:21 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ void			*parse_amblight(t_json_object *obj, unsigned long nb)
 		return (NULL);
 	if((ol = (t_json_object *)obj->pair[nb]->value->ptr) == NULL)
 		return (NULL);
-	while (num++ < ol->nb)
-	{
-		if (check_key(ol->pair[num]->key->str) == 1)
-			get_info(ol->pair[num]->value);
-	}
+	if (check_key(ol->pair[num]->key->str) == 1)
+		get_info(ol->pair[num]->value);
 	return (NULL);
 }
