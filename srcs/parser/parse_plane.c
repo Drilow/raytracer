@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:45:18 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/08 18:10:16 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/09 18:07:11 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,24 @@ bool	get_plane_inf(t_json_object *obj)
 		if (get_pos(o, obj->pair[1]->value) == false)
 			return (false);
 	}
+	else
+		return (false);
 	if (cmp_chars(obj->pair[2]->key->str, "vector", 0) == true)
 	{
 		if (geet_vector(o, obj->pair[2]->value) == false)
 			return (false);
 	}
+	else
+			return (false);
 	if (cmp_chars(obj->pair[3]->key->str, "color", 0) == true)
 		o->color = get_obj_color(obj->pair[3]->value);
+	else
+		return	(false);
+	if (cmp_chars(obj->pair[4]->key->str, "rotate", 0) == true)
+	{
+		if (prerotate(o, obj->pair[4]->value, 2) == false)
+			return (false);
+	}
 	put_inf_to_glob(o);
 	return (true);
 }

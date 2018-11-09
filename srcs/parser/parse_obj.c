@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/08 18:09:44 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/09 18:04:12 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <parser/parser.h>
 #include <extra/extra_defs.h>
 #include <objects/object.h>
+#include <geometry/geometry.h>
 #include <fcntl.h>
 
 extern t_global g_global;
@@ -34,6 +35,30 @@ static	bool	get_inf(t_obj *o,t_json_value *val, int i)
 	return (true);
 }
 */
+
+bool			prerotate(t_obj *obj, t_json_value *val, int type)
+{
+	t_rpoint		*t;
+	t_json_array	*arr;
+	int				*a;
+
+	if (!(t =(t_rpoint *)malloc(sizeof(t_point))))
+		return (false);
+	if (val == NULL || val->type != 3)
+		return (false);
+	arr = (t_json_array *)val->ptr;
+	if (arr->nb == 3)
+	{
+		a = (int *)arr->value[0]->ptr;
+		t->x = (double)*a;
+		a = (int *)arr->value[1]->ptr;
+		t->y = (double)*a;
+		a = (int *)arr->value[2]->ptr;
+		t->z = (double)*a;	
+	}
+	rotate_obj(obj, type, *t);
+	return (true);
+}
 static	int		get_obj_type(t_json_pair *pair)
 {
 	t_json_string	*string;
@@ -63,18 +88,22 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 	unsigned long	*nb;
 
 	nb = 0;
-	if (list->value[num]->type != 4)
+	if (list->value[num] == NULL || list->value[num]->type != 4)
 		return (false);
 	obj = (t_json_object *)list->value[num]->ptr;
+	if (obj->nb > 7)
+		return (false);
 	if (cmp_chars(obj->pair[0]->key->str, "type", 0) == false)
 		return (false);
 	i = get_obj_type(obj->pair[0]);
-	if (i == 1)
+	if (i == 1 && obj->nb == 4)
 		get_sphere_inf(obj);
-	if (i == 2)
+	if (i == 2 && obj->nb == 5)
 		get_plane_inf(obj);
-	if (i == 3)
+	if (i == 3 && obj->nb == 7)
 		get_cone_inf(obj);
+	if (i == 4 && obj->nb == 7)
+		get_cyl_inf(obj);
 	return (true);
 }
 
@@ -99,7 +128,7 @@ bool	parse_object(t_json_object *obj, unsigned long nb)
 	unsigned long	num;
 
 	num = 0;
-	if (obj->pair[nb]->value->type != 3)
+	if (obj->pair[nb] == NULL ||obj->pair[nb]->value->type != 3)
 		return (false);
 	list = (t_json_array *)obj->pair[nb]->value->ptr;
 	while (num < list->nb)
