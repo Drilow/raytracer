@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 18:49:08 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/08 15:41:16 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/12 16:58:26 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static	void	*get_info(t_json_value *val, int i, t_rpoint *angle)
 	unsigned long	num;
 
 	num = 0;
-	if (val->type != array)
+	if (val->type != 3)
 		return (NULL);
 	arr = (t_json_array *)val->ptr;
 	if (i == 1)
@@ -89,7 +89,6 @@ void				parse_camera(t_json_object *obj, unsigned long nb)
 	t_rpoint		angle;
 
 	num = 0;
-	o = 0;
 	angle = camera_init();
 	if (obj->pair[nb]->value->type != 4)
 	{
@@ -101,12 +100,13 @@ void				parse_camera(t_json_object *obj, unsigned long nb)
 		set_camera(angle);
 		return ;
 	}
-	while (num++ < o->nb)
+	while (num < o->nb)
 	{
-		if ((check_key(obj->pair[num]->key->str)) == 1)
-			get_info(obj->pair[num]->value, 1, &angle);
-		if ((check_key(obj->pair[num]->key->str)) == 2)
-			get_info(obj->pair[num]->value, 2, &angle);
+		if ((check_key(o->pair[num]->key->str)) == 1)
+			get_info(o->pair[num]->value, 1, &angle);
+		else if ((check_key(o->pair[num]->key->str) == 2))
+			get_info(o->pair[num]->value, 2, &angle);
+		num++;
 	}
 	set_camera(angle);
 }

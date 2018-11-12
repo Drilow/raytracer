@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 15:10:27 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/08 16:33:47 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/12 16:48:52 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			ft_cheeck(t_json_array *arr)
 	i = 0;
 	while(i < arr->nb)
 	{
-		if (arr->value[i]->type != integer)
+		if (arr->value[i]->type != 5)
 			return (0);
 		i++;
 	}

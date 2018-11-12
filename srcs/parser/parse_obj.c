@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/09 18:04:12 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/12 17:24:33 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 {
 	t_json_object	*obj;
 	int				i;
-	unsigned long	*nb;
 
 	nb = 0;
 	if (list->value[num] == NULL || list->value[num]->type != 4)
@@ -95,7 +94,8 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 		return (false);
 	if (cmp_chars(obj->pair[0]->key->str, "type", 0) == false)
 		return (false);
-	i = get_obj_type(obj->pair[0]);
+	if ((i = get_obj_type(obj->pair[0])) == -1)
+		return (false);
 	if (i == 1 && obj->nb == 4)
 		get_sphere_inf(obj);
 	if (i == 2 && obj->nb == 5)

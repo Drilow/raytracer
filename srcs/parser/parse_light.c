@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:17:00 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/08 16:32:12 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/12 16:46:58 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static 	t_light			*put_info(t_json_array *arr, t_light *lights)
 	}
 	else 
 	{
-		lights->source.x = 100;
-		lights->source.y = -100;
+		lights->source.x = 0;
+		lights->source.y = 0;
 		lights->source.z = 0;
 	}
 	return (lights);
@@ -59,7 +59,7 @@ static void		get_info(t_json_value *val, int i, t_light *lights)
 	unsigned long	num;
 
 	num = 0;
-	if (val->type != array)
+	if (val->type != 3)
 		return ;
 	arr = (t_json_array *)val->ptr;
 	if (i == 1)
@@ -87,7 +87,7 @@ void			parse_light(t_json_object *obj, unsigned long nb)
 	{
 		if (check_key(ol->pair[num]->key->str) == 1)
 			get_info(ol->pair[num]->value, 1, lights);
-		if (check_key(ol->pair[num]->key->str) == 2)
+		else if (check_key(ol->pair[num]->key->str) == 2)
 			get_info(ol->pair[num]->value, 2, lights);
 		num++;
 	}
