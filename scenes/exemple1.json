@@ -26,10 +26,10 @@
 					"type":"cone",
 					"pos":[-30, 5,10],
 					"vector":[2,2,-3],
-					"angle":0,
-					"INF":false,
+					"angle":5,
+					"INF":true,
 					"color":[25,150,150,0],
-					"rotate":[0,0,0]
+					"rotate":[0,15,0]
 				},
 				{
 					"type":"cube",
@@ -43,8 +43,7 @@
 					"vector":[1,2,3],
 					"radius":20,
 					"INF":true,
-					"color":[150,50,100,0],
-					"rotate":[0,0,0]
+					"color":[150,50,100,0]
 				}
 	]
 }

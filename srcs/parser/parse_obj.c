@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/12 17:24:33 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/13 16:23:49 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,9 @@ bool			prerotate(t_obj *obj, t_json_value *val, int type)
 		a = (int *)arr->value[2]->ptr;
 		t->z = (double)*a;	
 	}
+	t->x = ((double)((int)t->x % 360) / 360) * (2 * PI);
+	t->y = ((double)((int)t->y % 360) / 360) * (2 * PI);
+	t->z = ((double)((int)t->z % 360) / 360) * (2 * PI);
 	rotate_obj(obj, type, *t);
 	return (true);
 }
@@ -86,7 +89,6 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 	t_json_object	*obj;
 	int				i;
 
-	nb = 0;
 	if (list->value[num] == NULL || list->value[num]->type != 4)
 		return (false);
 	obj = (t_json_object *)list->value[num]->ptr;
@@ -102,7 +104,7 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 		get_plane_inf(obj);
 	if (i == 3 && obj->nb == 7)
 		get_cone_inf(obj);
-	if (i == 4 && obj->nb == 7)
+	if (i == 4 && obj->nb == 6)
 		get_cyl_inf(obj);
 	return (true);
 }

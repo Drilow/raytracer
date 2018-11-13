@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:05:20 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/09 17:56:15 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/13 16:35:26 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ static	bool	get_inf(t_obj *o,t_json_value *val)
 		return (false);
 	if (val->type == 5)
 	{
+		printf("ok\n");
 		a = (int *)val->ptr;
 		c->radius = (double)*a; 
 	}
 	if (val->type == 3)
 	{
+		printf("2\n");
 		arr = (t_json_array *)val->ptr;
 		a = (int *)arr->value[0]->ptr;
 		o->position.x = (double)*a;
@@ -49,6 +51,7 @@ static	void	verif_inf(t_obj *o, t_json_value *val)
 	bool		a;
 	t_cylinder	*c;
 
+	printf("3\n");
 	c = (t_cylinder *)o->obj;
 	a = (bool)val->ptr;
 	c->infinite = a;
@@ -60,11 +63,13 @@ static	bool	geet_vector(t_obj *o, t_json_value *val)
 	t_json_array	*arr;
 	t_cylinder		*c;
 
+	printf("%p\n", o->obj);
 	c = (t_cylinder *)o->obj;
 	if (val == NULL)
 		return (false);
 	if (val->type == 3)
 	{
+		printf("4\n");
 		arr = (t_json_array *)val->ptr;
 		a = (int *)arr->value[0]->ptr;
 		c->vector.x = (double)*a;
@@ -100,11 +105,11 @@ bool	get_cyl_inf(t_json_object *obj)
 		verif_inf(o, obj->pair[4]->value);
 	if (cmp_chars(obj->pair[5]->key->str, "color", 0) == true)
 		o->color = get_obj_color(obj->pair[5]->value);
-	if (cmp_chars(obj->pair[6]->key->str, "rotate", 0) == true)
+/*	if (cmp_chars(obj->pair[6]->key->str, "rotate", 0) == true)
 	{
 		if (prerotate(o, obj->pair[6]->value, 4) == false)
 			return (false);
-	}
+	}*/
 	put_inf_to_glob(o);
 	return (true);
 }
