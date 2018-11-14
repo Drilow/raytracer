@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/20 01:11:33 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/14 17:35:05 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct 				s_progress_data {
     GtkWidget				*window;
     int 					bProgressUp;
     int 					nLastPct;
+    long					pos;
+    long					len;
 }							t_progress_data;
 
 typedef struct				s_add_view
@@ -159,8 +161,5 @@ void						open_file(void);
 void						dialog_keyhook(GtkWidget *w, GdkEventKey *event);
 void						init_scene_view(void);
 void						scene_win(void);
-void						progress_bar();
-gboolean updateProgress (gpointer user_data);
-//void 						updateProgress (long pos, long len);
 
 #endif
