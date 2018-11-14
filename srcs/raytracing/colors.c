@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.c                                            :+:      :+:    :+:   */
+/*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/09/02 18:28:46 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/14 16:22:17 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ static t_rpoint		get_color(t_rt *r, t_collision c, bool debug)
 	l = r->lights;
 	while (l != NULL)
 	{
+		if (l->enabled == true)
+		{
 		otmp = r->objects;
 		afactor = angle_factor(c, l->source);
 		if (debug == true)
@@ -135,6 +137,7 @@ static t_rpoint		get_color(t_rt *r, t_collision c, bool debug)
 			otmp = otmp->next;
 		}
 		color = add_color(color, ocolor, l, afactor);
+		}
 		l = l->next;
 	}
 //	if (debug == true)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:11:40 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/27 11:16:39 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/14 16:29:29 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ bool					collision(t_ray ray, t_collision *c,  bool test)
 	o = c->o;
 	p = &(c->p);
 
+	//printf("%d\n", o->enabled);
+	if (o->enabled == false)
+		return (false);
 	if (o->type == 1 && sphere_collision(ray, o, p) == true)
 		return (true);
 	else if (o->type == 2 && \

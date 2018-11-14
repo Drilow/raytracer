@@ -64,12 +64,8 @@ static void		rotate_poly_obj(t_obj *o, t_rpoint angle)
 }
 
 
-void			rotate_obj(void *o, int type, t_rpoint angle)
+void			rotate_obj(t_obj *obj, int type, t_rpoint angle)
 {
-	t_obj		*obj;
-
-	if (type != 0)
-		obj = (t_obj *)o;
 	if (type == 2)
 		rotate(&(((t_plane *)obj->obj)->vector), angle);
 	if (type == 3)

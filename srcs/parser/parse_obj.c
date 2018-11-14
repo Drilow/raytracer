@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/13 16:23:49 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/14 16:48:24 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool			prerotate(t_obj *obj, t_json_value *val, int type)
 	t_json_array	*arr;
 	int				*a;
 
-	if (!(t =(t_rpoint *)malloc(sizeof(t_point))))
+	if (!(t = (t_rpoint *)malloc(sizeof(t_rpoint))))
 		return (false);
 	if (val == NULL || val->type != 3)
 		return (false);
@@ -114,14 +114,19 @@ void	put_inf_to_glob(t_obj *obj)
 	t_obj *otmp;
 
 	if (g_global.r->objects == NULL)
+	{
+		obj->enabled = true;
 		g_global.r->objects = (t_obj *)obj;
+	}
 	else
 	{
+		obj->enabled = true;
 		otmp = g_global.r->objects;
 		while (otmp->next != NULL)
 			otmp = otmp->next;
 		otmp->next = (t_obj *)obj;
 	}
+	printf("%p\n", g_global.r->objects);
 }
 
 bool	parse_object(t_json_object *obj, unsigned long nb)

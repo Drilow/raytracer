@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:17:00 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/12 16:46:58 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/14 16:33:05 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,13 @@ void			parse_light(t_json_object *obj, unsigned long nb)
 		num++;
 	}
 	if (g_global.r->lights == NULL)
+	{
+		lights->enabled = true;
 		g_global.r->lights = lights;
+	}
 	else
 	{
+		lights->enabled = true;
 		ltmp = g_global.r->lights;
 		while (ltmp->next != NULL)
 			ltmp = ltmp->next;

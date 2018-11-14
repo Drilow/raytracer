@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:05:20 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/13 16:35:26 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/14 13:40:07 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ static	bool	get_inf(t_obj *o,t_json_value *val)
 		return (false);
 	if (val->type == 5)
 	{
-		printf("ok\n");
 		a = (int *)val->ptr;
 		c->radius = (double)*a; 
 	}
 	if (val->type == 3)
 	{
-		printf("2\n");
 		arr = (t_json_array *)val->ptr;
 		a = (int *)arr->value[0]->ptr;
 		o->position.x = (double)*a;
@@ -51,7 +49,6 @@ static	void	verif_inf(t_obj *o, t_json_value *val)
 	bool		a;
 	t_cylinder	*c;
 
-	printf("3\n");
 	c = (t_cylinder *)o->obj;
 	a = (bool)val->ptr;
 	c->infinite = a;
@@ -63,13 +60,11 @@ static	bool	geet_vector(t_obj *o, t_json_value *val)
 	t_json_array	*arr;
 	t_cylinder		*c;
 
-	printf("%p\n", o->obj);
 	c = (t_cylinder *)o->obj;
 	if (val == NULL)
 		return (false);
 	if (val->type == 3)
 	{
-		printf("4\n");
 		arr = (t_json_array *)val->ptr;
 		a = (int *)arr->value[0]->ptr;
 		c->vector.x = (double)*a;

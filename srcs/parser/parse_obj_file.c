@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/01 11:19:31 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/14 17:17:57 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,7 @@ void			set_obj(t_obj *o)
 //printf("max_d = %f\n", ((t_poly_obj *)o->obj)->max_d);
 }
 
-t_poly_obj		*parse_obj(char *scene_line)
+t_poly_obj		*parse_obj(t_json_value *val)
 {
   t_poly_obj	*obj;
   t_vertex		*v_list;
@@ -295,11 +295,17 @@ t_poly_obj		*parse_obj(char *scene_line)
   char			*file;
   char			*line;
   int			i;
+  t_json_object *o;
+  t_json_string *str;
 
   obj = NULL;
   v_list = NULL;
 //  ft_putendl("1");
-  file = get_file_name(scene_line);
+	o = (t_json_object *)val->ptr;
+	
+	str = (t_json_string *)o->
+
+  file = ;
   // ft_putendl("2");
 	fd = open(file, O_RDONLY);
 	if (fd == -1)

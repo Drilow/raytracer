@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:40:23 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/13 16:34:01 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/14 14:46:18 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,12 @@ bool	get_cone_inf(t_json_object *obj)
 		verif_inf(o, obj->pair[4]->value);
 	if (cmp_chars(obj->pair[5]->key->str, "color", 0) == true)
 		o->color = get_obj_color(obj->pair[5]->value);
-	if (cmp_chars(obj->pair[6]->key->str, "rotate", 0) == true)
+	if (cmp_chars(obj->pair[6]->key->str, "rotate", 0) == true
+	&& obj->pair[6]->value->type == 3)
 	{
 		if (prerotate(o, obj->pair[6]->value, 3) == false)
 			return (false);
 	}
-	else
-		return (false);
 	put_inf_to_glob(o);
 	return (true);
 }
