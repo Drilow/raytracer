@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 13:03:48 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/27 11:17:26 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/14 18:17:53 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@
 # define AMBIENT_LIGHT 12
 # define LIGHT_DISTANCE_FACTOR 2000
 
-typedef struct		s_collision
+typedef struct			s_collision
 {
-	t_rpoint		p;
-	t_rpoint		normal;
-	t_obj			*o;
-}					t_collision;
+	t_rpoint			p;
+	t_rpoint			normal;
+	t_obj				*o;
+	struct s_collision	*next;
+}						t_collision;
 
 bool				find_collisions(t_rpoint factors, t_dpoint *solutions);
 
@@ -42,8 +43,8 @@ bool				poly_obj_collision(t_ray ray, t_poly_obj *po, \
 //t_bool				collision(t_ray ray, t_obj *o, t_rpoint *p);
 bool				collision(t_ray ray, t_collision *c, bool test);
 t_rpoint			normal_collision_vector(t_collision c);
-t_collision			ray_tracing(t_rt *r, t_ray ray, bool test);
+t_collision			*ray_tracing(t_rt *r, t_ray ray, bool test);
 
 //t_rgb				get_ray_color(t_rt *r, t_collision c);
-t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug);
+t_rgb				get_ray_color(t_rt *r, t_collision *c, bool debug);
 #endif

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:11:40 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/27 11:16:39 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/14 18:15:15 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,46 @@ bool					collision(t_ray ray, t_collision *c,  bool test)
 	return (false);
 }
 
-t_collision			ray_tracing(t_rt *r, t_ray ray, bool test)
+static t_collision	*add_collision(t_ray ray, t_collision *c, t_collision *tmpc)
 {
-	t_collision		c;
+	t_collision		*tmp;
+	t_collision		*new;
+
+	tmp = c;
+	new = (t_collision *)malloc(sizeof(t_collision));
+	*new = *tmpc;
+	new->next = NULL;
+	if (deltasq(ray.p, tmpc->p) < deltasq(ray.p, c->p))
+	{
+		new->next = c;
+		return (new);
+	}
+	while (tmp != NULL)
+	{
+		if (tmp->next == NULL)
+			tmp->next = new;
+		else if (deltasq(ray.p, tmpc->p) < deltasq(ray.p, tmp->next->p))
+		{
+			new->next = tmp->next;
+			tmp->next = new;
+			return (c);
+		}
+		tmp = tmp->next;
+	}
+	return (c);
+}
+
+t_collision			*ray_tracing(t_rt *r, t_ray ray, bool test)
+{
+	t_collision		*c;
 	t_rpoint		p;
 	t_collision		tmpc;
 	t_obj			*tmp;
 	int				i;
 
-	c.o = NULL;
+	c = (t_collision *)malloc(sizeof(t_collision));
+	c->o = NULL;
+	c->next = NULL;
 	tmp = r->objects;
 	i = 0;
 	p = set_rpoint(0, 0, 0);
@@ -64,12 +95,15 @@ t_collision			ray_tracing(t_rt *r, t_ray ray, bool test)
 		tmpc.p = p;
 		if (collision(ray, &tmpc, test) == true)
 		{
-			if (c.o == NULL || (deltasq(ray.p, tmpc.p) < deltasq(ray.p, c.p)))
+//			if (c->o == NULL || (deltasq(ray.p, tmpc.p) < deltasq(ray.p, c->p)))
+			if (c->o == NULL)
 			{
-				c.p = tmpc.p;
-				c.o = tmp;
-				c.normal = tmpc.normal;
+				c->p = tmpc.p;
+				c->o = tmp;
+				c->normal = tmpc.normal;
 			}
+			else
+				c = add_collision(ray, c, &tmpc);
 		}
 		i++;
 		tmp = tmp->next;

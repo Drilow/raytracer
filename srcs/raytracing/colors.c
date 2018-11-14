@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/09/02 18:28:46 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/14 18:35:18 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,22 +167,37 @@ static t_rgb		get_final_color(t_rpoint c, double df)
 	return (color);
 }
 
-t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug)
+static t_rgb		average_color(t_rgb c1, t_rgb c2, unsigned int trans)
+{
+	t_rgb			new;
+
+	new.r = (c1.r * (255 - trans) + c2.r * trans) / 255;
+	new.g = (c1.g * (255 - trans) + c2.g * trans) / 255;
+	new.b = (c1.b * (255 - trans) + c2.b * trans) / 255;
+	new.trans = 0;
+	return (new);
+}
+
+t_rgb				get_ray_color(t_rt *r, t_collision *c, bool debug)
 {
 	t_rgb			color;
 	t_rpoint		tmp_color;
 	double			distance_factor;
 	t_point			checker;
 
+	if (c == NULL)
+		return (ft_rgb(0, 0, 0, 0));
 	checker.x = -1;
 	checker.y = -1;
-	tmp_color = get_color(r, c, debug);
+	tmp_color = get_color(r, *c, debug);
 //	if (debug == true)
 //		printf("get_ray_color : rgb(%f, %f, %f)\n", tmp_color.x, tmp_color.y, tmp_color.z);
-	distance_factor = deltasq(r->cam_position, c.p) / LIGHT_DISTANCE_FACTOR;
+	distance_factor = deltasq(r->cam_position, c->p) / LIGHT_DISTANCE_FACTOR;
 //	if (distance_factor < 1)
 		distance_factor = 1;
 	color = get_final_color(tmp_color, distance_factor);
+	if (c->o->color.trans > 0)
+		color = average_color(color, get_ray_color(r, c->next, true), c->o->color.trans);
 //	if (c.o->type == 2 && color.g < 50)
 //		printf("Olalala !\n");
 	return (color);

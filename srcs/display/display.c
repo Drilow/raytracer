@@ -60,7 +60,7 @@ static void		*draw_image_core(void *arg)
 	t_thread	th;
 	t_point		p;
 	t_rt		*r;
-	t_collision	tmp;
+	t_collision	*tmp;
 //	t_rgb		tmpclr;
 
 	th = *((t_thread *)arg);
@@ -82,7 +82,7 @@ static void		*draw_image_core(void *arg)
 		while (++p.y < WIN_H)
 		{
 			tmp = ray_tracing(r, g_global.r->rays[p.y][p.x], false);
-			if (tmp.o != NULL)
+			if (tmp->o != NULL)
 			{
 //				if ((p.x == 361 || p.x == 360) && p.y == 209)
 //				if (p.x == 360 && p.y == 209)
@@ -96,10 +96,10 @@ static void		*draw_image_core(void *arg)
 //				}
 //				if (p.x == 361 && p.y == 209)
 //					printf("correct(361, 209) : rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
-				g_global.r->checker[p.y][p.x] = tmp.o;
+				g_global.r->checker[p.y][p.x] = tmp->o;
 				draw_px(GTKMGR.buf, p.x, p.y, \
 							get_ray_color(r, tmp, false));
-//				get_ray_color(r, tmp.o, tmp.p));
+				// Attention ca va leak ! --> free_collisions(tmp) ...
 			}
 			else
 			{
