@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/14 17:35:05 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/15 19:36:10 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,9 @@ void						open_file(void);
 void						dialog_keyhook(GtkWidget *w, GdkEventKey *event);
 void						init_scene_view(void);
 void						scene_win(void);
+void						progress_bar();
+void						progress_thread_handler(gdouble x);
+void						progress_main_handler();
+gboolean 					updateProgress();
 
 #endif

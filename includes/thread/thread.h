@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:01:17 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/24 17:01:30 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/15 20:00:52 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 # include <objects/object.h>
 # include <raytracing/collision.h>
 
+enum state
+{
+					STATE_A,
+					STATE_B
+};
+
 typedef struct		s_thread
 {
 	void			*data;
@@ -27,4 +33,5 @@ typedef struct		s_thread
     t_poly_obj      *po;
     t_collision     *col;
 }					t_thread;
+
 #endif

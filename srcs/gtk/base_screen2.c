@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/14 17:40:39 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/15 12:38:54 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ void			end_open(GtkWidget *dialog)
 	GtkCssProvider 			*cssProvider;
 
 	cssProvider = gtk_css_provider_new();
-  	gtk_css_provider_load_from_path(cssProvider, "./uiconfig/progressbar.css", NULL);
+  	gtk_css_provider_load_from_path(cssProvider,
+								"./uiconfig/progressbar.css", NULL);
   	gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
                                GTK_STYLE_PROVIDER(cssProvider),
                                GTK_STYLE_PROVIDER_PRIORITY_USER);
@@ -81,20 +82,20 @@ void			open_file(void)
 	dialog = NULL;
 	action = GTK_FILE_CHOOSER_ACTION_OPEN;
 	dialog = gtk_file_chooser_dialog_new("Open File",
-	GTK_WINDOW(g_global.base_view.win), action, "_Cancel",
-	GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
+					GTK_WINDOW(g_global.base_view.win), action, "_Cancel",
+					GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
 		exit(1); // to fix
 	dir = getwd(dir);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
-	(dir = ft_strjoin(dir, "/scenes")));
+					(dir = ft_strjoin(dir, "/scenes")));
 	init_rt();
 	init_gtk_variables();
 	free(dir);
 	dir = NULL;
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	g_signal_connect(G_OBJECT(dialog), "key-press-event",
-	G_CALLBACK(dialog_keyhook), NULL);
+					G_CALLBACK(dialog_keyhook), NULL);
 	if (res == GTK_RESPONSE_ACCEPT)
 		end_open(dialog);
 	else
