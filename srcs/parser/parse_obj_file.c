@@ -282,6 +282,7 @@ t_poly_obj		*parse_obj(char *str)
 		free(line);
 	}
 	free_vlist(&v_list);
+	printf("%p\n", obj);
   return (obj);
 }
 
