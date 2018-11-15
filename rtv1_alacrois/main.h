@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:09:05 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/07 14:25:28 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/15 15:34:37 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ t_bool				get_cylinder(char *s, t_cylinder *c, int *index);
 t_bool				get_light(char *s, t_light *l, int *index);
 t_bool				get_obj(char *s, void *o, int *index, int type);
 t_bool				parse(t_rtv1 *r, char *file);
-t_poly_obj			*parse_obj(char *scene_line);
+t_poly_obj			*parse_obj(char *str);
 void				set_obj(t_obj *o);
 void				usage(char *s);
 

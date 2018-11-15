@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:05:20 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/14 13:40:07 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/15 16:14:56 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,11 @@ bool	get_cyl_inf(t_json_object *obj)
 		verif_inf(o, obj->pair[4]->value);
 	if (cmp_chars(obj->pair[5]->key->str, "color", 0) == true)
 		o->color = get_obj_color(obj->pair[5]->value);
-/*	if (cmp_chars(obj->pair[6]->key->str, "rotate", 0) == true)
+	if (cmp_chars(obj->pair[6]->key->str, "rotate", 0) == true)
 	{
 		if (prerotate(o, obj->pair[6]->value, 4) == false)
 			return (false);
-	}*/
+	}
 	put_inf_to_glob(o);
 	return (true);
 }

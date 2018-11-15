@@ -86,7 +86,6 @@ void populate_tree_model(GtkTreeStore *store)
 	t_light *tmp_lights;
 
 	tmp_objs = g_global.r->objects;
-	printf("%p\n", tmp_objs);
 	tmp_lights = g_global.r->lights;
 	while (tmp_objs != NULL)
 	{
@@ -156,13 +155,11 @@ static void checked_row(__attribute__((unused)) GtkCellRendererToggle *cell,
 			((t_obj *)obj)->type == 6 || ((t_obj *)obj)->type == 66 || ((t_obj *)obj)->type == 67)
 		{
 			((t_obj *)obj)->enabled = enabled;
-			printf("WOLOLA %p\n", ((t_obj *)obj)->obj);
 		}
 		else
 		{
 			if (go_throu_lights(((t_light *)obj)))
 				((t_light *)obj)->enabled = enabled; // a debug
-			printf("WOLOLO\n");
 		}
 	}
 	redraw(true);
@@ -182,7 +179,6 @@ void select_handler(GtkTreeView *tree_view, GtkTreePath *path,
 	if (gtk_tree_model_get_iter(model, &iter, path))
 	{
 		gtk_tree_model_get(model, &iter, OBJ_REF, &obj, -1);
-		printf("objet select : %d\n", ((t_obj *)obj)->type);
 		if (((t_obj *)obj)->type != 0)
 		{
 			outline_obj(((t_obj *)obj));

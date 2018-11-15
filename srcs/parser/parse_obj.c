@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/14 16:48:24 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/15 16:15:04 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static	int		get_obj_type(t_json_pair *pair)
 		return (4);
 	if (cmp_chars(str, "obj", 0) == true)
 		return (6);
+	if (cmp_chars(str, "polyobject", 0) == true)
+		return (7);
 	return (-1);
 }
 
@@ -104,8 +106,10 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 		get_plane_inf(obj);
 	if (i == 3 && obj->nb == 7)
 		get_cone_inf(obj);
-	if (i == 4 && obj->nb == 6)
+	if (i == 4 && obj->nb == 7)
 		get_cyl_inf(obj);
+	if (i == 7 && obj->nb == 4)
+		get_poly_objinf(obj);
 	return (true);
 }
 
@@ -126,7 +130,6 @@ void	put_inf_to_glob(t_obj *obj)
 			otmp = otmp->next;
 		otmp->next = (t_obj *)obj;
 	}
-	printf("%p\n", g_global.r->objects);
 }
 
 bool	parse_object(t_json_object *obj, unsigned long nb)

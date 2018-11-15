@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/14 17:17:57 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/15 1:36:55 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ static bool	add_vertex(t_vertex **v_list, char *line)
   t_vertex		*tmp;
   t_vertex		*new;
 
-//  ft_putendl("add_vertex");
   new = malloc_vertex();
   if (parse_vertex(new, line) == false)
 	return (false);
@@ -153,7 +152,6 @@ static bool	parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
   t_vertex		*vertices;
   int			v_nb;
 
-//  ft_putendl("1");
   v_index = 0;
   line_index = 0;
   vertices = NULL;
@@ -161,10 +159,8 @@ static bool	parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
   while (get_next_double(line, &line_index, &v_index) == true)
 	{
 	  v_nb++;
-//	  ft_putendl("2");
 	  if (vertices == NULL)
 		{
-//			ft_putendl("3");
 		  vertices = malloc_vertex();
 		  face->vertices = vertices;
 		  if (get_vertex(v_list, (int)v_index, vertices) == false)
@@ -172,18 +168,13 @@ static bool	parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
 		}
 	  else
 		{
-//			ft_putendl("4");
 		  while (vertices->next != NULL)
 			vertices = vertices->next;
-//		  ft_putendl("4.1");
 		  vertices->next = malloc_vertex();
-//		  ft_putendl("4.2");
 		  if (get_vertex(v_list, (int)v_index, vertices->next) == false)
 			  return (false);
-//		  ft_putendl("4.3");
 		}
 	}
-//  ft_putendl("5");
   if (v_nb < 3)
 	return (false);
   return (true);
@@ -194,23 +185,18 @@ static bool	add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
   t_poly_obj   	*tmp;
   t_poly_obj	*new;
 
-//  ft_putendl("add_face");
   new = malloc_po();
-//  ft_putendl("1");
   if (parse_face(new, line, v_list) == false)
 	return (false);
-//  ft_putendl("2");
   if (*obj == NULL)
 	*obj = new;
   else
 	{
-//		ft_putendl("3");
 	  tmp = *obj;
 	  while (tmp->next != NULL)
 		tmp = tmp->next;
 	  tmp->next = new;
 	}
-//  ft_putendl("4");
   return (true);
 }
 
@@ -223,28 +209,6 @@ static bool	read_line(t_poly_obj **obj, t_vertex **v_list, char *line)
   else if (line[0] == 'f' && *v_list != NULL)
 	return (add_face(obj, *v_list, line));
   return (false);
-}
-
-static char		*get_file_name(char *line)
-{
-	char		*file;
-	int			index;
-	int			len;
-
-	index = 4;
-	len = 0;
-	while (line[index] != ' ')
-		index++;
-	len = index - 4;
-	file = (char *)malloc(sizeof(char) * (len + 1));
-	index = 0;
-	while (index < len)
-	{
-		file[index] = line[index + 4];
-		index++;
-	}
-	file[index] = '\0';
-	return (file);
 }
 
 static void		get_face_maxd(t_vertex *f, double *d)
@@ -287,51 +251,36 @@ void			set_obj(t_obj *o)
 //printf("max_d = %f\n", ((t_poly_obj *)o->obj)->max_d);
 }
 
-t_poly_obj		*parse_obj(t_json_value *val)
+
+t_poly_obj		*parse_obj(char *str)
 {
   t_poly_obj	*obj;
   t_vertex		*v_list;
   int			fd;
-  char			*file;
   char			*line;
   int			i;
-  t_json_object *o;
-  t_json_string *str;
 
   obj = NULL;
   v_list = NULL;
-//  ft_putendl("1");
-	o = (t_json_object *)val->ptr;
-	
-	str = (t_json_string *)o->
-
-  file = ;
-  // ft_putendl("2");
-	fd = open(file, O_RDONLY);
+	fd = open(str, O_RDONLY);
 	if (fd == -1)
 		ft_exit("Couldn't open obj file", 1);
-//		return (NULL);
 	i = 0;
 	while (get_next_line(fd, &line) == 1)
 	{
 	  if (read_line(&obj, &v_list, line) == false)
 	  {
-//	  return (NULL);
 		  free(line);
 		  if (v_list != NULL)
 			  free_vlist(&v_list);
-//		  printf("Lalalala\n");
 		  ft_putstr("Parsing ended at line ");
 		  ft_putnbr(i);
 		  ft_putstr("\n");
 		  return (obj);
 	  }
 	  i++;
-//	  ft_putendl("2.2");
-//	  printf("%d\n", i++);
 		free(line);
 	}
-//	ft_putendl("3");
 	free_vlist(&v_list);
   return (obj);
 }
@@ -385,7 +334,6 @@ bool			get_cube(char *s, t_obj *c, int *index)
         return (false);
 // distance au centre :
 	size = size / 2;
-	printf("%p\n", c);
 	c->size = size;
 	maxd = sqrt(3 * size * size);
 	c->obj = malloc_po();

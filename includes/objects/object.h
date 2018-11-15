@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/14 16:09:21 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/15 15:34:46 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 */
 # include <objects/camera.h>
 # include <objects/optics.h>
+# include "../../Libjson/includes/json.h"
 
 typedef struct		s_obj
 {
@@ -80,7 +81,7 @@ typedef struct      s_poly_obj
     struct s_poly_obj   *next;
 }                   t_poly_obj;
 
-t_poly_obj			*parse_obj(char *scene_line);
+t_poly_obj			*parse_obj(char *str);
 
 bool				get_plane(char *s, t_obj *o, int *index);
 bool				plane_collision(t_ray ray, t_plane *pl, t_rpoint pos, \
