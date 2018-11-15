@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/10 12:13:58 by cpays             #+#    #+#             */
-/*   Updated: 2015/03/17 21:03:59 by cpays            ###   ########.fr       */
+/*   Updated: 2018/11/15 19:16:00 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ int		get_next_line(const int fd, char **line)
 	static t_list	*tmp;
 	t_list			*tmp2;
 
-	ft_putnbr(fd);
-	ft_putchar('\n');
 	if (line == NULL)
 		return (-1);
 	tmp2 = check_fd(&tmp, fd);
