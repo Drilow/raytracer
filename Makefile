@@ -6,7 +6,7 @@
 #    By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/11/15 19:37:48 by Dagnear          ###   ########.fr        #
+#    Updated: 2018/11/15 20:23:35 by Dagnear          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCPATH = srcs/
 
 SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/scene_view.c			\
+		$(SRCPATH)gtk/scene_view2.c			\
 		$(SRCPATH)gtk/progress_bar.c		\
 		$(SRCPATH)gtk/base_screen.c			\
 		$(SRCPATH)gtk/base_screen2.c		\

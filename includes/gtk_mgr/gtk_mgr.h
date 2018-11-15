@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/15 19:36:10 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/15 20:24:31 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 # include <gtk/gtk.h>
 # include <stdbool.h>
 # include <objects/object.h>
+
+enum
+{
+   TYPE_COLUMN,
+   POS_X_COLUMN,
+   POS_Y_COLUMN,
+   POS_Z_COLUMN,
+   CHECKED_COLUMN,
+   CHECKED_ACTIVE,
+   OBJ_REF,
+   N_COLUMNS
+};
 
 typedef struct				s_switcher
 {
@@ -160,6 +172,8 @@ void						init_rt(void);
 void						open_file(void);
 void						dialog_keyhook(GtkWidget *w, GdkEventKey *event);
 void						init_scene_view(void);
+void 				append_column_with_text(GtkWidget *tree, char *text,
+									GtkCellRenderer *renderer, int en_column);
 void						scene_win(void);
 void						progress_bar();
 void						progress_thread_handler(gdouble x);
