@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/15 20:24:31 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/16 19:39:56 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ void						init_scene_view(void);
 void 				append_column_with_text(GtkWidget *tree, char *text,
 									GtkCellRenderer *renderer, int en_column);
 void						scene_win(void);
+gboolean					is_obj(int type);
 void						progress_bar();
 void						progress_thread_handler(gdouble x);
 void						progress_main_handler();

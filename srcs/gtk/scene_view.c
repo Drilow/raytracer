@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/15 20:26:13 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/16 19:45:59 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool				go_throu_lights(t_light *curr)
 }
 
 static void 		checked_row(__attribute__((unused))GtkCellRendererToggle *cell,
-									gchar __attribute__((unused))*path_str,
+									gchar *path_str,
 									__attribute__((unused))gpointer data)
 {
 	GtkTreeIter  iter;
@@ -68,18 +68,12 @@ static void 		checked_row(__attribute__((unused))GtkCellRendererToggle *cell,
 	if (gtk_tree_model_get_iter(model, &iter, path))
     {
 		gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
-		if (((t_obj*)obj)->type == 1
-			|| ((t_obj*)obj)->type == 1 || ((t_obj*)obj)->type == 2 || ((t_obj*)obj)->type == 3 || ((t_obj*)obj)->type == 4 ||
-			((t_obj*)obj)->type == 6 || ((t_obj*)obj)->type == 66 || ((t_obj*)obj)->type == 67)
-		{
+		if (is_obj(((t_obj*)obj)->type))
 			((t_obj*)obj)->enabled = enabled;
-			printf("WOLOLA %p\n", ((t_obj*)obj)->obj);
-		}
 		else
 		{
 			if (go_throu_lights(((t_light*)obj)))
 				((t_light*)obj)->enabled = enabled; // a debug
-			printf("WOLOLO\n");
 		}
 	}
 	redraw(true);
@@ -100,13 +94,11 @@ void        select_handler(GtkTreeView *tree_view, GtkTreePath *path,
 	if (gtk_tree_model_get_iter(model, &iter, path))
     {
 		gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
-		printf("objet select : %d\n", ((t_obj*)obj)->type);
-		if (((t_obj*)obj)->type != 0)
+		if (is_obj(((t_obj*)obj)->type))
 		{
             outline_obj(((t_obj*)obj));
             edit_win(((t_obj*)obj));
 		}
-		g_print ("You selected obj %i\n", ((t_obj*)obj)->type);
     }
 }
 
