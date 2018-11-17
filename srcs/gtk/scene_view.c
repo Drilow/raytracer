@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/16 19:45:59 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/16 19:54:32 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,28 @@ static void 		checked_row(__attribute__((unused))GtkCellRendererToggle *cell,
 									__attribute__((unused))gpointer data)
 {
 	GtkTreeIter  iter;
-	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
+	GtkTreePath *path;
 	gboolean enabled;
 	GtkTreeModel *model;
 	gpointer		*obj;
 
 	obj = NULL;
 	model = NULL;
+	path = gtk_tree_path_new_from_string (path_str);
 	if ((model = gtk_tree_view_get_model (GTK_TREE_VIEW (SCENE_VIEW.tree))) == NULL)
         return ;
-	gtk_tree_model_get_iter (model, &iter, path);
+	if (gtk_tree_model_get_iter (model, &iter, path) == FALSE);
+		return ;
 	gtk_tree_model_get (model, &iter, CHECKED_COLUMN, &enabled, -1);
 	enabled = !enabled;
 	gtk_tree_store_set(SCENE_VIEW.store, &iter, CHECKED_COLUMN, enabled, -1);
-	if (gtk_tree_model_get_iter(model, &iter, path))
-    {
-		gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
-		if (is_obj(((t_obj*)obj)->type))
-			((t_obj*)obj)->enabled = enabled;
-		else
-		{
-			if (go_throu_lights(((t_light*)obj)))
-				((t_light*)obj)->enabled = enabled; // a debug
-		}
-	}
+	if (gtk_tree_model_get_iter(model, &iter, path) == FALSE)
+		return ;
+	gtk_tree_model_get (model, &iter, OBJ_REF, &obj, -1);
+	if (is_obj(((t_obj*)obj)->type))
+		((t_obj*)obj)->enabled = enabled;
+	else if (go_throu_lights(((t_light*)obj)))
+			((t_light*)obj)->enabled = enabled; // a debug
 	redraw(true);
 	gtk_tree_path_free (path);
 }

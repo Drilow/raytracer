@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/10/24 17:09:32 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/16 20:40:19 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -354,7 +354,7 @@ bool			get_cube(char *s, t_obj *c, int *index)
         return (false);
 // distance au centre :
 	size = size / 2;
-	printf("%p\n", c);
+//	printf("%p\n", c);
 	c->size = size;
 	maxd = sqrt(3 * size * size);
 	c->obj = malloc_po();

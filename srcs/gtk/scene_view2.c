@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/15 20:23:14 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/16 20:05:28 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ void      init_scene_view(void)
 
      SCENE_VIEW.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
      gtk_window_set_title(GTK_WINDOW(SCENE_VIEW.win), "Scene");
-     gtk_window_set_transient_for(GTK_WINDOW(SCENE_VIEW.win),
-                                   GTK_WINDOW(GTKMGR.ui.main_view.win));
+     gtk_window_set_destroy_with_parent (GTK_WINDOW(SCENE_VIEW.win), TRUE);
+     gtk_window_set_deletable (GTK_WINDOW(SCENE_VIEW.win), FALSE);
      gtk_window_set_position(GTK_WINDOW(SCENE_VIEW.win), GTK_WIN_POS_MOUSE);
      SCENE_VIEW.store = gtk_tree_store_new(N_COLUMNS, G_TYPE_STRING,
                                         G_TYPE_DOUBLE, G_TYPE_DOUBLE,
