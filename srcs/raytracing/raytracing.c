@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:11:40 by alacrois          #+#    #+#             */
-/*   Updated: 2018/10/24 17:31:12 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/17 22:37:21 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,22 @@
 
 extern t_global			g_global;
 
+void					free_collisions(t_collision *c)
+{
+	t_collision			*tmp;
+	t_collision			*tmp_next;
+
+	tmp = c;
+	while (tmp != NULL)
+	{
+		tmp_next = tmp->next;
+		free(tmp);
+		tmp = tmp_next;
+	}
+}
+
 //t_bool				collision(t_ray ray, t_obj *o, t_rpoint *p)
-bool					collision(t_ray ray, t_collision *c,  bool test)
+bool					collision(t_ray ray, t_collision *c)
 {
 	t_obj				*o;
 	t_rpoint			*p;
@@ -42,20 +56,53 @@ bool					collision(t_ray ray, t_collision *c,  bool test)
 			 cylinder_collision(ray, o, p) == true)
 		return (true);
 	else if ((o->type == 6 || (o->type / 10) == 6) && \
-			 poly_obj_collision(ray, (t_poly_obj *)o->obj, c, test) == true)
+			 poly_obj_collision(ray, (t_poly_obj *)o->obj, c) == true)
         return (true);
 	return (false);
 }
 
-t_collision			ray_tracing(t_rt *r, t_ray ray, bool test)
+static t_collision	*add_collision(t_ray ray, t_collision *c, t_collision *tmpc)
 {
-	t_collision		c;
+    t_collision		*tmp;
+    t_collision		*new;
+
+	tmp = c;
+	new = (t_collision *)malloc(sizeof(t_collision));
+	*new = *tmpc;
+	new->next = NULL;
+	if (deltasq(ray.p, tmpc->p) < deltasq(ray.p, c->p))
+	{
+		new->next = c;
+		return (new);
+	}
+	while (tmp != NULL)
+	{
+		if (tmp->next == NULL)
+			tmp->next = new;
+		else if (deltasq(ray.p, tmpc->p) < deltasq(ray.p, tmp->next->p))
+		{
+			new->next = tmp->next;
+			tmp->next = new;
+			return (c);
+		}
+		tmp = tmp->next;
+	}
+	return (c);
+}
+
+t_collision			*ray_tracing(t_rt *r, t_ray ray)
+{
+	t_collision		*c;
 	t_rpoint		p;
 	t_collision		tmpc;
 	t_obj			*tmp;
 	int				i;
 
-	c.o = NULL;
+	if (!(c = (t_collision *)malloc(sizeof(t_collision))))
+		exit(1);
+	c->next = NULL;
+	c->reflected = NULL;
+	c->o = NULL;
 	tmp = r->objects;
 	i = 0;
 	p = set_rpoint(0, 0, 0);
@@ -64,14 +111,17 @@ t_collision			ray_tracing(t_rt *r, t_ray ray, bool test)
 //		if (collision(ray, tmp, &p) == true)
 		tmpc.o = tmp;
 		tmpc.p = p;
-		if (collision(ray, &tmpc, test) == true)
+		if (collision(ray, &tmpc) == true)
 		{
-			if (c.o == NULL || (deltasq(ray.p, tmpc.p) < deltasq(ray.p, c.p)))
+//			if (c.o == NULL || (deltasq(ray.p, tmpc.p) < deltasq(ray.p, c.p)))
+			if (c->o == NULL)
 			{
-				c.p = tmpc.p;
-				c.o = tmp;
-				c.normal = tmpc.normal;
+				c->p = tmpc.p;
+				c->o = tmp;
+				c->normal = tmpc.normal;
 			}
+			else
+                c = add_collision(ray, c, &tmpc);
 		}
 		i++;
 		tmp = tmp->next;

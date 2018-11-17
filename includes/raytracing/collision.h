@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/24 17:00:44 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/24 17:00:48 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/17 22:26:23 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@
 # define AMBIENT_LIGHT 12
 # define LIGHT_DISTANCE_FACTOR 2000
 
-typedef struct		s_collision
+typedef struct			s_collision
 {
-	bool			c;
-	t_rpoint		p;
-	t_rpoint		normal;
-	t_obj			*o;
-}					t_collision;
+	bool				c;
+	t_rpoint			p;
+	t_rpoint			normal;
+	t_obj				*o;
+	struct s_collision	*next;
+	struct s_collision	*reflected;
+}						t_collision;
 
 bool				find_collisions(t_rpoint factors, t_dpoint *solutions);
 
@@ -39,12 +41,13 @@ bool				find_collisions(t_rpoint factors, t_dpoint *solutions);
 //t_rpoint			get_cyc_eq_factors(t_ray ray, t_cylinder *c);
 //bool				cylinder_collision(t_ray ray, t_cylinder *c, t_rpoint *p);
 bool				poly_obj_collision(t_ray ray, t_poly_obj *po, \
-									   t_collision *col, bool test);
+									   t_collision *col);
 //t_bool				collision(t_ray ray, t_obj *o, t_rpoint *p);
-bool				collision(t_ray ray, t_collision *c, bool test);
+bool				collision(t_ray ray, t_collision *c);
 t_rpoint			normal_collision_vector(t_collision c);
-t_collision			ray_tracing(t_rt *r, t_ray ray, bool test);
+t_collision			*ray_tracing(t_rt *r, t_ray ray);
+void				free_collisions(t_collision *c);
 
 //t_rgb				get_ray_color(t_rt *r, t_collision c);
-t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug);
+t_rgb				get_ray_color(t_rt *r, t_collision *c, bool debug);
 #endif

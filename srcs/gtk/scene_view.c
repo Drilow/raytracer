@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/16 19:54:32 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/17 20:22:37 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void 		checked_row(__attribute__((unused))GtkCellRendererToggle *cell,
 	path = gtk_tree_path_new_from_string (path_str);
 	if ((model = gtk_tree_view_get_model (GTK_TREE_VIEW (SCENE_VIEW.tree))) == NULL)
         return ;
-	if (gtk_tree_model_get_iter (model, &iter, path) == FALSE);
+	if (gtk_tree_model_get_iter (model, &iter, path) == FALSE)
 		return ;
 	gtk_tree_model_get (model, &iter, CHECKED_COLUMN, &enabled, -1);
 	enabled = !enabled;

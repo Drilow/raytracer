@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/15 20:05:40 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/17 22:31:46 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,18 @@ pthread_cond_t      condB = PTHREAD_COND_INITIALIZER;
 
 static void		draw_image_core2(t_point p, t_rt *r)
 {
-	t_collision tmp;
+	t_collision *tmp;
 
 	while (++p.y < WIN_H)
 	{
-		tmp = ray_tracing(r, g_global.r->rays[p.y][p.x], false);
-		if (tmp.o != NULL)
+//		g_global.r->checker[p.y][p.x] = NULL;
+		tmp = ray_tracing(r, g_global.r->rays[p.y][p.x]);
+//		draw_px(GTKMGR.buf, p.x, p.y,			\
+//				get_ray_color(r, tmp, false));
+//		if (tmp != NULL)
+//			g_global.r->checker[p.y][p.x] = tmp->o;
+
+		if (tmp->o != NULL)
 		{
 //				if ((p.x == 361 || p.x == 360) && p.y == 209)
 //				if (p.x == 360 && p.y == 209)
@@ -49,7 +55,7 @@ static void		draw_image_core2(t_point p, t_rt *r)
 //				}
 //				if (p.x == 361 && p.y == 209)
 //					printf("correct(361, 209) : rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
-			g_global.r->checker[p.y][p.x] = tmp.o;
+			g_global.r->checker[p.y][p.x] = tmp->o;
 			draw_px(GTKMGR.buf, p.x, p.y, \
 						get_ray_color(r, tmp, false));
 //				get_ray_color(r, tmp.o, tmp.p));
@@ -61,6 +67,7 @@ static void		draw_image_core2(t_point p, t_rt *r)
 //					printf("Black pixel : x=%d & y=%d\n", p.x, p.y);
 			draw_px(GTKMGR.buf, p.x, p.y, ft_rgb(0, 0, 0, 0));
 		}
+		free_collisions(tmp);
 	}
 }
 
