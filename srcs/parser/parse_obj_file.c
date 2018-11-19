@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/19 16:38:09 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/19 17:25:41 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,7 +256,6 @@ void			set_obj(t_obj *o)
 {
 	t_poly_obj	*tmp;
 	t_vertex	*face;
-	t_rpoint	pos;
 	double		tmp_d;
 
 	tmp = (t_poly_obj *)o->obj;
@@ -264,7 +263,6 @@ void			set_obj(t_obj *o)
 	while (tmp != NULL)
 	{
 		face = tmp->vertices;
-		pos = o->position;
 		get_face_maxd(face, &tmp_d);
         face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 		tmp = tmp->next;
