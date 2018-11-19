@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 13:03:48 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/19 15:22:36 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/19 15:25:33 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 # include <pthread.h>
 # define THREADS_NB 8
 
+enum state
+{
+					STATE_A,
+					STATE_B
+};
 
 typedef struct		s_thread
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_objects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:18:32 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/04 18:20:14 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/16 19:43:14 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,12 @@ void				validate_objects(t_obj *o)
 		validate_cylinder((t_cylinder*)o->obj);
 	else if (o->type == 6 || o->type / 10 == 6)
 		validate_poly_obj(o);
+}
+
+gboolean			is_obj(int type)
+{
+	if (type == 1 || type == 2 || type == 3 || type == 4 || type == 6
+			|| type == 66 || type == 67)
+		return (TRUE);
+	return (FALSE);
 }

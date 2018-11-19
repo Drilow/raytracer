@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/15 15:28:44 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/19 16:33:36 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ bool			get_cyl_inf(t_json_object *obj);
 bool			prerotate(t_obj *obj, t_json_value *val, int type);
 void			rotate_obj(void *o, int type, t_rpoint angle);
 bool			get_poly_objinf(t_json_object *obj);
+bool			get_poly_obj(char *s, t_obj *o);
 
 #endif

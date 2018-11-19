@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 20:51:38 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/15 18:33:54 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/19 16:33:44 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,11 @@ bool			cmp_chars(char *s, char *o, int start)
 }
 
 
-static bool		get_poly_obj(char *s, t_obj *o, int *i)
+bool		get_poly_obj(char *s, t_obj *o)
 {
-//	int			i;
-
 	o->obj = parse_obj(s);
-	*i = 4;
-	while (s[*i] != ' ')
-		(*i)++;
 	if (o->obj == NULL)
 		ft_putendl("((t_obj *)new)->obj == NULL\n");
-	if (o->obj == NULL || get_next_rpoint(s, &(o->position), i) == false)
-		return (false);
 	set_obj(o);
 	return (true);
 }
@@ -81,7 +74,7 @@ static bool		get_obj_core_2(char *s, t_obj *obj, int *index)
 		get_cylinder(s, obj, index) == false)
 		return (false);
 	if (obj->type == 6 && \
-		get_poly_obj(s, obj, index) == false)
+		get_poly_obj(s, obj) == false)
 		return (false);
 	if (obj->type == 66 && \
 		get_cube(s, obj, index) == false)

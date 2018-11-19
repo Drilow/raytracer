@@ -33,7 +33,7 @@
 				},
 				{
 					"type":"polyobject",
-					"pos":[1,0,10],
+					"pos":[-150,0,90],
 					"adresse":"teapot.obj",
 					"color":[125,80,80,0]
 				}

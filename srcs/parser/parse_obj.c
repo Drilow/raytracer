@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/15 16:15:04 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/19 16:45:23 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,12 @@ void	put_inf_to_glob(t_obj *obj)
 
 	if (g_global.r->objects == NULL)
 	{
-		obj->enabled = true;
+		((t_obj*)obj)->enabled = true;
 		g_global.r->objects = (t_obj *)obj;
 	}
 	else
 	{
-		obj->enabled = true;
+		((t_obj*)obj)->enabled = true;
 		otmp = g_global.r->objects;
 		while (otmp->next != NULL)
 			otmp = otmp->next;

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/14 16:07:56 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/19 14:57:32 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,18 @@
 # include <gtk/gtk.h>
 # include <stdbool.h>
 # include <objects/object.h>
+
+enum
+{
+   TYPE_COLUMN,
+   POS_X_COLUMN,
+   POS_Y_COLUMN,
+   POS_Z_COLUMN,
+   CHECKED_COLUMN,
+   CHECKED_ACTIVE,
+   OBJ_REF,
+   N_COLUMNS
+};
 
 typedef struct				s_switcher
 {
@@ -46,6 +58,8 @@ typedef struct 				s_progress_data {
     GtkWidget				*window;
     int 					bProgressUp;
     int 					nLastPct;
+    long					pos;
+    long					len;
 }							t_progress_data;
 
 typedef struct				s_add_view
@@ -158,9 +172,13 @@ void						init_rt(void);
 void						open_file(void);
 void						dialog_keyhook(GtkWidget *w, GdkEventKey *event);
 void						init_scene_view(void);
+void 				append_column_with_text(GtkWidget *tree, char *text,
+									GtkCellRenderer *renderer, int en_column);
 void						scene_win(void);
+gboolean					is_obj(int type);
 void						progress_bar();
-gboolean updateProgress (gpointer user_data);
-//void 						updateProgress (long pos, long len);
+void						progress_thread_handler(gdouble x);
+void						progress_main_handler();
+gboolean 					updateProgress();
 
 #endif

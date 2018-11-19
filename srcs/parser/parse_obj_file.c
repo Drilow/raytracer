@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/15 1:36:55 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/19 16:38:09 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ static void			free_vlist(t_vertex **v_list)
   tmp = *v_list;
   while (tmp != NULL)
 	{
-		tmp_next = tmp->next;
-		free(tmp);
-		tmp = tmp_next;
+	  tmp_next = tmp->next;
+	  free(tmp);
+	  tmp = tmp_next;
 	}
 }
 
 static bool	get_next_double(char *line, int *index, double *a)
 {
-	double		sign;
-	double		tmp;
-	int			digit_index;
+  double		sign;
+  double		tmp;
+  int			digit_index;
 
   sign = 1;
   tmp = 0;
@@ -112,7 +112,9 @@ static bool	add_vertex(t_vertex **v_list, char *line)
 
   new = malloc_vertex();
   if (parse_vertex(new, line) == false)
+  {
 	return (false);
+  }
   if (*v_list == NULL)
 	*v_list = new;
   else
@@ -210,7 +212,29 @@ static bool	read_line(t_poly_obj **obj, t_vertex **v_list, char *line)
 	return (add_face(obj, *v_list, line));
   return (false);
 }
+/*
+static char		*get_file_name(char *line)
+{
+	char		*file;
+	int			index;
+	int			len;
 
+	index = 4;
+	len = 0;
+	while (line[index] != ' ')
+		index++;
+	len = index - 4;
+	file = (char *)malloc(sizeof(char) * (len + 1));
+	index = 0;
+	while (index < len)
+	{
+		file[index] = line[index + 4];
+		index++;
+	}
+	file[index] = '\0';
+	return (file);
+}
+*/
 static void		get_face_maxd(t_vertex *f, double *d)
 {
 	double		tmp_d;
@@ -242,17 +266,13 @@ void			set_obj(t_obj *o)
 		face = tmp->vertices;
 		pos = o->position;
 		get_face_maxd(face, &tmp_d);
-//		face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
         face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 		tmp = tmp->next;
 	}
 	((t_poly_obj *)o->obj)->max_d = tmp_d;
-// Check distance max :
-//printf("max_d = %f\n", ((t_poly_obj *)o->obj)->max_d);
 }
 
-
-t_poly_obj		*parse_obj(char *str)
+t_poly_obj		*parse_obj(char *scene_line)
 {
   t_poly_obj	*obj;
   t_vertex		*v_list;
@@ -262,7 +282,7 @@ t_poly_obj		*parse_obj(char *str)
 
   obj = NULL;
   v_list = NULL;
-	fd = open(str, O_RDONLY);
+	fd = open(scene_line, O_RDONLY);
 	if (fd == -1)
 		ft_exit("Couldn't open obj file", 1);
 	i = 0;
@@ -282,7 +302,6 @@ t_poly_obj		*parse_obj(char *str)
 		free(line);
 	}
 	free_vlist(&v_list);
-	printf("%p\n", obj);
   return (obj);
 }
 
@@ -335,6 +354,7 @@ bool			get_cube(char *s, t_obj *c, int *index)
         return (false);
 // distance au centre :
 	size = size / 2;
+//	printf("%p\n", c);
 	c->size = size;
 	maxd = sqrt(3 * size * size);
 	c->obj = malloc_po();

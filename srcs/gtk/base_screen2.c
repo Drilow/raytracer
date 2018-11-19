@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base_screen2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 14:40:43 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/15 12:38:54 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,34 @@ void			on_key_press(GtkWidget *w, GdkEventKey *event)
 	if (g_global.r && w == ADD_VIEW.win)
 		draw_image();
 	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
-		gtk_main_quit();
+	gtk_main_quit();
+}
+
+
+void			end_open(GtkWidget *dialog)
+{
+	char					*filename;
+	GtkFileChooser			*chooser;
+	GtkCssProvider 			*cssProvider;
+
+	cssProvider = gtk_css_provider_new();
+  	gtk_css_provider_load_from_path(cssProvider,
+								"./uiconfig/progressbar.css", NULL);
+  	gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
+                               GTK_STYLE_PROVIDER(cssProvider),
+                               GTK_STYLE_PROVIDER_PRIORITY_USER);
+	chooser = GTK_FILE_CHOOSER(dialog);
+	filename = gtk_file_chooser_get_filename(chooser);
+	if (!parse(filename))
+		usage("Error : invalid argument.", 1);
+	g_free(filename);
+	if (dialog)
+	{
+		gtk_widget_destroy(dialog);
+		dialog = NULL;
+	}
+	handle_main_view();
+	scene_win();
 }
 
 void			dialog_keyhook(GtkWidget *w, GdkEventKey *event)
@@ -41,21 +68,8 @@ void			dialog_keyhook(GtkWidget *w, GdkEventKey *event)
 			redraw(false);
 		gtk_widget_destroy(w);
 	}
-	else
-		return ;
-}
-
-void			end_open(GtkWidget *dialog)
-{
-	char					*filename;
-	GtkFileChooser			*chooser;
-
-	chooser = GTK_FILE_CHOOSER(dialog);
-	filename = gtk_file_chooser_get_filename(chooser);
-	if (!parse(filename))
-		usage("Error : invalid argument.", 1);
-	g_free(filename);
-	handle_main_view();
+	else if (event->keyval == 65421)
+		end_open(w);
 }
 
 void			open_file(void)
@@ -65,24 +79,29 @@ void			open_file(void)
 	gint					res;
 	char					*dir;
 
+	dialog = NULL;
 	action = GTK_FILE_CHOOSER_ACTION_OPEN;
 	dialog = gtk_file_chooser_dialog_new("Open File",
-	GTK_WINDOW(g_global.base_view.win), action, "_Cancel",
-	GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
+					GTK_WINDOW(g_global.base_view.win), action, "_Cancel",
+					GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
-		exit(1);
+		exit(1); // to fix
 	dir = getwd(dir);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
-	(dir = ft_strjoin(dir, "/scenes")));
+					(dir = ft_strjoin(dir, "/scenes")));
 	init_rt();
 	init_gtk_variables();
 	free(dir);
 	dir = NULL;
-	g_signal_connect(G_OBJECT(dialog), "key-press-event",
-	G_CALLBACK(dialog_keyhook), NULL);
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
+	g_signal_connect(G_OBJECT(dialog), "key-press-event",
+					G_CALLBACK(dialog_keyhook), NULL);
 	if (res == GTK_RESPONSE_ACCEPT)
 		end_open(dialog);
 	else
-		g_object_unref(dialog);
+	{
+		if (dialog)
+			gtk_widget_destroy(dialog);
+		dialog = NULL;
+	}
 }
