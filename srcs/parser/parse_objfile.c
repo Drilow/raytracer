@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/19 17:31:13 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/21 09:43:58 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,7 @@ bool	get_poly_objinf(t_json_object *obj)
 	}
 	if (cmp_chars(obj->pair[3]->key->str, "color", 0) == true)
 		o->color = get_obj_color(obj->pair[3]->value);
-	o->obj = parse_obj(str->str);
-	if (o->obj == NULL)
-		ft_putendl("((t_obj *)new)->obj == NULL\n");
-	set_obj(o);
-	printf("%p\n", o);
+	get_poly_obj(str->str, o);
 	put_inf_to_glob(o);
 	return (true);
 }
