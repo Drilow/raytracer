@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/21 11:45:45 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/21 13:53:42 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,7 +346,6 @@ bool			get_cube(t_obj *c, double size)
 	t_poly_obj	*o;
 	double		maxd;
 
-	printf ("%f\n", size);
 // distance au centre :
 	size = size / 2;
 //	printf("%p\n", c);

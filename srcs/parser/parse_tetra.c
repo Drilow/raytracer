@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 11:44:02 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/21 11:48:13 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/21 13:54:12 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ static	double	get_tetra_size(t_json_value *val)
 	if (val->type == 5)
 	{
 		a = (int *)val->ptr;
-		printf("%d\n", *a);
 		size = (double)*a; 
-		printf("%f\n", size);
 	}
 	return (size);
 }
