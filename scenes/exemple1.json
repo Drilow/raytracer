@@ -33,7 +33,8 @@
 				},
 				{
 					"type":"polyobject",
-					"pos":[-250,60,150],
+					"pos":[90,-120,150],
+					"size":100,
 					"adresse":"teapot.obj",
 					"color":[125,80,80,0]
 				},
@@ -44,10 +45,26 @@
 					"color":[120,255,255,0]
 				},
 				{
+					"type":"plane",
+					"pos":[0,-50,0],
+					"vector":[0,10,0],
+					"color":[120,180,120,0],
+					"rotate":[0,0,0,0]
+				},
+				{
 					"type":"tetrahedron",
 					"pos":[-170, 80,60],
 					"size":30,
 					"color":[120,255,255,0]
+				},
+				{
+					"type":"cylinder",
+					"pos":[-180,5,100],
+					"vector":[-8,8,10],
+					"radius":10,
+					"INF":true,
+					"color":[150,50,100,0],
+					"rotate":[0,0,0,0]
 				}
 	]
 }

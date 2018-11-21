@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/21 13:56:08 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/21 15:24:44 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,20 @@ static	bool	get_inf(t_obj *o,t_json_value *val)
 	}
 	return (true);
 }
+static	bool	set_size(t_obj *o, t_json_value *val)
+{
+	int		*a;
 
+	a = 0;
+	if (val == NULL)
+		return (false);
+	if (val->type == 5)
+	{
+		a = (int *)val->ptr;
+		o->size = (double)*a;
+	}
+	return (true);
+}
 bool	get_poly_objinf(t_json_object *obj)
 {
 	t_obj		*o;
@@ -52,13 +65,26 @@ bool	get_poly_objinf(t_json_object *obj)
 		if (get_inf(o, obj->pair[1]->value) == false)
 			return (false);
 	}
-	if (cmp_chars(obj->pair[2]->key->str, "adresse", 0) == true)
+	else
+		return (false);
+	if (cmp_chars(obj->pair[2]->key->str, "size", 0) == true)
 	{
-		if (obj->pair[2]->value->type == 7)
-			str = (t_json_string *)obj->pair[2]->value->ptr;
+		if (set_size(o, obj->pair[2]->value) == false)
+			return (false);
 	}
-	if (cmp_chars(obj->pair[3]->key->str, "color", 0) == true)
-		o->color = get_obj_color(obj->pair[3]->value);
+	else
+		return (false);
+	if (cmp_chars(obj->pair[3]->key->str, "adresse", 0) == true)
+	{
+		if (obj->pair[3]->value->type == 7)
+			str = (t_json_string *)obj->pair[3]->value->ptr;
+	}
+	else
+		return (false);
+	if (cmp_chars(obj->pair[4]->key->str, "color", 0) == true)
+		o->color = get_obj_color(obj->pair[4]->value);
+	else
+		return (false);
 	get_poly_obj(str->str, o);
 	put_inf_to_glob(o);
 	return (true);

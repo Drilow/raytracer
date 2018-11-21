@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/21 13:50:01 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/21 14:02:34 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,19 @@ bool	get_cube_inf(t_json_object *obj)
 		if (get_inf(o, obj->pair[1]->value) == false)
 			return (false);
 	}
+	else
+		return (false);
 	if (cmp_chars(obj->pair[2]->key->str, "size", 0) == true)
 	{
 		if (obj->pair[2]->value->type == 5)
 			size = get_cub_size(obj->pair[2]->value);
 	}
+	else
+		return (false);
 	if (cmp_chars(obj->pair[3]->key->str, "color", 0) == true)
 		o->color = get_obj_color(obj->pair[3]->value);
+	else
+		return (false);
 	get_cube(o, size);
 	put_inf_to_glob(o);
 	return (true);
