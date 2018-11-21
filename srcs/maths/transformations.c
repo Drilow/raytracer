@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessin@42.fr>                    +#+  +:+       +#+        */
+/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:45:24 by alacrois          #+#    #+#             */
 /*   Updated: 2018/08/31 02:58:20 by alacrois         ###   ########.fr       */
@@ -64,8 +64,12 @@ static void		rotate_poly_obj(t_obj *o, t_rpoint angle)
 }
 
 
-void			rotate_obj(t_obj *obj, int type, t_rpoint angle)
+void			rotate_obj(void *o, int type, t_rpoint angle)
 {
+	t_obj		*obj;
+
+	if (type != 0)
+		obj = (t_obj *)o;
 	if (type == 2)
 		rotate(&(((t_plane *)obj->obj)->vector), angle);
 	if (type == 3)
@@ -73,7 +77,7 @@ void			rotate_obj(t_obj *obj, int type, t_rpoint angle)
 	if (type == 4)
 		rotate(&(((t_cylinder *)obj->obj)->vector), angle);
 	if (type == 6 || type / 10 == 6)
-		rotate_poly_obj(obj, angle);
+	  rotate_poly_obj(obj, angle);
 }
 
 void			translate_obj(void *o, int type, t_rpoint translation)

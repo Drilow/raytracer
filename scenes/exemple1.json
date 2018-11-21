@@ -1,6 +1,6 @@
 {
 	"camera":{
-				"pos":[0,0,-500],
+				"pos":[50,-50,-100],
 				"angle":[0,0,0]
 			},
 	"light":{
@@ -34,7 +34,7 @@
 				{
 					"type":"polyobject",
 					"pos":[90,-120,150],
-					"size":100,
+					"size":20,
 					"adresse":"teapot.obj",
 					"color":[125,80,80,0]
 				},
@@ -43,13 +43,6 @@
 					"pos":[-130, 120,60],
 					"size":30,
 					"color":[120,255,255,0]
-				},
-				{
-					"type":"plane",
-					"pos":[0,-50,0],
-					"vector":[0,10,0],
-					"color":[120,180,120,0],
-					"rotate":[0,0,0,0]
 				},
 				{
 					"type":"tetrahedron",

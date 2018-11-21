@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/21 13:53:42 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/21 16:40:59 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ void			set_obj(t_obj *o)
 {
 	t_poly_obj	*tmp;
 	t_vertex	*face;
+	t_rpoint	pos;
 	double		tmp_d;
 
 	tmp = (t_poly_obj *)o->obj;
@@ -263,6 +264,7 @@ void			set_obj(t_obj *o)
 	while (tmp != NULL)
 	{
 		face = tmp->vertices;
+		pos = o->position;
 		get_face_maxd(face, &tmp_d);
         face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 		tmp = tmp->next;
@@ -272,14 +274,14 @@ void			set_obj(t_obj *o)
 
 t_poly_obj		*parse_obj(char *scene_line)
 {
-  t_poly_obj	*obj;
-  t_vertex		*v_list;
-  int			fd;
-  char			*line;
-  int			i;
+	t_poly_obj	*obj;
+	t_vertex		*v_list;
+	int			fd;
+	char			*line;
+	int			i;
 
-  obj = NULL;
-  v_list = NULL;
+	obj = NULL;
+	v_list = NULL;
 	fd = open(scene_line, O_RDONLY);
 	if (fd == -1)
 		ft_exit("Couldn't open obj file", 1);
