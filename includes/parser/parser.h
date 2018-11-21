@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/19 16:33:36 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/21 11:46:40 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ bool			get_next_rpoint(char *s, t_rpoint *p, int *index);
 bool			get_obj_core(char *s, t_obj *obj, int *index, t_rgb *clr);
 bool			get_obj(char *s, void *o, int *index, int type);
 void			set_obj(t_obj *o);
-bool			get_cube(char *s, t_obj *c, int *index);
-bool			get_tetrahedron(char *s, t_obj *t, int *index);
+bool			get_cube(t_obj *c, double size);
+bool			get_tetrahedron(t_obj *t, double size);
 bool			set_cube(t_rpoint position, double size, t_obj *c);
 bool			set_tetrahedron(t_rpoint position, double size, t_obj *t);
 bool			validate_obj(t_rpoint pos, double size, char *path, t_obj *o);
@@ -45,5 +45,7 @@ bool			prerotate(t_obj *obj, t_json_value *val, int type);
 void			rotate_obj(void *o, int type, t_rpoint angle);
 bool			get_poly_objinf(t_json_object *obj);
 bool			get_poly_obj(char *s, t_obj *o);
+bool			get_cube_inf(t_json_object *obj);
+bool			get_tetra_inf(t_json_object *obj);
 
 #endif

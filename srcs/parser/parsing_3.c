@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 20:51:38 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/19 16:33:44 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/21 11:59:06 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ static bool		get_obj_core_2(char *s, t_obj *obj, int *index)
 	if (obj->type == 6 && \
 		get_poly_obj(s, obj) == false)
 		return (false);
-	if (obj->type == 66 && \
+/*	if (obj->type == 66 && \
 		get_cube(s, obj, index) == false)
 		return (false);
 	if (obj->type == 67 && \
 		get_tetrahedron(s, obj, index) == false)
 		return (false);
-	return (true);
+*/	return (true);
 }
 
 

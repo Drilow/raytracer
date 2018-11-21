@@ -18,7 +18,7 @@
 	"objects":[
 				{
 					"type":"sphere",
-					"pos":[-150,0,90],
+					"pos":[-150,0,150],
 					"radius":20,
 					"color":[255,255, 255,0]
 				},
@@ -33,9 +33,21 @@
 				},
 				{
 					"type":"polyobject",
-					"pos":[-150,0,90],
+					"pos":[-250,60,150],
 					"adresse":"teapot.obj",
 					"color":[125,80,80,0]
+				},
+				{
+					"type":"cube",
+					"pos":[-130, 120,60],
+					"size":30,
+					"color":[120,255,255,0]
+				},
+				{
+					"type":"tetrahedron",
+					"pos":[-170, 80,60],
+					"size":30,
+					"color":[120,255,255,0]
 				}
 	]
 }

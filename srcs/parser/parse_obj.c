@@ -79,10 +79,12 @@ static	int		get_obj_type(t_json_pair *pair)
 		return (3);
 	if (cmp_chars(str, "cylinder", 0) == true)
 		return (4);
-	if (cmp_chars(str, "obj", 0) == true)
+	if (cmp_chars(str, "cube", 0) == true)
 		return (6);
-	if (cmp_chars(str, "polyobject", 0) == true)
+	if (cmp_chars(str, "tetrahedron", 0) == true)
 		return (7);
+	if (cmp_chars(str, "polyobject", 0) == true)
+		return (8);
 	return (-1);
 }
 
@@ -108,7 +110,11 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 		get_cone_inf(obj);
 	if (i == 4 && obj->nb == 7)
 		get_cyl_inf(obj);
+	if (i == 6 && obj->nb == 4)
+		get_cube_inf(obj);
 	if (i == 7 && obj->nb == 4)
+		get_tetra_inf(obj);
+	if (i == 8 && obj->nb == 4)
 		get_poly_objinf(obj);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/21 10:06:18 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/21 11:45:45 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,15 +341,12 @@ static t_vertex   *add_cube_face(t_rpoint f)
   return (face);
 }
 
-bool			get_cube(char *s, t_obj *c, int *index)
+bool			get_cube(t_obj *c, double size)
 {
-    double		size;
 	t_poly_obj	*o;
 	double		maxd;
 
-    if (get_next_rpoint(s, &(c->position), index) == false ||
-		get_next_nb(s, index, &size, NULL) == false)
-        return (false);
+	printf ("%f\n", size);
 // distance au centre :
 	size = size / 2;
 //	printf("%p\n", c);
@@ -426,15 +423,11 @@ static t_vertex       *add_t_face(int fnb, double size)
 	return (face);
 }
 
-bool			get_tetrahedron(char *s, t_obj *t, int *index)
+bool			get_tetrahedron(t_obj *t, double size)
 {
-    double		size;
 	t_poly_obj	*o;
 //	double		maxd;
 
-    if (get_next_rpoint(s, &(t->position), index) == false ||
-		get_next_nb(s, index, &size, NULL) == false)
-        return (false);
 	t->size = size;
 // distance au centre :
 //	size = size / 2;
