@@ -54,6 +54,7 @@ dkms.conf
 
 *~
 
+.DS_STORE
 settings.json
 .DS_STORE
 ext/*
