@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/21 11:46:40 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/22 12:08:27 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ bool			get_poly_objinf(t_json_object *obj);
 bool			get_poly_obj(char *s, t_obj *o);
 bool			get_cube_inf(t_json_object *obj);
 bool			get_tetra_inf(t_json_object *obj);
+bool			check_arr(t_json_array *arr);
 
 #endif

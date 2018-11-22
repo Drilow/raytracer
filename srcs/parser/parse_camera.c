@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 18:49:08 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/12 16:58:26 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/22 12:22:52 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static 	t_rpoint		put_cam_info(t_json_array *arr)
 	points.x = 0;
 	points.y = 0;
 	points.z = 0;
-	if (arr->nb == 3)
+	if (arr->nb == 3 && check_arr(arr))
 	{
 		a = (int *)arr->value[num++]->ptr;
 		points.x = (double)*a;

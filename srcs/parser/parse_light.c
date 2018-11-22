@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:17:00 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/14 16:33:05 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/22 12:08:10 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static 	t_light			*put_info(t_json_array *arr, t_light *lights)
 	unsigned long	num;
 
 	num = 0;
-	if (arr->nb == 3)
+	if (arr->nb == 3 && check_arr(arr))
 	{
 		a = (int *)arr->value[num++]->ptr;
 		lights->source.x = (double)*a;
