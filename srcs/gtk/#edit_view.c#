@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/22 20:24:10 by adleau           ###   ########.fr       */
+/*   Updated: 2018/10/20 11:47:33 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void				actual_edit_view(t_obj *o)
 	if (o->type == -5)
 	{
 		o->type = 1;
-		o->enabled = true;
 		o->next = g_global.r->objects;
 		g_global.r->objects = o;
 		if (!(o->obj = (t_sphere*)malloc(sizeof(t_sphere))))
