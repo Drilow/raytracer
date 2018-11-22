@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/22 19:50:17 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/22 21:56:19 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #define PIXMAP g_global.r->gtk_mgr.pixmap
 #define GTKMGR g_global.r->gtk_mgr
 #define ADD_VIEW g_global.r->gtk_mgr.ui.add_view
+#define SCENE_VIEW g_global.r->gtk_mgr.ui.scene_view
 
 extern t_global		g_global;
 
@@ -47,4 +48,6 @@ void				validate_edit(t_obj *o)
 	gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
 	validate_objects(o);
 	redraw(true);
+	gtk_widget_destroy(SCENE_VIEW.win);
+	scene_win();
 }
