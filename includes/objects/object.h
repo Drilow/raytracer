@@ -71,7 +71,7 @@ typedef struct      s_poly_obj
     struct s_poly_obj   *next;
 }                   t_poly_obj;
 
-t_poly_obj			*parse_obj(char *scene_line);
+t_poly_obj			*parse_obj(char *scene_line, double size);
 bool				get_plane(char *s, t_obj *o, int *index);
 bool				plane_collision(t_ray ray, t_plane *pl, t_rpoint pos,
 					t_rpoint *p);

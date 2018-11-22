@@ -28,7 +28,7 @@ typedef struct		s_poly_obj
 	struct s_poly_obj	*next;
 }					t_poly_obj;
 
-t_poly_obj		*parse_obj(char *scene_line);
+t_poly_obj		*parse_obj(char *scene_line, double size);
 
 #endif
 

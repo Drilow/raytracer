@@ -33,12 +33,15 @@ bool			cmp_chars(char *s, char *o, int start)
 
 static bool		get_poly_obj(char *s, t_obj *o, int *i)
 {
-//	int			i;
+	double		size;
 
-	o->obj = parse_obj(s);
+//	o->obj = parse_obj(s);
 	*i = 4;
 	while (s[*i] != ' ')
 		(*i)++;
+	if (get_next_nb(s, i, &size, NULL) == false)
+	  return (false);
+	o->obj = parse_obj(s, size);
 	if (o->obj == NULL)
 		ft_putendl("((t_obj *)new)->obj == NULL\n");
 	if (o->obj == NULL || get_next_rpoint(s, &(o->position), i) == false)
