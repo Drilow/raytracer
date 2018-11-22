@@ -12,6 +12,10 @@
 				"color":[75,75,75,0]
 			},
 	"light":{
+				"source":[-20,-33,-350],
+				"color":[75,75,75,0]
+			},
+	"light":{
 				"source":[-100,-50,0],
 				"color":[75,75,75,0]
 			},
@@ -29,11 +33,11 @@
 					"angle":5,
 					"INF":true,
 					"color":[25,150,150,0],
-					"rotate":[0,15,0]
+					"rotate":[0,0,0]
 				},
 				{
 					"type":"polyobject",
-					"pos":[90,-120,150],
+					"pos":[-20,-33,-300],
 					"size":20,
 					"adresse":"teapot.obj",
 					"color":[125,80,80,0]
@@ -57,7 +61,7 @@
 					"radius":10,
 					"INF":true,
 					"color":[150,50,100,0],
-					"rotate":[0,0,0,0]
+					"rotate":false
 				}
 	]
 }

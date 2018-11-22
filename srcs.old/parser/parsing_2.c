@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 17:04:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/06/16 18:29:11 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/11/22 16:16:12 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,37 +71,6 @@ static int		transform(char *s, t_rpoint *p, int *index)
 	*index = i;
 	return (0);
 }
-
-/*
-bool			get_obj_core(char *s, t_obj *obj, int *index, t_rgb *clr)
-{
-	t_rgb		*color;
-
-	color = clr;
-	if (obj != NULL)
-	{
-		color = &(obj->color);
-		if (obj->type == 1 && \
-			get_sphere(s, (t_sphere *)obj->obj, index) == false)
-			return (false);
-		if (obj->type == 2 && \
-			get_plane(s, (t_plane *)obj->obj, index) == false)
-			return (false);
-		if (obj->type == 3 && \
-			get_cone(s, (t_cone *)obj->obj, index) == false)
-			return (false);
-		if (obj->type == 4 && \
-			get_cylinder(s, (t_cylinder *)obj->obj, index) == false)
-			return (false);
-	}
-	if (get_next_nb(s, index, NULL, &(color->r)) == false || \
-		get_next_nb(s, index, NULL, &(color->g)) == false || \
-		get_next_nb(s, index, NULL, &(color->b)) == false || \
-		get_next_nb(s, index, NULL, &(color->trans)) == false)
-		return (false);
-	return (true);
-}
-*/
 
 bool			get_obj(char *s, void *o, int *index, int type)
 {

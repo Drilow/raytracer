@@ -19,22 +19,6 @@
 #include <fcntl.h>
 
 extern t_global g_global;
-/*
-static	bool	get_inf(t_obj *o,t_json_value *val, int i)
-{
-	double	*a;
-	t_json_array *arr;
-
-	if (val == NULL)
-		return (false);
-	if (val->type == number || val->type == integer)
-	{
-		a = (double *)val->ptr;
-		o->
-	}
-	return (true);
-}
-*/
 
 bool			prerotate(t_obj *obj, t_json_value *val, int type)
 {
@@ -42,12 +26,14 @@ bool			prerotate(t_obj *obj, t_json_value *val, int type)
 	t_json_array	*arr;
 	int				*a;
 
-	if (!(t = (t_rpoint *)malloc(sizeof(t_rpoint))))
-		return (false);
+	if (val->type == 2)
+		return (true);
 	if (val == NULL || val->type != 3)
 		return (false);
+	if (!(t = (t_rpoint *)malloc(sizeof(t_rpoint))))
+		return (false);
 	arr = (t_json_array *)val->ptr;
-	if (arr->nb == 3)
+	if (arr->nb == 3 && check_arr(arr))
 	{
 		a = (int *)arr->value[0]->ptr;
 		t->x = (double)*a;
@@ -62,6 +48,7 @@ bool			prerotate(t_obj *obj, t_json_value *val, int type)
 	rotate_obj(obj, type, *t);
 	return (true);
 }
+
 static	int		get_obj_type(t_json_pair *pair)
 {
 	t_json_string	*string;

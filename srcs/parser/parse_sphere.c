@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 11:37:43 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/21 14:01:33 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/22 14:08:14 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static	bool	get_inf(t_obj *o,t_json_value *val)
 	if (val->type == 3)
 	{
 		arr = (t_json_array *)val->ptr;
+		if (!check_arr(arr) && arr->nb != 3)
+			return (false);
 		a = (int *)arr->value[0]->ptr;
 		o->position.x = (double)*a;
 		a = (int *)arr->value[1]->ptr;

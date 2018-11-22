@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:40:23 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/21 14:02:56 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/22 14:07:40 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static	bool	get_pos(t_obj *o, t_json_value *val)
 	if (val->type == 3)
 	{
 		arr = (t_json_array *)val->ptr;
+		if (!check_arr(arr) && arr->nb != 3)
+			return (false);
 		a = (int *)arr->value[0]->ptr;
 		o->position.x = (double)*a;
 		a = (int *)arr->value[1]->ptr;
@@ -50,6 +52,8 @@ static	bool	geet_vector(t_obj *o, t_json_value *val)
 	if (val->type == 3)
 	{
 		arr = (t_json_array *)val->ptr;
+		if (!check_arr(arr) && arr->nb != 3)
+			return (false);
 		a = (int *)arr->value[0]->ptr;
 		c->vector.x = (double)*a;
 		a = (int *)arr->value[1]->ptr;

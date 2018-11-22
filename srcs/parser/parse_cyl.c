@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:05:20 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/21 14:14:30 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/22 14:06:33 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static	bool	get_inf(t_obj *o,t_json_value *val)
 	if (val->type == 3)
 	{
 		arr = (t_json_array *)val->ptr;
+		if (!check_arr(arr) && arr->nb != 3)
+			return (false);
 		a = (int *)arr->value[0]->ptr;
 		o->position.x = (double)*a;
 		a = (int *)arr->value[1]->ptr;
@@ -49,8 +51,10 @@ static	void	verif_inf(t_obj *o, t_json_value *val)
 	bool		a;
 	t_cylinder	*c;
 
+	a = true;
 	c = (t_cylinder *)o->obj;
-	a = (bool)val->ptr;
+	if (val->type == 2)
+		a = (bool)val->ptr;
 	c->infinite = a;
 }
 
@@ -66,6 +70,8 @@ static	bool	geet_vector(t_obj *o, t_json_value *val)
 	if (val->type == 3)
 	{
 		arr = (t_json_array *)val->ptr;
+		if (!check_arr(arr) && arr->nb != 3)
+			return (false);
 		a = (int *)arr->value[0]->ptr;
 		c->vector.x = (double)*a;
 		a = (int *)arr->value[1]->ptr;

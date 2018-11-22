@@ -98,7 +98,6 @@ static bool	add_vertex(t_vertex **v_list, char *line)
   t_vertex		*tmp;
   t_vertex		*new;
 
-//  ft_putendl("add_vertex");
   new = malloc_vertex();
   if (parse_vertex(new, line) == false)
 	return (false);
@@ -141,7 +140,6 @@ static bool	parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
   t_vertex		*vertices;
   int			v_nb;
 
-//  ft_putendl("1");
   v_index = 0;
   line_index = 0;
   vertices = NULL;
@@ -149,10 +147,8 @@ static bool	parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
   while (get_next_double(line, &line_index, &v_index) == true)
 	{
 	  v_nb++;
-//	  ft_putendl("2");
 	  if (vertices == NULL)
 		{
-//			ft_putendl("3");
 		  vertices = malloc_vertex();
 		  face->vertices = vertices;
 		  if (get_vertex(v_list, (int)v_index, vertices) == false)
@@ -160,18 +156,13 @@ static bool	parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
 		}
 	  else
 		{
-//			ft_putendl("4");
 		  while (vertices->next != NULL)
 			vertices = vertices->next;
-//		  ft_putendl("4.1");
 		  vertices->next = malloc_vertex();
-//		  ft_putendl("4.2");
 		  if (get_vertex(v_list, (int)v_index, vertices->next) == false)
 			  return (false);
-//		  ft_putendl("4.3");
 		}
 	}
-//  ft_putendl("5");
   if (v_nb < 3)
 	return (false);
   return (true);
@@ -182,23 +173,18 @@ static bool	add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
   t_poly_obj   	*tmp;
   t_poly_obj	*new;
 
-//  ft_putendl("add_face");
   new = malloc_po();
-//  ft_putendl("1");
   if (parse_face(new, line, v_list) == false)
 	return (false);
-//  ft_putendl("2");
   if (*obj == NULL)
 	*obj = new;
   else
 	{
-//		ft_putendl("3");
 	  tmp = *obj;
 	  while (tmp->next != NULL)
 		tmp = tmp->next;
 	  tmp->next = new;
 	}
-//  ft_putendl("4");
   return (true);
 }
 
@@ -218,14 +204,12 @@ bool			validate_obj(t_rpoint pos, double size, char *path, t_obj *o)
   t_poly_obj	*obj;
   t_vertex		*v_list;
   int			fd;
-  //  char			*file;
   char			*line;
   int			i;
 
   obj = NULL;
   o->obj = NULL;
   v_list = NULL;
-//  file = get_file_name(scene_line);
   fd = open(path, O_RDONLY);
   if (fd == -1)
     ft_exit("Couldn't open obj file", 1);
