@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 16:32:15 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 16:33:42 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/22 19:31:36 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,22 @@
 #define FILTER_VIEW GTKMGR.ui.filter_view
 
 extern t_global		g_global;
+
+void				reversed(unsigned char *ptr)
+{
+	unsigned char	tmpr;
+	unsigned char	tmpg;
+	unsigned char	tmpb;
+
+	tmpr = ptr[0];
+	tmpg = ptr[1];
+	tmpb = ptr[2];
+	gtk_widget_set_state_flags(FILTER_VIEW.reversed_button,
+	GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
+	ptr[0] = 255 - tmpr;
+	ptr[1] = 255 - tmpg;
+	ptr[2] = 255 - tmpb;
+}
 
 void				black_white(unsigned char *ptr)
 {

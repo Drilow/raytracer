@@ -26,8 +26,6 @@ bool			prerotate(t_obj *obj, t_json_value *val, int type)
 	t_json_array	*arr;
 	int				*a;
 
-	if (val->type == 2)
-		return (true);
 	if (val == NULL || val->type != 3)
 		return (false);
 	if (!(t = (t_rpoint *)malloc(sizeof(t_rpoint))))

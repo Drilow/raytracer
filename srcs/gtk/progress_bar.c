@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   progress_bar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/19 15:26:01 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/15 20:05:25 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <libft.h>
 #include <rt.h>
 #include <thread/thread.h>
 #include <global.h>
-#include <libft.h>
 #define PROGRESS_DATA g_global.r->gtk_mgr.ui.progress_data
 
 extern t_global            g_global;

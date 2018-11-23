@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cone_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 19:57:41 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/26 20:08:47 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/11/23 12:29:48 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <objects/object.h>
 #include <geometry/geometry.h>
-
 #include <libft.h>
 
 static bool	base_collision(t_ray ray, t_obj *c, t_rpoint *p)
@@ -68,12 +67,15 @@ static bool	check_solutions(t_ray ray, t_obj *c, t_dpoint *solutions)
 	return (true);
 }
 
+#include <stdio.h>
+
 bool			cone_collision(t_ray ray, t_obj *c, t_rpoint *p)
 {
 	t_rpoint	bcollision;
 	t_rpoint	eq_factors;
 	t_dpoint	solutions;
 
+//	printf("object ptr %p id %d\n", c, c->type, ((t_cone*)c->obj));
 	if (get_cc_eq_factors(ray, c, &eq_factors) == false)
 		return (false);
 	if (find_collisions(eq_factors, &solutions) == false)

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/19 14:57:32 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/23 12:28:14 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct				s_filter_view
 	GtkWidget				*bw_img;
 	GtkWidget				*sepia_button;
 	GtkWidget				*sepia_img;
+	GtkWidget				*reversed_button;
+	GtkWidget				*reversed_img;
 }							t_filter_view;
 
 typedef struct 				s_scene_view
@@ -53,7 +55,8 @@ typedef struct 				s_scene_view
     GtkTreeStore 			*store;
 }							t_scene_view;
 
-typedef struct 				s_progress_data {
+typedef struct 				s_progress_data
+{
 	GtkWidget				*pbar;
     GtkWidget				*window;
     int 					bProgressUp;
@@ -167,12 +170,13 @@ void						add_view(void);
 void						validate_objects(t_obj *o);
 void						black_white(unsigned char *ptr);
 void						sepia(unsigned char *ptr);
+void						reversed(unsigned char *ptr);
 void						get_color_values(t_rgb col, GdkRGBA *c);
 void						init_rt(void);
 void						open_file(void);
 void						dialog_keyhook(GtkWidget *w, GdkEventKey *event);
 void						init_scene_view(void);
-void 				append_column_with_text(GtkWidget *tree, char *text,
+void						append_column_with_text(GtkWidget *tree, char *text,
 									GtkCellRenderer *renderer, int en_column);
 void						scene_win(void);
 gboolean					is_obj(int type);

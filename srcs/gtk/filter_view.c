@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/12 16:32:24 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/22 19:32:35 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void				handle_filters(GtkButton *button)
 		f = black_white;
 	else if (button == GTK_BUTTON(FILTER_VIEW.sepia_button))
 		f = sepia;
+	else if (button == GTK_BUTTON(FILTER_VIEW.reversed_button))
+		f = reversed;
 	deactivate_filter_buttons((GtkWidget*)button);
 	stride = cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W);
 	y = -1;
@@ -66,15 +68,21 @@ void				end_filters(void)
 {
 	gtk_container_add(GTK_CONTAINER(FILTER_VIEW.buttonbox),
 	FILTER_VIEW.bw_button);
+	gtk_container_add(GTK_CONTAINER(FILTER_VIEW.buttonbox),
+	FILTER_VIEW.reversed_button);
 	FILTER_VIEW.sepia_button = gtk_button_new();
 	gtk_widget_set_tooltip_text(FILTER_VIEW.sepia_button, "Sepia");
+	gtk_widget_set_tooltip_text(FILTER_VIEW.reversed_button, "Invert Colors");
 	g_signal_connect(G_OBJECT(FILTER_VIEW.sepia_button), "clicked",
+	G_CALLBACK(handle_filters), NULL);
+	g_signal_connect(G_OBJECT(FILTER_VIEW.reversed_button), "clicked",
 	G_CALLBACK(handle_filters), NULL);
 	gtk_button_set_image(GTK_BUTTON(FILTER_VIEW.sepia_button),
 	FILTER_VIEW.sepia_img);
 	gtk_container_add(GTK_CONTAINER(FILTER_VIEW.buttonbox),
 	FILTER_VIEW.sepia_button);
 	gtk_widget_show_all(FILTER_VIEW.win);
+	gtk_button_set_image(GTK_BUTTON(FILTER_VIEW.reversed_button), FILTER_VIEW.reversed_img);
 	handle_filter_validation();
 }
 
@@ -85,6 +93,7 @@ void				filter_win(void)
 	redraw(false);
 	FILTER_VIEW.bw_img = gtk_image_new_from_file("uiconfig/bw.png");
 	FILTER_VIEW.sepia_img = gtk_image_new_from_file("uiconfig/sepia.png");
+	FILTER_VIEW.reversed_img = gtk_image_new_from_file("uiconfig/reversed.png");
 	FILTER_VIEW.win = gtk_dialog_new_with_buttons("Filters",
 	GTK_WINDOW(GTKMGR.ui.main_view.win),
 	GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT, "_OK",
@@ -99,6 +108,7 @@ void				filter_win(void)
 	gtk_grid_attach(GTK_GRID(FILTER_VIEW.grid), FILTER_VIEW.buttonbox,
 	0, 0, 4, 1);
 	FILTER_VIEW.bw_button = gtk_button_new();
+	FILTER_VIEW.reversed_button = gtk_button_new();
 	gtk_widget_set_tooltip_text(FILTER_VIEW.bw_button, "Black & White");
 	g_signal_connect(G_OBJECT(FILTER_VIEW.bw_button), "clicked",
 	G_CALLBACK(handle_filters), NULL);
