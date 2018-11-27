@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/22 16:16:43 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/27 10:59:28 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 # include "../Libjson/includes/json.h"
 # include <extra/extra_defs.h>
 # include <stdbool.h>
+
+
+typedef struct s_check_obj
+{
+	bool		(*f)(t_json_object *obj);
+	unsigned long			i;
+}				t_check_obj;
 
 bool			parse(char *file);
 bool			start_parse(t_json_object *obj, int type, unsigned long nb);

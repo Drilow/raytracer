@@ -65,11 +65,11 @@ static	int		get_obj_type(t_json_pair *pair)
 	if (cmp_chars(str, "cylinder", 0) == true)
 		return (4);
 	if (cmp_chars(str, "cube", 0) == true)
-		return (6);
+		return (5);
 	if (cmp_chars(str, "tetrahedron", 0) == true)
-		return (7);
+		return (6);
 	if (cmp_chars(str, "polyobject", 0) == true)
-		return (8);
+		return (7);
 	return (-1);
 }
 
@@ -77,6 +77,9 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 {
 	t_json_object	*obj;
 	int				i;
+	static t_check_obj		check[8] = {{&get_sphere_inf, 4},
+	{&get_plane_inf, 5}, {&get_cone_inf, 7}, {&get_cyl_inf, 7},
+	{&get_cube_inf, 4}, {&get_tetra_inf, 4}, {&get_poly_objinf, 5}};
 
 	if (list->value[num] == NULL || list->value[num]->type != 4)
 		return (false);
@@ -87,41 +90,46 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 		return (false);
 	if ((i = get_obj_type(obj->pair[0])) == -1)
 		return (false);
-	if (i == 1 && obj->nb == 4)
+	if (check[i - 1].i == obj->nb)
 	{
-		if ((get_sphere_inf(obj)) == false)
+		if (check[i - 1].f(obj) == false)
 			return (false);
 	}
-	if (i == 2 && obj->nb == 5)
-	{
-		if (get_plane_inf(obj) == false)
-			return (false);
-	}
-	if (i == 3 && obj->nb == 7)
-	{
-		if (get_cone_inf(obj) == false)
-			return (false);
-	}
-	if (i == 4 && obj->nb == 7)
-	{
-		if (get_cyl_inf(obj) == false)
-			return (false);
-	}
-	if (i == 6 && obj->nb == 4)
-	{
-		if (get_cube_inf(obj) == false)
-			return (false);
-	}
-	if (i == 7 && obj->nb == 4)
-	{
-		if (get_tetra_inf(obj) == false)
-			return (false);
-	}
-	if (i == 8 && obj->nb == 5)
-	{
-		if(get_poly_objinf(obj) == false)
-			return (false);
-	}
+//	if (i == 1 && obj->nb == 4)
+//	{
+//		if ((get_sphere_inf(obj)) == false)
+//			return (false);
+//	}
+//	if (i == 2 && obj->nb == 5)
+//	{
+//		if (get_plane_inf(obj) == false)
+//			return (false);
+//	}
+//	if (i == 3 && obj->nb == 7)
+//	{
+//		if (get_cone_inf(obj) == false)
+//			return (false);
+//	}
+//	if (i == 4 && obj->nb == 7)
+//	{
+//		if (get_cyl_inf(obj) == false)
+//			return (false);
+//	}
+//	if (i == 6 && obj->nb == 4)
+//	{
+//		if (get_cube_inf(obj) == false)
+//			return (false);
+//	}
+//	if (i == 7 && obj->nb == 4)
+//	{
+//		if (get_tetra_inf(obj) == false)
+//			return (false);
+//	}
+//	if (i == 8 && obj->nb == 5)
+//	{
+//		if(get_poly_objinf(obj) == false)
+//			return (false);
+//	}
 	return (true);
 }
 
