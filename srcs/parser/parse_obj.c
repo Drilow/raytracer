@@ -95,41 +95,6 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 		if (check[i - 1].f(obj) == false)
 			return (false);
 	}
-//	if (i == 1 && obj->nb == 4)
-//	{
-//		if ((get_sphere_inf(obj)) == false)
-//			return (false);
-//	}
-//	if (i == 2 && obj->nb == 5)
-//	{
-//		if (get_plane_inf(obj) == false)
-//			return (false);
-//	}
-//	if (i == 3 && obj->nb == 7)
-//	{
-//		if (get_cone_inf(obj) == false)
-//			return (false);
-//	}
-//	if (i == 4 && obj->nb == 7)
-//	{
-//		if (get_cyl_inf(obj) == false)
-//			return (false);
-//	}
-//	if (i == 6 && obj->nb == 4)
-//	{
-//		if (get_cube_inf(obj) == false)
-//			return (false);
-//	}
-//	if (i == 7 && obj->nb == 4)
-//	{
-//		if (get_tetra_inf(obj) == false)
-//			return (false);
-//	}
-//	if (i == 8 && obj->nb == 5)
-//	{
-//		if(get_poly_objinf(obj) == false)
-//			return (false);
-//	}
 	return (true);
 }
 
