@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/27 10:59:28 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/27 17:08:55 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@
 # include <extra/extra_defs.h>
 # include <stdbool.h>
 
+typedef	struct	s_checkplane
+{
+	bool	(*f)(t_obj *o, t_json_value *val);
+	int		i;
+}				t_checkplane;
 
 typedef struct s_check_obj
 {

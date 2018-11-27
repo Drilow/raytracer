@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:45:18 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/22 14:08:49 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/27 17:15:56 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,36 +63,49 @@ static	bool	geet_vector(t_obj *o, t_json_value *val)
 	return (true);
 }
 
-bool	get_plane_inf(t_json_object *obj)
+static	bool	call_parse(int i, t_json_value *val, t_obj *o)
+{
+	static t_checkplane checkplane[2] = {{&get_pos, 1},
+	{&geet_vector, 2}};
+
+	if (i > 0 && checkplane[i - 1].i == i)
+		return (checkplane[i - 1].f(o, val));
+	if (i == 3)
+	{
+		o->color = get_obj_color(val);
+		return (true);
+	}
+	if (i == 4)
+		return (prerotate(o, val, 2));
+	return (false);
+}
+
+static	int		check_keys(char *str)
+{
+	if (cmp_chars(str, "pos", 0) == true)
+		return (1);
+	if (cmp_chars(str, "vector", 0) == true)
+		return (2);
+	if (cmp_chars(str, "color", 0) == true)
+		return (3);
+	if (cmp_chars(str, "rotate", 0) == true)
+		return (4);
+	return (-1);
+}
+
+bool			get_plane_inf(t_json_object *obj)
 {
 	t_obj		*o;
+	int			i;
 
+	i = 0;
 	o = malloc_object(2);
-	if (cmp_chars(obj->pair[1]->key->str, "pos", 0) == true)
+	while (i++ < 4)
 	{
-		if (get_pos(o, obj->pair[1]->value) == false)
+		if (call_parse(check_keys(obj->pair[i]->key->str),
+		obj->pair[i]->value, o) == false)
 			return (false);
 	}
-	else
-		return (false);
-	if (cmp_chars(obj->pair[2]->key->str, "vector", 0) == true)
-	{
-		if (geet_vector(o, obj->pair[2]->value) == false)
-			return (false);
-	}
-	else
-			return (false);
-	if (cmp_chars(obj->pair[3]->key->str, "color", 0) == true)
-		o->color = get_obj_color(obj->pair[3]->value);
-	else
-		return	(false);
-	if (cmp_chars(obj->pair[4]->key->str, "rotate", 0) == true)
-	{
-		if (prerotate(o, obj->pair[4]->value, 2) == false)
-			return (false);
-	}
-	else
-		return (false);
 	put_inf_to_glob(o);
 	return (true);
 }

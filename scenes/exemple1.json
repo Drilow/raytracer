@@ -36,6 +36,13 @@
 					"rotate":[0,0,0]
 				},
 				{
+					"type":"plane",
+					"pos":[0, 0, -200],
+					"vector":[2,2,2],
+					"color":[25,150,150,0],
+					"rotate":[0,0,0]
+				},
+				{
 					"type":"polyobject",
 					"pos":[-20,-33,-300],
 					"size":20,
