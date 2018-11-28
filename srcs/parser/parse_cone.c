@@ -6,10 +6,9 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:40:23 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/22 14:07:40 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/28 15:30:41 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include <global.h>
 #include <libft.h>
@@ -17,28 +16,6 @@
 #include <extra/extra_defs.h>
 #include <objects/object.h>
 #include <fcntl.h>
-
-static	bool	get_pos(t_obj *o, t_json_value *val)
-{
-	int				*a;
-	t_json_array	*arr;
-
-	if (val == NULL)
-		return (false);
-	if (val->type == 3)
-	{
-		arr = (t_json_array *)val->ptr;
-		if (!check_arr(arr) && arr->nb != 3)
-			return (false);
-		a = (int *)arr->value[0]->ptr;
-		o->position.x = (double)*a;
-		a = (int *)arr->value[1]->ptr;
-		o->position.y = (double)*a;
-		a = (int *)arr->value[2]->ptr;
-		o->position.z = (double)*a;
-	}
-	return (true);
-}
 
 static	bool	geet_vector(t_obj *o, t_json_value *val)
 {
@@ -61,66 +38,74 @@ static	bool	geet_vector(t_obj *o, t_json_value *val)
 		a = (int *)arr->value[2]->ptr;
 		c->vector.z = (double)*a;
 	}
+	return (true);
+}
+
+static	bool	cone_angle(t_obj *o, t_json_value *val)
+{
+	int		*a;
+	t_cone	*c;
+
+	c = (t_cone *)o->obj;
+	a = 0;
 	if (val->type == 5)
 	{
 		a = (int *)val->ptr;
 		c->angle = ((double)*a / 360) * (2 * PI);
 	}
+	else
+		return (false);
 	return (true);
 }
 
-static	void	verif_inf(t_obj *o, t_json_value *val)
+static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 {
-	bool	a;
-	t_cone	*c;
+	static t_checkcyl checkcyl[4] = {{&get_inf, 1},
+	{&geet_vector, 2},{&cone_angle, 3}, {&verif_infinite, 4}};
 
-	c = (t_cone *)o->obj;
-	a = (bool)val->ptr;
-	c->infinite = a;
+	if (i > 0 && checkcyl[i - 1].i == i)
+		return (checkcyl[i - 1].f(o, val));
+	if (i == 5)
+	{
+		o->color = get_obj_color(val);
+		return (true);
+	}
+	if (i == 6)
+		return (prerotate(o, val, 2));
+	return (false);
 }
+
+static	int		check_keys(char *str)
+{
+	if (cmp_chars(str, "pos", 0) == true)
+		return (1);
+	if (cmp_chars(str, "vector", 0) == true)
+		return (2);
+	if (cmp_chars(str, "angle", 0) == true)
+		return (3);
+	if (cmp_chars(str, "INF", 0) == true)
+		return (4);
+	if (cmp_chars(str, "color", 0) == true)
+		return (5);
+	if (cmp_chars(str, "rotate", 0) == true)
+		return (6);
+	return (-1);
+}
+
 
 bool	get_cone_inf(t_json_object *obj)
 {
 	t_obj		*o;
+	int			i;
 
+	i = 0;
 	o = malloc_object(3);
-	if (cmp_chars(obj->pair[1]->key->str, "pos", 0) == true)
+	while (i++ < 6)
 	{
-		if (get_pos(o, obj->pair[1]->value) == false)
+		if (call_parse(check_keys(obj->pair[i]->key->str),
+			obj->pair[i]->value, o) == false)
 			return (false);
 	}
-	else
-		return (false);
-	if (cmp_chars(obj->pair[2]->key->str, "vector", 0) == true)
-	{
-		if (geet_vector(o, obj->pair[2]->value) == false)
-			return (false);
-	}
-	else
-		return (false);
-	if (cmp_chars(obj->pair[3]->key->str, "angle", 0) == true)
-	{
-		if (geet_vector(o, obj->pair[3]->value) == false)
-			return (false);
-	}
-	else
-		return (false);
-	if (cmp_chars(obj->pair[4]->key->str, "INF", 0) == true)
-		verif_inf(o, obj->pair[4]->value);
-	else
-		return (false);
-	if (cmp_chars(obj->pair[5]->key->str, "color", 0) == true)
-		o->color = get_obj_color(obj->pair[5]->value);
-	else
-		return (false);
-	if (cmp_chars(obj->pair[6]->key->str, "rotate", 0) == true
-	&& obj->pair[6]->value->type == 3)
-	{
-		if (prerotate(o, obj->pair[6]->value, 3) == false)
-			return (false);
-	}
-	else
-		return (false);
 	put_inf_to_glob(o);
 	return (true);
 }

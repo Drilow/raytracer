@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/27 17:08:55 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/28 15:10:15 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ typedef	struct	s_checkplane
 	bool	(*f)(t_obj *o, t_json_value *val);
 	int		i;
 }				t_checkplane;
+
+typedef	struct	s_checkcyl
+{
+	bool	(*f)(t_obj *o, t_json_value *val);
+	int		i;
+}				t_checkcyl;
 
 typedef struct s_check_obj
 {
@@ -58,5 +64,7 @@ bool			get_poly_obj(char *s, t_obj *o);
 bool			get_cube_inf(t_json_object *obj);
 bool			get_tetra_inf(t_json_object *obj);
 bool			check_arr(t_json_array *arr);
+bool			verif_infinite(t_obj *o, t_json_value *val);
+bool			get_inf(t_obj *o, t_json_value *val);
 
 #endif

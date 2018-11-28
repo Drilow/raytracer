@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:45:18 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/27 17:15:56 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/28 15:12:05 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,6 @@
 #include <extra/extra_defs.h>
 #include <objects/object.h>
 #include <fcntl.h>
-
-static	bool	get_pos(t_obj *o, t_json_value *val)
-{
-	int				*a;
-	t_json_array	*arr;
-
-	if (val == NULL)
-		return (false);
-	if (val->type == 3)
-	{
-		arr = (t_json_array *)val->ptr;
-		if (!check_arr(arr) && arr->nb != 3)
-			return (false);
-		a = (int *)arr->value[0]->ptr;
-		o->position.x = (double)*a;
-		a = (int *)arr->value[1]->ptr;
-		o->position.y = (double)*a;
-		a = (int *)arr->value[2]->ptr;
-		o->position.z = (double)*a;
-	}
-	return (true);
-}
 
 static	bool	geet_vector(t_obj *o, t_json_value *val)
 {
@@ -65,7 +43,7 @@ static	bool	geet_vector(t_obj *o, t_json_value *val)
 
 static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 {
-	static t_checkplane checkplane[2] = {{&get_pos, 1},
+	static t_checkplane checkplane[2] = {{&get_inf, 1},
 	{&geet_vector, 2}};
 
 	if (i > 0 && checkplane[i - 1].i == i)

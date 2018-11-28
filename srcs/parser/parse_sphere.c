@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 11:37:43 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/22 14:08:14 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/28 15:29:30 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,9 @@
 #include <objects/object.h>
 #include <fcntl.h>
 
-static	bool	get_inf(t_obj *o,t_json_value *val)
+static	bool	get_sph_radius(t_obj *o, t_json_value *val)
 {
 	int				*a;
-	t_json_array	*arr;
 	t_sphere		*sph;
 
 	sph = (t_sphere *)o->obj;
@@ -31,44 +30,49 @@ static	bool	get_inf(t_obj *o,t_json_value *val)
 		a = (int *)val->ptr;
 		sph->radius = (double)*a; 
 	}
-	if (val->type == 3)
-	{
-		arr = (t_json_array *)val->ptr;
-		if (!check_arr(arr) && arr->nb != 3)
-			return (false);
-		a = (int *)arr->value[0]->ptr;
-		o->position.x = (double)*a;
-		a = (int *)arr->value[1]->ptr;
-		o->position.y = (double)*a;
-		a = (int *)arr->value[2]->ptr;
-		o->position.z = (double)*a;
-	}
+	else
+		return (false);
 	return (true);
 }
 
-bool	get_sphere_inf(t_json_object *obj)
+static	bool	call_parse(int i, t_json_value *val, t_obj *o)
+{
+	if (i == 1)
+			return (get_inf(o, val));
+	if (i == 2)
+			return (get_sph_radius(o, val));
+	if (i == 3)
+	{
+		o->color = get_obj_color(val);
+		return (true);
+	}
+	return (false);
+}
+
+static	int		check_keys(char *str)
+{
+	if (cmp_chars(str, "pos", 0) == true)
+		return (1);
+	if (cmp_chars(str, "radius", 0) == true)
+		return (2);
+	if (cmp_chars(str, "color", 0) == true)
+		return (3);
+	return (-1);
+}
+
+bool			get_sphere_inf(t_json_object *obj)
 {
 	t_obj		*o;
+	int			i;
 
+	i = 0;
 	o = malloc_object(1);
-	if (cmp_chars(obj->pair[1]->key->str, "pos", 0) == true)
+	while (i++ < 3)
 	{
-		if (get_inf(o, obj->pair[1]->value) == false)
+		if (call_parse(check_keys(obj->pair[i]->key->str),
+		obj->pair[i]->value, o) == false)
 			return (false);
 	}
-	else
-		return (false);
-	if (cmp_chars(obj->pair[2]->key->str, "radius", 0) == true)
-	{
-		if (get_inf(o, obj->pair[2]->value) == false)
-			return (false);
-	}
-	else
-		return (false);
-	if (cmp_chars(obj->pair[3]->key->str, "color", 0) == true)
-		o->color = get_obj_color(obj->pair[3]->value);
-	else
-		return (false);
 	put_inf_to_glob(o);
 	return (true);
 }
