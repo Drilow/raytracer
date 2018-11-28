@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_tetrahedron.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/11/28 19:02:34 by mabessir          #+#    #+#             */
+/*   Updated: 2018/11/28 19:02:45 by mabessir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <global.h>
 #include <objects/object.h>
 #include <stdlib.h>
@@ -5,29 +17,29 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static t_poly_obj	*malloc_po(void)
+static t_poly_obj *malloc_po(void)
 {
-  t_poly_obj		*obj;
+	t_poly_obj *obj;
 
-  obj = (t_poly_obj *)malloc(sizeof(t_poly_obj));
-  obj->next = NULL;
-  return (obj);
+	obj = (t_poly_obj *)malloc(sizeof(t_poly_obj));
+	obj->next = NULL;
+	return (obj);
 }
 
-static t_vertex		*malloc_vertex(void)
+static t_vertex *malloc_vertex(void)
 {
-  t_vertex			*v;
+	t_vertex *v;
 
-  v = (t_vertex *)malloc(sizeof(t_vertex));
-  v->next = NULL;
-  return (v);
+	v = (t_vertex *)malloc(sizeof(t_vertex));
+	v->next = NULL;
+	return (v);
 }
 
-static t_vertex       *add_t_face(int fnb, double size)
+static t_vertex *add_t_face(int fnb, double size)
 {
-	t_vertex		*face;
-	double			height;
-	double			h;
+	t_vertex *face;
+	double height;
+	double h;
 
 	face = malloc_vertex();
 	face->next = malloc_vertex();
@@ -59,27 +71,20 @@ static t_vertex       *add_t_face(int fnb, double size)
 		face->next->next->p = set_rpoint(-size / 2, -h, -h);
 	}
 
-//	face->pl.p = set_rpoint(pos.x + face->p.x, pos.y + face->p.y, pos.z + face->p.z);
 	face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 	if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
 		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
 	return (face);
 }
 
-bool			set_tetrahedron(t_rpoint position, double size, t_obj *t)
+bool set_tetrahedron(t_rpoint position, double size, t_obj *t)
 {
-	t_poly_obj	*o;
-//	double		maxd;
+	t_poly_obj *o;
 
 	t->position = position;
-// distance au centre :
-//	size = size / 2;
-//	maxd = sqrt(3 * size * size);
 	t->obj = malloc_po();
 	o = t->obj;
-// a faire : calculer valeur exact de maxd
 	o->max_d = size;
-//	o->vertices = add_t_face(1, size, t->position);
 	o->vertices = add_t_face(1, size);
 
 	o->next = malloc_po();
@@ -92,5 +97,5 @@ bool			set_tetrahedron(t_rpoint position, double size, t_obj *t)
 	o = o->next;
 	o->vertices = add_t_face(4, size);
 	t->size = size;
-    return (true);
+	return (true);
 }

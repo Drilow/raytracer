@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 15:10:27 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/12 16:48:52 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/28 19:06:07 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int			ft_cheeck(t_json_array *arr)
 	unsigned long i;
 
 	i = 0;
-	while(i < arr->nb)
+	while (i < arr->nb)
 	{
 		if (arr->value[i]->type != 5)
 			return (0);
@@ -35,8 +35,8 @@ int			ft_cheeck(t_json_array *arr)
 
 t_rgb		get_obj_color(t_json_value *val)
 {
-	t_rgb color;
-	t_json_array *arr;
+	t_rgb			color;
+	t_json_array	*arr;
 
 	color.r = 75;
 	color.g = 75;
@@ -47,10 +47,10 @@ t_rgb		get_obj_color(t_json_value *val)
 		arr = (t_json_array *)val->ptr;
 		if (arr->nb == 4 && ft_cheeck(arr))
 		{
-			color.r  = *(int *)arr->value[0]->ptr;
-			color.g  = *(int *)arr->value[1]->ptr;
-			color.b  = *(int *)arr->value[2]->ptr;
-			color.trans  = *(int *)arr->value[3]->ptr;
+			color.r = *(int *)arr->value[0]->ptr;
+			color.g = *(int *)arr->value[1]->ptr;
+			color.b = *(int *)arr->value[2]->ptr;
+			color.trans = *(int *)arr->value[3]->ptr;
 		}
 	}
 	return (color);

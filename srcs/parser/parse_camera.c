@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 18:49:08 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/22 12:22:52 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/28 19:05:16 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 extern t_global g_global;
 
-static	int		check_key(char *str)
+static	int			check_key(char *str)
 {
 	if (cmp_chars(str, "pos", 0))
 		return (1);
@@ -28,7 +28,7 @@ static	int		check_key(char *str)
 	return (0);
 }
 
-static 	t_rpoint	camera_init(void)
+static	t_rpoint	camera_init(void)
 {
 	t_rpoint	angle;
 
@@ -38,10 +38,10 @@ static 	t_rpoint	camera_init(void)
 	angle.x = 0;
 	angle.y = 0;
 	angle.z = 0;
-	return(angle);
+	return (angle);
 }
 
-static 	t_rpoint		put_cam_info(t_json_array *arr)
+static	t_rpoint	put_cam_info(t_json_array *arr)
 {
 	int				*a;
 	unsigned long	num;
@@ -64,7 +64,7 @@ static 	t_rpoint		put_cam_info(t_json_array *arr)
 	return (points);
 }
 
-static	void	*get_info(t_json_value *val, int i, t_rpoint *angle)
+static	void		*get_info(t_json_value *val, int i, t_rpoint *angle)
 {
 	t_json_array	*arr;
 	unsigned long	num;
@@ -95,7 +95,7 @@ void				parse_camera(t_json_object *obj, unsigned long nb)
 		set_camera(angle);
 		return ;
 	}
-	if((o = (t_json_object *)obj->pair[nb]->value->ptr) == NULL)
+	if ((o = (t_json_object *)obj->pair[nb]->value->ptr) == NULL)
 	{
 		set_camera(angle);
 		return ;

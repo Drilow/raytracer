@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:40:23 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/28 15:30:41 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/28 19:07:59 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ static	bool	cone_angle(t_obj *o, t_json_value *val)
 
 static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 {
-	static t_checkcyl checkcyl[4] = {{&get_inf, 1},
-	{&geet_vector, 2},{&cone_angle, 3}, {&verif_infinite, 4}};
+	static	t_checkcyl	checkcyl[4] = {{&get_inf, 1},
+	{&geet_vector, 2}, {&cone_angle, 3}, {&verif_infinite, 4}};
 
 	if (i > 0 && checkcyl[i - 1].i == i)
 		return (checkcyl[i - 1].f(o, val));
@@ -92,8 +92,7 @@ static	int		check_keys(char *str)
 	return (-1);
 }
 
-
-bool	get_cone_inf(t_json_object *obj)
+bool			get_cone_inf(t_json_object *obj)
 {
 	t_obj		*o;
 	int			i;
