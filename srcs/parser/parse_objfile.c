@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/28 15:17:46 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/29 10:16:11 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static	bool	set_size(t_obj *o, t_json_value *val)
 static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 {
 	if (i == 1)
-			return (get_inf(o, val));
+		return (get_inf(o, val));
 	if (i == 2)
-			return (set_size(o, val));
+		return (set_size(o, val));
 	if (i == 3)
 		return (true);
 	if (i == 4)
@@ -49,7 +49,7 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 	return (false);
 }
 
-static	int 	check_keys(char *str)
+static	int		check_keys(char *str)
 {
 	if (cmp_chars(str, "pos", 0) == true)
 		return (1);
@@ -62,7 +62,7 @@ static	int 	check_keys(char *str)
 	return (-1);
 }
 
-bool	get_poly_objinf(t_json_object *obj)
+bool			get_poly_objinf(t_json_object *obj)
 {
 	t_obj			*o;
 	t_json_string	*str;
@@ -73,7 +73,8 @@ bool	get_poly_objinf(t_json_object *obj)
 	o = malloc_object(6);
 	while (i++ < 4)
 	{
-		if (call_parse(check_keys(obj->pair[i]->key->str), obj->pair[i]->value, o) == false)
+		if (call_parse(check_keys(obj->pair[i]->key->str),
+			obj->pair[i]->value, o) == false)
 			return (false);
 		if (i == 3)
 		{

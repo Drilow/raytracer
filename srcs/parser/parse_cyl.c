@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:05:20 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/28 15:17:13 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/29 10:06:37 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,10 @@ static	bool	get_cyl_radius(t_obj *o, t_json_value *val)
 	if (val->type == 5)
 	{
 		a = (int *)val->ptr;
-		c->radius = (double)*a; 
+		c->radius = (double)*a;
 	}
 	else
 		return (false);
-	return (true);
-}
-
-static	bool	verif_inf(t_obj *o, t_json_value *val)
-{
-	bool		a;
-	t_cylinder	*c;
-
-	a = true;
-	c = (t_cylinder *)o->obj;
-	if (val->type == 2)
-		a = (bool)val->ptr;
-	c->infinite = a;
 	return (true);
 }
 
@@ -75,7 +62,7 @@ static	bool	geet_vector(t_obj *o, t_json_value *val)
 static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 {
 	static t_checkcyl checkcyl[4] = {{&get_inf, 1},
-	{&geet_vector, 2},{&get_cyl_radius, 3}, {&verif_inf, 4}};
+	{&geet_vector, 2}, {&get_cyl_radius, 3}, {&verif_infinite, 4}};
 
 	if (i > 0 && checkcyl[i - 1].i == i)
 		return (checkcyl[i - 1].f(o, val));
@@ -106,7 +93,7 @@ static	int		check_keys(char *str)
 	return (-1);
 }
 
-bool	get_cyl_inf(t_json_object *obj)
+bool			get_cyl_inf(t_json_object *obj)
 {
 	t_obj		*o;
 	int			i;

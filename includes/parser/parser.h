@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/28 15:10:15 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/29 10:22:20 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_check_obj
 }				t_check_obj;
 
 bool			parse(char *file);
+bool			get_started(t_json_value *val);
 bool			start_parse(t_json_object *obj, int type, unsigned long nb);
 bool			cmp_chars(char *s, char *o, int start);
 bool			get_next_nb(char *s, int *index, double *nb1, unsigned char *nb2);

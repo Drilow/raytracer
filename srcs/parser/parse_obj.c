@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/29 17:13:15 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/19 1:23 by mabessir         ###   ########.fr       */
+/*   Created: 2018/11/29 10:13:57 by mabessir          #+#    #+#             */
+/*   Updated: 2018/11/29 10:14:45 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool			prerotate(t_obj *obj, t_json_value *val, int type)
 		a = (int *)arr->value[1]->ptr;
 		t->y = (double)*a;
 		a = (int *)arr->value[2]->ptr;
-		t->z = (double)*a;	
+		t->z = (double)*a;
 	}
 	t->x = ((double)((int)t->x % 360) / 360) * (2 * PI);
 	t->y = ((double)((int)t->y % 360) / 360) * (2 * PI);
@@ -75,9 +75,9 @@ static	int		get_obj_type(t_json_pair *pair)
 
 static	bool	add_new_obj(t_json_array *list, unsigned long num)
 {
-	t_json_object	*obj;
-	int				i;
-	static t_check_obj		check[8] = {{&get_sphere_inf, 4},
+	t_json_object		*obj;
+	int					i;
+	static t_check_obj	check[8] = {{&get_sphere_inf, 4},
 	{&get_plane_inf, 5}, {&get_cone_inf, 7}, {&get_cyl_inf, 7},
 	{&get_cube_inf, 4}, {&get_tetra_inf, 4}, {&get_poly_objinf, 5}};
 
@@ -98,7 +98,7 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 	return (true);
 }
 
-void	put_inf_to_glob(t_obj *obj)
+void			put_inf_to_glob(t_obj *obj)
 {
 	t_obj *otmp;
 
@@ -117,13 +117,13 @@ void	put_inf_to_glob(t_obj *obj)
 	}
 }
 
-bool	parse_object(t_json_object *obj, unsigned long nb)
+bool			parse_object(t_json_object *obj, unsigned long nb)
 {
 	t_json_array	*list;
 	unsigned long	num;
 
 	num = 0;
-	if (obj->pair[nb] == NULL ||obj->pair[nb]->value->type != 3)
+	if (obj->pair[nb] == NULL || obj->pair[nb]->value->type != 3)
 		return (false);
 	list = (t_json_array *)obj->pair[nb]->value->ptr;
 	while (num < list->nb)

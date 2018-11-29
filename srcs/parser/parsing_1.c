@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/27 10:31:51 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/29 10:43:07 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,21 @@
 
 extern t_global g_global;
 
-static int		get_object_type(char *s)
+static	int		get_object_type(char *s)
 {
 	if (cmp_chars(s, "light", 0) == true)
 		return (1);
 	if (cmp_chars(s, "camera", 0) == true)
 		return (2);
 	if (cmp_chars(s, "objects", 0) == true)
-        return (3);
+		return (3);
 	if (cmp_chars(s, "ambientlight", 0) == true)
-        return (4);
+		return (4);
 	ft_putendl(s);
 	return (-1);
 }
 
-t_obj	*malloc_object(int type)
+t_obj			*malloc_object(int type)
 {
 	t_obj		*o;
 
@@ -52,15 +52,29 @@ t_obj	*malloc_object(int type)
 	return (o);
 }
 
+bool			get_started(t_json_value *val)
+{
+	t_json_object	*obj;
+	unsigned long	nb;
+
+	nb = 0;
+	obj = (t_json_object *)val->ptr;
+	while (nb < obj->nb)
+	{
+		if (start_parse(obj,
+			get_object_type(obj->pair[nb]->key->str), nb) == false)
+			return (false);
+		nb++;
+	}
+	return (true);
+}
+
 bool			parse(char *file)
 {
 	int				fd;
 	char			*str;
 	t_json_value	*val;
-	unsigned long	nb;
-	t_json_object	*obj;
 
-	nb = 0;
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (false);
@@ -75,12 +89,8 @@ bool			parse(char *file)
 		return (false);
 	}
 	ft_free(str);
-	obj = (t_json_object *)val->ptr;
-	while (nb < obj->nb)
-	{
-		start_parse(obj, get_object_type(obj->pair[nb]->key->str), nb);
-		nb++;
-	}
+	if (get_started(val) == false)
+		return (false);
 	close(fd);
 	return (true);
 }
