@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 19:02:34 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/28 19:02:45 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/29 13:20:19 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static t_poly_obj *malloc_po(void)
+static	t_poly_obj	*malloc_po(void)
 {
 	t_poly_obj *obj;
 
@@ -26,7 +26,7 @@ static t_poly_obj *malloc_po(void)
 	return (obj);
 }
 
-static t_vertex *malloc_vertex(void)
+static	t_vertex	*malloc_vertex(void)
 {
 	t_vertex *v;
 
@@ -35,11 +35,11 @@ static t_vertex *malloc_vertex(void)
 	return (v);
 }
 
-static t_vertex *add_t_face(int fnb, double size)
+static	t_vertex	*add_t_face(int fnb, double size)
 {
-	t_vertex *face;
-	double height;
-	double h;
+	t_vertex	*face;
+	double		height;
+	double		h;
 
 	face = malloc_vertex();
 	face->next = malloc_vertex();
@@ -70,14 +70,13 @@ static t_vertex *add_t_face(int fnb, double size)
 		face->next->p = set_rpoint(size / 2, -h, -h);
 		face->next->next->p = set_rpoint(-size / 2, -h, -h);
 	}
-
 	face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 	if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
 		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
 	return (face);
 }
 
-bool set_tetrahedron(t_rpoint position, double size, t_obj *t)
+bool				set_tetrahedron(t_rpoint position, double size, t_obj *t)
 {
 	t_poly_obj *o;
 
@@ -86,7 +85,6 @@ bool set_tetrahedron(t_rpoint position, double size, t_obj *t)
 	o = t->obj;
 	o->max_d = size;
 	o->vertices = add_t_face(1, size);
-
 	o->next = malloc_po();
 	o = o->next;
 	o->vertices = add_t_face(2, size);

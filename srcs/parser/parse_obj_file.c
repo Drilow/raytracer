@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/25 16:46:46 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/29 10:12:57 by mabessir         ###   ########.fr       */
+/*   Created: 2018/11/29 13:31:57 by mabessir          #+#    #+#             */
+/*   Updated: 2018/11/29 13:32:36 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static t_poly_obj	*malloc_po(void)
+static	t_poly_obj		*malloc_po(void)
 {
 	t_poly_obj *obj;
 
@@ -26,7 +26,7 @@ static t_poly_obj	*malloc_po(void)
 	return (obj);
 }
 
-static t_vertex		*malloc_vertex(void)
+static	t_vertex		*malloc_vertex(void)
 {
 	t_vertex *v;
 
@@ -35,7 +35,7 @@ static t_vertex		*malloc_vertex(void)
 	return (v);
 }
 
-static void			free_vlist(t_vertex **v_list)
+static	void			free_vlist(t_vertex **v_list)
 {
 	t_vertex *tmp;
 	t_vertex *tmp_next;
@@ -49,16 +49,16 @@ static void			free_vlist(t_vertex **v_list)
 	}
 }
 
-static bool			get_next_double(char *line, int *index, double *a)
+static	bool			get_next_double(char *line, int *index, double *a)
 {
-	double sign;
-	double tmp;
-	int digit_index;
+	double	sign;
+	double	tmp;
+	int		digit_index;
 
 	sign = 1;
 	tmp = 0;
-	while (line[*index] != '-' && ft_isdigit(line[*index]) == 0 &&
-		   line[*index] != '\0')
+	while (line[*index] != '-' && ft_isdigit(line[*index]) == 0
+		&& line[*index] != '\0')
 		(*index)++;
 	if (line[*index] == '-')
 	{
@@ -91,7 +91,7 @@ static bool			get_next_double(char *line, int *index, double *a)
 	return (true);
 }
 
-static bool 		parse_vertex(t_vertex *v, char *line)
+static	bool			parse_vertex(t_vertex *v, char *line)
 {
 	int index;
 
@@ -105,7 +105,7 @@ static bool 		parse_vertex(t_vertex *v, char *line)
 	return (true);
 }
 
-static bool 		add_vertex(t_vertex **v_list, char *line)
+static	bool			add_vertex(t_vertex **v_list, char *line)
 {
 	t_vertex *tmp;
 	t_vertex *new;
@@ -127,10 +127,10 @@ static bool 		add_vertex(t_vertex **v_list, char *line)
 	return (true);
 }
 
-static bool 		get_vertex(t_vertex *v_list, int position, t_vertex *v)
+static	bool			get_vertex(t_vertex *v_list, int position, t_vertex *v)
 {
-	t_vertex *tmp;
-	int index;
+	t_vertex	*tmp;
+	int			index;
 
 	tmp = v_list;
 	index = 0;
@@ -147,12 +147,12 @@ static bool 		get_vertex(t_vertex *v_list, int position, t_vertex *v)
 	return (false);
 }
 
-static bool 		parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
+static	bool			parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
 {
-	int line_index;
-	double v_index;
-	t_vertex *vertices;
-	int v_nb;
+	int			line_index;
+	double		v_index;
+	t_vertex	*vertices;
+	int			v_nb;
 
 	v_index = 0;
 	line_index = 0;
@@ -182,7 +182,7 @@ static bool 		parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
 	return (true);
 }
 
-static bool 		add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
+static	bool			add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
 {
 	t_poly_obj *tmp;
 	t_poly_obj *new;
@@ -202,7 +202,7 @@ static bool 		add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
 	return (true);
 }
 
-static bool			read_line(t_poly_obj **obj, t_vertex **v_list, char *line)
+static	bool			read_line(t_poly_obj **obj, t_vertex **v_list, char *line)
 {
 	if (line[0] == 'v')
 		return (add_vertex(v_list, line));
@@ -211,7 +211,7 @@ static bool			read_line(t_poly_obj **obj, t_vertex **v_list, char *line)
 	return (false);
 }
 
-static void 		get_face_maxd(t_vertex *f, double *d)
+static	void			get_face_maxd(t_vertex *f, double *d)
 {
 	double tmp_d;
 	double tmp;
@@ -228,12 +228,12 @@ static void 		get_face_maxd(t_vertex *f, double *d)
 		*d = tmp_d;
 }
 
-void				set_obj(t_obj *o)
+void					set_obj(t_obj *o)
 {
-	t_poly_obj *tmp;
-	t_vertex *face;
-	t_rpoint pos;
-	double tmp_d;
+	t_poly_obj	*tmp;
+	t_vertex	*face;
+	t_rpoint	pos;
+	double		tmp_d;
 
 	tmp = (t_poly_obj *)o->obj;
 	tmp_d = 0;
@@ -248,13 +248,13 @@ void				set_obj(t_obj *o)
 	((t_poly_obj *)o->obj)->max_d = tmp_d;
 }
 
-t_poly_obj			*parse_obj(char *scene_line)
+t_poly_obj				*parse_obj(char *scene_line)
 {
-	t_poly_obj *obj;
-	t_vertex *v_list;
-	int fd;
-	char *line;
-	int i;
+	t_poly_obj	*obj;
+	t_vertex	*v_list;
+	int			fd;
+	char		*line;
+	int			i;
 
 	obj = NULL;
 	v_list = NULL;
@@ -281,7 +281,7 @@ t_poly_obj			*parse_obj(char *scene_line)
 	return (obj);
 }
 
-static t_vertex		*add_cube_face(t_rpoint f)
+static	t_vertex		*add_cube_face(t_rpoint f)
 {
 	t_vertex *face;
 
@@ -310,17 +310,16 @@ static t_vertex		*add_cube_face(t_rpoint f)
 		face->next->next->p = set_rpoint(f.z, f.z, f.z);
 		face->next->next->next->p = set_rpoint(f.z, -f.z, f.z);
 	}
-
 	face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 	if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
 		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
 	return (face);
 }
 
-bool 				get_cube(t_obj *c, double size)
+bool					get_cube(t_obj *c, double size)
 {
-	t_poly_obj *o;
-	double maxd;
+	t_poly_obj	*o;
+	double		maxd;
 
 	size = size / 2;
 	c->size = size;
@@ -328,9 +327,7 @@ bool 				get_cube(t_obj *c, double size)
 	c->obj = malloc_po();
 	o = c->obj;
 	o->max_d = maxd;
-	;
 	o->vertices = add_cube_face(set_rpoint(0, 0, size));
-
 	o->next = malloc_po();
 	o = o->next;
 	o->vertices = add_cube_face(set_rpoint(0, 0, -size));
@@ -349,11 +346,11 @@ bool 				get_cube(t_obj *c, double size)
 	return (true);
 }
 
-static t_vertex		*add_t_face(int fnb, double size)
+static	t_vertex		*add_t_face(int fnb, double size)
 {
-	t_vertex *face;
-	double height;
-	double h;
+	t_vertex	*face;
+	double		height;
+	double		h;
 
 	face = malloc_vertex();
 	face->next = malloc_vertex();
@@ -384,14 +381,13 @@ static t_vertex		*add_t_face(int fnb, double size)
 		face->next->p = set_rpoint(size / 2, -h, -h);
 		face->next->next->p = set_rpoint(-size / 2, -h, -h);
 	}
-
 	face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 	if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
 		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
 	return (face);
 }
 
-bool 				get_tetrahedron(t_obj *t, double size)
+bool					get_tetrahedron(t_obj *t, double size)
 {
 	t_poly_obj *o;
 
@@ -400,7 +396,6 @@ bool 				get_tetrahedron(t_obj *t, double size)
 	o = t->obj;
 	o->max_d = size;
 	o->vertices = add_t_face(1, size);
-
 	o->next = malloc_po();
 	o = o->next;
 	o->vertices = add_t_face(2, size);

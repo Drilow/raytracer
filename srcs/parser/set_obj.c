@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 10:43:54 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/29 10:44:30 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/29 13:41:36 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static t_poly_obj *malloc_po(void)
+static	t_poly_obj	*malloc_po(void)
 {
 	t_poly_obj *obj;
 
@@ -26,7 +26,7 @@ static t_poly_obj *malloc_po(void)
 	return (obj);
 }
 
-static t_vertex *malloc_vertex(void)
+static	t_vertex	*malloc_vertex(void)
 {
 	t_vertex *v;
 
@@ -35,7 +35,7 @@ static t_vertex *malloc_vertex(void)
 	return (v);
 }
 
-static void 	free_vlist(t_vertex **v_list)
+static	void		free_vlist(t_vertex **v_list)
 {
 	t_vertex *tmp;
 	t_vertex *tmp_next;
@@ -49,16 +49,16 @@ static void 	free_vlist(t_vertex **v_list)
 	}
 }
 
-static bool 	get_next_double(char *line, int *index, double *a)
+static	bool		get_next_double(char *line, int *index, double *a)
 {
-	double sign;
-	double tmp;
-	int digit_index;
+	double	sign;
+	double	tmp;
+	int		digit_index;
 
 	sign = 1;
 	tmp = 0;
-	while (line[*index] != '-' && ft_isdigit(line[*index]) == 0 &&
-		   line[*index] != '\0')
+	while (line[*index] != '-' && ft_isdigit(line[*index]) == 0
+	&& line[*index] != '\0')
 		(*index)++;
 	if (line[*index] == '-')
 	{
@@ -91,7 +91,7 @@ static bool 	get_next_double(char *line, int *index, double *a)
 	return (true);
 }
 
-static bool 	parse_vertex(t_vertex *v, char *line)
+static	bool 		parse_vertex(t_vertex *v, char *line)
 {
 	int index;
 
@@ -105,7 +105,7 @@ static bool 	parse_vertex(t_vertex *v, char *line)
 	return (true);
 }
 
-static bool 	add_vertex(t_vertex **v_list, char *line)
+static bool 		add_vertex(t_vertex **v_list, char *line)
 {
 	t_vertex *tmp;
 	t_vertex *new;
@@ -125,10 +125,10 @@ static bool 	add_vertex(t_vertex **v_list, char *line)
 	return (true);
 }
 
-static bool 	get_vertex(t_vertex *v_list, int position, t_vertex *v)
+static	bool 		get_vertex(t_vertex *v_list, int position, t_vertex *v)
 {
-	t_vertex *tmp;
-	int index;
+	t_vertex	*tmp;
+	int			index;
 
 	tmp = v_list;
 	index = 0;
@@ -145,12 +145,12 @@ static bool 	get_vertex(t_vertex *v_list, int position, t_vertex *v)
 	return (false);
 }
 
-static bool 	parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
+static	bool 		parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
 {
-	int line_index;
-	double v_index;
-	t_vertex *vertices;
-	int v_nb;
+	int			line_index;
+	double		v_index;
+	t_vertex	*vertices;
+	int			v_nb;
 
 	v_index = 0;
 	line_index = 0;
@@ -180,7 +180,7 @@ static bool 	parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
 	return (true);
 }
 
-static bool 	add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
+static	bool 		add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
 {
 	t_poly_obj *tmp;
 	t_poly_obj *new;
@@ -200,7 +200,7 @@ static bool 	add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
 	return (true);
 }
 
-static bool 	read_line(t_poly_obj **obj, t_vertex **v_list, char *line)
+static	bool 		read_line(t_poly_obj **obj, t_vertex **v_list, char *line)
 {
 	if (line[0] == 'v')
 		return (add_vertex(v_list, line));
@@ -209,13 +209,13 @@ static bool 	read_line(t_poly_obj **obj, t_vertex **v_list, char *line)
 	return (false);
 }
 
-bool 			validate_obj(t_rpoint pos, double size, char *path, t_obj *o)
+bool				validate_obj(t_rpoint pos, double size, char *path, t_obj *o)
 {
-	t_poly_obj *obj;
-	t_vertex *v_list;
-	int fd;
-	char *line;
-	int i;
+	t_poly_obj	*obj;
+	t_vertex	*v_list;
+	int			fd;
+	char		*line;
+	int			i;
 
 	obj = NULL;
 	o->obj = NULL;

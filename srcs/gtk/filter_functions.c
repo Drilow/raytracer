@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filter_functions.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 16:32:15 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/22 19:31:36 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/29 13:50:01 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void				sepia(unsigned char *ptr)
 	gtk_widget_set_state_flags(FILTER_VIEW.sepia_button,
 	GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
 	ptr[0] = ((float)tmpr * .131 + (float)tmpg * .534 + (float)tmpb * .272) / 3;
-	ptr[1] =
-	((float)tmpr * .168 + (float)tmpg * .686 + (float)tmpb * .349) / 3;
-	ptr[2] =
-	((float)tmpr * .189 + (float)tmpg * .769 + (float)tmpb * .393) / 3;
+	ptr[1]
+	= ((float)tmpr * .168 + (float)tmpg * .686 + (float)tmpb * .349) / 3;
+	ptr[2]
+	= ((float)tmpr * .189 + (float)tmpg * .769 + (float)tmpb * .393) / 3;
 }

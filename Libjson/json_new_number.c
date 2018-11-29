@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:58:59 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/17 13:47:39 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/29 13:42:36 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ t_json_value *parent)
 {
 	t_json_value *num;
 
-	if (file->str == NULL || file->pos >= file->len ||
-	(ft_isdigit(file->str[file->pos]) != 1 && file->str[file->pos] != '-' &&
-	file->str[file->pos] != '+'))
+	if (file->str == NULL || file->pos >= file->len
+		|| (ft_isdigit(file->str[file->pos]) != 1 && file->str[file->pos] != '-'
+		&& file->str[file->pos] != '+'))
 		return (NULL);
 	if ((num = (t_json_value *)malloc(sizeof(t_json_value))) == NULL)
 		return (NULL);

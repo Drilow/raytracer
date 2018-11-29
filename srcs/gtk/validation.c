@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/22 21:56:19 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/29 13:51:04 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ void				validate_edit(t_obj *o)
 	o->color.g = (unsigned char)(c->green * 255);
 	o->color.b = (unsigned char)(c->blue * 255);
 	o->color.trans = (unsigned char)(c->alpha);
-	o->position.x =
-	gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
-	o->position.y =
-	gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_y_spin));
-	o->position.z =
-	gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
+	o->position.x
+	= gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
+	o->position.y
+	= gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_y_spin));
+	o->position.z
+	= gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
 	validate_objects(o);
 	redraw(true);
 	gtk_widget_destroy(SCENE_VIEW.win);

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 19:01:48 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/28 19:01:49 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/29 13:13:59 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static t_poly_obj *malloc_po(void)
+static	t_poly_obj	*malloc_po(void)
 {
 	t_poly_obj *obj;
 
@@ -26,7 +26,7 @@ static t_poly_obj *malloc_po(void)
 	return (obj);
 }
 
-static t_vertex *malloc_vertex(void)
+static	t_vertex	*malloc_vertex(void)
 {
 	t_vertex *v;
 
@@ -35,7 +35,7 @@ static t_vertex *malloc_vertex(void)
 	return (v);
 }
 
-static t_vertex *add_cube_face(t_rpoint f)
+static	t_vertex	*add_cube_face(t_rpoint f)
 {
 	t_vertex *face;
 
@@ -64,17 +64,16 @@ static t_vertex *add_cube_face(t_rpoint f)
 		face->next->next->p = set_rpoint(f.z, f.z, f.z);
 		face->next->next->next->p = set_rpoint(f.z, -f.z, f.z);
 	}
-
 	face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 	if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
 		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
 	return (face);
 }
 
-bool set_cube(t_rpoint position, double size, t_obj *c)
+bool				set_cube(t_rpoint position, double size, t_obj *c)
 {
-	t_poly_obj *o;
-	double maxd;
+	t_poly_obj	*o;
+	double		maxd;
 
 	c->position = position;
 	size = size / 2;
@@ -83,7 +82,6 @@ bool set_cube(t_rpoint position, double size, t_obj *c)
 	o = c->obj;
 	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, 0, size));
-
 	o->next = malloc_po();
 	o = o->next;
 	o->vertices = add_cube_face(set_rpoint(0, 0, -size));

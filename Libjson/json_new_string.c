@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 14:07:51 by mabessir          #+#    #+#             */
-/*   Updated: 2018/10/17 13:47:44 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/29 13:42:15 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_json_string	*make_new_string(t_json_file *file)
 	t_json_string *str;
 	unsigned long i;
 
-	if (file->str == NULL || file->pos >= file->len ||
-	file->str[file->pos] != '"')
+	if (file->str == NULL || file->pos >= file->len
+		|| file->str[file->pos] != '"')
 		return (NULL);
 	i = file->pos + 1;
 	while (i < file->len && file->str[i] != '\0' && file->str[i] != '"')

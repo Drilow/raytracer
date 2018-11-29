@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_screen2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:28:27 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/22 19:47:04 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/29 13:50:34 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static gboolean		clicked(GtkWidget __attribute__((unused)) *widget,
 	{
 		if (g_global.r->checker[(int)event->y][(int)event->x])
 		{
-			g_global.r->selected_obj =
-			g_global.r->checker[(int)event->y][(int)event->x];
+			g_global.r->selected_obj
+			= g_global.r->checker[(int)event->y][(int)event->x];
 			if ((gtk_widget_get_state_flags(GTKMGR.ui.main_view.select_button)
 			& GTK_STATE_FLAG_CHECKED))
 			{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:16:43 by adleau            #+#    #+#             */
-/*   Updated: 2017/12/22 02:01:11 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/29 13:45:55 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int	base_getter(char c, int base_limit)
 	base_iterator = -1;
 	while (++base_iterator < base_limit)
 	{
-		if (base[base_iterator] == c ||
-		((c >= 'A' && c <= 'F') && c + 32 == base[base_iterator]))
+		if (base[base_iterator] == c
+			|| ((c >= 'A' && c <= 'F') && c + 32 == base[base_iterator]))
 			return (base_iterator);
 	}
 	free(base);

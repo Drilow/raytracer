@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 14:44:25 by adleau            #+#    #+#             */
-/*   Updated: 2017/11/08 19:43:14 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/29 13:45:36 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	conversion(int c, int ref, int i, int fd)
 	{
 		if (i % 8 == 1 && i != 1)
 			tab[i] = 0;
-		else if ((ref >= 15 && i == 1) || (ref >= 23 && i == 2) ||
-		(ref == 31 && i == 3) || (i != ref && !(i % 8)))
+		else if ((ref >= 15 && i == 1) || (ref >= 23 && i == 2)
+			|| (ref == 31 && i == 3) || (i != ref && !(i % 8)))
 			tab[i] = 1;
 		else
 		{
