@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:31:57 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/29 13:32:36 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/30 17:54:40 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static	bool			get_next_double(char *line, int *index, double *a)
 	return (true);
 }
 
-static	bool			parse_vertex(t_vertex *v, char *line)
+static	bool			parse_vertex(t_vertex *v, char *line, double size)
 {
 	int index;
 
@@ -102,16 +102,19 @@ static	bool			parse_vertex(t_vertex *v, char *line)
 		return (false);
 	if (get_next_double(line, &index, &(v->p.z)) == false)
 		return (false);
+	v->p.x = v->p.x * size;
+	v->p.y = v->p.y * size;
+	v->p.z = v->p.z * size;
 	return (true);
 }
 
-static	bool			add_vertex(t_vertex **v_list, char *line)
+static	bool			add_vertex(t_vertex **v_list, char *line, double size)
 {
 	t_vertex *tmp;
 	t_vertex *new;
 
 	new = malloc_vertex();
-	if (parse_vertex(new, line) == false)
+	if (parse_vertex(new, line, size) == false)
 	{
 		return (false);
 	}
@@ -202,13 +205,14 @@ static	bool			add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
 	return (true);
 }
 
-static	bool			read_line(t_poly_obj **obj, t_vertex **v_list, char *line)
+static	bool			read_line(t_poly_obj **obj, t_vertex **v_list, char *line, double size)
 {
 	if (line[0] == 'v')
-		return (add_vertex(v_list, line));
+		return (add_vertex(v_list, line, size));
 	else if (line[0] == 'f' && *v_list != NULL)
 		return (add_face(obj, *v_list, line));
-	return (false);
+//	return (false);
+	return (true);
 }
 
 static	void			get_face_maxd(t_vertex *f, double *d)
@@ -248,7 +252,7 @@ void					set_obj(t_obj *o)
 	((t_poly_obj *)o->obj)->max_d = tmp_d;
 }
 
-t_poly_obj				*parse_obj(char *scene_line)
+t_poly_obj				*parse_obj(char *scene_line, double size)
 {
 	t_poly_obj	*obj;
 	t_vertex	*v_list;
@@ -264,7 +268,7 @@ t_poly_obj				*parse_obj(char *scene_line)
 	i = 0;
 	while (get_next_line(fd, &line) == 1)
 	{
-		if (read_line(&obj, &v_list, line) == false)
+		if (read_line(&obj, &v_list, line, size) == false)
 		{
 			free(line);
 			if (v_list != NULL)
