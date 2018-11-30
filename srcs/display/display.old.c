@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/30 17:35:00 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/11/23 12:28:59 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,12 @@ pthread_cond_t      condB = PTHREAD_COND_INITIALIZER;
 
 static void		draw_image_core2(t_point p, t_rt *r)
 {
-	t_collision *tmp;
+	t_collision tmp;
 
 	while (++p.y < WIN_H)
 	{
-//		g_global.r->checker[p.y][p.x] = NULL;
-//		if (p.x > 376 && p.x % THREADS_NB == 0)
-		tmp = ray_tracing(r, g_global.r->rays[p.y][p.x]);
-//		draw_px(GTKMGR.buf, p.x, p.y,			\
-//				get_ray_color(r, tmp, false));
-//		if (tmp != NULL)
-//			g_global.r->checker[p.y][p.x] = tmp->o;
-//		if (p.x > 376 && p.x % THREADS_NB == 0)
-		if (tmp->o != NULL)
+		tmp = ray_tracing(r, g_global.r->rays[p.y][p.x], false);
+		if (tmp.o != NULL)
 		{
 //				if ((p.x == 361 || p.x == 360) && p.y == 209)
 //				if (p.x == 360 && p.y == 209)
@@ -56,27 +49,18 @@ static void		draw_image_core2(t_point p, t_rt *r)
 //				}
 //				if (p.x == 361 && p.y == 209)
 //					printf("correct(361, 209) : rgb(%d, %d, %d)\n", tmpclr.r, tmpclr.g, tmpclr.b);
-//			if (p.x > 376 && p.x % THREADS_NB == 0)
-			g_global.r->checker[p.y][p.x] = tmp->o;
-//			if (p.x > 376 && p.x % THREADS_NB == 0)
+			g_global.r->checker[p.y][p.x] = tmp.o;
 			draw_px(GTKMGR.buf, p.x, p.y, \
-						get_ray_color(r, tmp));
-//			if (p.x > 376 && p.x % THREADS_NB == 0)
+						get_ray_color(r, tmp, false));
 //				get_ray_color(r, tmp.o, tmp.p));
 		}
 		else
 		{
-//			if (p.x > 376 && p.x % THREADS_NB == 0)
 			g_global.r->checker[p.y][p.x] = NULL;
 //				if (p.y > 120)
 //					printf("Black pixel : x=%d & y=%d\n", p.x, p.y);
-//			if (p.x > 376 && p.x % THREADS_NB == 0)
 			draw_px(GTKMGR.buf, p.x, p.y, ft_rgb(0, 0, 0, 0));
-//			if (p.x > 376 && p.x % THREADS_NB == 0)
 		}
-//		if (p.x > 376 && p.x % THREADS_NB == 0)
-		free_collisions(tmp);
-//		if (p.x > 376 && p.x % THREADS_NB == 0)
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:47:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/05/07 18:46:21 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/11/30 17:50:39 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ typedef struct		s_poly_obj
 	struct s_poly_obj	*next;
 }					t_poly_obj;
 
-t_poly_obj		*parse_obj(char *scene_line);
+t_poly_obj		*parse_obj(char *scene_line, double size);
 
 #endif

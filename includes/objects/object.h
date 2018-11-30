@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/22 16:20:53 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/30 17:55:33 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ typedef struct      s_poly_obj
     struct s_poly_obj   *next;
 }                   t_poly_obj;
 
-t_poly_obj			*parse_obj(char *str);
+t_poly_obj			*parse_obj(char *str, double size);
 
 bool				plane_collision(t_ray ray, t_plane *pl, t_rpoint pos, \
 					t_rpoint *p);
