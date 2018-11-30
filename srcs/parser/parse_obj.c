@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 10:13:57 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/29 10:14:45 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/30 18:59:38 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 	int					i;
 	static t_check_obj	check[8] = {{&get_sphere_inf, 4},
 	{&get_plane_inf, 5}, {&get_cone_inf, 7}, {&get_cyl_inf, 7},
-	{&get_cube_inf, 4}, {&get_tetra_inf, 4}, {&get_poly_objinf, 5}};
+	{&get_cube_inf, 5}, {&get_tetra_inf, 5}, {&get_poly_objinf, 6}};
 
 	if (list->value[num] == NULL || list->value[num]->type != 4)
 		return (false);

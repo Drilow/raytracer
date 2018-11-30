@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:40:23 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/28 19:07:59 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/30 18:58:38 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 		return (true);
 	}
 	if (i == 6)
-		return (prerotate(o, val, 2));
+		return (prerotate(o, val, 3));
 	return (false);
 }
 

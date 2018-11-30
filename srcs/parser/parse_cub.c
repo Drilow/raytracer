@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/28 19:09:12 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/30 19:04:45 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 		o->color = get_obj_color(val);
 		return (true);
 	}
+	if (i == 4)
+		return(prerotate(o, val, 66))
 	return (false);
 }
 
@@ -54,6 +56,8 @@ static	int		check_keys(char *str)
 		return (2);
 	if (cmp_chars(str, "color", 0) == true)
 		return (3);
+	if (cmp_chars(str, "rotate", 0 ) == true)
+		return (4);
 	return (-1);
 }
 
@@ -66,7 +70,7 @@ bool			get_cube_inf(t_json_object *obj)
 	i = 0;
 	o = malloc_object(66);
 	size = 1;
-	while (i++ < 3)
+	while (i++ < 4)
 	{
 		if (call_parse(check_keys(obj->pair[i]->key->str),
 			obj->pair[i]->value, o) == false)
