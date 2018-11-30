@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/23 12:28:14 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/30 17:38:50 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ typedef struct				s_ui
 typedef struct				s_gtk_mgr
 {
 	cairo_surface_t			*pixmap;
+	unsigned char			*saved;
 	unsigned char			*buf;
 	char					editmode;
 	t_ui					ui;
@@ -184,5 +185,6 @@ void						progress_bar();
 void						progress_thread_handler(gdouble x);
 void						progress_main_handler();
 gboolean 					updateProgress();
+unsigned char				*ft_ustrdup(unsigned char *s, int size);
 
 #endif

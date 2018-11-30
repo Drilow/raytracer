@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/22 19:32:35 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/30 17:36:03 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,13 @@ void				handle_filter_validation(void)
 
 	r = gtk_dialog_run(GTK_DIALOG(FILTER_VIEW.win));
 	if (r == GTK_RESPONSE_ACCEPT)
+	{
 		gtk_widget_destroy(FILTER_VIEW.win);
+	}
 	else if (r == GTK_RESPONSE_REJECT)
+	{
 		gtk_widget_destroy(FILTER_VIEW.win);
+	}
 }
 
 void				deactivate_filter_buttons(GtkWidget *except)
@@ -89,8 +93,10 @@ void				end_filters(void)
 void				filter_win(void)
 {
 	GtkWidget		*content_area;
+	unsigned char	*tmp;
 
-	redraw(false);
+	if (!(tmp = ft_ustrdup(GTKMGR.buf, WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
+		exit(1); //to fix
 	FILTER_VIEW.bw_img = gtk_image_new_from_file("uiconfig/bw.png");
 	FILTER_VIEW.sepia_img = gtk_image_new_from_file("uiconfig/sepia.png");
 	FILTER_VIEW.reversed_img = gtk_image_new_from_file("uiconfig/reversed.png");

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/23 12:28:59 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/30 17:31:21 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,32 @@ static void		*draw_image_core(void *arg)
 	pthread_exit(NULL);
 }
 
+unsigned char		*ft_ustrdup(unsigned char *s, int size)
+{
+	int				i;
+	unsigned char	*ret;
+
+	i = -1;
+	if (!(ret = (unsigned char*)malloc(sizeof(unsigned char) * (size + 1))))
+		return (NULL);
+	while (++i < size)
+	{
+		ret[i] = s[i];
+	}
+	return (ret);
+}
+
 void			draw_image(void)
 {
 	pthread_t	th[THREADS_NB];
 	t_thread	th_arg[THREADS_NB];
 	int			i;
 
+	if ((GTKMGR.saved))
+	{
+		free(GTKMGR.saved);
+		GTKMGR.saved = NULL;
+	}
 	i = 0;
 	progress_bar();
 	PROGRESS_DATA.pos = 0;
@@ -113,5 +133,7 @@ void			draw_image(void)
 	}
 	if (ANTIALIASING == 1)
 		antialiasing();
+	if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf, WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
+		exit(1); //fix
 	g_global.drawn = 0;
 }

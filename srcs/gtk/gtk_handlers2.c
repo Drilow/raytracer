@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/20 11:47:06 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/30 18:00:42 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,25 @@ void				deactivate_buttons(GtkWidget *except)
 
 void				redraw(bool display)
 {
-	draw_image();
 	if (display == true)
 	{
+		draw_image();
 		if (PIXMAP)
 			cairo_surface_destroy(PIXMAP);
 		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf,
+		CAIRO_FORMAT_RGB24,
+		WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+		if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
+			exit(1); // to fix
+		cairo_surface_mark_dirty(PIXMAP);
+		gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
+		PIXMAP);
+	}
+	else
+	{
+		if (PIXMAP)
+			cairo_surface_destroy(PIXMAP);
+		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.saved,
 		CAIRO_FORMAT_RGB24,
 		WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 		if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/22 19:12:17 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/30 18:46:47 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,26 @@
 #define PIXMAP g_global.r->gtk_mgr.pixmap
 #define GTKMGR g_global.r->gtk_mgr
 #define ADD_VIEW g_global.r->gtk_mgr.ui.add_view
+#define PROGRESS_DATA g_global.r->gtk_mgr.ui.progress_data
 
 extern t_global		g_global;
 
 void			on_key_press(GtkWidget *w, GdkEventKey *event)
 {
-	if (event->keyval == GDK_KEY_Escape)
-		gtk_widget_destroy(w);
+	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
+		gtk_main_quit();
+	if (g_global.r && w == ADD_VIEW.win && event->keyval == GDK_KEY_Escape)
+		redraw(false);
+	if (event->keyval == GDK_KEY_Escape && w != NULL && w != PROGRESS_DATA.window)
+	{
+		if (GTK_IS_WIDGET(w))
+		{
+			gtk_widget_destroy(GTK_WIDGET(w));
+			w = NULL;
+		}
+	}
 	else if (event->keyval != GDK_KEY_Escape)
 		return ;
-	if (g_global.r && w == ADD_VIEW.win)
-		draw_image();
-	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
-	gtk_main_quit();
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/15 20:05:25 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/30 18:42:46 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <libft.h>
@@ -49,7 +49,7 @@ gboolean updateProgress()
 static void EndProgress ()
 {
     PROGRESS_DATA.bProgressUp = FALSE;
-    gtk_widget_destroy(PROGRESS_DATA.window);
+    gtk_widget_destroy(GTK_WIDGET(PROGRESS_DATA.window));
 }
 
 void			progress_bar()

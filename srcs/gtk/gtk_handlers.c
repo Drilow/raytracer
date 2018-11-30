@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:47:04 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/24 17:37:56 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/30 18:52:59 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,16 @@ void				handle_edit_validation(t_obj *o)
 	if (r == GTK_RESPONSE_ACCEPT)
 	{
 		validate_edit(o);
-		gtk_widget_destroy(ADD_VIEW.win);
+		if (ADD_VIEW.win && GTK_IS_WIDGET(ADD_VIEW.win))
+		{
+			gtk_widget_destroy(GTK_WIDGET(ADD_VIEW.win));
+			ADD_VIEW.win = NULL;
+		}
 	}
 	else if (r == GTK_RESPONSE_REJECT)
 	{
-		redraw(true);
-		gtk_widget_destroy(ADD_VIEW.win);
+		redraw(false);
+		gtk_widget_destroy(GTK_WIDGET(ADD_VIEW.win));
 	}
 }
 
