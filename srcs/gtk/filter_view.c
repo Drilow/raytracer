@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/30 17:36:03 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/30 19:51:37 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void				handle_filter_validation(void)
 {
 	int		r;
 
+	gtk_widget_show_all(FILTER_VIEW.win);
 	r = gtk_dialog_run(GTK_DIALOG(FILTER_VIEW.win));
 	if (r == GTK_RESPONSE_ACCEPT)
 	{
@@ -30,6 +31,9 @@ void				handle_filter_validation(void)
 	}
 	else if (r == GTK_RESPONSE_REJECT)
 	{
+		free(GTKMGR.buf);
+		GTKMGR.buf = NULL;
+		GTKMGR.buf = ft_ustrdup(GTKMGR.saved, WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 		gtk_widget_destroy(FILTER_VIEW.win);
 	}
 }
@@ -85,7 +89,6 @@ void				end_filters(void)
 	FILTER_VIEW.sepia_img);
 	gtk_container_add(GTK_CONTAINER(FILTER_VIEW.buttonbox),
 	FILTER_VIEW.sepia_button);
-	gtk_widget_show_all(FILTER_VIEW.win);
 	gtk_button_set_image(GTK_BUTTON(FILTER_VIEW.reversed_button), FILTER_VIEW.reversed_img);
 	handle_filter_validation();
 }
