@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/15 20:05:25 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/11/30 18:42:46 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,13 @@ gboolean		update_progress(void)
 
 static void		end_progress(void)
 {
+<<<<<<< HEAD
 	PROGRESS_DATA.bProgressUp = FALSE;
 	gtk_widget_destroy(PROGRESS_DATA.window);
+=======
+    PROGRESS_DATA.bProgressUp = FALSE;
+    gtk_widget_destroy(GTK_WIDGET(PROGRESS_DATA.window));
+>>>>>>> f1b1a02fb73028e522f699bfce46e8edd7bc08aa
 }
 
 void			progress_bar(void)

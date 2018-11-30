@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/29 13:51:04 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/30 18:50:36 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void				validate_edit(t_obj *o)
 	= gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
 	validate_objects(o);
 	redraw(true);
-	gtk_widget_destroy(SCENE_VIEW.win);
+	gtk_widget_destroy(GTK_WIDGET(SCENE_VIEW.win));
 	scene_win();
 }
