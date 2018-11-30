@@ -22,11 +22,11 @@
 #define GTKMGR g_global.r->gtk_mgr
 #define PROGRESS_DATA g_global.r->gtk_mgr.ui.progress_data
 
-extern t_global	g_global;
-enum state 			state = STATE_A;
-pthread_mutex_t 	mutex = PTHREAD_MUTEX_INITIALIZER;
-pthread_cond_t      condA = PTHREAD_COND_INITIALIZER;
-pthread_cond_t      condB = PTHREAD_COND_INITIALIZER;
+extern t_global		g_global;
+enum state 			g_state = STATE_A;
+pthread_mutex_t		g_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t      g_cond_a = PTHREAD_COND_INITIALIZER;
+pthread_cond_t      g_cond_b = PTHREAD_COND_INITIALIZER;
 
 static void		draw_image_core2(t_point p, t_rt *r)
 {
