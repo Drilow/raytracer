@@ -49,8 +49,8 @@ gboolean		update_progress(void)
 
 static void		end_progress(void)
 {
-    PROGRESS_DATA.bProgressUp = FALSE;
-    gtk_widget_destroy(GTK_WIDGET(PROGRESS_DATA.window));
+	PROGRESS_DATA.bProgressUp = FALSE;
+	gtk_widget_destroy(GTK_WIDGET(PROGRESS_DATA.window));
 }
 
 void			progress_bar(void)
