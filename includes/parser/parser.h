@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/29 10:22:20 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/30 18:45:26 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ bool			get_next_rpoint(char *s, t_rpoint *p, int *index);
 void			set_obj(t_obj *o);
 bool			get_cube(t_obj *c, double size);
 bool			get_tetrahedron(t_obj *t, double size);
+bool			get_pyramid(t_obj *p, double base_size, double height);
 bool			set_cube(t_rpoint position, double size, t_obj *c);
 bool			set_tetrahedron(t_rpoint position, double size, t_obj *t);
 bool			validate_obj(t_rpoint pos, double size, char *path, t_obj *o);

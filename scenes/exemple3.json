@@ -39,6 +39,12 @@
 					"color":[75,60,150,0]
 				},
 				{
+                    "type":"tetrahedron",
+                    "pos":[0,-7,1],
+                    "size":5,
+                    "color":[100,50,200,50]
+                },
+				{
 					"type":"cube",
 					"pos":[4,-6,6],
 					"size":3,
