@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:30:52 by alacrois          #+#    #+#             */
-/*   Updated: 2018/10/24 17:10:08 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/30 19:06:34 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_rpoint	add_rpoints(t_rpoint a, t_rpoint b)
 }
 
 
-static bool		face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision *col, bool test)
+static bool		face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision *col)
 {
 	t_rpoint	tmp;
 	double		a;
@@ -58,13 +58,13 @@ static bool		face_collision(t_ray ray, t_rpoint pos, t_vertex *face, t_collision
 	col->p = tmp;
 //	if (test == true)
 //		printf("face_collision == true, a = %f, atmp = %f\n", a, atmp);
-	if (test == true)
-		return (true);
+//	if (test == true)
+//		return (true);
 	return (true);
 }
 
 
-bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col, bool test)
+bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col)
 {
 	t_collision	fcol;
 	t_collision	tmp;
@@ -78,7 +78,7 @@ bool			poly_obj_collision(t_ray ray, t_poly_obj *po, t_collision *col, bool test
 		return (false);
 	while (potmp != NULL)
 	{
-		if (face_collision(ray, col->o->position, potmp->vertices, &tmp, test) == true && (d == -1 || deltasq(ray.p, tmp.p) < d))
+		if (face_collision(ray, col->o->position, potmp->vertices, &tmp) == true && (d == -1 || deltasq(ray.p, tmp.p) < d))
 		{
 //			fcol = tmp;
 			fcol.o = tmp.o;
