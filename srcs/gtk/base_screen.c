@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/29 13:48:51 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/11/30 19:00:51 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ extern t_global		g_global;
 
 void			handle_drawing(void)
 {
-	if (!(GTKMGR.buf = malloc(sizeof(unsigned char)
+	if (!(GTKMGR.buf = (unsigned char*)malloc(sizeof(unsigned char)
 	* (WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
 		exit(1); // to fix
 	draw_image();
