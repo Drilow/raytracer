@@ -46,11 +46,21 @@ static t_rpoint		average(t_rpoint a, t_rpoint b, double f)
 
 static double		rgb_min(t_rgb c)
 {
-	if (c.r > c.g)
-		c.r = c.g;
-	if (c.r > c.b)
-		c.r = c.b;
-	return ((double)c.r);
+	double			min;
+
+	min = c.r;
+	if (min == 0)
+		min = c.g;
+	if (min == 0)
+		min = c.b;
+	if (min == 0)
+		return (1);
+	if (c.g < min && c.g != 0)
+		min = c.g;
+	if (c.b < min && c.b != 0)
+		min = c.b;
+	//return ((double)c.r);
+	return (min);
 }
 
 static double		rpoint_max(t_rpoint p)
@@ -126,12 +136,12 @@ static t_rpoint		get_color(t_rt *r, t_collision c)
 				tmpc.o = otmp;
 				if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
 				{
-					afactor = 0;
-/*
+//					afactor = 0;
+
 					tmpl.color.r = (double)tmpl.color.r * ((double)otmp->color.trans / 255);
 					tmpl.color.g = (double)tmpl.color.g * ((double)otmp->color.trans / 255);
 					tmpl.color.b = (double)tmpl.color.b * ((double)otmp->color.trans / 255);
-*/
+
 				}
 				otmp = otmp->next;
 			}
