@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/30 19:55:15 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/03 17:26:47 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 		return (true);
 	}
 	if (i == 4)
-		return (prerotate(o, val, 66));
+		return (true);
 	return (false);
 }
 
@@ -83,8 +83,12 @@ bool			get_cube_inf(t_json_object *obj)
 					return (false);
 			}
 		}
+		if (i == 4 && check_keys(obj->pair[i]->key->str) == 4)
+		{
+			if (get_cube(o, size) && !prerotate(o, obj->pair[i]->value, 66))
+				return (false);
+		}
 	}
-	get_cube(o, size);
 	put_inf_to_glob(o);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/29 10:22:20 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/03 15:59:43 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool			get_cyl_inf(t_json_object *obj);
 bool			prerotate(t_obj *obj, t_json_value *val, int type);
 void			rotate_obj(void *o, int type, t_rpoint angle);
 bool			get_poly_objinf(t_json_object *obj);
-bool			get_poly_obj(char *s, t_obj *o);
+bool			poly_obj(char *s, t_obj *o);
 bool			get_cube_inf(t_json_object *obj);
 bool			get_tetra_inf(t_json_object *obj);
 bool			check_arr(t_json_array *arr);

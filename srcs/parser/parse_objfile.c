@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/30 19:54:53 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/03 16:13:24 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 		return (true);
 	}
 	if (i == 5)
-		return (prerotate(o, val, 6));
+		return (true);
 	return (false);
 }
 
@@ -61,7 +61,7 @@ static	int		check_keys(char *str)
 		return (3);
 	if (cmp_chars(str, "color", 0) == true)
 		return (4);
-	if (cmp_chars(str, "rotate", 0 ) == true)
+	if (cmp_chars(str, "rotate", 0) == true)
 		return (5);
 	return (-1);
 }
@@ -85,8 +85,12 @@ bool			get_poly_objinf(t_json_object *obj)
 			if (obj->pair[i]->value->type == 7)
 				str = (t_json_string *)obj->pair[i]->value->ptr;
 		}
+		if (i == 5 && check_keys(obj->pair[i]->key->str) == 5)
+		{
+			if (poly_obj(str->str, o) && !prerotate(o, obj->pair[i]->value, 6))
+				return (false);
+		}
 	}
-	get_poly_obj(str->str, o);
 	put_inf_to_glob(o);
 	return (true);
 }

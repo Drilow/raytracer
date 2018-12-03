@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 10:13:57 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/30 18:59:38 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/03 16:16:38 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ bool			prerotate(t_obj *obj, t_json_value *val, int type)
 		a = (int *)arr->value[2]->ptr;
 		t->z = (double)*a;
 	}
+	else
+		return (false);
 	t->x = ((double)((int)t->x % 360) / 360) * (2 * PI);
 	t->y = ((double)((int)t->y % 360) / 360) * (2 * PI);
 	t->z = ((double)((int)t->z % 360) / 360) * (2 * PI);

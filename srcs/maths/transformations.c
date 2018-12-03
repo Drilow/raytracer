@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:45:24 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/30 19:03:37 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/03 17:32:01 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void			rotate(t_rpoint *p, t_rpoint angle)
 	}
 }
 
-
 static void		rotate_poly_obj(t_obj *o, t_rpoint angle)
 {
 	t_vertex	*tmpv;
@@ -62,7 +61,6 @@ static void		rotate_poly_obj(t_obj *o, t_rpoint angle)
 		tmppo = tmppo->next;
 	}
 }
-
 
 void			rotate_obj(void *o, int type, t_rpoint angle)
 {

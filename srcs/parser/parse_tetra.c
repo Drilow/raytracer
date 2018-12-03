@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 11:44:02 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/30 19:55:29 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/03 17:27:00 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 		return (true);
 	}
 	if (i == 4)
-		return (prerotate(o, val, 67));
+		return (true);
 	return (false);
 }
 
@@ -83,8 +83,12 @@ bool			get_tetra_inf(t_json_object *obj)
 					return (false);
 			}
 		}
+				if (i == 4 && check_keys(obj->pair[i]->key->str) == 4)
+		{
+			if (get_tetrahedron(o, size) && !prerotate(o, obj->pair[i]->value, 67))
+				return (false);
+		}
 	}
-	get_tetrahedron(o, size);
 	put_inf_to_glob(o);
 	return (true);
 }

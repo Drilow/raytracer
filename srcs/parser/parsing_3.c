@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 20:51:38 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/30 17:49:26 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/12/03 15:59:47 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool			cmp_chars(char *s, char *o, int start)
 	return (true);
 }
 
-bool			get_poly_obj(char *s, t_obj *o)
+bool			poly_obj(char *s, t_obj *o)
 {
 	o->obj = parse_obj(s, o->size);
 	if (o->obj == NULL)
