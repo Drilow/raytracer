@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/03 17:26:47 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/03 18:24:56 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static	int		check_keys(char *str)
 		return (2);
 	if (cmp_chars(str, "color", 0) == true)
 		return (3);
-	if (cmp_chars(str, "rotate", 0 ) == true)
+	if (cmp_chars(str, "rotate", 0) == true)
 		return (4);
 	return (-1);
 }
@@ -75,13 +75,10 @@ bool			get_cube_inf(t_json_object *obj)
 		if (call_parse(check_keys(obj->pair[i]->key->str),
 			obj->pair[i]->value, o) == false)
 			return (false);
-		if (i == 2)
+		if (i == 2 && obj->pair[2]->value->type == 5)
 		{
-			if (obj->pair[2]->value->type == 5)
-			{
-				if ((size = get_cub_size(obj->pair[2]->value)) <= 0)
-					return (false);
-			}
+			if ((size = get_cub_size(obj->pair[2]->value)) <= 0)
+				return (false);
 		}
 		if (i == 4 && check_keys(obj->pair[i]->key->str) == 4)
 		{
