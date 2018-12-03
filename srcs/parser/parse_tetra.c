@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 11:44:02 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/03 17:27:00 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/03 18:23:03 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static	int		check_keys(char *str)
 		return (2);
 	if (cmp_chars(str, "color", 0) == true)
 		return (3);
-	if (cmp_chars(str, "rotate", 0 ) == true)
+	if (cmp_chars(str, "rotate", 0) == true)
 		return (4);
 	return (-1);
 }
@@ -75,17 +75,14 @@ bool			get_tetra_inf(t_json_object *obj)
 		if (call_parse(check_keys(obj->pair[i]->key->str),
 			obj->pair[i]->value, o) == false)
 			return (false);
-		if (i == 2)
+		if (i == 2 && obj->pair[2]->value->type == 5)
 		{
-			if (obj->pair[2]->value->type == 5)
-			{
-				if ((size = get_tetra_size(obj->pair[2]->value)) <= 0)
-					return (false);
-			}
+			if ((size = get_tetra_size(obj->pair[2]->value)) <= 0)
+				return (false);
 		}
-				if (i == 4 && check_keys(obj->pair[i]->key->str) == 4)
+		if (i == 4 && check_keys(obj->pair[i]->key->str) == 4)
 		{
-			if (get_tetrahedron(o, size) && !prerotate(o, obj->pair[i]->value, 67))
+			if (get_tetrad(o, size) && !prerotate(o, obj->pair[i]->value, 67))
 				return (false);
 		}
 	}

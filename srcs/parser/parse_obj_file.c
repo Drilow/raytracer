@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:31:57 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/03 16:21:46 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/03 18:23:09 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -391,7 +391,7 @@ static	t_vertex		*add_t_face(int fnb, double size)
 	return (face);
 }
 
-bool					get_tetrahedron(t_obj *t, double size)
+bool					get_tetrad(t_obj *t, double size)
 {
 	t_poly_obj *o;
 
