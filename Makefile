@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/11/28 15:26:34 by mabessir         ###   ########.fr        #
+#    Updated: 2018/12/04 17:02:34 by mabessir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)parser/parse_1.c		\
 		$(SRCPATH)parser/parse_plane.c		\
 		$(SRCPATH)parser/parse_sphere.c		\
+		$(SRCPATH)parser/parse_pyra.c		\
 		$(SRCPATH)parser/parse_camera.c		\
 		$(SRCPATH)parser/parse_light.c		\
 		$(SRCPATH)parser/parse_cone.c		\

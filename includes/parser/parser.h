@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/03 18:22:58 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/04 17:04:36 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ bool			get_tetra_inf(t_json_object *obj);
 bool			check_arr(t_json_array *arr);
 bool			verif_infinite(t_obj *o, t_json_value *val);
 bool			get_inf(t_obj *o, t_json_value *val);
+bool			get_pyra_inf(t_json_object *obj);
+bool			get_pyramid(t_obj *p, double base_size, double height);
 
 #endif

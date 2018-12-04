@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_objfile2.c                                   :+:      :+:    :+:   */
+/*   parse_pyra.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 18:14:35 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/30 19:06:37 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/04 17:08:37 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,36 @@ static	bool	set_size(t_obj *o, t_json_value *val)
 		a = (int *)val->ptr;
 		o->size = (double)*a;
 	}
+	else
+		return (false);
 	return (true);
 }
 
-static	bool	call_parse(int i, t_json_value *val, t_obj *o)
+static	bool	get_height(t_json_value *val, double *height)
+{
+	int		*a;
+
+	a = 0;
+	if (val == NULL)
+		return (false);
+	if (val->type == 5)
+	{
+		a = (int *)val->ptr;
+		*height = (double)*a;
+	}
+	else
+		return (false);
+	return (true);
+}
+
+static	bool	call_parse(int i, t_json_value *val, t_obj *o, double *height)
 {
 	if (i == 1)
 		return (get_inf(o, val));
 	if (i == 2)
 		return (set_size(o, val));
 	if (i == 3)
-		return (true);
+		return (get_height(val, height));
 	if (i == 4)
 	{
 		o->color = get_obj_color(val);
@@ -53,38 +72,30 @@ static	int		check_keys(char *str)
 {
 	if (cmp_chars(str, "pos", 0) == true)
 		return (1);
-	if (cmp_chars(str, "size", 0) == true)
+	if (cmp_chars(str, "base_size", 0) == true)
 		return (2);
-	if (cmp_chars(str, "adresse", 0) == true)
+	if (cmp_chars(str, "height", 0) == true)
 		return (3);
-	if (cmp_chars(str, "color", 0) == true)
-		return (4);
 	if (cmp_chars(str, "color", 0) == true)
 		return (4);
 	return (-1);
 }
 
-bool			get_poly_objinf(t_json_object *obj)
+bool			get_pyra_inf(t_json_object *obj)
 {
 	t_obj			*o;
-	t_json_string	*str;
 	int				i;
+	double			height;
 
-	str = 0;
 	i = 0;
 	o = malloc_object(7);
-	while (i++ < 6)
+	while (i++ < 4)
 	{
 		if (call_parse(check_keys(obj->pair[i]->key->str),
-			obj->pair[i]->value, o) == false)
+			obj->pair[i]->value, o, &height) == false)
 			return (false);
-		if (i == 3)
-		{
-			if (obj->pair[i]->value->type == 7)
-				str = (t_json_string *)obj->pair[i]->value->ptr;
-		}
 	}
-	get_poly_obj(str->str, o);
+	get_pyramid(o, o->size, height);
 	put_inf_to_glob(o);
 	return (true);
 }

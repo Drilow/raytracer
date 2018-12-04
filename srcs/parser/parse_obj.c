@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 10:13:57 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/03 16:16:38 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/04 17:02:10 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static	int		get_obj_type(t_json_pair *pair)
 		return (6);
 	if (cmp_chars(str, "polyobject", 0) == true)
 		return (7);
+	if (cmp_chars(str, "pyramide", 0) == true)
+		return (8);
 	return (-1);
 }
 
@@ -79,9 +81,10 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 {
 	t_json_object		*obj;
 	int					i;
-	static t_check_obj	check[8] = {{&get_sphere_inf, 4},
+	static t_check_obj	check[9] = {{&get_sphere_inf, 4},
 	{&get_plane_inf, 5}, {&get_cone_inf, 7}, {&get_cyl_inf, 7},
-	{&get_cube_inf, 5}, {&get_tetra_inf, 5}, {&get_poly_objinf, 6}};
+	{&get_cube_inf, 5}, {&get_tetra_inf, 5}, {&get_poly_objinf, 6},
+	{&get_pyra_inf, 5}};
 
 	if (list->value[num] == NULL || list->value[num]->type != 4)
 		return (false);

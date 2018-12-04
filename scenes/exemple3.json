@@ -58,6 +58,13 @@
 					"INF":false,
 					"color":[150,50,100,30],
 					"rotate":[0,20,-10]
+				},
+				{
+					"type":"pyramide",
+					"pos":[-150,5,90],
+					"base_size":10,
+					"height":5,
+					"color":[150,50,100,0]
 				}
 	]
 }
