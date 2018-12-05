@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:18:32 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/16 19:43:14 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/12/05 18:13:21 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void				validate_objects(t_obj *o)
 gboolean			is_obj(int type)
 {
 	if (type == 1 || type == 2 || type == 3 || type == 4 || type == 6
-			|| type == 66 || type == 67)
+			|| type == 66 || type == 67 || type == 68)
 		return (TRUE);
 	return (FALSE);
 }
