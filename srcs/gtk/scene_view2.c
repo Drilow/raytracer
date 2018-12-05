@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_view2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/05 18:07:44 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/05 18:31:59 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void					init_scene_view(void)
 	gtk_window_set_title(GTK_WINDOW(SCENE_VIEW.win), "Scene");
 	gtk_window_set_destroy_with_parent(GTK_WINDOW(SCENE_VIEW.win), TRUE);
 	gtk_window_set_deletable(GTK_WINDOW(SCENE_VIEW.win), FALSE);
-	gtk_window_set_position(GTK_WINDOW(SCENE_VIEW.win), GTK_WIN_POS_MOUSE);
+	//gtk_window_set_position(GTK_WINDOW(SCENE_VIEW.win), GTK_WIN_POS_MOUSE);
 	SCENE_VIEW.store = gtk_tree_store_new(N_COLUMNS, G_TYPE_STRING,
 										G_TYPE_DOUBLE, G_TYPE_DOUBLE,
 										G_TYPE_DOUBLE, G_TYPE_BOOLEAN,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtk_mgr.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/30 17:38:50 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/05 18:27:36 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct 				s_scene_view
     GtkWidget 				*tree;
     GtkWidget				*button;
     GtkTreeStore 			*store;
+    GtkWidget				*fixed;
 }							t_scene_view;
 
 typedef struct 				s_progress_data
