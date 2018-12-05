@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 18:14:35 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/04 17:08:37 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/05 17:37:22 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ bool			get_pyra_inf(t_json_object *obj)
 	double			height;
 
 	i = 0;
-	o = malloc_object(7);
+	o = malloc_object(68);
 	while (i++ < 4)
 	{
 		if (call_parse(check_keys(obj->pair[i]->key->str),

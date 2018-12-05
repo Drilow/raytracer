@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/03 18:24:56 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/05 17:57:46 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 #include <geometry/geometry.h>
 #include <fcntl.h>
 
-static	double	get_cub_size(t_json_value *val)
+static	bool	get_cub_size(t_obj *o, t_json_value *val)
 {
 	int		*a;
-	double	size;
 
-	size = 1;
+	if (val == NULL)
+		return (false);
 	if (val->type == 5)
 	{
 		a = (int *)val->ptr;
-		size = (double)*a;
+		o->size = (double)*a;
 	}
-	return (size);
+	return (true);
 }
 
 static	bool	call_parse(int i, t_json_value *val, t_obj *o)
@@ -37,7 +37,7 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 	if (i == 1)
 		return (get_inf(o, val));
 	if (i == 2)
-		return (true);
+		return (get_cub_size(o, val));
 	if (i == 3)
 	{
 		o->color = get_obj_color(val);
@@ -75,14 +75,10 @@ bool			get_cube_inf(t_json_object *obj)
 		if (call_parse(check_keys(obj->pair[i]->key->str),
 			obj->pair[i]->value, o) == false)
 			return (false);
-		if (i == 2 && obj->pair[2]->value->type == 5)
-		{
-			if ((size = get_cub_size(obj->pair[2]->value)) <= 0)
-				return (false);
-		}
 		if (i == 4 && check_keys(obj->pair[i]->key->str) == 4)
 		{
-			if (get_cube(o, size) && !prerotate(o, obj->pair[i]->value, 66))
+			get_cube(o, o->size);
+			if (prerotate(o, obj->pair[i]->value, 66) == false)
 				return (false);
 		}
 	}
