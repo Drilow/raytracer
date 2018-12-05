@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/03 16:13:24 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/05 18:15:26 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ bool			get_poly_objinf(t_json_object *obj)
 	t_json_string	*str;
 	int				i;
 
-	str = 0;
 	i = 0;
 	o = malloc_object(6);
 	while (i++ < 5)
@@ -87,7 +86,8 @@ bool			get_poly_objinf(t_json_object *obj)
 		}
 		if (i == 5 && check_keys(obj->pair[i]->key->str) == 5)
 		{
-			if (poly_obj(str->str, o) && !prerotate(o, obj->pair[i]->value, 6))
+			poly_obj(str->str, o);
+			if (prerotate(o, obj->pair[i]->value, 6) == false)
 				return (false);
 		}
 	}
