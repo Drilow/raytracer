@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/16 20:05:28 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/12/05 17:45:08 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static char				*get_obj_type(int type)
 		return ("Cylinder");
 	else if (type == 6)
 		return ("Poly");
+	else if (type == 7)
+		return ("Pyramid");
 	else if (type == 66)
 		return ("Cube");
 	else if (type == 67)
