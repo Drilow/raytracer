@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_view2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/05 17:45:08 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/12/05 18:07:44 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char				*get_obj_type(int type)
 		return ("Cylinder");
 	else if (type == 6)
 		return ("Poly");
-	else if (type == 7)
+	else if (type == 68)
 		return ("Pyramid");
 	else if (type == 66)
 		return ("Cube");
