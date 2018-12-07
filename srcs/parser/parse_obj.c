@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 10:13:57 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/04 17:02:10 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/07 14:14:12 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,28 @@ bool			prerotate(t_obj *obj, t_json_value *val, int type)
 static	int		get_obj_type(t_json_pair *pair)
 {
 	t_json_string	*string;
-	char			*str;
 
 	if (pair->value->type != 7)
-		return (0);
+		return (-1);
 	string = (t_json_string *)pair->value->ptr;
-	str = (char *)string->str;
-	if (cmp_chars(str, "sphere", 0) == true)
+	if (cmp_chars(string->str, "sphere", 0) == true)
 		return (1);
-	if (cmp_chars(str, "plane", 0) == true)
+	if (cmp_chars(string->str, "plane", 0) == true)
 		return (2);
-	if (cmp_chars(str, "cone", 0) == true)
+	if (cmp_chars(string->str, "cone", 0) == true)
 		return (3);
-	if (cmp_chars(str, "cylinder", 0) == true)
+	if (cmp_chars(string->str, "cylinder", 0) == true)
 		return (4);
-	if (cmp_chars(str, "cube", 0) == true)
+	if (cmp_chars(string->str, "cube", 0) == true)
 		return (5);
-	if (cmp_chars(str, "tetrahedron", 0) == true)
+	if (cmp_chars(string->str, "tetrahedron", 0) == true)
 		return (6);
-	if (cmp_chars(str, "polyobject", 0) == true)
+	if (cmp_chars(string->str, "polyobject", 0) == true)
 		return (7);
-	if (cmp_chars(str, "pyramide", 0) == true)
+	if (cmp_chars(string->str, "pyramide", 0) == true)
 		return (8);
+	if (cmp_chars(string->str, "dodeca", 0) == true)
+		return (9);
 	return (-1);
 }
 
