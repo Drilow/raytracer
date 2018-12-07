@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/30 19:37:36 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/07 12:36:41 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ extern t_global		g_global;
 void			on_key_press(GtkWidget *w, GdkEventKey *event)
 {
 	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
+	{
 		gtk_main_quit();
+		exit(0);
+	}
 	if (g_global.r && w == ADD_VIEW.win && event->keyval == GDK_KEY_Escape)
 		redraw(false);
 	if (event->keyval == GDK_KEY_Escape && w != NULL && w != PROGRESS_DATA.window)
