@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtk_handlers2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/30 19:40:55 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/07 12:54:38 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ void				redraw(bool display)
 {
 	if (display == true)
 	{
-		printf("WTFFFFFFFFFF1\n");
 		draw_image();
 		if (PIXMAP)
 			cairo_surface_destroy(PIXMAP);
@@ -100,7 +99,6 @@ void				redraw(bool display)
 	}
 	else
 	{
-		printf("WTFFFFFFFFFF\n");
 		if (PIXMAP)
 			cairo_surface_destroy(PIXMAP);
 		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.saved,
