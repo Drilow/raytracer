@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/05 17:57:46 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/07 13:11:47 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static	bool	get_cub_size(t_obj *o, t_json_value *val)
 		a = (int *)val->ptr;
 		o->size = (double)*a;
 	}
+	else
+		return (false);
 	return (true);
 }
 

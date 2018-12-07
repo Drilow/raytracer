@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 11:44:02 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/05 18:13:10 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/07 13:10:30 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static	bool	get_tetra_size(t_obj *o, t_json_value *val)
 		a = (int *)val->ptr;
 		o->size = (double)*a;
 	}
+	else
+		return (false);
 	return (true);
 }
 

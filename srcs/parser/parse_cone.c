@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:40:23 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/30 18:58:38 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/07 13:12:02 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static	bool	geet_vector(t_obj *o, t_json_value *val)
 		a = (int *)arr->value[2]->ptr;
 		c->vector.z = (double)*a;
 	}
+	else
+		return (false);
 	return (true);
 }
 
