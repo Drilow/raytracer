@@ -28,6 +28,7 @@ typedef struct			s_collision
 	t_rpoint			normal;
 	t_obj				*o;
 	struct s_collision	*next;
+	struct s_collision	*reflected;
 }						t_collision;
 
 bool				find_collisions(t_rpoint factors, t_dpoint *solutions);
@@ -43,7 +44,7 @@ bool				poly_obj_collision(t_ray ray, t_poly_obj *po, \
 //t_bool				collision(t_ray ray, t_obj *o, t_rpoint *p);
 bool				collision(t_ray ray, t_collision *c);
 t_rpoint			normal_collision_vector(t_collision c);
-t_collision			*ray_tracing(t_rt *r, t_ray ray);
+t_collision			*ray_tracing(t_rt *r, t_ray ray, int r_index);
 void				free_collisions(t_collision *c);
 
 t_rgb				get_ray_color(t_rt *r, t_collision *c);
