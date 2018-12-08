@@ -79,7 +79,7 @@ bool			get_dod_inf(t_json_object *obj)
 			return (false);
 		if (i == 4 && check_keys(obj->pair[i]->key->str) == 4)
 		{
-			get_dodeca(o, o->size);
+			get_dodecahedron(o, o->size);
 			if (prerotate(o, obj->pair[i]->value, 69) == false)
 				return (false);
 		}
