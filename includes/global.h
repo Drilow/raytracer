@@ -20,7 +20,7 @@
 # include <stdbool.h>
 # include <gtk/gtk.h>
 # define REFLEX_DEPTH 1
-# define ANTIALIASING 1
+# define ANTIALIASING 0
 # define AA_ITERATIONS 4
 # define AA_LOWER_THRESHOLD 0.9
 # define AA_UPPER_THRESHOLD 0.1

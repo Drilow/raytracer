@@ -163,6 +163,7 @@ static t_rpoint		reflected_vector(t_rpoint v, t_rpoint normal)
 	rv.y = v.y - tmp.y;
 	rv.z = v.z - tmp.z;
 	return (rv);
+	//return (v);
 }
 
 static void			reflexion(t_rt *r, t_ray ray, t_collision *c, int index)
@@ -180,7 +181,8 @@ static void			reflexion(t_rt *r, t_ray ray, t_collision *c, int index)
 		{
 		//	printf("debug 3\n");
 			reflected_ray.p = tmp->p;
-			reflected_ray.vector = reflected_vector(ray.vector, c->normal);
+		//	reflected_ray.vector = reflected_vector(ray.vector, c->normal);
+			reflected_ray.vector = reflected_vector(ray.vector, tmp->normal);
 		//	printf("debug 4\n");
 			if (vlength(reflected_ray.vector) > 0)
 				tmp->reflected = ray_tracing(r, reflected_ray, index - 1);

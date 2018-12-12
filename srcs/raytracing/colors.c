@@ -21,7 +21,8 @@ static double		angle_factor(t_collision c, t_rpoint lsrc)
 	double			angle;
 	double			af;
 
-	angle = vangle(get_vector(c.p, lsrc), normal_collision_vector(c));
+	//angle = vangle(get_vector(c.p, lsrc), normal_collision_vector(c));
+	angle = vangle(get_vector(c.p, lsrc), c.normal);
 	if (angle < 0 || angle > PI)
 		return (0);
 	else if (angle > (PI / 2) && c.o->type == 2)
@@ -77,8 +78,8 @@ static t_rpoint		color_to_add(t_rpoint oclr, t_rgb lclr, double af)
 	t_rpoint		tmp;
 	t_rpoint		lclr_factors;
 	t_rpoint		cta;
-
 	lclr_factors.x = (double)lclr.r / rgb_min(lclr);
+
 	lclr_factors.y = (double)lclr.g / rgb_min(lclr);
 	lclr_factors.z = (double)lclr.b / rgb_min(lclr);
 	tmp = set_rpoint((oclr.x * (double)lclr.r), \
@@ -182,10 +183,13 @@ static t_rgb		average_color(t_rgb c1, t_rgb c2, unsigned int trans)
 {
 	t_rgb			new;
 
-	new.r = (c1.r * (255 - trans) + c2.r * trans) / 255;
-	new.g = (c1.g * (255 - trans) + c2.g * trans) / 255;
-	new.b = (c1.b * (255 - trans) + c2.b * trans) / 255;
+	//printf("%d\n", trans);
+	new.r = (unsigned int)((double)((double)c1.r * (255 - (double)trans) + (double)c2.r * (double)trans) / 255);
+	new.b = (unsigned int)((double)((double)c1.b * (255 - (double)trans) + (double)c2.b * (double)trans) / 255);
+	new.g = (unsigned int)((double)((double)c1.g * (255 - (double)trans) + (double)c2.g * (double)trans) / 255);
 	new.trans = 0;
+	//if (new.r == 0 && new.g == 0 && new.b == 0)
+	//	printf("c1 : %d, %d, %d  c2 : %d, %d, %d  trans : %d\n", c1.r, c1.g, c1.b, c2.r, c2.g, c2.b, trans);
 	return (new);
 }
 
@@ -197,7 +201,7 @@ t_rgb				get_ray_color(t_rt *r, t_collision *c)
 	t_point			checker;
 
 	if (c == NULL)
-		return (ft_rgb(0, 0, 0, 0));
+		return (ft_rgb(255, 255, 255, 0));
 	checker.x = -1;
 	checker.y = -1;
 	tmp_color = get_color(r, *c);
@@ -209,7 +213,7 @@ t_rgb				get_ray_color(t_rt *r, t_collision *c)
 //	if (c->o->color.trans > 0)
 //        color = average_color(color, get_ray_color(r, c->next), c->o->color.trans);
 // reflexion :
-	if (c->o->color.trans > 0)
-        color = average_color(color, get_ray_color(r, c->reflected), c->o->color.trans);
+	if (c->o->color.trans > 0 && c->reflected != NULL)
+       color = average_color(color, get_ray_color(r, c->reflected), c->o->color.trans);
 	return (color);
 }
