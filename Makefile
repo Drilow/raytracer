@@ -77,6 +77,7 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)parser/parse_objfile.c		\
 		$(SRCPATH)parser/parse_cub.c		\
 		$(SRCPATH)parser/parse_tetra.c		\
+		$(SRCPATH)parser/parse_dodeca.c		\
 		$(SRCPATH)parser/parse_obj_file.c		\
 		$(SRCPATH)objects/camera.c		\
 		$(SRCPATH)objects/plane.c		\

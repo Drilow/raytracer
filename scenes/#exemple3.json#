@@ -38,6 +38,13 @@
 					"INF":false,
 					"color":[75,60,150,0]
 				},
+				{https://github.com/Drilow/raytracer
+					"type":"dodeca",
+					"pos":[4,-6,6],
+					"size":4,
+					"color":[100,100,100,0],
+					"rotate":[0,0,0]
+				},
 				{
 					"type":"cube",
 					"pos":[-8,-2,28],

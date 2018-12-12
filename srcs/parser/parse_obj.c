@@ -84,7 +84,7 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 	static t_check_obj	check[9] = {{&get_sphere_inf, 4},
 	{&get_plane_inf, 5}, {&get_cone_inf, 7}, {&get_cyl_inf, 7},
 	{&get_cube_inf, 5}, {&get_tetra_inf, 5}, {&get_poly_objinf, 6},
-	{&get_pyra_inf, 5}};
+	{&get_pyra_inf, 5}, {&get_dod_inf, 5}};
 
 	if (list->value[num] == NULL || list->value[num]->type != 4)
 		return (false);
