@@ -16,15 +16,28 @@
 
 extern t_global g_global;
 
+/*
+static double		mod_pi(double angle)
+{
+	if (angle < 0)
+		angle = -angle;
+	while (angle > PI)
+		angle = angle - PI;
+	return (angle);
+}
+*/
+
 static double		angle_factor(t_collision c, t_rpoint lsrc)
 {
 	double			angle;
 	double			af;
 
-	angle = vangle(get_vector(c.p, lsrc), normal_collision_vector(c));
+//	angle = vangle(get_vector(c.p, lsrc), normal_collision_vector(c));
+	angle = vangle(get_vector(c.p, lsrc), c.normal);
+	//angle = mod_pi(angle);
 	if (angle < 0 || angle > PI)
 		return (0);
-	else if (angle > (PI / 2) && c.o->type == 2)
+	else if (angle > (PI / 2) && (c.o->type == 2 || c.o->type == 6 || c.o->type / 10 == 6))
 		angle = PI - angle;
 	else if (angle > (PI / 2))
 		return (0);

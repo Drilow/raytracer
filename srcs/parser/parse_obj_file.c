@@ -386,8 +386,8 @@ static	t_vertex		*add_t_face(int fnb, double size)
 		face->next->next->p = set_rpoint(-size / 2, -h, -h);
 	}
 	face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
-	if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
-		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
+	//if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
+//		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, -face->pl.vector.z);
 	return (face);
 }
 
@@ -505,7 +505,7 @@ static void				get_dodecahedron_vertices(t_rpoint *p, double size)
 	p[12] = set_rpoint(0, -a * size, b * size);
 	p[13] = set_rpoint(size, size, size);
 	p[14] = set_rpoint(size, size, -size);
-	p[15] = set_rpoint(-size, size, size);
+	p[15] = set_rpoint(-size, size, -size);
 	p[16] = set_rpoint(-size, size, size);
 	p[17] = set_rpoint(size, -size, -size);
 	p[19] = set_rpoint(-size, -size, size);
@@ -620,16 +620,18 @@ bool					get_dodecahedron(t_obj *d, double size)
 	t_poly_obj			*o;
 	int					i;
 	t_rpoint			v[21];
-	t_rpoint			faces[12][5];
-
+	//t_rpoint			faces[12][5];
+	t_rpoint			*faces[12];
+	
 	printf("==> get_dodecahedron\n");
 	i = -1;
+	while (++i < 12)
+		faces[i] = (t_rpoint *)malloc(sizeof(t_rpoint) * 5);
 	d->obj = malloc_po();
 	o = d->obj;
-	o->max_d = 2 * size;
-
+	o->max_d = 4 * size;
 	get_dodecahedron_vertices(v, size);
-	get_dodecahedron_faces(v, (t_rpoint **)faces);
+	get_dodecahedron_faces(v, faces);
 	i = -1;
 	while (++i < 12)
 	{
@@ -640,5 +642,8 @@ bool					get_dodecahedron(t_obj *d, double size)
 			o = o->next;
 		}
 	}
+	i = -1;
+	while (++i < 12)
+		free(faces[i]);
 	return (true);
 }
