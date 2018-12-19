@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:52 by adleau            #+#    #+#             */
-/*   Updated: 2018/10/15 14:26:03 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/19 13:12:18 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void			destroy_scene(void)
 	t_obj			*to_free;
 	t_obj			*tmp;
 
-//	init_rt();
 	to_free = g_global.r->objects;
 	while (to_free)
 	{

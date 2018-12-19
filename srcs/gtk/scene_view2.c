@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/05 18:31:59 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/12/19 13:17:56 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,18 +112,18 @@ void					init_scene_view(void)
 	gtk_window_set_deletable(GTK_WINDOW(SCENE_VIEW.win), FALSE);
 	//gtk_window_set_position(GTK_WINDOW(SCENE_VIEW.win), GTK_WIN_POS_MOUSE);
 	SCENE_VIEW.store = gtk_tree_store_new(N_COLUMNS, G_TYPE_STRING,
-										G_TYPE_DOUBLE, G_TYPE_DOUBLE,
-										G_TYPE_DOUBLE, G_TYPE_BOOLEAN,
-										G_TYPE_BOOLEAN, G_TYPE_POINTER, -1);
+	G_TYPE_DOUBLE, G_TYPE_DOUBLE, G_TYPE_DOUBLE, G_TYPE_BOOLEAN,
+	G_TYPE_BOOLEAN, G_TYPE_POINTER, -1);
 	populate_tree_model(SCENE_VIEW.store);
-	SCENE_VIEW.tree = gtk_tree_view_new_with_model(GTK_TREE_MODEL(SCENE_VIEW.store));
+	SCENE_VIEW.tree =
+	gtk_tree_view_new_with_model(GTK_TREE_MODEL(SCENE_VIEW.store));
 	g_object_unref(G_OBJECT(SCENE_VIEW.store));
 	render = gtk_cell_renderer_text_new();
 	g_object_set(G_OBJECT(render), "foreground", "red", NULL);
 	append_column_with_text(SCENE_VIEW.tree, "Type", render, TYPE_COLUMN);
 	render = gtk_cell_renderer_text_new();
 	g_object_set(render, "weight", PANGO_WEIGHT_BOLD, "weight-set",
-										TRUE, NULL);
+	TRUE, NULL);
 	append_column_with_text(SCENE_VIEW.tree, "Pos X", render, POS_X_COLUMN);
 	append_column_with_text(SCENE_VIEW.tree, "Pos Y", render, POS_Y_COLUMN);
 	append_column_with_text(SCENE_VIEW.tree, "Pos Z", render, POS_Z_COLUMN);

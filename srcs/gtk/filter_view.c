@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/30 19:51:37 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/19 12:55:46 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void				handle_filter_validation(void)
 	{
 		free(GTKMGR.buf);
 		GTKMGR.buf = NULL;
-		GTKMGR.buf = ft_ustrdup(GTKMGR.saved, WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+		GTKMGR.buf =
+		ft_ustrdup(GTKMGR.saved,
+		WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 		gtk_widget_destroy(FILTER_VIEW.win);
 	}
 }
@@ -74,6 +76,10 @@ void				handle_filters(GtkButton *button)
 
 void				end_filters(void)
 {
+	gtk_widget_set_tooltip_text(FILTER_VIEW.bw_button, "Black & White");
+	g_signal_connect(G_OBJECT(FILTER_VIEW.bw_button), "clicked",
+	G_CALLBACK(handle_filters), NULL);
+	gtk_button_set_image(GTK_BUTTON(FILTER_VIEW.bw_button), FILTER_VIEW.bw_img);
 	gtk_container_add(GTK_CONTAINER(FILTER_VIEW.buttonbox),
 	FILTER_VIEW.bw_button);
 	gtk_container_add(GTK_CONTAINER(FILTER_VIEW.buttonbox),
@@ -89,7 +95,8 @@ void				end_filters(void)
 	FILTER_VIEW.sepia_img);
 	gtk_container_add(GTK_CONTAINER(FILTER_VIEW.buttonbox),
 	FILTER_VIEW.sepia_button);
-	gtk_button_set_image(GTK_BUTTON(FILTER_VIEW.reversed_button), FILTER_VIEW.reversed_img);
+	gtk_button_set_image(GTK_BUTTON(FILTER_VIEW.reversed_button),
+	FILTER_VIEW.reversed_img);
 	handle_filter_validation();
 }
 
@@ -98,7 +105,8 @@ void				filter_win(void)
 	GtkWidget		*content_area;
 	unsigned char	*tmp;
 
-	if (!(tmp = ft_ustrdup(GTKMGR.buf, WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
+	if (!(tmp = ft_ustrdup(GTKMGR.buf,
+	WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
 		exit(1); //to fix
 	FILTER_VIEW.bw_img = gtk_image_new_from_file("uiconfig/bw.png");
 	FILTER_VIEW.sepia_img = gtk_image_new_from_file("uiconfig/sepia.png");
@@ -118,9 +126,5 @@ void				filter_win(void)
 	0, 0, 4, 1);
 	FILTER_VIEW.bw_button = gtk_button_new();
 	FILTER_VIEW.reversed_button = gtk_button_new();
-	gtk_widget_set_tooltip_text(FILTER_VIEW.bw_button, "Black & White");
-	g_signal_connect(G_OBJECT(FILTER_VIEW.bw_button), "clicked",
-	G_CALLBACK(handle_filters), NULL);
-	gtk_button_set_image(GTK_BUTTON(FILTER_VIEW.bw_button), FILTER_VIEW.bw_img);
 	end_filters();
 }

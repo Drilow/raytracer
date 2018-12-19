@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:18:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/29 13:49:32 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/19 12:59:21 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,20 @@ void				add_view(void)
 	if (!(o = (t_obj*)malloc(sizeof(t_obj))))
 		exit(1); // to fix
 	o->type = -5;
+	o->enabled = true;
 	edit_win(o);
 }
 
 void				handle_main_view(void)
 {
-	GTKMGR.ui.main_view.add_img
-	= gtk_image_new_from_file("uiconfig/plus-sign-in-a-black-circle.png");
-	GTKMGR.ui.main_view.filters_img
-	= gtk_image_new_from_file("uiconfig/filter.png");
-	GTKMGR.ui.main_view.select_img
-	= gtk_image_new_from_file("uiconfig/new-file.png");
-	GTKMGR.ui.main_view.export_img
-	= gtk_image_new_from_file("uiconfig/scale-symbol.png");
+	GTKMGR.ui.main_view.add_img =
+	gtk_image_new_from_file("uiconfig/plus-sign-in-a-black-circle.png");
+	GTKMGR.ui.main_view.filters_img =
+	gtk_image_new_from_file("uiconfig/filter.png");
+	GTKMGR.ui.main_view.select_img =
+	gtk_image_new_from_file("uiconfig/new-file.png");
+	GTKMGR.ui.main_view.export_img =
+	gtk_image_new_from_file("uiconfig/scale-symbol.png");
 	GTKMGR.ui.main_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(GTKMGR.ui.main_view.win),
 	GTK_WIN_POS_CENTER);
@@ -48,8 +49,8 @@ void				handle_main_view(void)
 	GTKMGR.ui.main_view.grid = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.win),
 	GTKMGR.ui.main_view.grid);
-	GTKMGR.ui.main_view.buttonbox
-	= gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
+	GTKMGR.ui.main_view.buttonbox =
+	gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
 	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.grid),
 	GTKMGR.ui.main_view.buttonbox);
 	GTKMGR.ui.main_view.list_button = gtk_button_new();

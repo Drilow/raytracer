@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/30 19:27:45 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/19 12:39:32 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ void			handle_drawing(void)
 		exit(1); // to fix
 	draw_image();
 	if (PIXMAP)
-	{
 		cairo_surface_destroy(PIXMAP);
-	}
 	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf,
 	CAIRO_FORMAT_RGB24, WIN_W, WIN_H,
 	cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
@@ -68,8 +66,8 @@ void			handle_base_view(void)
 	"Open Scene");
 	g_signal_connect(G_OBJECT(g_global.base_view.open_button),
 	"clicked", G_CALLBACK(open_file), NULL);
-	g_global.base_view.exit_button
-	= gtk_button_new_from_icon_name("application-exit", GTK_ICON_SIZE_BUTTON);
+	g_global.base_view.exit_button =
+	gtk_button_new_from_icon_name("application-exit", GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_label(GTK_BUTTON(g_global.base_view.exit_button), "Exit");
 	gtk_button_set_always_show_image(GTK_BUTTON(g_global.base_view.exit_button),
 	true);

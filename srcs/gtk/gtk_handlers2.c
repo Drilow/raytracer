@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/07 12:54:38 by mabessir         ###   ########.fr       */
+/*   Updated: 2018/12/19 12:52:43 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,6 @@ void				redraw(bool display)
 		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf,
 		CAIRO_FORMAT_RGB24,
 		WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
-		if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-			exit(1); // to fix
-		cairo_surface_mark_dirty(PIXMAP);
-		gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
-		PIXMAP);
 	}
 	else
 	{
@@ -104,10 +99,10 @@ void				redraw(bool display)
 		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.saved,
 		CAIRO_FORMAT_RGB24,
 		WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
-		if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-			exit(1); // to fix
-		cairo_surface_mark_dirty(PIXMAP);
-		gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
-		PIXMAP);
 	}
+	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
+		exit(1); // to fix
+	cairo_surface_mark_dirty(PIXMAP);
+	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
+	PIXMAP);
 }

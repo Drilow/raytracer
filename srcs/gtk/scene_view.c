@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/05 18:30:07 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/12/19 13:16:49 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@
 extern t_global		g_global;
 
 void					append_column_with_text(GtkWidget *tree, char *text,
-	GtkCellRenderer *renderer, int en_column)
+GtkCellRenderer *renderer, int en_column)
 {
 	GtkTreeViewColumn	*column;
 
 	column = gtk_tree_view_column_new_with_attributes(text, renderer,
-													"text", en_column,
-													NULL);
+	"text", en_column, NULL);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(tree), column);
 }
 
@@ -46,7 +45,8 @@ bool					go_throu_lights(t_light *curr)
 	return (false);
 }
 
-static void				checked_row(__attribute__((unused))GtkCellRendererToggle *cell, gchar *path_str)
+static void				checked_row(
+GtkCellRendererToggle __attribute__((unused)) *cell, gchar *path_str)
 {
 	GtkTreeIter			iter;
 	GtkTreePath			*path;
@@ -107,20 +107,16 @@ void					scene_win(void)
 	g_signal_connect(G_OBJECT(render), "toggled", G_CALLBACK(checked_row),
 		NULL);
 	column = gtk_tree_view_column_new_with_attributes("Visible",
-													render,
-													"active", CHECKED_COLUMN,
-													NULL);
+	render, "active", CHECKED_COLUMN, NULL);
 	gtk_tree_view_column_add_attribute(column, render, "activatable",
-		CHECKED_ACTIVE);
+	CHECKED_ACTIVE);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(SCENE_VIEW.tree), column);
 	g_signal_connect(G_OBJECT(SCENE_VIEW.tree), "row-activated",
 	G_CALLBACK(select_handler), NULL);
 	gtk_container_add(GTK_CONTAINER(SCENE_VIEW.win), SCENE_VIEW.tree);
 	SCENE_VIEW.fixed = gtk_fixed_new();
 	gtk_fixed_put(GTK_FIXED(SCENE_VIEW.fixed),
-               SCENE_VIEW.win,
-               200,
-               200);
+	SCENE_VIEW.win, 200, 200);
 	gtk_widget_show_all(SCENE_VIEW.win);
 	return ;
 }
