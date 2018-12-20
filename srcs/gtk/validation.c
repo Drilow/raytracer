@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/20 11:30:25 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/20 11:42:30 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void				validate_edit(t_obj *o)
 	o->color.r = (unsigned char)(c->red * 255);
 	o->color.g = (unsigned char)(c->green * 255);
 	o->color.b = (unsigned char)(c->blue * 255);
-	o->color.trans = (unsigned char)(c->alpha * 255);
+	o->color.trans = (unsigned char)(c->alpha * 255) - 255;
 	o->position.x =
 	gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
 	o->position.y =
