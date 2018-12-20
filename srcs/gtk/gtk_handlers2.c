@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/19 12:52:43 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/20 11:32:45 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void				get_color_values(t_rgb col, GdkRGBA *c)
 	c->red = (gdouble)(col.r) / 255;
 	c->green = (gdouble)(col.g) / 255;
 	c->blue = (gdouble)(col.b) / 255;
-	c->alpha = 1;
+	c->alpha = (gdouble)col.trans / 255;
 }
 
 void				set_for_cone(t_obj *o)
