@@ -610,8 +610,7 @@ static  t_vertex        *add_dode_face(t_rpoint **f, int i)
 
 	face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 	if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
-		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
-// ATTENTION (au desssus) -face->pl.vector.z ??
+		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, -face->pl.vector.z);
 	return (face);
 }
 
@@ -623,7 +622,6 @@ bool					get_dodecahedron(t_obj *d, double size)
 	//t_rpoint			faces[12][5];
 	t_rpoint			*faces[12];
 	
-	printf("==> get_dodecahedron\n");
 	i = -1;
 	while (++i < 12)
 		faces[i] = (t_rpoint *)malloc(sizeof(t_rpoint) * 5);
