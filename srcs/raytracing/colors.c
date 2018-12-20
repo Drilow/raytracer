@@ -35,10 +35,12 @@ static double		angle_factor(t_collision c, t_rpoint lsrc)
 //	angle = vangle(get_vector(c.p, lsrc), normal_collision_vector(c));
 	angle = vangle(get_vector(c.p, lsrc), c.normal);
 	//angle = mod_pi(angle);
+	if (c.o->type == 2 || c.o->type == 6 || c.o->type / 10 == 6)
+		angle = PI - angle;
 	if (angle < 0 || angle > PI)
 		return (0);
-	else if (angle > (PI / 2) && (c.o->type == 2 || c.o->type == 6 || c.o->type / 10 == 6))
-		angle = PI - angle;
+	//else if (angle > (PI / 2) && (c.o->type == 2 || c.o->type == 6 || c.o->type / 10 == 6))
+	//	angle = PI - angle;
 	else if (angle > (PI / 2))
 		return (0);
 	af = ((PI / 2) - angle) / (PI / 2);

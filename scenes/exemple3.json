@@ -56,7 +56,7 @@
 				},
 				{
 					"type":"pyramide",
-					"pos":[-2,0,50],
+					"pos":[-4,12,50],
 					"base_size":10,
 					"height":5,
 					"color":[150,50,100,0]

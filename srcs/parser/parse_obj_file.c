@@ -453,7 +453,7 @@ static  t_vertex        *add_p_face(int fnb, double bsize, double h)
     }
 	face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
 	if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
-		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
+		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, -face->pl.vector.z);
 // ATTENTION (au desssus) -face->pl.vector.z ??
 	return (face);
 }
