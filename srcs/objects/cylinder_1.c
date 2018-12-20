@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <objects/object.h>
-
+#include <global.h>
 
 static bool		bc_init(t_cylinder *c, t_plane *pl1, t_plane *pl2)
 {
@@ -89,7 +89,7 @@ bool				cylinder_collision(t_ray ray, t_obj *c, t_rpoint *p)
 
 	bcol = base_collision(ray, (t_cylinder *)c->obj, c->position, &bcollision);
 	eq_factors = get_cyc_eq_factors(ray, (t_cylinder *)c->obj, c->position);
-	if (find_collisions(eq_factors, &solutions) == false || \
+	if (find_collisions(eq_factors, &solutions, MIN_DISTANCE) == false || \
 		between_bases(ray, (t_cylinder *)c->obj, c->position, &solutions) == false)
 	{
 		if (bcol == false)

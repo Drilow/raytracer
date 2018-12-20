@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <rt.h>
+#include <global.h>
 #include <maths/transformations.h>
 
 static t_rpoint		get_eq_factors(t_ray ray, t_obj *sph)
@@ -43,13 +44,13 @@ bool				sphere_collision(t_ray ray, t_obj *s, t_rpoint *p)
 	eq_factors = get_eq_factors(ray, s);
 	if (ft_solve_equation(eq_factors, &solutions) == false)
 		return (false);
-	if (solutions.x < 0)
+	if (solutions.x < MIN_DISTANCE)
 	{
-		if (solutions.y < 0)
+		if (solutions.y < MIN_DISTANCE)
 			return (false);
 		solutions.x = solutions.y;
 	}
-	else if (solutions.y < 0)
+	else if (solutions.y < MIN_DISTANCE)
 		solutions.y = solutions.x;
 	*p = closer(ray.p, new_point(ray.p, ray.vector, solutions.x), \
 		new_point(ray.p, ray.vector, solutions.y));

@@ -50,17 +50,17 @@ t_bool			set_camera(t_rtv1 *r, char *s)
 	return (true);
 }
 
-t_bool			find_collisions(t_rpoint factors, t_dpoint *solutions)
+t_bool			find_collisions(t_rpoint factors, t_dpoint *solutions, double minimum)
 {
 	if (ft_solve_equation(factors, solutions) == false)
 		return (false);
-	if (solutions->x < 0)
+	if (solutions->x < minimum)
 	{
-		if (solutions->y < 0)
+		if (solutions->y < minimum)
 			return (false);
 		solutions->x = solutions->y;
 	}
-	else if (solutions->y < 0)
+	else if (solutions->y < minimum)
 		solutions->y = solutions->x;
 	return (true);
 }

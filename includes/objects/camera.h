@@ -15,7 +15,7 @@
 
 
 bool			set_camera(t_rpoint angle);
-bool			find_collisions(t_rpoint factors, t_dpoint *solutions);
+bool			find_collisions(t_rpoint factors, t_dpoint *solutions, double minimum);
 t_ray			get_ray(t_rpoint p, t_rpoint vector);
 
 #endif

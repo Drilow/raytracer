@@ -14,6 +14,7 @@
 #include <objects/object.h>
 #include <geometry/geometry.h>
 #include <libft.h>
+#include <global.h>
 
 static bool	base_collision(t_ray ray, t_obj *c, t_rpoint *p)
 {
@@ -78,7 +79,7 @@ bool			cone_collision(t_ray ray, t_obj *c, t_rpoint *p)
 //	printf("object ptr %p id %d\n", c, c->type, ((t_cone*)c->obj));
 	if (get_cc_eq_factors(ray, c, &eq_factors) == false)
 		return (false);
-	if (find_collisions(eq_factors, &solutions) == false)
+	if (find_collisions(eq_factors, &solutions, MIN_DISTANCE) == false)
 		return (false);
 	if (check_solutions(ray, c, &solutions) == false)
 		return (false);

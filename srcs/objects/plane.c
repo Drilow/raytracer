@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <objects/object.h>
+#include <global.h>
 
 bool			plane_collision(t_ray ray, t_plane *pl, t_rpoint pos, t_rpoint *p)
 {
@@ -28,7 +29,7 @@ bool			plane_collision(t_ray ray, t_plane *pl, t_rpoint pos, t_rpoint *p)
 	if (tmp == 0)
 		return (false);
 	solution = (scalar(vpl, pos) - scalar(vpl, c)) / tmp;
-	if (solution <= 0)
+	if (solution < MIN_DISTANCE)
 		return (false);
 	*p = new_point(c, ray.vector, solution);
 	return (true);

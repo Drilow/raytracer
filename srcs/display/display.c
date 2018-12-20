@@ -36,13 +36,13 @@ static void		draw_image_core2(t_point p, t_rt *r)
 	{
 //		g_global.r->checker[p.y][p.x] = NULL;
 //		if (p.x > 376 && p.x % THREADS_NB == 0)
-		tmp = ray_tracing(r, g_global.r->rays[p.y][p.x]);
+		tmp = ray_tracing(r, g_global.r->rays[p.y][p.x], REFLEX_DEPTH);
 //		draw_px(GTKMGR.buf, p.x, p.y,			\
 //				get_ray_color(r, tmp, false));
 //		if (tmp != NULL)
 //			g_global.r->checker[p.y][p.x] = tmp->o;
 //		if (p.x > 376 && p.x % THREADS_NB == 0)
-		if (tmp->o != NULL)
+		if (tmp != NULL && tmp->o != NULL)
 		{
 //				if ((p.x == 361 || p.x == 360) && p.y == 209)
 //				if (p.x == 360 && p.y == 209)

@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:21:23 by alacrois          #+#    #+#             */
-/*   Updated: 2018/10/24 17:52:06 by adleau           ###   ########.fr       */
+/*   Updated: 2018/11/30 17:59:28 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ static double		angle_factor(t_collision c, t_rpoint lsrc)
 	double			angle;
 	double			af;
 
-	angle = vangle(get_vector(c.p, lsrc), normal_collision_vector(c));
+	//angle = vangle(get_vector(c.p, lsrc), normal_collision_vector(c));
+	angle = vangle(get_vector(c.p, lsrc), c.normal);
+	if (c.o->type == 2 || c.o->type == 6 || c.o->type / 10 == 6)
+		angle = PI - angle;
 	if (angle < 0 || angle > PI)
 		return (0);
-//		return (AMBIENT_LIGHT);
-	else if (angle > (PI / 2) && c.o->type == 2)
-		angle = PI - angle;
+	//else if (angle > (PI / 2) && c.o->type == 2)
+	//	angle = PI - angle;
 	else if (angle > (PI / 2))
 		return (0);
-//		return (AMBIENT_LIGHT);
 	af = ((PI / 2) - angle) / (PI / 2);
 	return (af);
 }
@@ -48,11 +49,21 @@ static t_rpoint		average(t_rpoint a, t_rpoint b, double f)
 
 static double		rgb_min(t_rgb c)
 {
-	if (c.r > c.g)
-		c.r = c.g;
-	if (c.r > c.b)
-		c.r = c.b;
-	return ((double)c.r);
+	double			min;
+
+	min = c.r;
+	if (min == 0)
+		min = c.g;
+	if (min == 0)
+		min = c.b;
+	if (min == 0)
+		return (1);
+	if (c.g < min && c.g != 0)
+		min = c.g;
+	if (c.b < min && c.b != 0)
+		min = c.b;
+	//return ((double)c.r);
+	return (min);
 }
 
 static double		rpoint_max(t_rpoint p)
@@ -102,12 +113,13 @@ static t_rpoint		add_color(t_rpoint c, t_rpoint oclr, t_light *l, double af)
 	return (new_c);
 }
 
-static t_rpoint		get_color(t_rt *r, t_collision c, bool debug)
+static t_rpoint		get_color(t_rt *r, t_collision c)
 {
 	t_rpoint		color;
 	t_rpoint		ocolor;
 	t_obj			*otmp;
 	t_light			*l;
+	t_light			tmpl;
 	double			afactor;
 	t_collision		tmpc;
 
@@ -117,31 +129,29 @@ static t_rpoint		get_color(t_rt *r, t_collision c, bool debug)
 	l = r->lights;
 	while (l != NULL)
 	{
+		tmpl = *l;
 		if (l->enabled == true)
 		{
 			otmp = r->objects;
 			afactor = angle_factor(c, l->source);
-			if (debug == true)
-				printf("afactor = %f\n", afactor);
 			while (otmp != NULL)
 			{
 				tmpc.o = otmp;
-				if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc, debug) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
+				if (otmp != c.o && collision(get_ray(c.p, get_vector(c.p, l->source)), &tmpc) == true && deltasq(c.p, l->source) > deltasq(c.p, tmpc.p))
 				{
-					afactor = 0;
-//				if (debug == true)
-//				{
-//					printf("collision ! obj type = %d\n", otmp->type);
-//				}
+//					afactor = 0;
+
+					tmpl.color.r = (double)tmpl.color.r * ((double)otmp->color.trans / 255);
+					tmpl.color.g = (double)tmpl.color.g * ((double)otmp->color.trans / 255);
+					tmpl.color.b = (double)tmpl.color.b * ((double)otmp->color.trans / 255);
+
 				}
 				otmp = otmp->next;
 			}
-			color = add_color(color, ocolor, l, afactor);
+			color = add_color(color, ocolor, &tmpl, afactor);
 		}
 		l = l->next;
 	}
-//	if (debug == true)
-//		printf("\n");
 	return (color);
 }
 
@@ -170,23 +180,35 @@ static t_rgb		get_final_color(t_rpoint c, double df)
 	return (color);
 }
 
-t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug)
+
+static t_rgb		average_color(t_rgb c1, t_rgb c2, unsigned int trans)
+{
+	t_rgb			new;
+
+	new.r = (c1.r * (255 - trans) + c2.r * trans) / 255;
+	new.g = (c1.g * (255 - trans) + c2.g * trans) / 255;
+	new.b = (c1.b * (255 - trans) + c2.b * trans) / 255;
+	new.trans = 0;
+	return (new);
+}
+
+t_rgb				get_ray_color(t_rt *r, t_collision *c)
 {
 	t_rgb			color;
 	t_rpoint		tmp_color;
 	double			distance_factor;
 	t_point			checker;
 
+	if (c == NULL)
+		return (ft_rgb(0, 0, 0, 0));
 	checker.x = -1;
 	checker.y = -1;
-	tmp_color = get_color(r, c, debug);
-//	if (debug == true)
-//		printf("get_ray_color : rgb(%f, %f, %f)\n", tmp_color.x, tmp_color.y, tmp_color.z);
-	distance_factor = deltasq(r->cam_position, c.p) / LIGHT_DISTANCE_FACTOR;
+	tmp_color = get_color(r, *c);
+	distance_factor = deltasq(r->cam_position, c->p) / LIGHT_DISTANCE_FACTOR;
 //	if (distance_factor < 1)
 		distance_factor = 1;
 	color = get_final_color(tmp_color, distance_factor);
-//	if (c.o->type == 2 && color.g < 50)
-//		printf("Olalala !\n");
+	if (c->o->color.trans > 0)
+        color = average_color(color, get_ray_color(r, c->next), c->o->color.trans);
 	return (color);
 }
