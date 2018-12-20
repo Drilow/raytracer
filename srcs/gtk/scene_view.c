@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/19 13:16:49 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/20 16:58:36 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ void					scene_win(void)
 	G_CALLBACK(select_handler), NULL);
 	gtk_container_add(GTK_CONTAINER(SCENE_VIEW.win), SCENE_VIEW.tree);
 	SCENE_VIEW.fixed = gtk_fixed_new();
-	gtk_fixed_put(GTK_FIXED(SCENE_VIEW.fixed),
-	SCENE_VIEW.win, 200, 200);
+//	gtk_fixed_put(GTK_FIXED(SCENE_VIEW.fixed),
+//SCENE_VIEW.win, 200, 200);
 	gtk_widget_show_all(SCENE_VIEW.win);
 	return ;
 }
