@@ -70,5 +70,6 @@ bool			get_inf(t_obj *o, t_json_value *val);
 bool			get_pyra_inf(t_json_object *obj);
 bool			get_pyramid(t_obj *p, double base_size, double height);
 bool			get_dodecahedron(t_obj *d, double size);
+bool			get_dod_inf(t_json_object *obj);
 
 #endif

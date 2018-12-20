@@ -30,6 +30,7 @@ void					free_collisions(t_collision *c)
 	}
 }
 
+/*
 //t_bool				collision(t_ray ray, t_obj *o, t_rpoint *p)
 bool					collision(t_ray ray, t_collision *c)
 {
@@ -59,6 +60,40 @@ bool					collision(t_ray ray, t_collision *c)
 			 poly_obj_collision(ray, (t_poly_obj *)o->obj, c) == true)
         return (true);
 	return (false);
+}
+*/
+
+bool					collision(t_ray ray, t_collision *c)
+{
+	t_obj				*o;
+	t_rpoint			*p;
+
+	o = c->o;
+	p = &(c->p);
+
+	if (o->enabled == false)
+		return (false);
+	if (o->type == 1 && sphere_collision(ray, o, p) == false)
+		return (false);
+	else if (o->type == 2 && \
+			 plane_collision(ray, (t_plane *)o->obj, o->position, p) == false)
+		return (false);
+	else if (o->type == 3 && \
+			 cone_collision(ray, o, p) == false)
+		return (false);
+	else if (o->type == 4 && \
+			 cylinder_collision(ray, o, p) == false)
+		return (false);
+	else if ((o->type == 6 || (o->type / 10) == 6) && \
+			 poly_obj_collision(ray, (t_poly_obj *)o->obj, c) == false)
+        return (false);
+	else if (o->type < 1)
+		return (false);
+	c->normal = normal_collision_vector(*c);
+	if ((o->type == 6 || (o->type / 10) == 6 || o->type == 2) && \
+		(vangle(ray.vector, c->normal) > (PI / 2) || vangle(ray.vector, c->normal) < (-PI / 2)))
+		c->normal = set_rpoint(-c->normal.x, -c->normal.y, -c->normal.z);
+	return (true);
 }
 
 static t_collision	*add_collision(t_ray ray, t_collision *c, t_collision *tmpc)
