@@ -42,7 +42,7 @@
 					"type":"sphere",
 					"pos":[10,-6,26],
 					"radius":7,
-					"color":[100,100,100,255]
+					"color":[0,0,0,255]
 				},
 				{
 					"type":"cube",

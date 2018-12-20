@@ -36,6 +36,9 @@ static void		draw_image_core2(t_point p, t_rt *r)
 	{
 //		g_global.r->checker[p.y][p.x] = NULL;
 //		if (p.x > 376 && p.x % THREADS_NB == 0)
+		//if (p.x == 665 && p.y == 400)
+		//	tmp = ray_tracing(r, g_global.r->rays[p.y][p.x], REFLEX_DEPTH, true);
+		//else
 		tmp = ray_tracing(r, g_global.r->rays[p.y][p.x], REFLEX_DEPTH);
 //		draw_px(GTKMGR.buf, p.x, p.y,			\
 //				get_ray_color(r, tmp, false));
@@ -74,6 +77,8 @@ static void		draw_image_core2(t_point p, t_rt *r)
 			draw_px(GTKMGR.buf, p.x, p.y, ft_rgb(0, 0, 0, 0));
 //			if (p.x > 376 && p.x % THREADS_NB == 0)
 		}
+		//if (p.x == 665 && p.y == 400)
+		//	draw_px(GTKMGR.buf, p.x, p.y, ft_rgb(255, 0, 125, 0));
 //		if (p.x > 376 && p.x % THREADS_NB == 0)
 		free_collisions(tmp);
 //		if (p.x > 376 && p.x % THREADS_NB == 0)
