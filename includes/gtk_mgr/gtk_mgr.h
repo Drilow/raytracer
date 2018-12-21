@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/05 18:27:36 by Dagnear          ###   ########.fr       */
+/*   Updated: 2018/12/21 13:07:44 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ typedef struct				s_add_view
 	GtkWidget				*ok_button;
 	GtkWidget				*cancel_button;
 	GtkWidget				*color;
+	GtkWidget				*reflex_spin;
+	GtkWidget				*reflex_img;
 	t_switcher				sw;
 	GtkWidget				*file_check;
 	GtkWidget				*same;
@@ -113,6 +115,8 @@ typedef struct				s_add_view
 	GtkWidget				*cube_img;
 	GtkWidget				*tetra;
 	GtkWidget				*tetra_img;
+	GtkWidget				*dode;
+	GtkWidget				*dode_img;
 	GtkWidget				*file_opener;
 	char					*obj_file_path;
 }							t_add_view;

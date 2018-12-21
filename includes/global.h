@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/30 19:25:07 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/21 13:52:35 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdbool.h>
 # include <gtk/gtk.h>
 # define MIN_DISTANCE 0.00001
-# define REFLEX_DEPTH 4
+# define REFLEX_DEPTH 0
 # define ANTIALIASING 1
 # define AA_ITERATIONS 4
 # define AA_LOWER_THRESHOLD 0.9
