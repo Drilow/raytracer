@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/19 12:55:46 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 22:52:30 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void				handle_filter_validation(void)
 	r = gtk_dialog_run(GTK_DIALOG(FILTER_VIEW.win));
 	if (r == GTK_RESPONSE_ACCEPT)
 	{
+//		redraw(false);
 		gtk_widget_destroy(FILTER_VIEW.win);
 	}
 	else if (r == GTK_RESPONSE_REJECT)
@@ -37,6 +38,7 @@ void				handle_filter_validation(void)
 		ft_ustrdup(GTKMGR.saved,
 		WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 		gtk_widget_destroy(FILTER_VIEW.win);
+		redraw(true);
 	}
 }
 
@@ -47,6 +49,9 @@ void				deactivate_filter_buttons(GtkWidget *except)
 		GTK_STATE_FLAG_NORMAL, true);
 	if (&(FILTER_VIEW.sepia_button) != &except)
 		gtk_widget_set_state_flags(FILTER_VIEW.sepia_button,
+		GTK_STATE_FLAG_NORMAL, true);
+	if (&(FILTER_VIEW.reversed_button) != &except)
+		gtk_widget_set_state_flags(FILTER_VIEW.reversed_button,
 		GTK_STATE_FLAG_NORMAL, true);
 }
 
@@ -103,11 +108,11 @@ void				end_filters(void)
 void				filter_win(void)
 {
 	GtkWidget		*content_area;
-	unsigned char	*tmp;
+//	unsigned char	*tmp;
 
-	if (!(tmp = ft_ustrdup(GTKMGR.buf,
+	if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf,
 	WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
-		exit(1); //to fix
+	exit(1); //to fix
 	FILTER_VIEW.bw_img = gtk_image_new_from_file("uiconfig/bw.png");
 	FILTER_VIEW.sepia_img = gtk_image_new_from_file("uiconfig/sepia.png");
 	FILTER_VIEW.reversed_img = gtk_image_new_from_file("uiconfig/reversed.png");
