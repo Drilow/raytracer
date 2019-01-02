@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:47:04 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 18:23:34 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 21:51:16 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,13 @@ void				destroy_ui_for_poly(void)
 	gtk_widget_destroy(ADD_VIEW.file_check);
 	gtk_widget_destroy(ADD_VIEW.same);
 	gtk_widget_destroy(ADD_VIEW.from_template);
-	gtk_widget_destroy(ADD_VIEW.cube);
-	gtk_widget_destroy(ADD_VIEW.cube_img);
-	gtk_widget_destroy(ADD_VIEW.tetra);
-	gtk_widget_destroy(ADD_VIEW.tetra_img);
+	if (ADD_VIEW.cube_img)
+	{
+		gtk_widget_destroy(ADD_VIEW.cube);
+		gtk_widget_destroy(ADD_VIEW.tetra);
+		gtk_widget_destroy(ADD_VIEW.dode);
+		gtk_widget_destroy(ADD_VIEW.pyramid);
+	}
 }
 
 void				destroy_interface_for_type(int type)
