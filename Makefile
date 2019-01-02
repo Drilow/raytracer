@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2019/01/02 18:15:08 by adleau           ###   ########.fr        #
+#    Updated: 2019/01/02 20:05:44 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -107,16 +107,17 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-
 $(NAME): $(OBJ) $(INC)
+		@echo "$(VERT)~> [ Sources compiled. ]$(NCOL)"
 		make -C libft/
 		make -C Libjson/
 		@echo "$(VERT)~> [ libft library made. ]$(NCOL)"
-		$(CC) $(CFLAGS) ./libft/libft.a ./Libjson/libjson.a $(OBJ) -o $(NAME) -Iincludes/ $(LDFLAGS) -Ilibft/ -I./Libjson/includes -Llibft/ -L./Libjson/ -lft $(LIB)
+		@$(CC) $(CFLAGS) ./libft/libft.a ./Libjson/libjson.a $(OBJ) -o $(NAME) -Iincludes/ $(LDFLAGS) -Ilibft/ -I./Libjson/includes -Llibft/ -L./Libjson/ -lft $(LIB)
 		@echo "$(VERT)~> [ binary file '$(NAME)' made. ]$(NCOL)"
 
 %.o: %.c
-		$(CC) $(CFLAGS) $(LDLAGS) -o  $@ -c $< -Ilibft/ -ILibjson/includes -Iincludes/ $(LIB)
+		@echo "$(JAUN)~> [ Compiling sources, please wait. ]$(NCOL)"
+		@$(CC) $(CFLAGS) $(LDLAGS) -o  $@ -c $< -Ilibft/ -ILibjson/includes -Iincludes/ $(LIB)
 
 clean:
 		rm -rf $(OBJ)
@@ -127,14 +128,10 @@ clean:
 fclean: clean
 		rm -f $(NAME)
 		@echo "$(JAUN)~> [ binary file '$(NAME)' erased. ]$(NCOL)"
-		rm -fr ext
-		rm -fr ext/glfw
-		rm -fr ext/glew
-		rm -fr ext/SDL2
-		rm -fr ext/SDL2_Image
-		@echo "$(JAUN)~> [ glfw3 folder cleaned. ]$(NCOL)"
 		make fclean -C libft/
 		@echo "$(JAUN)~> [ libft cleaned. ]$(NCOL)"
+		make fclean -C Libjson/
+		@echo "$(JAUN)~> [ Libjson cleaned. ]$(NCOL)"
 
 re: fclean all
 

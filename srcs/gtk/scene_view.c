@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 18:16:54 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 19:54:28 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void					select_handler(GtkTreeView *tree, GtkTreePath *path)
 			outline_obj(((t_obj*)obj));
 			edit_win(((t_obj*)obj));
 		}
-		else
+		else if (go_throu_lights(((t_light*)obj)))
 			edit_light((t_light*)obj);
 	}
 }
