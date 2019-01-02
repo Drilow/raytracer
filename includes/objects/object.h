@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/04 16:55:58 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/02 22:07:25 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_obj
 	t_rpoint		position;
 	void			*obj;
 	t_rgb			color;
+	char			reflex;
 	double			size;
 	struct s_obj	*next;
 }					t_obj;
