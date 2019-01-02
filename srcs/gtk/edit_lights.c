@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 17:33:56 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 18:40:04 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 20:19:08 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,18 +106,18 @@ void				edit_light2(t_light *l)
 	handle_light_validation(l);
 }
 
-void				edit_light(t_light *l)
+void				edit_light(t_light *l, GtkWidget *parent)
 {
 	GtkWidget		*content_area;
 
 	init_light_view();
 	LIGHT_VIEW.translate_img = gtk_image_new_from_file("uiconfig/move.png");
-	LIGHT_VIEW.win = gtk_dialog_new_with_buttons("Edit Object",
-	GTK_WINDOW(GTKMGR.ui.main_view.win),
+	LIGHT_VIEW.win = gtk_dialog_new_with_buttons("Edit Light",
+	GTK_WINDOW(parent),
 	GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 	"_OK", GTK_RESPONSE_ACCEPT, "_Cancel", GTK_RESPONSE_REJECT, NULL);
 	gtk_window_set_transient_for(GTK_WINDOW(LIGHT_VIEW.win),
-	GTK_WINDOW(GTKMGR.ui.main_view.win));
+	GTK_WINDOW(parent));
 	gtk_window_set_position(GTK_WINDOW(LIGHT_VIEW.win), GTK_WIN_POS_MOUSE);
 	content_area = gtk_dialog_get_content_area(GTK_DIALOG(LIGHT_VIEW.win));
 	LIGHT_VIEW.grid = gtk_grid_new();

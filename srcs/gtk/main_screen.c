@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:18:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/20 14:09:25 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 20:16:18 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void				add_view(void)
 		exit(1); // to fix
 	o->type = -5;
 	o->enabled = true;
-	edit_win(o);
+	edit_win(o, GTKMGR.ui.main_view.win);
 }
 
 void				handle_main_view(void)

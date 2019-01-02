@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 18:15:28 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 20:15:26 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ typedef struct				s_gtk_mgr
 
 void						draw_px(unsigned char *buf, int x, int y, t_rgb cols);;
 void						init_gtk_variables(void);
-void						edit_win(t_obj *o);
+void						edit_win(t_obj *o, GtkWidget *parent);
 void						filter_win(void);
 void						redraw(bool display);
 void						init_add_view(void);
@@ -206,6 +206,6 @@ void						progress_thread_handler(gdouble x);
 void						progress_main_handler();
 gboolean 					updateProgress();
 unsigned char				*ft_ustrdup(unsigned char *s, int size);
-void						edit_light(t_light *l);
+void						edit_light(t_light *l, GtkWidget *parent);
 
 #endif

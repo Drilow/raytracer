@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 18:04:23 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 20:13:40 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void				edit_win_2(t_obj *o)
 	edit_win_3(o);
 }
 
-void				edit_win(t_obj *o)
+void				edit_win(t_obj *o, GtkWidget *parent)
 {
 	GtkWidget		*content_area;
 
@@ -141,11 +141,11 @@ void				edit_win(t_obj *o)
 	ADD_VIEW.cylinder_img = gtk_image_new_from_file("uiconfig/cylinder.png");
 	ADD_VIEW.obj_file_img = gtk_image_new_from_file("uiconfig/poly_obj.png");
 	ADD_VIEW.win = gtk_dialog_new_with_buttons("Edit Object",
-	GTK_WINDOW(GTKMGR.ui.main_view.win),
+	GTK_WINDOW(parent),
 	GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 	"_OK", GTK_RESPONSE_ACCEPT, "_Cancel", GTK_RESPONSE_REJECT, NULL);
 	gtk_window_set_transient_for(GTK_WINDOW(ADD_VIEW.win),
-	GTK_WINDOW(GTKMGR.ui.main_view.win));
+	GTK_WINDOW(parent));
 	gtk_window_set_position(GTK_WINDOW(ADD_VIEW.win), GTK_WIN_POS_MOUSE);
 	ADD_VIEW.sw.o = o;
 	content_area = gtk_dialog_get_content_area(GTK_DIALOG(ADD_VIEW.win));

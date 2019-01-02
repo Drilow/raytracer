@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:28:27 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/20 14:10:09 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 20:18:06 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static gboolean		clicked(GtkWidget __attribute__((unused)) *widget,
 			& GTK_STATE_FLAG_CHECKED))
 			{
 				outline_obj(g_global.r->selected_obj);
-				edit_win(g_global.r->selected_obj);
+				edit_win(g_global.r->selected_obj, GTKMGR.ui.main_view.win);
 			}
 		}
 	}
