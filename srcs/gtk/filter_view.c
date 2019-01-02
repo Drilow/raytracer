@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 22:52:30 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 23:17:25 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ void				handle_filter_validation(void)
 	gtk_widget_show_all(FILTER_VIEW.win);
 	r = gtk_dialog_run(GTK_DIALOG(FILTER_VIEW.win));
 	if (r == GTK_RESPONSE_ACCEPT)
-	{
-//		redraw(false);
 		gtk_widget_destroy(FILTER_VIEW.win);
-	}
 	else if (r == GTK_RESPONSE_REJECT)
 	{
 		free(GTKMGR.buf);
@@ -108,7 +105,6 @@ void				end_filters(void)
 void				filter_win(void)
 {
 	GtkWidget		*content_area;
-//	unsigned char	*tmp;
 
 	if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf,
 	WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
@@ -131,5 +127,7 @@ void				filter_win(void)
 	0, 0, 4, 1);
 	FILTER_VIEW.bw_button = gtk_button_new();
 	FILTER_VIEW.reversed_button = gtk_button_new();
+	g_signal_connect(G_OBJECT(FILTER_VIEW.win),
+	"key-press-event", G_CALLBACK(on_key_press), NULL);
 	end_filters();
 }

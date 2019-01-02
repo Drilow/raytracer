@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/20 14:13:17 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 23:18:29 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,23 @@
 #define GTKMGR g_global.r->gtk_mgr
 #define ADD_VIEW g_global.r->gtk_mgr.ui.add_view
 #define PROGRESS_DATA g_global.r->gtk_mgr.ui.progress_data
+#define FILTER_VIEW GTKMGR.ui.filter_view
 
 extern t_global				g_global;
 
 void						on_key_press(GtkWidget *w, GdkEventKey *event)
 {
-	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
+	if (event->keyval == GDK_KEY_Escape && w == FILTER_VIEW.win)
 	{
-		gtk_main_quit();
-		exit(0); // very dirty fix
+		redraw(true);
+		gtk_widget_destroy(w);
+		return ;
 	}
 	if (g_global.r && w == ADD_VIEW.win && event->keyval == GDK_KEY_Escape)
+	{
 		redraw(false);
+		return ;
+	}
 	if (event->keyval == GDK_KEY_Escape &&
 	w != NULL && w != PROGRESS_DATA.window)
 	{
