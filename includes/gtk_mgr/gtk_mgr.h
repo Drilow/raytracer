@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/21 13:07:44 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 18:15:28 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,20 @@ typedef struct 				s_progress_data
     long					pos;
     long					len;
 }							t_progress_data;
+
+typedef struct				s_light_view
+{
+	GtkWidget				*win;
+	GtkWidget				*grid;
+	GtkWidget				*x_label;
+	GtkWidget				*y_label;
+	GtkWidget				*z_label;
+	GtkWidget				*translate_img;
+	GtkWidget				*translate_x_spin;
+	GtkWidget				*translate_y_spin;
+	GtkWidget				*translate_z_spin;
+	GtkWidget				*color;
+}							t_light_view;
 
 typedef struct				s_add_view
 {
@@ -144,6 +158,7 @@ typedef struct				s_ui
 {
 	t_main_view				main_view;
 	t_add_view				add_view;
+	t_light_view			light_view;
 	t_filter_view			filter_view;
 	t_scene_view			scene_view;
 	t_progress_data			progress_data;
@@ -191,5 +206,6 @@ void						progress_thread_handler(gdouble x);
 void						progress_main_handler();
 gboolean 					updateProgress();
 unsigned char				*ft_ustrdup(unsigned char *s, int size);
+void						edit_light(t_light *l);
 
 #endif

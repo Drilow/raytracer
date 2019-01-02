@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 15:49:17 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/06 03:33:36 by adleau           ###   ########.fr       */
+/*   Updated: 2018/12/21 14:30:09 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # include <objects/object.h>
 # include <geometry/geometry.h>
 # include <gtk_mgr/gtk_mgr.h>
-# define WIN_W 800
-# define WIN_H 600
+# define WIN_W 1920
+# define WIN_H 1080
 
 
 typedef struct		s_rt

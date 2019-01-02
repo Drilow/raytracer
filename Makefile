@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2018/12/04 17:02:34 by mabessir         ###   ########.fr        #
+#    Updated: 2019/01/02 18:15:08 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/filter_view.c			\
 		$(SRCPATH)gtk/filter_functions.c	\
 		$(SRCPATH)gtk/edit_view.c			\
+		$(SRCPATH)gtk/edit_lights.c			\
 		$(SRCPATH)gtk/export_view.c			\
 		$(SRCPATH)gtk/radio_button.c		\
 		$(SRCPATH)gtk/validate_objects.c	\

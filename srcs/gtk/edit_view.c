@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/19 13:01:20 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 18:04:23 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void				actual_edit_view(t_obj *o)
 	}
 	if (o->type == -5)
 	{
+		gtk_window_set_title(GTK_WINDOW(ADD_VIEW.win), "Add Object");
 		o->type = 1;
 		o->next = g_global.r->objects;
 		g_global.r->objects = o;
