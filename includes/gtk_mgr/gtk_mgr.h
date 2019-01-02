@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 20:15:26 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 20:39:35 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ typedef struct				s_add_view
 	GtkWidget				*tetra_img;
 	GtkWidget				*dode;
 	GtkWidget				*dode_img;
+	GtkWidget				*pyramid;
+	GtkWidget				*pyramid_img;
 	GtkWidget				*file_opener;
 	char					*obj_file_path;
 }							t_add_view;

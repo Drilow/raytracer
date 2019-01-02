@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:06:53 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/19 12:41:20 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 21:04:22 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,20 @@ static void			for_template(void)
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.tetra, 3, 6, 1, 1);
 	g_signal_connect(G_OBJECT(ADD_VIEW.tetra), "clicked", G_CALLBACK(add_tetra),
 	NULL);
+	ADD_VIEW.dode = gtk_button_new();
+	ADD_VIEW.dode_img = gtk_image_new_from_file("uiconfig/dodecahedron.png");
+	gtk_widget_set_tooltip_text(ADD_VIEW.dode, "Dodecahedron");
+	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.dode), ADD_VIEW.dode_img);
+	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.dode, 2, 7, 1, 1);
+	g_signal_connect(G_OBJECT(ADD_VIEW.dode), "clicked", G_CALLBACK(add_dode),
+	NULL);
+	ADD_VIEW.pyramid = gtk_button_new();
+	ADD_VIEW.pyramid_img = gtk_image_new_from_file("uiconfig/pyramid.png");
+	gtk_widget_set_tooltip_text(ADD_VIEW.pyramid, "Pyramid");
+	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.pyramid), ADD_VIEW.pyramid_img);
+	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.pyramid, 3, 7, 1, 1);
+	g_signal_connect(G_OBJECT(ADD_VIEW.pyramid), "clicked", G_CALLBACK(add_pyramid),
+	NULL);
 	gtk_widget_show_all(ADD_VIEW.win);
 }
 
@@ -81,6 +95,16 @@ static void			radio_toggle(GtkWidget *button)
 			if (ADD_VIEW.tetra)
 			{
 				gtk_widget_destroy(ADD_VIEW.tetra);
+				ADD_VIEW.tetra = NULL;
+			}
+			if (ADD_VIEW.dode)
+			{
+				gtk_widget_destroy(ADD_VIEW.dode);
+				ADD_VIEW.tetra = NULL;
+			}
+			if (ADD_VIEW.pyramid)
+			{
+				gtk_widget_destroy(ADD_VIEW.pyramid);
 				ADD_VIEW.tetra = NULL;
 			}
 		}

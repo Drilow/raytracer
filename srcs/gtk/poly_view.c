@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:57:37 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/19 12:42:34 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 20:47:35 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,22 @@ void				add_tetra(void)
 	gtk_widget_set_state_flags(ADD_VIEW.tetra,
 	GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
 	ADD_VIEW.sw.o->type = 67;
+}
+
+void				add_dode(void)
+{
+	deactivate_buttons_from_tp(ADD_VIEW.dode);
+	gtk_widget_set_state_flags(ADD_VIEW.dode,
+	GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
+	ADD_VIEW.sw.o->type = 69;
+}
+
+void				add_pyramid(void)
+{
+	deactivate_buttons_from_tp(ADD_VIEW.pyramid);
+	gtk_widget_set_state_flags(ADD_VIEW.pyramid,
+	GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
+	ADD_VIEW.sw.o->type = 68;
 }
 
 void				edit_poly_view(void)

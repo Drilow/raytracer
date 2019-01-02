@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:18:32 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/20 09:27:29 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/02 21:02:27 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ void				validate_same_obj(t_obj *o)
 		set_tetrahedron(ADD_VIEW.sw.o->position,
 	gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin)),
 	ADD_VIEW.sw.o);
+/*		else if (o->type == 68)
+			set_pyramid(o->position,
+		gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin)), o);
+		else if (o->type == 69)
+			set_dodecahedron(o->position,
+			gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin)), o);*/
 }
 
 void				validate_from_file(char *path)
@@ -55,6 +61,12 @@ void				validate_poly_obj(t_obj *o)
 		else if (o->type == 67)
 			set_tetrahedron(o->position,
 		gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin)), o);
+/*		else if (o->type == 68)
+			set_pyramid(o->position,
+		gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin)), o);
+		else if (o->type == 69)
+			set_dodecahedron(o->position,
+			gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin)), o);*/
 	}
 	else
 		validate_from_file(ADD_VIEW.obj_file_path);

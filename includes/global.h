@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 18:21:16 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 20:43:24 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void					redraw(bool display);
 void					open_poly_obj(void);
 void					add_cube(void);
 void					add_tetra(void);
+void					add_dode(void);
+void					add_pyramid(void);
 void					edit_poly_view(void);
 void					outline_obj(t_obj *o);
 void					export_view(void);

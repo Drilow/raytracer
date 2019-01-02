@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 18:26:53 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/02 20:58:26 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void				deactivate_buttons_from_tp(GtkWidget *except)
 		gtk_widget_set_state_flags(ADD_VIEW.cube, GTK_STATE_FLAG_NORMAL, true);
 	if (&(ADD_VIEW.tetra) != &except)
 		gtk_widget_set_state_flags(ADD_VIEW.tetra, GTK_STATE_FLAG_NORMAL, true);
+	if (&(ADD_VIEW.dode) != &except)
+		gtk_widget_set_state_flags(ADD_VIEW.dode, GTK_STATE_FLAG_NORMAL, true);
+	if (&(ADD_VIEW.pyramid) != &except)
+		gtk_widget_set_state_flags(ADD_VIEW.pyramid, GTK_STATE_FLAG_NORMAL, true);
 }
 
 void				validate_edit(t_obj *o)
