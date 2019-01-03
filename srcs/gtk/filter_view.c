@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 23:17:25 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/03 04:33:11 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void				handle_filter_validation(void)
 	gtk_widget_show_all(FILTER_VIEW.win);
 	r = gtk_dialog_run(GTK_DIALOG(FILTER_VIEW.win));
 	if (r == GTK_RESPONSE_ACCEPT)
+	{
 		gtk_widget_destroy(FILTER_VIEW.win);
+		redraw(false);
+	}
 	else if (r == GTK_RESPONSE_REJECT)
 	{
 		free(GTKMGR.buf);
@@ -72,7 +75,7 @@ void				handle_filters(GtkButton *button)
 	{
 		x = -1;
 		while (++x < WIN_W)
-			(f(GTKMGR.buf + (y * stride) + x * 4));
+			(f(GTKMGR.saved + (y * stride) + x * 4));
 	}
 }
 
@@ -108,7 +111,7 @@ void				filter_win(void)
 
 	if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf,
 	WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
-	exit(1); //to fix
+		exit(1); //to fix
 	FILTER_VIEW.bw_img = gtk_image_new_from_file("uiconfig/bw.png");
 	FILTER_VIEW.sepia_img = gtk_image_new_from_file("uiconfig/sepia.png");
 	FILTER_VIEW.reversed_img = gtk_image_new_from_file("uiconfig/reversed.png");

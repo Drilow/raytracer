@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 22:54:00 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/03 04:31:49 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,11 @@ void				redraw(bool display)
 	}
 	else
 	{
+		free(GTKMGR.buf);
+		GTKMGR.buf = NULL;
+		if (!(GTKMGR.buf = ft_ustrdup(GTKMGR.saved,
+		WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
+			exit(1); //to fix
 		if (PIXMAP)
 			cairo_surface_destroy(PIXMAP);
 		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.saved,

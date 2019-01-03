@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:36:15 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/30 17:06:23 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/03 04:30:09 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ void				outline_obj(t_obj *o)
 	int				y;
 
 	y = -1;
+	if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf,
+	WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
+		exit(1); //to fix
 	while (++y < WIN_H)
 	{
 		x = -1;
