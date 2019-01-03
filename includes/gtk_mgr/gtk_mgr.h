@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 20:39:35 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/03 00:55:04 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 
 enum
 {
-   TYPE_COLUMN,
-   POS_X_COLUMN,
-   POS_Y_COLUMN,
-   POS_Z_COLUMN,
-   CHECKED_COLUMN,
-   CHECKED_ACTIVE,
-   OBJ_REF,
-   N_COLUMNS
+	TYPE_COLUMN,
+	POS_X_COLUMN,
+	POS_Y_COLUMN,
+	POS_Z_COLUMN,
+	CHECKED_COLUMN,
+	CHECKED_ACTIVE,
+	OBJ_REF,
+	N_COLUMNS
 };
 
 typedef struct				s_switcher
@@ -47,23 +47,23 @@ typedef struct				s_filter_view
 	GtkWidget				*reversed_img;
 }							t_filter_view;
 
-typedef struct 				s_scene_view
+typedef struct				s_scene_view
 {
-    GtkWidget				*win;
-    GtkWidget 				*tree;
-    GtkWidget				*button;
-    GtkTreeStore 			*store;
-    GtkWidget				*fixed;
+	GtkWidget				*win;
+	GtkWidget				*tree;
+	GtkWidget				*button;
+	GtkTreeStore			*store;
+	GtkWidget				*fixed;
 }							t_scene_view;
 
-typedef struct 				s_progress_data
+typedef struct				s_progress_data
 {
 	GtkWidget				*pbar;
-    GtkWidget				*window;
-    int 					bProgressUp;
-    int 					nLastPct;
-    long					pos;
-    long					len;
+	GtkWidget				*window;
+	int						bProgressUp;
+	int						nLastPct;
+	long					pos;
+	long					len;
 }							t_progress_data;
 
 typedef struct				s_light_view
@@ -155,7 +155,6 @@ typedef struct				s_main_view
 	GtkWidget				*event_box;
 }							t_main_view;
 
-
 typedef struct				s_ui
 {
 	t_main_view				main_view;
@@ -175,7 +174,8 @@ typedef struct				s_gtk_mgr
 	t_ui					ui;
 }							t_gtk_mgr;
 
-void						draw_px(unsigned char *buf, int x, int y, t_rgb cols);;
+void						draw_px(unsigned char *buf, int x, int y,
+t_rgb cols);
 void						init_gtk_variables(void);
 void						edit_win(t_obj *o, GtkWidget *parent);
 void						filter_win(void);
@@ -206,7 +206,7 @@ gboolean					is_obj(int type);
 void						progress_bar();
 void						progress_thread_handler(gdouble x);
 void						progress_main_handler();
-gboolean 					updateProgress();
+gboolean					updateProgress();
 unsigned char				*ft_ustrdup(unsigned char *s, int size);
 void						edit_light(t_light *l, GtkWidget *parent);
 

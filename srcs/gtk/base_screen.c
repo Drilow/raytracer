@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 22:45:35 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/03 00:59:00 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void			handle_drawing(void)
 void			end_base_view(void)
 {
 	g_signal_connect(G_OBJECT(g_global.base_view.win),
-	"key-press-event", G_CALLBACK(on_key_press), NULL);
+	"key-press-event", G_CALLBACK(gtk_main_quit), NULL);
 	g_signal_connect(G_OBJECT(g_global.base_view.win),
-	"delete-event", G_CALLBACK(handle_x_button), NULL);
+	"delete-event", G_CALLBACK(gtk_main_quit), NULL);
 	gtk_widget_show_all(g_global.base_view.win);
 }
 
