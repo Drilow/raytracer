@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 17:33:56 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 20:19:08 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/03 04:52:53 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,4 +123,8 @@ void				edit_light(t_light *l, GtkWidget *parent)
 	LIGHT_VIEW.grid = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(content_area), LIGHT_VIEW.grid);
 	edit_light2(l);
+	gtk_widget_grab_focus(gtk_dialog_get_widget_for_response(
+	GTK_DIALOG(LIGHT_VIEW.win), GTK_RESPONSE_ACCEPT));
+	g_signal_connect(G_OBJECT(LIGHT_VIEW.win),
+	"key-press-event", G_CALLBACK(on_key_press), NULL);
 }
