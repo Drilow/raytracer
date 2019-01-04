@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 18:14:35 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/05 17:37:22 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/04 21:34:54 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ bool			get_pyra_inf(t_json_object *obj)
 			obj->pair[i]->value, o, &height) == false)
 			return (false);
 	}
+	o->reflex = 0;
 	get_pyramid(o, o->size, height);
 	put_inf_to_glob(o);
 	return (true);

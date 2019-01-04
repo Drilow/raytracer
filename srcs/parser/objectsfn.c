@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 14:32:59 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/28 15:34:14 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/04 21:30:47 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,15 @@ bool	verif_infinite(t_obj *o, t_json_value *val)
 	}
 	else
 		return (false);
+	return (true);
+}
+
+bool	geet_reflex(t_json_value *val, t_obj *o)
+{
+	if (val == NULL)
+		return (false);
+	if (val->type != 5)
+		return (false);
+	o->reflex = *(int *)val->ptr;
 	return (true);
 }

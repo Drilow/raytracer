@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 10:13:57 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/07 14:14:12 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/04 21:49:21 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,15 @@ static	bool	add_new_obj(t_json_array *list, unsigned long num)
 {
 	t_json_object		*obj;
 	int					i;
-	static t_check_obj	check[9] = {{&get_sphere_inf, 4},
-	{&get_plane_inf, 5}, {&get_cone_inf, 7}, {&get_cyl_inf, 7},
-	{&get_cube_inf, 5}, {&get_tetra_inf, 5}, {&get_poly_objinf, 6},
-	{&get_pyra_inf, 5}, {&get_dod_inf, 5}};
+	static t_check_obj	check[9] = {{&get_sphere_inf, 5},
+	{&get_plane_inf, 6}, {&get_cone_inf, 8}, {&get_cyl_inf, 8},
+	{&get_cube_inf, 6}, {&get_tetra_inf, 6}, {&get_poly_objinf, 7},
+	{&get_pyra_inf, 6}, {&get_dod_inf, 6}};
 
 	if (list->value[num] == NULL || list->value[num]->type != 4)
 		return (false);
 	obj = (t_json_object *)list->value[num]->ptr;
-	if (obj->nb > 7)
+	if (obj->nb > 8)
 		return (false);
 	if (cmp_chars(obj->pair[0]->key->str, "type", 0) == false)
 		return (false);

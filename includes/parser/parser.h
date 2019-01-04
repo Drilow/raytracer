@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/04 17:04:36 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/04 22:11:01 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ typedef	struct	s_checkcyl
 	bool	(*f)(t_obj *o, t_json_value *val);
 	int		i;
 }				t_checkcyl;
+
+typedef	struct	s_checkcone
+{
+	bool	(*f)(t_obj *o, t_json_value *val);
+	int		i;
+}				t_checkcone;
 
 typedef struct s_check_obj
 {
@@ -71,5 +77,6 @@ bool			get_pyra_inf(t_json_object *obj);
 bool			get_pyramid(t_obj *p, double base_size, double height);
 bool			get_dodecahedron(t_obj *d, double size);
 bool			get_dod_inf(t_json_object *obj);
+bool			geet_reflex(t_json_value *val, t_obj *o);
 
 #endif

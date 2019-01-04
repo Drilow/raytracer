@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 15:05:20 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/30 18:58:30 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/04 22:11:5 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 	static t_checkcyl checkcyl[4] = {{&get_inf, 1},
 	{&geet_vector, 2}, {&get_cyl_radius, 3}, {&verif_infinite, 4}};
 
-	if (i > 0 && checkcyl[i - 1].i == i)
+	if (i > 0 && checkcyl[i - 1].i == i && i < 5)
 		return (checkcyl[i - 1].f(o, val));
 	if (i == 5)
 	{
@@ -106,6 +106,7 @@ bool			get_cyl_inf(t_json_object *obj)
 		obj->pair[i]->value, o) == false)
 			return (false);
 	}
+	o->reflex = 0;
 	put_inf_to_glob(o);
 	return (true);
 }

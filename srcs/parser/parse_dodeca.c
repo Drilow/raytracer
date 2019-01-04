@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/07 14:06:33 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/04 21:35:07 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ bool			get_dod_inf(t_json_object *obj)
 				return (false);
 		}
 	}
+	o->reflex = 0;
 	put_inf_to_glob(o);
 	return (true);
 }

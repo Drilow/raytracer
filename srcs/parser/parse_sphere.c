@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 11:37:43 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/29 10:16:39 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/04 21:32:29 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ bool			get_sphere_inf(t_json_object *obj)
 		obj->pair[i]->value, o) == false)
 			return (false);
 	}
+	o->reflex = 0;
 	put_inf_to_glob(o);
 	return (true);
 }
