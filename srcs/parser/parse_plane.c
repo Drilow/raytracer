@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:45:18 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/04 21:33:12 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/04 23:35:34 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static	bool	geet_vector(t_obj *o, t_json_value *val)
 	if (val->type == 3)
 	{
 		arr = (t_json_array *)val->ptr;
-		if (!check_arr(arr) && arr->nb != 3)
+		if (!check_arr(arr) || arr->nb != 3)
 			return (false);
 		a = (int *)arr->value[0]->ptr;
 		pl->vector.x = (double)*a;

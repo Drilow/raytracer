@@ -1,27 +1,26 @@
 {
 	"camera":{
-				"pos":[0,0,0],
-				"angle":[0,0,0]
-			},
-	"light":{
-				"source":[10,15,-10],
-				"color":[75,75,75,0]
-			},
-	"light":{
-				"source":[0,0,-100],
-				"color":[75,75,75,0]
-			},
-	"light":{
-				"source":[0,0,0],
-				"color":[75,75,75,0]
-			},
+		"pos":[-20,0,-30],
+		"angle":[0,-10,0]
+	},
+"light":{
+		"source":[-30,150,-100],
+		"color":[45,45,45,0]
+	},
+"light":{
+	"source":[70,150,-100],
+	"color":[45,45,45,0]
+	},
 	"objects":[
 		{
-			"type":"polyobject",
-			"pos":[1,0,10],
-			"size":20,
-			"adresse":"teapot.obj",
-			"color":[125,80,80,0]
+			"type":"cylinder",
+			"pos":[-4,-5,25],
+			"vector":[-8,8,10],
+			"radius":2,
+			"INF":false,
+			"color":[150,50,100,80],
+			"rotate":[0,20,-10],
+			"reflex":100
 		}
 			]
 }

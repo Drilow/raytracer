@@ -47,7 +47,7 @@ static	bool	geet_vector(t_obj *o, t_json_value *val)
 	if (val->type == 3)
 	{
 		arr = (t_json_array *)val->ptr;
-		if (!check_arr(arr) && arr->nb != 3)
+		if (!check_arr(arr) || arr->nb != 3)
 			return (false);
 		a = (int *)arr->value[0]->ptr;
 		c->vector.x = (double)*a;
