@@ -211,11 +211,18 @@ t_rgb				get_ray_color(t_rt *r, t_collision *c)
 //	if (distance_factor < 1)
 		distance_factor = 1;
 	color = get_final_color(tmp_color, distance_factor);
-
+/*
 	if (REFLEX_DEPTH == 0 && c->o->color.trans > 0)
        color = average_color(color, get_ray_color(r, c->next), c->o->color.trans);
 // reflexion :
 	else if (REFLEX_DEPTH > 0 && c->o->color.trans > 0)
        color = average_color(color, get_ray_color(r, c->reflected), c->o->color.trans);
+	*/
+	if (REFLEX_DEPTH > 0 && c->o->reflex > 0)
+       color = average_color(color, get_ray_color(r, c->reflected), c->o->reflex);
+	if (c->o->color.trans > 0)
+       color = average_color(color, get_ray_color(r, c->next), c->o->color.trans);
 	return (color);
+	
+
 }

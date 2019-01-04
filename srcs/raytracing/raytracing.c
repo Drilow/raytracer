@@ -183,7 +183,7 @@ static void			reflexion(t_rt *r, t_ray ray, t_collision *c, int index)
 		// a remplacer par if (tmp->o->reflexion > 0) :
 //		if (debug == true)
 //		printf("debug  2\n");
-		if (tmp->o != NULL && tmp->o->color.trans > 0)
+		if (tmp->o != NULL && tmp->o->reflex > 0)
 		{
 //		if (debug == true)
 //		printf("debug  3\n");
