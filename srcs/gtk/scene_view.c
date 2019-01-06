@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 20:14:46 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/06 13:46:54 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ bool					go_throu_lights(t_light *curr)
 }
 
 static void				checked_row(
-GtkCellRendererToggle __attribute__((unused)) *cell, gchar *path_str)
+GtkCellRendererToggle *cell, gchar *path_str)
 {
 	GtkTreeIter			iter;
 	GtkTreePath			*path;
@@ -57,7 +57,7 @@ GtkCellRendererToggle __attribute__((unused)) *cell, gchar *path_str)
 	obj = NULL;
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(SCENE_VIEW.tree));
 	path = gtk_tree_path_new_from_string(path_str);
-	if (model == NULL)
+	if (model == NULL || !cell)
 		return ;
 	if (gtk_tree_model_get_iter(model, &iter, path) == FALSE)
 		return ;
