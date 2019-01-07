@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/04 23:02:36 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/07 18:59:05 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 	}
 	if (i == 5)
 		return (true);
+	if (i == 6)
+		return (geet_reflex(val, o));
 	return (false);
 }
 
@@ -65,6 +67,8 @@ static	int		check_keys(char *str)
 		return (4);
 	if (cmp_chars(str, "rotate", 0) == true)
 		return (5);
+	if (cmp_chars(str, "reflex", 0) == true)
+		return (6);
 	return (-1);
 }
 
@@ -93,7 +97,6 @@ bool			get_poly_objinf(t_json_object *obj)
 				return (false);
 		}
 	}
-	o->reflex = 0;
 	put_inf_to_glob(o);
 	return (true);
 }
