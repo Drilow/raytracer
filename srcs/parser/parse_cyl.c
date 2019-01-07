@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/09 15:05:20 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/04 22:11:5 by mabessir         ###   ########.fr       */
+/*   Created: 2019/01/07 17:11:48 by mabessir          #+#    #+#             */
+/*   Updated: 2019/01/07 17:26:14 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 	}
 	if (i == 6)
 		return (prerotate(o, val, 4));
+	if (i == 7)
+		return (geet_reflex(val, o));
 	return (false);
 }
 
@@ -90,6 +92,8 @@ static	int		check_keys(char *str)
 		return (5);
 	if (cmp_chars(str, "rotate", 0) == true)
 		return (6);
+	if (cmp_chars(str, "reflex", 0) == true)
+		return (7);
 	return (-1);
 }
 
@@ -100,13 +104,12 @@ bool			get_cyl_inf(t_json_object *obj)
 
 	i = 0;
 	o = malloc_object(4);
-	while (i++ < 6)
+	while (i++ < 7)
 	{
 		if (call_parse(check_keys(obj->pair[i]->key->str),
 		obj->pair[i]->value, o) == false)
 			return (false);
 	}
-	o->reflex = 0;
 	put_inf_to_glob(o);
 	return (true);
 }

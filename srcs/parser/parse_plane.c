@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:45:18 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/04 23:35:34 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/07 17:21:38 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 	}
 	if (i == 4)
 		return (prerotate(o, val, 2));
+	if (i == 5)
+		return (geet_reflex(val, o));
 	return (false);
 }
 
@@ -70,6 +72,8 @@ static	int		check_keys(char *str)
 		return (3);
 	if (cmp_chars(str, "rotate", 0) == true)
 		return (4);
+	if (cmp_chars(str, "reflex", 0) == true)
+		return (5);
 	return (-1);
 }
 
@@ -80,7 +84,7 @@ bool			get_plane_inf(t_json_object *obj)
 
 	i = 0;
 	o = malloc_object(2);
-	while (i++ < 4)
+	while (i++ < 5)
 	{
 		if (call_parse(check_keys(obj->pair[i]->key->str),
 		obj->pair[i]->value, o) == false)

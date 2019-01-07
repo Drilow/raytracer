@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 11:37:43 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/04 21:32:29 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/07 17:26:53 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 		o->color = get_obj_color(val);
 		return (true);
 	}
+	if (i == 4)
+		return (geet_reflex(val, o));
 	return (false);
 }
 
@@ -57,6 +59,8 @@ static	int		check_keys(char *str)
 		return (2);
 	if (cmp_chars(str, "color", 0) == true)
 		return (3);
+	if (cmp_chars(str, "reflex", 0) == true)
+		return (4);
 	return (-1);
 }
 
@@ -67,13 +71,12 @@ bool			get_sphere_inf(t_json_object *obj)
 
 	i = 0;
 	o = malloc_object(1);
-	while (i++ < 3)
+	while (i++ < 4)
 	{
 		if (call_parse(check_keys(obj->pair[i]->key->str),
 		obj->pair[i]->value, o) == false)
 			return (false);
 	}
-	o->reflex = 0;
 	put_inf_to_glob(o);
 	return (true);
 }

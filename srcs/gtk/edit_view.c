@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_view.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/03 04:52:38 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/07 17:46:17 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void				handle_reflex_edit(t_obj *o)
 	ADD_VIEW.reflex_img = gtk_image_new_from_file("uiconfig/reflex.png");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.reflex_img,
 	0, 8, 1, 1);
-	adj = gtk_adjustment_new(o->position.x, 0, 1, .01, .01, 10);
+	printf("%u, %f\n", o->reflex, (gdouble)o->reflex / 255);
+	adj = gtk_adjustment_new((gdouble)(o->reflex) / 255, 0, 1, .01, .01, 10);
 	ADD_VIEW.reflex_spin = gtk_spin_button_new(adj, 1, 4);
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.reflex_spin,
 	1, 8, 3, 1);

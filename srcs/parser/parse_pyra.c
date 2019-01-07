@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 18:14:35 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/04 21:34:54 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/07 17:21:25 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o, double *height)
 		o->color = get_obj_color(val);
 		return (true);
 	}
+	if (i == 5)
+		return (geet_reflex(val, o));
 	return (false);
 }
 
@@ -78,6 +80,8 @@ static	int		check_keys(char *str)
 		return (3);
 	if (cmp_chars(str, "color", 0) == true)
 		return (4);
+	if (cmp_chars(str, "reflex", 0) == true)
+		return (5);
 	return (-1);
 }
 
@@ -89,13 +93,12 @@ bool			get_pyra_inf(t_json_object *obj)
 
 	i = 0;
 	o = malloc_object(68);
-	while (i++ < 4)
+	while (i++ < 5)
 	{
 		if (call_parse(check_keys(obj->pair[i]->key->str),
 			obj->pair[i]->value, o, &height) == false)
 			return (false);
 	}
-	o->reflex = 0;
 	get_pyramid(o, o->size, height);
 	put_inf_to_glob(o);
 	return (true);

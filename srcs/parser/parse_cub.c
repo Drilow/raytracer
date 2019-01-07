@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/04 22:00:06 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/07 17:26:41 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static	bool	call_parse(int i, t_json_value *val, t_obj *o)
 	}
 	if (i == 4)
 		return (true);
+	if (i == 5)
+		return (geet_reflex(val, o));
 	return (false);
 }
 
@@ -60,6 +62,8 @@ static	int		check_keys(char *str)
 		return (3);
 	if (cmp_chars(str, "rotate", 0) == true)
 		return (4);
+	if (cmp_chars(str, "reflex", 0) == true)
+		return (5);
 	return (-1);
 }
 
@@ -72,7 +76,7 @@ bool			get_cube_inf(t_json_object *obj)
 	i = 0;
 	o = malloc_object(66);
 	size = 1;
-	while (i++ < 4)
+	while (i++ < 5)
 	{
 		if (call_parse(check_keys(obj->pair[i]->key->str),
 			obj->pair[i]->value, o) == false)
@@ -84,7 +88,6 @@ bool			get_cube_inf(t_json_object *obj)
 				return (false);
 		}
 	}
-	o->reflex = 255;
 	put_inf_to_glob(o);
 	return (true);
 }
