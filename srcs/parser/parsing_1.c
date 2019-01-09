@@ -145,6 +145,24 @@ static bool	read_line(char *line)
 	return (true);
 }
 
+static void		error_view(gchar *text)
+{
+	static GtkWidget 		*label;
+	GtkWidget 				*dialog;
+
+	dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_MOUSE);
+	gtk_window_set_default_size(GTK_WINDOW(dialog), 280, 80);
+	g_signal_connect(G_OBJECT(dialog), "destroy",
+					G_CALLBACK(gtk_widget_destroyed), &dialog);
+	gtk_window_set_title (GTK_WINDOW(dialog), "Parser Details");
+    gtk_container_set_border_width (GTK_CONTAINER(dialog), 5);
+	label = gtk_label_new(text);
+	gtk_widget_set_size_request(label, 10, 10);
+	gtk_container_add(GTK_CONTAINER(dialog), label);
+	gtk_widget_show_all(dialog);
+}
+
 bool			parse(char *file)
 {
 	int			fd;
