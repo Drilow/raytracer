@@ -59,7 +59,7 @@ bool			get_started(t_json_value *val)
 
 	nb = 0;
 	obj = (t_json_object *)val->ptr;
-	g_global->ambient_light = 0;
+	g_global.r->ambient_light = ft_rgb(0, 0, 0, 0);
 	while (nb < obj->nb)
 	{
 		if (start_parse(obj,

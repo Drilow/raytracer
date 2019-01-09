@@ -21,7 +21,7 @@
 //# define AMBIENT_LIGHT 0.1
 //# define AMBIENT_LIGHT 10
 # define LIGHT_LOSS false
-# define LIGHT_DISTANCE_FACTOR 20000
+# define LIGHT_DISTANCE_FACTOR 2000
 
 typedef struct			s_collision
 {

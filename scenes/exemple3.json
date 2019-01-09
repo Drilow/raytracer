@@ -7,6 +7,9 @@
 				"source":[-30,150,-100],
 				"color":[45,45,45,0]
 			},
+	"ambientlight":{
+				"color":[0,0,0,0]
+			},
 	"objects":[
 				{
 					"type":"sphere",
