@@ -206,7 +206,7 @@ t_rgb				get_ray_color(t_rt *r, t_collision *c)
 	checker.y = -1;
 	tmp_color = get_color(r, *c);
 	distance_factor = deltasq(r->cam_position, c->p) / LIGHT_DISTANCE_FACTOR;
-//	if (distance_factor < 1)
+	if (LIGHT_LOSS == false || distance_factor < 1)
 		distance_factor = 1;
 	color = get_final_color(tmp_color, distance_factor);
 /*
