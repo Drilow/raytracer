@@ -101,14 +101,10 @@ static t_rpoint		add_color(t_rpoint c, t_rpoint oclr, t_light *l, double af)
 
 	shining = pow(af, 1 + SHINING_FACTOR);
 	tmp_c = color_to_add(oclr, l->color, shining);
-	tmp_c = set_rpoint(tmp_c.x * af * BRIGHTNESS + g_global.r->ambient_light.r, \
-					   tmp_c.y * af * BRIGHTNESS + g_global.r->ambient_light.g, \
-					   tmp_c.z * af * BRIGHTNESS + g_global.r->ambient_light.b);
-/*
 	tmp_c = set_rpoint(tmp_c.x * af * BRIGHTNESS, \
-                       tmp_c.y * af * BRIGHTNESS, \
-                       tmp_c.z * af * BRIGHTNESS);
-*/
+					   tmp_c.y * af * BRIGHTNESS, \
+					   tmp_c.z * af * BRIGHTNESS);
+
 	new_c = set_rpoint(c.x + tmp_c.x, c.y + tmp_c.y, c.z + tmp_c.z);
 	return (new_c);
 }
@@ -123,9 +119,11 @@ static t_rpoint		get_color(t_rt *r, t_collision c)
 	double			afactor;
 	t_collision		tmpc;
 
-	color = set_rpoint(0, 0, 0);
 	ocolor = set_rpoint((double)c.o->color.r, (double)c.o->color.g, \
 						(double)c.o->color.b);
+	color = set_rpoint(ocolor.x * g_global.r->ambient_light.r * BRIGHTNESS, \
+						ocolor.y * g_global.r->ambient_light.g * BRIGHTNESS, \
+						ocolor.z * g_global.r->ambient_light.b * BRIGHTNESS);
 	l = r->lights;
 	while (l != NULL)
 	{
