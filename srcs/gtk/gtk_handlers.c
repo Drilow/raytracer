@@ -38,7 +38,8 @@ void				handle_edit_validation(t_obj *o)
 	else if (r == GTK_RESPONSE_REJECT)
 	{
 		redraw(false);
-		if (!(ft_strcmp(gtk_window_get_title(GTK_WINDOW(ADD_VIEW.win)), "Add Object")))
+		if (!(ft_strcmp(gtk_window_get_title(GTK_WINDOW(ADD_VIEW.win)),
+			"Add Object")))
 		{
 			g_global.r->objects = o->next;
 			free(o->obj);

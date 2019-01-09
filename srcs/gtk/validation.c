@@ -30,7 +30,8 @@ void				deactivate_buttons_from_tp(GtkWidget *except)
 	if (&(ADD_VIEW.dode) != &except)
 		gtk_widget_set_state_flags(ADD_VIEW.dode, GTK_STATE_FLAG_NORMAL, true);
 	if (&(ADD_VIEW.pyramid) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.pyramid, GTK_STATE_FLAG_NORMAL, true);
+		gtk_widget_set_state_flags(ADD_VIEW.pyramid, GTK_STATE_FLAG_NORMAL,
+			true);
 }
 
 void				validate_edit(t_obj *o)
@@ -44,7 +45,8 @@ void				validate_edit(t_obj *o)
 	o->color.g = (unsigned char)(c->green * 255);
 	o->color.b = (unsigned char)(c->blue * 255);
 	o->color.trans = ((unsigned char)255 - (c->alpha * 255));
-	o->reflex = (unsigned char)((gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.reflex_spin))));
+	o->reflex = (unsigned char)
+	((gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.reflex_spin))));
 	o->position.x =
 	gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
 	o->position.y =
