@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:52 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/09 12:51:36 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/09 14:28:01 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,37 @@ void			free_poly(t_poly_obj *p)
 	t_vertex	*freed_v;
 
 	tmp = p;
-	printf("PPP %p\n", p);
 	while (tmp)
 	{
-		tmp_v = p->vertices;
+		tmp_v = tmp->vertices;
 		while (tmp_v)
 		{
-			printf("aha\n");
 			freed_v = tmp_v;
-			printf("aha %p\n", tmp_v->next);
 			tmp_v = tmp_v->next;
-			printf("aha\n");
 			free(freed_v);
-			printf("aha\n");
 			freed_v = NULL;
-			printf("aha\n");
 		}
 		freed_o = tmp;
 		tmp = tmp->next;
-		printf("OH! %p\n", freed_o);
 		free(freed_o);
 		freed_o = NULL;
+	}
+}
+
+void			free_objects(t_obj *start)
+{
+	t_obj		*tmp;
+	t_obj		*swap;
+
+	tmp = start;
+	while (tmp)
+	{
+		swap = tmp;
+		if (swap->type % 10 == 6)
+			free_poly(((t_poly_obj*)swap->obj));
+		tmp = tmp->next;
+		free(swap);
+		swap = NULL;
 	}
 }
 

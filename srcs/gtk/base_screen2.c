@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/09 12:15:04 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/09 14:31:13 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ extern t_global				g_global;
 
 void						on_key_press(GtkWidget *w, GdkEventKey *event)
 {
-	printf("MA COUILLE\n");
 	if (event->keyval != GDK_KEY_Escape)
 		return ;
 	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
 	{
-		printf("AHAHAHAHAHAHAH\n");
+		if (g_global.r)
+			free_objects(g_global.r->objects);
 		gtk_main_quit();
 		return ;
 	}
@@ -46,14 +46,19 @@ void						on_key_press(GtkWidget *w, GdkEventKey *event)
 		return ;
 	}
 	if (event->keyval == GDK_KEY_Escape &&
-	w != NULL && w != PROGRESS_DATA.window)
+		w != NULL && w != PROGRESS_DATA.window)
 	{
+		if (w == GTKMGR.ui.main_view.win)
+		{
+			free_objects(g_global.r->objects);
+		}
 		if (GTK_IS_WIDGET(w))
 		{
 			gtk_widget_destroy(GTK_WIDGET(w));
 			w = NULL;
 		}
 	}
+	printf("ASKIP\n");
 }
 
 void						end_open(GtkWidget *dialog)
