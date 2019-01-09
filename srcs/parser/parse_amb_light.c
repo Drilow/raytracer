@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 15:17:09 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/28 19:04:00 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/09 18:46:46 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ extern t_global g_global;
 
 static	int		check_key(char *str)
 {
-	if (cmp_chars(str, "source", 0))
+	if (cmp_chars(str, "color", 0))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/09 18:44:10 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/09 18:50:28 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ bool			get_started(t_json_value *val)
 
 	nb = 0;
 	obj = (t_json_object *)val->ptr;
+	g_global->ambient_light = 0;
 	while (nb < obj->nb)
 	{
 		if (start_parse(obj,
