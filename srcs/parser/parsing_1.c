@@ -75,15 +75,16 @@ static void		error_view(gchar *text)
 	GtkWidget 				*dialog;
 
 	dialog = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_MOUSE);
+	gtk_window_set_transient_for(GTK_WINDOW(dialog), GTK_WINDOW(g_global.r->gtk_mgr.ui.main_view.win));
 	gtk_window_set_default_size(GTK_WINDOW(dialog), 280, 80);
 	g_signal_connect(G_OBJECT(dialog), "destroy",
 					G_CALLBACK(gtk_widget_destroyed), &dialog);
-	gtk_window_set_title (GTK_WINDOW(dialog), "Parser Details");
-    gtk_container_set_border_width (GTK_CONTAINER(dialog), 5);
+	gtk_window_set_title(GTK_WINDOW(dialog), "Parser Details");
+    gtk_container_set_border_width(GTK_CONTAINER(dialog), 5);
 	label = gtk_label_new(text);
 	gtk_widget_set_size_request(label, 10, 10);
 	gtk_container_add(GTK_CONTAINER(dialog), label);
+	gtk_window_move(GTK_WINDOW(dialog), 0, 600);
 	gtk_widget_show_all(dialog);
 }
 
