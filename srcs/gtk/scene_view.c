@@ -69,7 +69,7 @@ static void				checked_row(GtkCellRendererToggle *cell, gchar *p_str)
 	if (is_obj(((t_obj*)obj)->type))
 		((t_obj*)obj)->enabled = enabled;
 	else if (go_throu_lights(((t_light*)obj)))
-		((t_light*)obj)->enabled = enabled; // a debug
+		((t_light*)obj)->enabled = enabled;
 	redraw(true);
 	gtk_tree_path_free(path);
 }
@@ -116,8 +116,6 @@ void					scene_win(void)
 	G_CALLBACK(select_handler), NULL);
 	gtk_container_add(GTK_CONTAINER(SCENE_VIEW.win), SCENE_VIEW.tree);
 	SCENE_VIEW.fixed = gtk_fixed_new();
-//	gtk_fixed_put(GTK_FIXED(SCENE_VIEW.fixed),
-//SCENE_VIEW.win, 200, 200);
 	gtk_widget_show_all(SCENE_VIEW.win);
 	return ;
 }

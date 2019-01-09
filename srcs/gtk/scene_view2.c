@@ -112,7 +112,6 @@ void					init_scene_view(void)
 	gtk_window_set_title(GTK_WINDOW(SCENE_VIEW.win), "Scene");
 	gtk_window_set_destroy_with_parent(GTK_WINDOW(SCENE_VIEW.win), TRUE);
 	gtk_window_set_deletable(GTK_WINDOW(SCENE_VIEW.win), FALSE);
-	//gtk_window_set_position(GTK_WINDOW(SCENE_VIEW.win), GTK_WIN_POS_MOUSE);
 	SCENE_VIEW.store = gtk_tree_store_new(N_COLUMNS, G_TYPE_STRING,
 	G_TYPE_DOUBLE, G_TYPE_DOUBLE, G_TYPE_DOUBLE, G_TYPE_BOOLEAN,
 	G_TYPE_BOOLEAN, G_TYPE_POINTER, -1);
