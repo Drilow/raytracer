@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:28:27 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 23:12:55 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/09 12:16:42 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void				handle_main_view_3(void)
 	GTKMGR.ui.main_view.export_button);
 	handle_drawing();
 	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.win),
-	"key-press-event", G_CALLBACK(gtk_main_quit), NULL);
+	"key-press-event", G_CALLBACK(on_key_press), NULL);
 	gtk_widget_show_all(GTKMGR.ui.main_view.win);
 	gtk_widget_destroy(g_global.base_view.win);
 	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.win),

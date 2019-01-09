@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:52 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/19 13:12:18 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/09 12:51:36 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,34 @@ extern t_global		g_global;
 
 void			free_poly(t_poly_obj *p)
 {
-	(void)p;
+	t_poly_obj	*tmp;
+	t_poly_obj	*freed_o;
+	t_vertex	*tmp_v;
+	t_vertex	*freed_v;
+
+	tmp = p;
+	printf("PPP %p\n", p);
+	while (tmp)
+	{
+		tmp_v = p->vertices;
+		while (tmp_v)
+		{
+			printf("aha\n");
+			freed_v = tmp_v;
+			printf("aha %p\n", tmp_v->next);
+			tmp_v = tmp_v->next;
+			printf("aha\n");
+			free(freed_v);
+			printf("aha\n");
+			freed_v = NULL;
+			printf("aha\n");
+		}
+		freed_o = tmp;
+		tmp = tmp->next;
+		printf("OH! %p\n", freed_o);
+		free(freed_o);
+		freed_o = NULL;
+	}
 }
 
 void			destroy_scene(void)

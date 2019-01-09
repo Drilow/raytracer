@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/03 04:31:49 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/09 12:52:16 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,11 @@ void				set_default_values(t_obj *o)
 		((t_cylinder*)o->obj)->infinite = true;
 	}
 	else if (o->type == 6 || o->type / 10 == 6)
+	{
 		ADD_VIEW.sw.o->size = 2;
+		((t_poly_obj*)(o->obj))->vertices = NULL;
+		((t_poly_obj*)(o->obj))->next = NULL;
+	}
 }
 
 void				deactivate_buttons(GtkWidget *except)

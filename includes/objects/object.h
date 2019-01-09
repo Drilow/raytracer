@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 22:08:18 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/09 11:44:02 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ bool				get_cc_eq_factors(t_ray ray, t_obj *c, t_rpoint *f);
 bool                cone_collision(t_ray ray, t_obj *c, t_rpoint *p);
 
 bool				sphere_collision(t_ray ray, t_obj *s, t_rpoint *p);
+
+void				free_poly(t_poly_obj *p);
 
 #endif

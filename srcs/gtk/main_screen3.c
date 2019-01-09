@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:50:05 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/30 18:54:22 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/09 12:12:48 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,18 @@ extern t_global		g_global;
 
 void				handle_x_button(GtkWidget *w)
 {
+	printf("DAFUK\n");
 	if (g_global.r && w == ADD_VIEW.win)
+	{
 		redraw(false);
-	if (w == g_global.base_view.win)
+		gtk_widget_destroy(GTK_WIDGET(w));
+		printf("DAFUK2\n");
+		return ;
+	}
+	else if (w == g_global.base_view.win)
+	{
 		gtk_main_quit();
+	}
 	if (GTK_IS_WIDGET(w))
 	{
 		gtk_widget_destroy(GTK_WIDGET(w));

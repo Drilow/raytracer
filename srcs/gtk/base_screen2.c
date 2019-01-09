@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 23:18:29 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/09 12:15:04 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,15 @@ extern t_global				g_global;
 
 void						on_key_press(GtkWidget *w, GdkEventKey *event)
 {
+	printf("MA COUILLE\n");
+	if (event->keyval != GDK_KEY_Escape)
+		return ;
+	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
+	{
+		printf("AHAHAHAHAHAHAH\n");
+		gtk_main_quit();
+		return ;
+	}
 	if (event->keyval == GDK_KEY_Escape && w == FILTER_VIEW.win)
 	{
 		redraw(true);
@@ -45,8 +54,6 @@ void						on_key_press(GtkWidget *w, GdkEventKey *event)
 			w = NULL;
 		}
 	}
-	else if (event->keyval != GDK_KEY_Escape)
-		return ;
 }
 
 void						end_open(GtkWidget *dialog)
@@ -77,14 +84,17 @@ void						end_open(GtkWidget *dialog)
 
 void						dialog_keyhook(GtkWidget *w, GdkEventKey *event)
 {
+	printf("%d\n", event->keyval);
 	if (event->keyval == GDK_KEY_Escape)
 	{
 		if (w == ADD_VIEW.win)
 			redraw(false);
 		gtk_widget_destroy(w);
 	}
-	else if (event->keyval == 65421)
+	else if (event->keyval == 65421 || event->keyval == 65293)
 		end_open(w);
+	else
+		return ;
 }
 
 void						open_file_append(gint res, GtkWidget *dialog)
@@ -93,7 +103,7 @@ void						open_file_append(gint res, GtkWidget *dialog)
 		end_open(dialog);
 	else
 	{
-		if (dialog)
+		if (GTK_IS_WIDGET(dialog))
 			gtk_widget_destroy(dialog);
 		dialog = NULL;
 	}
@@ -111,6 +121,8 @@ void						open_file(void)
 	dialog = gtk_file_chooser_dialog_new("Open File",
 	GTK_WINDOW(g_global.base_view.win), action, "_Cancel",
 	GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
+	g_signal_connect(G_OBJECT(dialog), "key-press-event",
+					G_CALLBACK(dialog_keyhook), NULL);
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
 		exit(1); // to fix
 	dir = getwd(dir);
@@ -121,7 +133,5 @@ void						open_file(void)
 	free(dir);
 	dir = NULL;
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
-	g_signal_connect(G_OBJECT(dialog), "key-press-event",
-					G_CALLBACK(dialog_keyhook), NULL);
 	open_file_append(res, dialog);
 }

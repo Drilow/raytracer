@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/07 18:56:22 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/09 11:30:16 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,3 @@ void				validate_edit(t_obj *o)
 	gtk_widget_destroy(GTK_WIDGET(SCENE_VIEW.win));
 	scene_win();
 }
-
-
-
-
-
-
-
-
