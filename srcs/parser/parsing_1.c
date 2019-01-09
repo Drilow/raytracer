@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/29 10:43:07 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/09 18:44:10 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ bool			parse(char *file)
 	if (get_started(val) == false)
 		return (false);
 	close(fd);
+	json_free(val);
 	return (true);
 }
