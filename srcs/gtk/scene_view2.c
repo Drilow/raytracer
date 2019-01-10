@@ -103,7 +103,8 @@ void					init_scene_view(void)
 
 	SCENE_VIEW.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_title(GTK_WINDOW(SCENE_VIEW.win), "Scene");
-	gtk_window_set_transient_for(GTK_WINDOW(SCENE_VIEW.win), GTK_WINDOW(GTKMGR.ui.main_view.win));
+	gtk_window_set_transient_for(GTK_WINDOW(SCENE_VIEW.win),
+		GTK_WINDOW(GTKMGR.ui.main_view.win));
 	gtk_window_set_destroy_with_parent(GTK_WINDOW(SCENE_VIEW.win), TRUE);
 	gtk_window_set_deletable(GTK_WINDOW(SCENE_VIEW.win), FALSE);
 	SCENE_VIEW.store = gtk_tree_store_new(N_COLUMNS, G_TYPE_STRING,
