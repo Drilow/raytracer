@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 17:02:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 17:04:11 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:31:47 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void				handle_base_elems_edit(t_obj *o)
 	attach_base_elens_edit(o);
 	handle_reflex_edit(o);
 	if (!(c = (GdkRGBA*)malloc(sizeof(GdkRGBA))))
-		exit(1); // to fix
+		exit_properly(1);
 	get_color_values(o->color, c);
 	ADD_VIEW.color = gtk_color_chooser_widget_new();
 	gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(ADD_VIEW.color), c);

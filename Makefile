@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2019/01/10 18:18:20 by adleau           ###   ########.fr        #
+#    Updated: 2019/01/10 18:28:00 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/edit_sphere.c			\
 		$(SRCPATH)gtk/edit_view.c			\
 		$(SRCPATH)gtk/edit_view2.c 			\
+		$(SRCPATH)gtk/exit_properly.c		\
 		$(SRCPATH)gtk/export_view.c			\
 		$(SRCPATH)gtk/filter_functions.c	\
 		$(SRCPATH)gtk/filter_view.c			\

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 17:35:46 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:34:21 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void				validate_edit(t_obj *o)
 	GdkRGBA			*c;
 
 	if (!(c = (GdkRGBA*)malloc(sizeof(GdkRGBA))))
-		exit(1); // to fix
+		exit_properly(1);
 	gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(ADD_VIEW.color), c);
 	o->color.r = (unsigned char)(c->red * 255);
 	o->color.g = (unsigned char)(c->green * 255);

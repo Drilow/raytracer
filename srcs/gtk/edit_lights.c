@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 17:33:56 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 16:59:34 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:32:06 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void				validate_light(t_light *l)
 	GdkRGBA			*c;
 
 	if (!(c = (GdkRGBA*)malloc(sizeof(GdkRGBA))))
-		exit(1); // to fix
+		exit_properly(1);
 	gtk_color_chooser_get_rgba(GTK_COLOR_CHOOSER(LIGHT_VIEW.color), c);
 	l->color.r = (unsigned char)(c->red * 255);
 	l->color.g = (unsigned char)(c->green * 255);
@@ -86,7 +86,7 @@ void				edit_light2(t_light *l)
 
 	attach_light_buttons(l);
 	if (!(c = (GdkRGBA*)malloc(sizeof(GdkRGBA))))
-		exit(1); // to fix
+		exit_properly(1);
 	get_color_values(l->color, c);
 	LIGHT_VIEW.color = gtk_color_chooser_widget_new();
 	gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(LIGHT_VIEW.color), c);

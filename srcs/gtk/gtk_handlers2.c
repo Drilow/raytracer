@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 17:07:17 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:33:30 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void				redraw(bool display)
 	else
 		redraw_if_false();
 	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-		exit(1); // to fix
+		exit_properly(1);
 	cairo_surface_mark_dirty(PIXMAP);
 	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
 	PIXMAP);

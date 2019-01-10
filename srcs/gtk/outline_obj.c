@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:36:15 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/03 04:30:09 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:34:08 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void				outline_obj(t_obj *o)
 	y = -1;
 	if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf,
 	WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
-		exit(1); //to fix
+		exit_properly(1);
 	while (++y < WIN_H)
 	{
 		x = -1;
@@ -66,7 +66,7 @@ void				outline_obj(t_obj *o)
 	CAIRO_FORMAT_RGB24, WIN_W, WIN_H,
 	cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-		exit(1); // to fix
+		exit_properly(1);
 	cairo_surface_mark_dirty(PIXMAP);
 	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
 	PIXMAP);

@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 17:01:34 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:32:52 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void				filter_win(void)
 
 	if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf,
 	WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
-		exit(1); //to fix
+		exit_properly(1);
 	init_filter_img();
 	FILTER_VIEW.win = gtk_dialog_new_with_buttons("Filters",
 	GTK_WINDOW(GTKMGR.ui.main_view.win),

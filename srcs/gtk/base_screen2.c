@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 18:23:12 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:30:34 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void						open_file(void)
 	g_signal_connect(G_OBJECT(dialog), "key-press-event",
 					G_CALLBACK(dialog_keyhook), NULL);
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
-		exit(1); // to fix
+		exit_properly(1);
 	dir = getwd(dir);
 	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
 	(dir = ft_strjoin(dir, "/scenes")));

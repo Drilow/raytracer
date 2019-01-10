@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 17:02:58 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:31:00 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void				add_addendum(t_obj *o)
 	o->next = g_global.r->objects;
 	g_global.r->objects = o;
 	if (!(o->obj = (t_sphere*)malloc(sizeof(t_sphere))))
-		exit(1); // to fix
+		exit_properly(1);
 	set_default_values(o);
 }
 

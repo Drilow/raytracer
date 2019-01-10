@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 20:43:24 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 18:31:21 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void					outline_obj(t_obj *o);
 void					export_view(void);
 void					handle_drawing(void);
 void					handle_radio_buttons(void);
+void					exit_properly(int ret);
 
 #endif
