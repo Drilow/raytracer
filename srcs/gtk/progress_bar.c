@@ -25,7 +25,7 @@ gboolean		update_progress(void)
 	{
 		fraction = (gfloat)PROGRESS_DATA.pos / (gfloat)PROGRESS_DATA.len;
 		pct = fraction * 100;
-		if (PROGRESS_DATA.nLastPct != pct)
+		if (PROGRESS_DATA.nlastpct != pct)
 		{
 			gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(PROGRESS_DATA.pbar),
 							fraction);
@@ -36,17 +36,17 @@ gboolean		update_progress(void)
 			free(tmp);
 			while (gtk_events_pending())
 				gtk_main_iteration();
-			PROGRESS_DATA.nLastPct = pct;
+			PROGRESS_DATA.nlastpct = pct;
 		}
 	}
-	if (PROGRESS_DATA.nLastPct >= 100)
+	if (PROGRESS_DATA.nlastpct >= 100)
 		return (TRUE);
 	return (FALSE);
 }
 
 static void		end_progress(void)
 {
-	PROGRESS_DATA.bProgressUp = FALSE;
+	PROGRESS_DATA.bprogressup = FALSE;
 	gtk_widget_destroy(GTK_WIDGET(PROGRESS_DATA.window));
 	pthread_mutex_destroy(&PROGRESS_DATA.g_mutex);
 	pthread_cond_destroy(&PROGRESS_DATA.g_cond_a);
@@ -59,12 +59,13 @@ void			progress_bar(void)
 	pthread_mutex_init(&PROGRESS_DATA.g_mutex, NULL);
 	pthread_cond_init(&PROGRESS_DATA.g_cond_a, NULL);
 	pthread_cond_init(&PROGRESS_DATA.g_cond_b, NULL);
-	PROGRESS_DATA.nLastPct = -1;
-	PROGRESS_DATA.bProgressUp = TRUE;
+	PROGRESS_DATA.nlastpct = -1;
+	PROGRESS_DATA.bprogressup = TRUE;
 	PROGRESS_DATA.pbar = NULL;
 	PROGRESS_DATA.window = NULL;
 	PROGRESS_DATA.window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_transient_for(GTK_WINDOW(PROGRESS_DATA.window), GTK_WINDOW(GTKMGR.ui.main_view.win));
+	gtk_window_set_transient_for(GTK_WINDOW(PROGRESS_DATA.window),
+		GTK_WINDOW(GTKMGR.ui.main_view.win));
 	gtk_window_set_destroy_with_parent(GTK_WINDOW(PROGRESS_DATA.window), TRUE);
 	gtk_window_set_title(GTK_WINDOW(PROGRESS_DATA.window), "Loading");
 	gtk_window_set_position(GTK_WINDOW(PROGRESS_DATA.window),

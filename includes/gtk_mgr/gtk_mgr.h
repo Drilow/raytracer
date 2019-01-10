@@ -25,20 +25,20 @@
 
 enum
 {
-							TYPE_COLUMN,
-							POS_X_COLUMN,
-							POS_Y_COLUMN,
-							POS_Z_COLUMN,
-							CHECKED_COLUMN,
-							CHECKED_ACTIVE,
-							OBJ_REF,
-							N_COLUMNS
+	TYPE_COLUMN,
+	POS_X_COLUMN,
+	POS_Y_COLUMN,
+	POS_Z_COLUMN,
+	CHECKED_COLUMN,
+	CHECKED_ACTIVE,
+	OBJ_REF,
+	N_COLUMNS
 };
 
-enum state
+enum						e_state
 {
-							STATE_A,
-							STATE_B
+	STATE_A,
+	STATE_B
 };
 
 typedef struct				s_switcher
@@ -73,14 +73,14 @@ typedef struct				s_progress_data
 {
 	GtkWidget				*pbar;
 	GtkWidget				*window;
-	int						bProgressUp;
-	int						nLastPct;
+	int						bprogressup;
+	int						nlastpct;
 	long					pos;
 	long					len;
-	enum state 				g_state;
+	enum e_state			g_state;
 	pthread_mutex_t			g_mutex;
-	pthread_cond_t      	g_cond_a;
-	pthread_cond_t      	g_cond_b;
+	pthread_cond_t			g_cond_a;
+	pthread_cond_t			g_cond_b;
 }							t_progress_data;
 
 typedef struct				s_light_view
@@ -226,7 +226,6 @@ gboolean					is_obj(int type);
 void						progress_bar();
 void						progress_thread_handler(gdouble x);
 void						progress_main_handler();
-gboolean					updateProgress();
 unsigned char				*ft_ustrdup(unsigned char *s, int size);
 void						edit_light(t_light *l, GtkWidget *parent);
 void						add_height_spin(void);

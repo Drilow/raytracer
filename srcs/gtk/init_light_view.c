@@ -14,11 +14,6 @@
 #include <parser/parser.h>
 #include <fcntl.h>
 #include <libft.h>
-#define PIXMAP g_global.r->gtk_mgr.pixmap
-#define GTKMGR g_global.r->gtk_mgr
-#define LIGHT_VIEW g_global.r->gtk_mgr.ui.light_view
-#define SCENE_VIEW g_global.r->gtk_mgr.ui.scene_view
-#define FILTER_VIEW g_global.r->gtk_mgr.ui.filter_view
 
 extern t_global		g_global;
 
