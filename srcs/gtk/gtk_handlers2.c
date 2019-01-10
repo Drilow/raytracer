@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 14:53:03 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 17:07:17 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@
 #define ADD_VIEW g_global.r->gtk_mgr.ui.add_view
 
 extern t_global		g_global;
-
-void				get_color_values(t_rgb col, GdkRGBA *c)
-{
-	c->red = (gdouble)(col.r) / 255;
-	c->green = (gdouble)(col.g) / 255;
-	c->blue = (gdouble)(col.b) / 255;
-	c->alpha = (gdouble)(255 - col.trans) / 255;
-}
 
 void				set_for_cone(t_obj *o)
 {
@@ -85,6 +77,20 @@ void				deactivate_buttons(GtkWidget *except)
 		GTK_STATE_FLAG_NORMAL, true);
 }
 
+void				redraw_if_false(void)
+{
+	free(GTKMGR.buf);
+	GTKMGR.buf = NULL;
+	if (!(GTKMGR.buf = ft_ustrdup(GTKMGR.saved,
+	WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
+		exit(1); //to fix
+	if (PIXMAP)
+		cairo_surface_destroy(PIXMAP);
+	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.saved,
+	CAIRO_FORMAT_RGB24,
+	WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+}
+
 void				redraw(bool display)
 {
 	if (display == true)
@@ -97,18 +103,7 @@ void				redraw(bool display)
 		WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 	}
 	else
-	{
-		free(GTKMGR.buf);
-		GTKMGR.buf = NULL;
-		if (!(GTKMGR.buf = ft_ustrdup(GTKMGR.saved,
-		WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
-			exit(1); //to fix
-		if (PIXMAP)
-			cairo_surface_destroy(PIXMAP);
-		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.saved,
-		CAIRO_FORMAT_RGB24,
-		WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
-	}
+		redraw_if_false();
 	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
 		exit(1); // to fix
 	cairo_surface_mark_dirty(PIXMAP);

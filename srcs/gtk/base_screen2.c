@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/09 14:31:13 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 16:41:05 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,44 +22,6 @@
 #define FILTER_VIEW GTKMGR.ui.filter_view
 
 extern t_global				g_global;
-
-void						on_key_press(GtkWidget *w, GdkEventKey *event)
-{
-	if (event->keyval != GDK_KEY_Escape)
-		return ;
-	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
-	{
-		if (g_global.r)
-			free_objects(g_global.r->objects);
-		gtk_main_quit();
-		return ;
-	}
-	if (event->keyval == GDK_KEY_Escape && w == FILTER_VIEW.win)
-	{
-		redraw(true);
-		gtk_widget_destroy(w);
-		return ;
-	}
-	if (g_global.r && w == ADD_VIEW.win && event->keyval == GDK_KEY_Escape)
-	{
-		redraw(false);
-		return ;
-	}
-	if (event->keyval == GDK_KEY_Escape &&
-		w != NULL && w != PROGRESS_DATA.window)
-	{
-		if (w == GTKMGR.ui.main_view.win)
-		{
-			free_objects(g_global.r->objects);
-		}
-		if (GTK_IS_WIDGET(w))
-		{
-			gtk_widget_destroy(GTK_WIDGET(w));
-			w = NULL;
-		}
-	}
-	printf("ASKIP\n");
-}
 
 void						end_open(GtkWidget *dialog)
 {

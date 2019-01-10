@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 16:20:39 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 17:15:48 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,5 +213,20 @@ gboolean					updateProgress();
 unsigned char				*ft_ustrdup(unsigned char *s, int size);
 void						edit_light(t_light *l, GtkWidget *parent);
 void						add_height_spin(void);
+void						init_light_view(void);
+void						init_filter_img(void);
+void						handle_reflex_edit(t_obj *o);
+void						attach_base_elens_edit(t_obj *o);
+void						handle_base_elems_edit(t_obj *o);
+void						add_cube(void);
+void						add_tetra(void);
+void						add_dode(void);
+void						add_height_spin(void);
+void						add_pyramid(void);
+void						radio_toggle_2(void);
+void						radio_toggle(GtkWidget *button);
+void						handle_cube_template(void);
+void						for_template(void);
+void						for_file(GtkWidget *button);
 
 #endif

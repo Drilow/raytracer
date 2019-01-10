@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2019/01/02 20:05:44 by adleau           ###   ########.fr        #
+#    Updated: 2019/01/10 17:13:25 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,8 +46,9 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/radio_button.c		\
 		$(SRCPATH)gtk/validate_objects.c	\
 		$(SRCPATH)gtk/poly_view.c			\
-		$(SRCPATH)gtk/gtk_handlers.c			\
-		$(SRCPATH)gtk/gtk_handlers2.c			\
+		$(SRCPATH)gtk/gtk_handlers.c		\
+		$(SRCPATH)gtk/gtk_handlers2.c		\
+		$(SRCPATH)gtk/gtk_handlers3.c		\
 		$(SRCPATH)gtk/outline_obj.c			\
 		$(SRCPATH)gtk/init_variables.c		\
 		$(SRCPATH)gtk/validation.c			\
@@ -96,6 +97,11 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)raytracing/raytracing.c 	\
 		$(SRCPATH)raytracing/colors.c 	\
 		$(SRCPATH)gtk/draw_px.c 	\
+		$(SRCPATH)gtk/key_events.c 	\
+		$(SRCPATH)gtk/init_light_view.c 	\
+		$(SRCPATH)gtk/edit_view2.c 	\
+		$(SRCPATH)gtk/add_templates.c 	\
+		$(SRCPATH)gtk/radio_toggle.c 	\
 		$(SRCPATH)raytracing/collision/normal_collision_vector.c 	\
 		$(SRCPATH)raytracing/collision/obj_collision.c 	\
 

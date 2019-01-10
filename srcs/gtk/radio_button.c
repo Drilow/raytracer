@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:06:53 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 16:21:23 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 17:14:46 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 extern t_global		g_global;
 
-static void			for_file(GtkWidget *button)
+void			for_file(GtkWidget *button)
 {
 	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
 	{
@@ -44,7 +44,7 @@ static void			for_file(GtkWidget *button)
 	}
 }
 
-static void			for_template(void)
+void					handle_cube_template(void)
 {
 	ADD_VIEW.cube = gtk_button_new();
 	ADD_VIEW.cube_img = gtk_image_new_from_file("uiconfig/cube.png");
@@ -53,6 +53,11 @@ static void			for_template(void)
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.cube, 2, 6, 1, 1);
 	g_signal_connect(G_OBJECT(ADD_VIEW.cube), "clicked", G_CALLBACK(add_cube),
 	NULL);
+}
+
+void					for_template(void)
+{
+	handle_cube_template();
 	ADD_VIEW.tetra = gtk_button_new();
 	ADD_VIEW.tetra_img = gtk_image_new_from_file("uiconfig/tetra.png");
 	gtk_widget_set_tooltip_text(ADD_VIEW.tetra, "Tetrahedron");
@@ -72,51 +77,9 @@ static void			for_template(void)
 	gtk_widget_set_tooltip_text(ADD_VIEW.pyramid, "Pyramid");
 	gtk_button_set_image(GTK_BUTTON(ADD_VIEW.pyramid), ADD_VIEW.pyramid_img);
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.pyramid, 3, 7, 1, 1);
-	g_signal_connect(G_OBJECT(ADD_VIEW.pyramid), "clicked", G_CALLBACK(add_pyramid),
-	NULL);
+	g_signal_connect(G_OBJECT(ADD_VIEW.pyramid),
+	"clicked", G_CALLBACK(add_pyramid), NULL);
 	gtk_widget_show_all(ADD_VIEW.win);
-}
-
-static void			radio_toggle(GtkWidget *button)
-{
-	if (ADD_VIEW.height_img)
-	{
-		gtk_widget_destroy(ADD_VIEW.height_img);
-		gtk_widget_destroy(ADD_VIEW.height_spin);
-		ADD_VIEW.height_img = NULL;
-	}
-	if (button == ADD_VIEW.file_check)
-		for_file(button);
-	if (button == ADD_VIEW.from_template)
-	{
-		if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
-			for_template();
-		else
-		{
-			if (ADD_VIEW.cube)
-			{
-				gtk_widget_destroy(ADD_VIEW.cube);
-				ADD_VIEW.cube = NULL;
-			}
-			if (ADD_VIEW.tetra)
-			{
-				gtk_widget_destroy(ADD_VIEW.tetra);
-				ADD_VIEW.tetra = NULL;
-			}
-			if (ADD_VIEW.dode)
-			{
-				gtk_widget_destroy(ADD_VIEW.dode);
-				ADD_VIEW.tetra = NULL;
-			}
-			if (ADD_VIEW.pyramid)
-			{
-				gtk_widget_destroy(ADD_VIEW.pyramid);
-				ADD_VIEW.tetra = NULL;
-			}
-		}
-	}
-	if (ADD_VIEW.saved_type == 68 && (button == ADD_VIEW.same))
-		add_height_spin();
 }
 
 void				handle_radio_buttons(void)

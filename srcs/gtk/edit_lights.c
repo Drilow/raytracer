@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 17:33:56 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/03 04:52:53 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 16:59:34 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,6 @@
 
 extern t_global		g_global;
 
-void				init_light_view(void)
-{
-	LIGHT_VIEW.win = NULL;
-	LIGHT_VIEW.grid = NULL;
-	LIGHT_VIEW.x_label = NULL;
-	LIGHT_VIEW.y_label = NULL;
-	LIGHT_VIEW.z_label = NULL;
-	LIGHT_VIEW.translate_img = NULL;
-	LIGHT_VIEW.translate_x_spin = NULL;
-	LIGHT_VIEW.translate_y_spin = NULL;
-	LIGHT_VIEW.translate_z_spin = NULL;
-	LIGHT_VIEW.color = NULL;
-}
-
 void				validate_light(t_light *l)
 {
 	GdkRGBA			*c;
@@ -47,11 +33,11 @@ void				validate_light(t_light *l)
 	l->color.b = (unsigned char)(c->blue * 255);
 	l->color.trans = ((unsigned char)255 - (c->alpha * 255));
 	l->source.x =
-		gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_x_spin));
+	gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_x_spin));
 	l->source.y =
-		gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_y_spin));
+	gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_y_spin));
 	l->source.z =
-		gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_z_spin));
+	gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_z_spin));
 	redraw(true);
 	gtk_widget_destroy(GTK_WIDGET(SCENE_VIEW.win));
 	scene_win();
@@ -78,23 +64,31 @@ void				handle_light_validation(t_light *l)
 	}
 }
 
-void				edit_light2(t_light *l)
+void				attach_light_buttons(t_light *l)
 {
 	GtkAdjustment	*adj;
-	GdkRGBA			*c;
 
-	gtk_grid_attach(GTK_GRID(LIGHT_VIEW.grid), LIGHT_VIEW.translate_img, 0, 0, 1, 1);
+	gtk_grid_attach(GTK_GRID(LIGHT_VIEW.grid),
+	LIGHT_VIEW.translate_img, 0, 0, 1, 1);
 	adj = gtk_adjustment_new(l->source.x, -1000, 1000, .5, 1, 10);
 	LIGHT_VIEW.translate_x_spin = gtk_spin_button_new(adj, 1, 4);
-	gtk_grid_attach(GTK_GRID(LIGHT_VIEW.grid), LIGHT_VIEW.translate_x_spin, 1, 0, 1, 1);
-
+	gtk_grid_attach(GTK_GRID(LIGHT_VIEW.grid),
+	LIGHT_VIEW.translate_x_spin, 1, 0, 1, 1);
 	adj = gtk_adjustment_new(l->source.y, -1000, 1000, .5, 1, 10);
 	LIGHT_VIEW.translate_y_spin = gtk_spin_button_new(adj, 1, 4);
-	gtk_grid_attach(GTK_GRID(LIGHT_VIEW.grid), LIGHT_VIEW.translate_y_spin, 2, 0, 1, 1);
-
+	gtk_grid_attach(GTK_GRID(LIGHT_VIEW.grid),
+	LIGHT_VIEW.translate_y_spin, 2, 0, 1, 1);
 	adj = gtk_adjustment_new(l->source.z, -1000, 1000, .5, 1, 10);
 	LIGHT_VIEW.translate_z_spin = gtk_spin_button_new(adj, 1, 4);
-	gtk_grid_attach(GTK_GRID(LIGHT_VIEW.grid), LIGHT_VIEW.translate_z_spin, 3, 0, 1, 1);
+	gtk_grid_attach(GTK_GRID(LIGHT_VIEW.grid),
+	LIGHT_VIEW.translate_z_spin, 3, 0, 1, 1);
+}
+
+void				edit_light2(t_light *l)
+{
+	GdkRGBA			*c;
+
+	attach_light_buttons(l);
 	if (!(c = (GdkRGBA*)malloc(sizeof(GdkRGBA))))
 		exit(1); // to fix
 	get_color_values(l->color, c);

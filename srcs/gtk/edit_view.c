@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 16:21:11 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 17:02:58 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,47 +20,15 @@
 
 extern t_global		g_global;
 
-void				handle_reflex_edit(t_obj *o)
+void				add_addendum(t_obj *o)
 {
-	GtkAdjustment	*adj;
-
-	ADD_VIEW.reflex_img = gtk_image_new_from_file("uiconfig/reflex.png");
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.reflex_img,
-	0, 8, 1, 1);
-	adj = gtk_adjustment_new(o->reflex, 0, 255, 1, 1, 0);
-	ADD_VIEW.reflex_spin = gtk_spin_button_new(adj, 1, 4);
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.reflex_spin,
-	1, 8, 3, 1);
-}
-
-void				handle_base_elems_edit(t_obj *o)
-{
-	GtkAdjustment	*adj_mv;
-	GdkRGBA			*c;
-
-	ADD_VIEW.translate_img = gtk_image_new_from_file("uiconfig/move.png");
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.translate_img,
-	0, 3, 1, 1);
-	adj_mv = gtk_adjustment_new(o->position.x, -1000, 1000, .5, 1, 10);
-	ADD_VIEW.translate_x_spin = gtk_spin_button_new(adj_mv, 1, 4);
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.translate_x_spin,
-	1, 3, 1, 1);
-	adj_mv = gtk_adjustment_new(o->position.y, -1000, 1000, .5, 1, 10);
-	ADD_VIEW.translate_y_spin = gtk_spin_button_new(adj_mv, 1, 4);
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.translate_y_spin,
-	2, 3, 1, 1);
-	adj_mv = gtk_adjustment_new(o->position.z, -1000, 1000, .5, 1, 10);
-	ADD_VIEW.translate_z_spin = gtk_spin_button_new(adj_mv, 1, 4);
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.translate_z_spin,
-	3, 3, 1, 1);
-	handle_reflex_edit(o);
-	if (!(c = (GdkRGBA*)malloc(sizeof(GdkRGBA))))
+	gtk_window_set_title(GTK_WINDOW(ADD_VIEW.win), "Add Object");
+	o->type = 1;
+	o->next = g_global.r->objects;
+	g_global.r->objects = o;
+	if (!(o->obj = (t_sphere*)malloc(sizeof(t_sphere))))
 		exit(1); // to fix
-	get_color_values(o->color, c);
-	ADD_VIEW.color = gtk_color_chooser_widget_new();
-	gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(ADD_VIEW.color), c);
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.color, 0, 10, 4, 1);
-	free(c);
+	set_default_values(o);
 }
 
 void				actual_edit_view(t_obj *o)
@@ -72,15 +40,7 @@ void				actual_edit_view(t_obj *o)
 		handle_base_elems_edit(o);
 	}
 	if (o->type == -5)
-	{
-		gtk_window_set_title(GTK_WINDOW(ADD_VIEW.win), "Add Object");
-		o->type = 1;
-		o->next = g_global.r->objects;
-		g_global.r->objects = o;
-		if (!(o->obj = (t_sphere*)malloc(sizeof(t_sphere))))
-			exit(1); // to fix
-		set_default_values(o);
-	}
+		add_addendum(o);
 	if (o->type == 1)
 		edit_sphere_view((t_sphere*)o->obj);
 	else if (o->type == 2)
