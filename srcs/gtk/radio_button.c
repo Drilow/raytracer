@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:06:53 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 17:14:46 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 17:42:59 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 extern t_global		g_global;
 
-void			for_file(GtkWidget *button)
+void					for_file(GtkWidget *button)
 {
 	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
 	{
@@ -79,7 +79,7 @@ void					for_template(void)
 	gtk_widget_show_all(ADD_VIEW.win);
 }
 
-void				handle_radio_buttons(void)
+void					handle_radio_buttons(void)
 {
 	ADD_VIEW.same = gtk_radio_button_new_with_label(NULL, "Current object");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.same, 0, 5, 2, 1);

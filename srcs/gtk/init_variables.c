@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 09:30:07 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 15:11:38 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 17:38:10 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,6 @@ void			init_filter_view(void)
 
 void			init_gtk_variables(void)
 {
-	int			y;
-
-	y = -1;
 	GTKMGR.editmode = 0;
 	init_main_view();
 	init_add_view();

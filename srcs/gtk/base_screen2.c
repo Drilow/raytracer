@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 16:41:05 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 17:41:09 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void						end_open(GtkWidget *dialog)
 	if (!parse(filename))
 		usage("Error : invalid argument.", 1);
 	g_free(filename);
+	filename = NULL;
 	if (dialog)
 	{
 		gtk_widget_destroy(dialog);
@@ -46,7 +47,6 @@ void						end_open(GtkWidget *dialog)
 
 void						dialog_keyhook(GtkWidget *w, GdkEventKey *event)
 {
-	printf("%d\n", event->keyval);
 	if (event->keyval == GDK_KEY_Escape)
 	{
 		if (w == ADD_VIEW.win)

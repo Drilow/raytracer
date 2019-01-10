@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:52 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/09 14:28:01 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 17:40:52 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,29 +57,5 @@ void			free_objects(t_obj *start)
 		tmp = tmp->next;
 		free(swap);
 		swap = NULL;
-	}
-}
-
-void			destroy_scene(void)
-{
-	t_obj			*to_free;
-	t_obj			*tmp;
-
-	to_free = g_global.r->objects;
-	while (to_free)
-	{
-		tmp = to_free->next;
-		if (to_free->type == 6)
-			free_poly((t_poly_obj*)to_free->obj);
-		else if (to_free->obj)
-		{
-			free(to_free->obj);
-			to_free->obj = NULL;
-		}
-		if (to_free)
-		{
-			free(to_free);
-			to_free = NULL;
-		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:57:37 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 17:10:29 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 17:37:30 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void				open_poly_obj(void)
 	if (res == GTK_RESPONSE_ACCEPT)
 		ADD_VIEW.obj_file_path =
 		gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+	free(dir);
+	dir = NULL;
 	gtk_widget_destroy(dialog);
 }
 
