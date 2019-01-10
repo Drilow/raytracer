@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:06:53 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/02 21:45:05 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 16:21:23 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,12 @@ static void			for_template(void)
 
 static void			radio_toggle(GtkWidget *button)
 {
+	if (ADD_VIEW.height_img)
+	{
+		gtk_widget_destroy(ADD_VIEW.height_img);
+		gtk_widget_destroy(ADD_VIEW.height_spin);
+		ADD_VIEW.height_img = NULL;
+	}
 	if (button == ADD_VIEW.file_check)
 		for_file(button);
 	if (button == ADD_VIEW.from_template)
@@ -109,6 +115,8 @@ static void			radio_toggle(GtkWidget *button)
 			}
 		}
 	}
+	if (ADD_VIEW.saved_type == 68 && (button == ADD_VIEW.same))
+		add_height_spin();
 }
 
 void				handle_radio_buttons(void)

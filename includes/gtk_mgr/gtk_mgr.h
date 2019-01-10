@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/03 00:55:04 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 16:20:39 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,11 @@ typedef struct				s_add_view
 	GtkWidget				*dode_img;
 	GtkWidget				*pyramid;
 	GtkWidget				*pyramid_img;
+	GtkWidget				*height_img;
+	GtkWidget				*height_spin;
 	GtkWidget				*file_opener;
 	char					*obj_file_path;
+	int						saved_type;
 }							t_add_view;
 
 typedef struct				s_main_view
@@ -209,5 +212,6 @@ void						progress_main_handler();
 gboolean					updateProgress();
 unsigned char				*ft_ustrdup(unsigned char *s, int size);
 void						edit_light(t_light *l, GtkWidget *parent);
+void						add_height_spin(void);
 
 #endif

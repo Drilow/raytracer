@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 09:30:07 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/09 12:06:32 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 15:11:38 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void			init_add_view2(void)
 	GTKMGR.ui.add_view.file_opener = NULL;
 	GTKMGR.ui.add_view.obj_file_path = NULL;
 	GTKMGR.ui.add_view.reflex_spin = NULL;
+	GTKMGR.ui.add_view.height_spin = NULL;
+	GTKMGR.ui.add_view.height_img = NULL;
 }
 
 void			init_add_view(void)

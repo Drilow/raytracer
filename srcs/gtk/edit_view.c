@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/09 11:51:43 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 16:21:11 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void				handle_base_elems_edit(t_obj *o)
 	get_color_values(o->color, c);
 	ADD_VIEW.color = gtk_color_chooser_widget_new();
 	gtk_color_chooser_set_rgba(GTK_COLOR_CHOOSER(ADD_VIEW.color), c);
-	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.color, 0, 9, 4, 1);
+	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.color, 0, 10, 4, 1);
 	free(c);
 }
 
@@ -90,7 +90,11 @@ void				actual_edit_view(t_obj *o)
 	else if (o->type == 4)
 		edit_cylinder_view((t_cylinder*)o->obj);
 	else if (o->type / 10 == 6 || o->type == 6)
+	{
 		edit_poly_view();
+		if (o->type == 68)
+			add_height_spin();
+	}
 }
 
 void				edit_win_3(t_obj *o)
@@ -149,6 +153,7 @@ void				edit_win(t_obj *o, GtkWidget *parent)
 	GtkWidget		*content_area;
 
 	init_add_view();
+	ADD_VIEW.saved_type = o->type;
 	ADD_VIEW.sphere_img = gtk_image_new_from_file("uiconfig/sphere.png");
 	ADD_VIEW.plane_img = gtk_image_new_from_file("uiconfig/plane.png");
 	ADD_VIEW.cone_img = gtk_image_new_from_file("uiconfig/cone.png");
