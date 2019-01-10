@@ -15,12 +15,6 @@
 # include <pthread.h>
 # define THREADS_NB 8
 
-enum state
-{
-					STATE_A,
-					STATE_B
-};
-
 typedef struct		s_thread
 {
 	void			*data;

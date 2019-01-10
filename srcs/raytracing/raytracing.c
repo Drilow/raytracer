@@ -12,7 +12,6 @@
 
 #include <raytracing/collision.h>
 #include <global.h>
-#define GTKMGR g_global.gtk_mgr
 
 extern t_global			g_global;
 

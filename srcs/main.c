@@ -20,7 +20,6 @@
 #include <parser/parser.h>
 #include <display/display.h>
 #define EVENT_PTR g_global.sdl_mgr.event
-#define PIXMAP g_global.r->gtk_mgr.pixmap
 
 t_global		g_global;
 

@@ -13,8 +13,6 @@
 #include <global.h>
 #include <fcntl.h>
 #include <parser/parser.h>
-#define PIXMAP g_global.r->gtk_mgr.pixmap
-#define GTKMGR g_global.r->gtk_mgr
 
 extern t_global		g_global;
 

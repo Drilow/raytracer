@@ -15,17 +15,30 @@
 # include <gtk/gtk.h>
 # include <stdbool.h>
 # include <objects/object.h>
+# define GTKMGR 			g_global.r->gtk_mgr
+# define PIXMAP 			GTKMGR.pixmap
+# define SCENE_VIEW 		GTKMGR.ui.scene_view
+# define PROGRESS_DATA 		GTKMGR.ui.progress_data
+# define ADD_VIEW 			GTKMGR.ui.add_view
+# define FILTER_VIEW 		GTKMGR.ui.filter_view
+# define LIGHT_VIEW 		GTKMGR.ui.light_view
 
 enum
 {
-	TYPE_COLUMN,
-	POS_X_COLUMN,
-	POS_Y_COLUMN,
-	POS_Z_COLUMN,
-	CHECKED_COLUMN,
-	CHECKED_ACTIVE,
-	OBJ_REF,
-	N_COLUMNS
+							TYPE_COLUMN,
+							POS_X_COLUMN,
+							POS_Y_COLUMN,
+							POS_Z_COLUMN,
+							CHECKED_COLUMN,
+							CHECKED_ACTIVE,
+							OBJ_REF,
+							N_COLUMNS
+};
+
+enum state
+{
+							STATE_A,
+							STATE_B
 };
 
 typedef struct				s_switcher
@@ -64,6 +77,10 @@ typedef struct				s_progress_data
 	int						nLastPct;
 	long					pos;
 	long					len;
+	enum state 				g_state;
+	pthread_mutex_t			g_mutex;
+	pthread_cond_t      	g_cond_a;
+	pthread_cond_t      	g_cond_b;
 }							t_progress_data;
 
 typedef struct				s_light_view

@@ -11,21 +11,15 @@
 /* ************************************************************************** */
 
 #include <libft.h>
-#include <rt.h>
-#include <thread/thread.h>
 #include <global.h>
-#define PROGRESS_DATA g_global.r->gtk_mgr.ui.progress_data
 
 extern t_global				g_global;
-extern enum state			g_state;
-extern pthread_mutex_t		g_mutex;
-extern pthread_cond_t		g_cond_a;
-extern pthread_cond_t		g_cond_b;
 
 gboolean		update_progress(void)
 {
 	gdouble		fraction;
 	int			pct;
+	char		*tmp;
 
 	if (PROGRESS_DATA.len > 0)
 	{
@@ -35,8 +29,11 @@ gboolean		update_progress(void)
 		{
 			gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(PROGRESS_DATA.pbar),
 							fraction);
+			tmp = ft_itoa(pct);
+			tmp = ft_strmerge(" %", tmp, 2, 2);
 			gtk_progress_bar_set_text(GTK_PROGRESS_BAR(PROGRESS_DATA.pbar),
-				ft_strjoin(ft_itoa(pct), " %"));
+				tmp);
+			free(tmp);
 			while (gtk_events_pending())
 				gtk_main_iteration();
 			PROGRESS_DATA.nLastPct = pct;
@@ -51,15 +48,24 @@ static void		end_progress(void)
 {
 	PROGRESS_DATA.bProgressUp = FALSE;
 	gtk_widget_destroy(GTK_WIDGET(PROGRESS_DATA.window));
+	pthread_mutex_destroy(&PROGRESS_DATA.g_mutex);
+	pthread_cond_destroy(&PROGRESS_DATA.g_cond_a);
+	pthread_cond_destroy(&PROGRESS_DATA.g_cond_b);
 }
 
 void			progress_bar(void)
 {
+	PROGRESS_DATA.g_state = STATE_A;
+	pthread_mutex_init(&PROGRESS_DATA.g_mutex, NULL);
+	pthread_cond_init(&PROGRESS_DATA.g_cond_a, NULL);
+	pthread_cond_init(&PROGRESS_DATA.g_cond_b, NULL);
 	PROGRESS_DATA.nLastPct = -1;
 	PROGRESS_DATA.bProgressUp = TRUE;
 	PROGRESS_DATA.pbar = NULL;
 	PROGRESS_DATA.window = NULL;
 	PROGRESS_DATA.window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_transient_for(GTK_WINDOW(PROGRESS_DATA.window), GTK_WINDOW(GTKMGR.ui.main_view.win));
+	gtk_window_set_destroy_with_parent(GTK_WINDOW(PROGRESS_DATA.window), TRUE);
 	gtk_window_set_title(GTK_WINDOW(PROGRESS_DATA.window), "Loading");
 	gtk_window_set_position(GTK_WINDOW(PROGRESS_DATA.window),
 		GTK_WIN_POS_CENTER);
@@ -72,16 +78,16 @@ void			progress_bar(void)
 
 void			progress_thread_handler(gdouble x)
 {
-	pthread_mutex_lock(&g_mutex);
-	while (g_state != STATE_B)
-		pthread_cond_wait(&g_cond_b, &g_mutex);
-	pthread_mutex_unlock(&g_mutex);
+	pthread_mutex_lock(&PROGRESS_DATA.g_mutex);
+	while (PROGRESS_DATA.g_state != STATE_B)
+		pthread_cond_wait(&PROGRESS_DATA.g_cond_b, &PROGRESS_DATA.g_mutex);
+	pthread_mutex_unlock(&PROGRESS_DATA.g_mutex);
 	PROGRESS_DATA.pos = x;
 	PROGRESS_DATA.len = WIN_W;
-	pthread_mutex_lock(&g_mutex);
-	g_state = STATE_A;
-	pthread_cond_signal(&g_cond_a);
-	pthread_mutex_unlock(&g_mutex);
+	pthread_mutex_lock(&PROGRESS_DATA.g_mutex);
+	PROGRESS_DATA.g_state = STATE_A;
+	pthread_cond_signal(&PROGRESS_DATA.g_cond_a);
+	pthread_mutex_unlock(&PROGRESS_DATA.g_mutex);
 }
 
 void			progress_main_handler(void)
@@ -91,19 +97,19 @@ void			progress_main_handler(void)
 	b_lock = FALSE;
 	while (b_lock == FALSE)
 	{
-		pthread_mutex_lock(&g_mutex);
-		while (g_state != STATE_A)
-			pthread_cond_wait(&g_cond_a, &g_mutex);
-		pthread_mutex_unlock(&g_mutex);
+		pthread_mutex_lock(&PROGRESS_DATA.g_mutex);
+		while (PROGRESS_DATA.g_state != STATE_A)
+			pthread_cond_wait(&PROGRESS_DATA.g_cond_a, &PROGRESS_DATA.g_mutex);
+		pthread_mutex_unlock(&PROGRESS_DATA.g_mutex);
 		b_lock = update_progress();
 		if (b_lock == FALSE)
 		{
-			pthread_mutex_lock(&g_mutex);
+			pthread_mutex_lock(&PROGRESS_DATA.g_mutex);
 			while (gtk_events_pending())
 				gtk_main_iteration();
-			g_state = STATE_B;
-			pthread_cond_signal(&g_cond_b);
-			pthread_mutex_unlock(&g_mutex);
+			PROGRESS_DATA.g_state = STATE_B;
+			pthread_cond_signal(&PROGRESS_DATA.g_cond_b);
+			pthread_mutex_unlock(&PROGRESS_DATA.g_mutex);
 		}
 	}
 	end_progress();
