@@ -28,6 +28,12 @@ enum
 	N_COLUMNS
 };
 
+enum state
+{
+					STATE_A,
+					STATE_B
+};
+
 typedef struct				s_switcher
 {
 	t_obj					*o;
@@ -64,6 +70,10 @@ typedef struct				s_progress_data
 	int						nLastPct;
 	long					pos;
 	long					len;
+	enum state 				g_state;
+	pthread_mutex_t			g_mutex;
+	pthread_cond_t      	g_cond_a;
+	pthread_cond_t      	g_cond_b;
 }							t_progress_data;
 
 typedef struct				s_light_view
