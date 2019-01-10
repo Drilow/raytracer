@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/09 11:11:10 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/10 17:49:52 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void			handle_base_view(void)
 	g_global.base_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(g_global.base_view.win),
 	GTK_WIN_POS_CENTER);
-	gtk_window_set_title(GTK_WINDOW(g_global.base_view.win), "raytracer");
+	gtk_window_set_title(GTK_WINDOW(g_global.base_view.win), "RT");
 	g_global.base_view.grid = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(g_global.base_view.win),
 	g_global.base_view.grid);

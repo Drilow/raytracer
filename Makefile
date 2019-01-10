@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2019/01/10 17:13:25 by adleau           ###   ########.fr        #
+#    Updated: 2019/01/10 17:58:41 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME = rt
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -O3 $(shell pkg-config --cflags gtk+-3.0) #-g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -O3 $(shell pkg-config --cflags gtk+-3.0)
 
 LDFLAGS = 	-framework IOKit -framework CoreVideo $(shell pkg-config --libs gtk+-3.0)
 
@@ -28,6 +28,10 @@ LDFLAGS = 	-framework IOKit -framework CoreVideo $(shell pkg-config --libs gtk+-
 SRCPATH = srcs/
 
 SRC =   $(SRCPATH)main.c \
+		$(SRCPATH)display/display.c 		\
+		$(SRCPATH)display/antialiasing.c	\
+		$(SRCPATH)extra/ft_rgb.c			\
+		$(SRCPATH)geometry/rpoint_fcts.c	\
 		$(SRCPATH)gtk/scene_view.c			\
 		$(SRCPATH)gtk/scene_view2.c			\
 		$(SRCPATH)gtk/progress_bar.c		\
@@ -53,16 +57,31 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/init_variables.c		\
 		$(SRCPATH)gtk/validation.c			\
 		$(SRCPATH)gtk/validate_base_obj.c	\
-		$(SRCPATH)gtk/edit_base_view.c	\
+		$(SRCPATH)gtk/edit_base_view.c		\
+		$(SRCPATH)gtk/draw_px.c 			\
+		$(SRCPATH)gtk/key_events.c		 	\
+		$(SRCPATH)gtk/init_light_view.c 	\
+		$(SRCPATH)gtk/edit_view2.c 			\
+		$(SRCPATH)gtk/add_templates.c	 	\
+		$(SRCPATH)gtk/radio_toggle.c 		\
 		$(SRCPATH)maths/transformations.c	\
 		$(SRCPATH)maths/ft_solve_equation.c	\
 		$(SRCPATH)maths/ft_delta.c			\
 		$(SRCPATH)maths/ft_deltasq.c		\
+		$(SRCPATH)maths/vector_fcts_1.c		\
+		$(SRCPATH)maths/vector_fcts_2.c		\
+		$(SRCPATH)objects/camera.c			\
+		$(SRCPATH)objects/plane.c			\
+		$(SRCPATH)objects/sphere.c			\
+		$(SRCPATH)objects/cone_1.c			\
+		$(SRCPATH)objects/cone_2.c			\
+		$(SRCPATH)objects/cylinder_1.c		\
+		$(SRCPATH)objects/cylinder_2.c		\
 		$(SRCPATH)parser/get_tetrahedron.c	\
-		$(SRCPATH)parser/set_obj.c	\
-		$(SRCPATH)parser/get_cube.c	\
+		$(SRCPATH)parser/set_obj.c			\
+		$(SRCPATH)parser/get_cube.c			\
 		$(SRCPATH)parser/parsing_1.c		\
-		$(SRCPATH)parser/parse_1.c		\
+		$(SRCPATH)parser/parse_1.c			\
 		$(SRCPATH)parser/parse_plane.c		\
 		$(SRCPATH)parser/parse_sphere.c		\
 		$(SRCPATH)parser/parse_pyra.c		\
@@ -70,40 +89,21 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)parser/parse_light.c		\
 		$(SRCPATH)parser/parse_cone.c		\
 		$(SRCPATH)parser/parse_cyl.c		\
-		$(SRCPATH)parser/parse_amb_light.c		\
+		$(SRCPATH)parser/parse_amb_light.c	\
 		$(SRCPATH)parser/parse_color.c		\
 		$(SRCPATH)parser/parsing_2.c		\
 		$(SRCPATH)parser/parsing_3.c		\
 		$(SRCPATH)parser/parse_obj.c		\
 		$(SRCPATH)parser/objectsfn.c		\
-		$(SRCPATH)parser/parse_objfile.c		\
+		$(SRCPATH)parser/parse_objfile.c	\
 		$(SRCPATH)parser/parse_cub.c		\
 		$(SRCPATH)parser/parse_tetra.c		\
 		$(SRCPATH)parser/parse_dodeca.c		\
-		$(SRCPATH)parser/parse_obj_file.c		\
-		$(SRCPATH)objects/camera.c		\
-		$(SRCPATH)objects/plane.c		\
-		$(SRCPATH)objects/sphere.c		\
-		$(SRCPATH)objects/cone_1.c		\
-		$(SRCPATH)objects/cone_2.c		\
-		$(SRCPATH)objects/cylinder_1.c		\
-		$(SRCPATH)objects/cylinder_2.c		\
-		$(SRCPATH)extra/ft_rgb.c		\
-		$(SRCPATH)geometry/rpoint_fcts.c	\
-		$(SRCPATH)maths/vector_fcts_1.c	\
-		$(SRCPATH)maths/vector_fcts_2.c	\
-		$(SRCPATH)display/display.c 	\
-		$(SRCPATH)display/antialiasing.c \
+		$(SRCPATH)parser/parse_obj_file.c	\
 		$(SRCPATH)raytracing/raytracing.c 	\
-		$(SRCPATH)raytracing/colors.c 	\
-		$(SRCPATH)gtk/draw_px.c 	\
-		$(SRCPATH)gtk/key_events.c 	\
-		$(SRCPATH)gtk/init_light_view.c 	\
-		$(SRCPATH)gtk/edit_view2.c 	\
-		$(SRCPATH)gtk/add_templates.c 	\
-		$(SRCPATH)gtk/radio_toggle.c 	\
+		$(SRCPATH)raytracing/colors.c 		\
 		$(SRCPATH)raytracing/collision/normal_collision_vector.c 	\
-		$(SRCPATH)raytracing/collision/obj_collision.c 	\
+		$(SRCPATH)raytracing/collision/obj_collision.c				\
 
 INCPATH	=	includes/
 
@@ -115,8 +115,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
 		@echo "$(VERT)~> [ Sources compiled. ]$(NCOL)"
-		make -C libft/
-		make -C Libjson/
+		@echo "$(JAUN)~> [ Compiling libft and Libjson. ]$(NCOL)"
+		@make -C libft/
+		@echo "$(VERT)~> [ libft compiled. ]$(NCOL)"
+		@make -C Libjson/
+		@echo "$(VERT)~> [ Libjson compiled. ]$(NCOL)"
 		@echo "$(VERT)~> [ libft library made. ]$(NCOL)"
 		@$(CC) $(CFLAGS) ./libft/libft.a ./Libjson/libjson.a $(OBJ) -o $(NAME) -Iincludes/ $(LDFLAGS) -Ilibft/ -I./Libjson/includes -Llibft/ -L./Libjson/ -lft $(LIB)
 		@echo "$(VERT)~> [ binary file '$(NAME)' made. ]$(NCOL)"
@@ -126,18 +129,20 @@ $(NAME): $(OBJ) $(INC)
 		@$(CC) $(CFLAGS) $(LDLAGS) -o  $@ -c $< -Ilibft/ -ILibjson/includes -Iincludes/ $(LIB)
 
 clean:
-		rm -rf $(OBJ)
-		@echo "$(JAUN)~> [ .o files erased. ]$(NCOL)"
-		make clean -C libft/
-		make clean -C Libjson/
+		@rm -rf $(OBJ)
+		@echo "$(ROUG)~> [ .o files in project erased. ]$(NCOL)"
+		@make clean -C libft/
+		@echo "$(ROUG)~> [ .o files in libft erased. ]$(NCOL)"
+		@make clean -C Libjson/
+		@echo "$(ROUG)~> [ .o files in Libjson erased. ]$(NCOL)"
 
 fclean: clean
-		rm -f $(NAME)
-		@echo "$(JAUN)~> [ binary file '$(NAME)' erased. ]$(NCOL)"
-		make fclean -C libft/
-		@echo "$(JAUN)~> [ libft cleaned. ]$(NCOL)"
-		make fclean -C Libjson/
-		@echo "$(JAUN)~> [ Libjson cleaned. ]$(NCOL)"
+		@rm -f $(NAME)
+		@echo "$(ROUG)~> [ binary file '$(NAME)' erased. ]$(NCOL)"
+		@make fclean -C libft/
+		@echo "$(ROUG)~> [ libft cleaned. ]$(NCOL)"
+		@make fclean -C Libjson/
+		@echo "$(ROUG)~> [ Libjson cleaned. ]$(NCOL)"
 
 re: fclean all
 
