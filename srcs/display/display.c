@@ -18,9 +18,6 @@
 #include <extra/extra_defs.h>
 #include <geometry/geometry.h>
 #include <display/display.h>
-#define PIXMAP g_global.r->gtk_mgr.pixmap
-#define GTKMGR g_global.r->gtk_mgr
-#define PROGRESS_DATA g_global.r->gtk_mgr.ui.progress_data
 
 extern t_global		g_global;
 

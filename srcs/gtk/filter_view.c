@@ -13,9 +13,6 @@
 #include <global.h>
 #include <fcntl.h>
 #include <libft.h>
-#define PIXMAP g_global.r->gtk_mgr.pixmap
-#define GTKMGR g_global.r->gtk_mgr
-#define FILTER_VIEW GTKMGR.ui.filter_view
 
 extern t_global		g_global;
 

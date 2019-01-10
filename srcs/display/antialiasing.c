@@ -20,8 +20,6 @@
 #include <extra/extra_defs.h>
 #include <libft.h>
 #include <parser/parser.h>
-#define GTKMGR g_global.r->gtk_mgr
-#define PIXMAP g_global.r->gtk_mgr.pixmap
 
 extern t_global	g_global;
 

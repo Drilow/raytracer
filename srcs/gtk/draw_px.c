@@ -12,7 +12,6 @@
 
 #include <global.h>
 #include <gtk/gtk.h>
-#define PIXMAP g_global.gtk_mgr.pixmap
 
 extern t_global		g_global;
 

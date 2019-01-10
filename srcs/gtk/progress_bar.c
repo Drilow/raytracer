@@ -14,7 +14,6 @@
 #include <rt.h>
 #include <thread/thread.h>
 #include <global.h>
-#define PROGRESS_DATA g_global.r->gtk_mgr.ui.progress_data
 
 extern t_global				g_global;
 
@@ -67,6 +66,8 @@ void			progress_bar(void)
 	PROGRESS_DATA.pbar = NULL;
 	PROGRESS_DATA.window = NULL;
 	PROGRESS_DATA.window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_transient_for(GTK_WINDOW(PROGRESS_DATA.window), GTK_WINDOW(GTKMGR.ui.main_view.win));
+	gtk_window_set_destroy_with_parent(GTK_WINDOW(PROGRESS_DATA.window), TRUE);
 	gtk_window_set_title(GTK_WINDOW(PROGRESS_DATA.window), "Loading");
 	gtk_window_set_position(GTK_WINDOW(PROGRESS_DATA.window),
 		GTK_WIN_POS_CENTER);

@@ -15,9 +15,6 @@
 #include <objects/object.h>
 #include <fcntl.h>
 #include <libft.h>
-#define PIXMAP g_global.r->gtk_mgr.pixmap
-#define GTKMGR g_global.r->gtk_mgr
-#define SCENE_VIEW g_global.r->gtk_mgr.ui.scene_view
 
 extern t_global		g_global;
 
