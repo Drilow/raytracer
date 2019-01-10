@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2019/01/10 17:58:41 by adleau           ###   ########.fr        #
+#    Updated: 2019/01/10 18:18:20 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,56 +32,58 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)display/antialiasing.c	\
 		$(SRCPATH)extra/ft_rgb.c			\
 		$(SRCPATH)geometry/rpoint_fcts.c	\
-		$(SRCPATH)gtk/scene_view.c			\
-		$(SRCPATH)gtk/scene_view2.c			\
-		$(SRCPATH)gtk/progress_bar.c		\
+		$(SRCPATH)gtk/add_templates.c	 	\
 		$(SRCPATH)gtk/base_screen.c			\
 		$(SRCPATH)gtk/base_screen2.c		\
 		$(SRCPATH)gtk/base_screen3.c		\
-		$(SRCPATH)gtk/main_screen.c			\
-		$(SRCPATH)gtk/main_screen2.c		\
-		$(SRCPATH)gtk/main_screen3.c		\
-		$(SRCPATH)gtk/edit_sphere.c			\
-		$(SRCPATH)gtk/filter_view.c			\
-		$(SRCPATH)gtk/filter_functions.c	\
-		$(SRCPATH)gtk/edit_view.c			\
+		$(SRCPATH)gtk/draw_px.c 			\
+		$(SRCPATH)gtk/edit_base_view.c		\
 		$(SRCPATH)gtk/edit_lights.c			\
+		$(SRCPATH)gtk/edit_sphere.c			\
+		$(SRCPATH)gtk/edit_view.c			\
+		$(SRCPATH)gtk/edit_view2.c 			\
 		$(SRCPATH)gtk/export_view.c			\
-		$(SRCPATH)gtk/radio_button.c		\
-		$(SRCPATH)gtk/validate_objects.c	\
-		$(SRCPATH)gtk/poly_view.c			\
+		$(SRCPATH)gtk/filter_functions.c	\
+		$(SRCPATH)gtk/filter_view.c			\
 		$(SRCPATH)gtk/gtk_handlers.c		\
 		$(SRCPATH)gtk/gtk_handlers2.c		\
 		$(SRCPATH)gtk/gtk_handlers3.c		\
-		$(SRCPATH)gtk/outline_obj.c			\
-		$(SRCPATH)gtk/init_variables.c		\
-		$(SRCPATH)gtk/validation.c			\
-		$(SRCPATH)gtk/validate_base_obj.c	\
-		$(SRCPATH)gtk/edit_base_view.c		\
-		$(SRCPATH)gtk/draw_px.c 			\
-		$(SRCPATH)gtk/key_events.c		 	\
 		$(SRCPATH)gtk/init_light_view.c 	\
-		$(SRCPATH)gtk/edit_view2.c 			\
-		$(SRCPATH)gtk/add_templates.c	 	\
+		$(SRCPATH)gtk/init_variables.c		\
+		$(SRCPATH)gtk/key_events.c		 	\
+		$(SRCPATH)gtk/main_screen.c			\
+		$(SRCPATH)gtk/main_screen2.c		\
+		$(SRCPATH)gtk/main_screen3.c		\
+		$(SRCPATH)gtk/outline_obj.c			\
+		$(SRCPATH)gtk/poly_view.c			\
+		$(SRCPATH)gtk/progress_bar.c		\
+		$(SRCPATH)gtk/radio_button.c		\
 		$(SRCPATH)gtk/radio_toggle.c 		\
-		$(SRCPATH)maths/transformations.c	\
-		$(SRCPATH)maths/ft_solve_equation.c	\
+		$(SRCPATH)gtk/scene_view.c			\
+		$(SRCPATH)gtk/scene_view2.c			\
+		$(SRCPATH)gtk/validate_base_obj.c	\
+		$(SRCPATH)gtk/validate_objects.c	\
+		$(SRCPATH)gtk/validation.c			\
 		$(SRCPATH)maths/ft_delta.c			\
 		$(SRCPATH)maths/ft_deltasq.c		\
+		$(SRCPATH)maths/ft_solve_equation.c	\
+		$(SRCPATH)maths/transformations.c	\
 		$(SRCPATH)maths/vector_fcts_1.c		\
 		$(SRCPATH)maths/vector_fcts_2.c		\
 		$(SRCPATH)objects/camera.c			\
-		$(SRCPATH)objects/plane.c			\
-		$(SRCPATH)objects/sphere.c			\
 		$(SRCPATH)objects/cone_1.c			\
 		$(SRCPATH)objects/cone_2.c			\
 		$(SRCPATH)objects/cylinder_1.c		\
 		$(SRCPATH)objects/cylinder_2.c		\
+		$(SRCPATH)objects/plane.c			\
+		$(SRCPATH)objects/sphere.c			\
 		$(SRCPATH)parser/get_tetrahedron.c	\
-		$(SRCPATH)parser/set_obj.c			\
 		$(SRCPATH)parser/get_cube.c			\
+		$(SRCPATH)parser/objectsfn.c		\
 		$(SRCPATH)parser/parsing_1.c		\
 		$(SRCPATH)parser/parse_1.c			\
+		$(SRCPATH)parser/parsing_2.c		\
+		$(SRCPATH)parser/parsing_3.c		\
 		$(SRCPATH)parser/parse_plane.c		\
 		$(SRCPATH)parser/parse_sphere.c		\
 		$(SRCPATH)parser/parse_pyra.c		\
@@ -91,19 +93,17 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)parser/parse_cyl.c		\
 		$(SRCPATH)parser/parse_amb_light.c	\
 		$(SRCPATH)parser/parse_color.c		\
-		$(SRCPATH)parser/parsing_2.c		\
-		$(SRCPATH)parser/parsing_3.c		\
 		$(SRCPATH)parser/parse_obj.c		\
-		$(SRCPATH)parser/objectsfn.c		\
 		$(SRCPATH)parser/parse_objfile.c	\
 		$(SRCPATH)parser/parse_cub.c		\
 		$(SRCPATH)parser/parse_tetra.c		\
 		$(SRCPATH)parser/parse_dodeca.c		\
 		$(SRCPATH)parser/parse_obj_file.c	\
-		$(SRCPATH)raytracing/raytracing.c 	\
-		$(SRCPATH)raytracing/colors.c 		\
+		$(SRCPATH)parser/set_obj.c			\
 		$(SRCPATH)raytracing/collision/normal_collision_vector.c 	\
 		$(SRCPATH)raytracing/collision/obj_collision.c				\
+		$(SRCPATH)raytracing/colors.c 		\
+		$(SRCPATH)raytracing/raytracing.c 	\
 
 INCPATH	=	includes/
 
