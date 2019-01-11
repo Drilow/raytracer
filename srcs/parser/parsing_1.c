@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/09 18:50:28 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/11 16:45:19 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,29 @@ t_obj			*malloc_object(int type)
 {
 	t_obj		*o;
 
+	o = NULL;
 	if (!(o = (t_obj *)malloc(sizeof(t_obj))))
-		exit(1);
+		exit_properly(1);
 	if (type == 1)
-		o->obj = (t_sphere *)malloc(sizeof(t_sphere));
+	{
+		if (!(o->obj = (t_sphere *)malloc(sizeof(t_sphere))))
+			exit_properly(1);
+	}
 	else if (type == 2)
-		o->obj = (t_plane *)malloc(sizeof(t_plane));
+	{
+		if(!(o->obj = (t_plane *)malloc(sizeof(t_plane))))
+			exit_properly(1);
+	}
 	else if (type == 3)
-		o->obj = (t_cone *)malloc(sizeof(t_cone));
+	{
+		if(!(o->obj = (t_cone *)malloc(sizeof(t_cone))))
+			exit_properly(1);
+	}
 	else if (type == 4)
-		o->obj = (t_cylinder *)malloc(sizeof(t_cylinder));
+	{
+		if(!(o->obj = (t_cylinder *)malloc(sizeof(t_cylinder))))
+			exit_properly(1);
+	}
 	o->type = type;
 	o->next = NULL;
 	return (o);
@@ -109,9 +122,9 @@ bool			parse(char *file)
 		return (false);
 	}
 	ft_free(str);
-	error_view("jambon");
 	if (get_started(val) == false)
 		return (false);
+	error_view("CA MARCHE");
 	close(fd);
 	json_free(val);
 	return (true);
