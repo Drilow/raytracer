@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2018/09/06 03:40:45 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/11 15:09:30 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,12 @@ void			setup_rt_lst(void)
 {
 	if (!(g_global.r = (t_rt*)malloc(sizeof(t_rt))))
 		exit(1);
-	g_global.first_scene = g_global.r;
+	g_global.r->checker = NULL;
+	g_global.r->selected_obj = NULL;
+	g_global.r->objects = NULL;
+	g_global.r->lights = NULL;
 	g_global.r->next = NULL;
+	g_global.first_scene = g_global.r;
 }
 
 void			add_link_to_rt_list(void)
