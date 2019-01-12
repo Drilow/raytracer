@@ -21,7 +21,6 @@ static double		angle_factor(t_collision c, t_rpoint lsrc)
 	double			angle;
 	double			af;
 
-	//angle = vangle(get_vector(c.p, lsrc), normal_collision_vector(c));
 	angle = vangle(get_vector(c.p, lsrc), c.normal);
 	if (c.o->type == 2 || c.o->type == 6 || c.o->type / 10 == 6)
 		angle = PI - angle;

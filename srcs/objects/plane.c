@@ -13,18 +13,16 @@
 #include <objects/object.h>
 #include <global.h>
 
-bool			plane_collision(t_ray ray, t_plane *pl, t_rpoint pos, t_rpoint *p)
+bool			plane_collision(t_ray ray, t_plane *pl, \
+								t_rpoint pos, t_rpoint *p)
 {
 	t_rpoint	vpl;
 	t_rpoint	c;
-//	t_rpoint	ppl;
 	double		tmp;
 	double		solution;
 
 	vpl = pl->vector;
 	c = ray.p;
-//	ppl = pl->position;
-//	ppl = ((t_plane *)pl->obj)->p;
 	tmp = scalar(ray.vector, vpl);
 	if (tmp == 0)
 		return (false);

@@ -18,22 +18,7 @@
 #include <libft.h>
 
 extern t_global g_global;
-/*
-static bool	get_camera(char *s, t_rpoint *angle)
-{
-	int			index;
 
-	index = 0;
-	if (get_next_nb(s, &index, &(g_global.r->cam_position.x), NULL) == false || \
-		get_next_nb(s, &index, &(g_global.r->cam_position.y), NULL) == false || \
-		get_next_nb(s, &index, &(g_global.r->cam_position.z), NULL) == false || \
-		get_next_nb(s, &index, &(angle->x), NULL) == false || \
-		get_next_nb(s, &index, &(angle->y), NULL) == false || \
-		get_next_nb(s, &index, &(angle->z), NULL) == false)
-		return (false);
-	return (true);
-}
-*/
 bool			set_camera(t_rpoint angle)
 {
 	t_point		p;
@@ -54,7 +39,8 @@ bool			set_camera(t_rpoint angle)
 	return (true);
 }
 
-bool			find_collisions(t_rpoint factors, t_dpoint *solutions, double minimum)
+bool			find_collisions(t_rpoint factors, \
+								t_dpoint *solutions, double minimum)
 {
 	if (ft_solve_equation(factors, solutions) == false)
 		return (false);

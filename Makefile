@@ -104,7 +104,9 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)raytracing/collision/normal_collision_vector.c 	\
 		$(SRCPATH)raytracing/collision/obj_collision.c				\
 		$(SRCPATH)raytracing/colors.c 		\
-		$(SRCPATH)raytracing/raytracing.c 	\
+		$(SRCPATH)raytracing/raytracing_1.c \
+		$(SRCPATH)raytracing/raytracing_2.c \
+		$(SRCPATH)raytracing/raytracing_3.c \
 
 INCPATH	=	includes/
 

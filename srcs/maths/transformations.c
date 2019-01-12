@@ -81,25 +81,11 @@ void			rotate_obj(void *o, int type, t_rpoint angle)
 void			translate_obj(void *o, int type, t_rpoint translation)
 {
 	t_rpoint	*data;
-//	t_obj		*obj;
 
 	if (type == 0)
 		data = &(((t_light *)o)->source);
 	else
 		data = &(((t_obj *)o)->position);
-//		obj = (t_obj *)o;
-/*
-//	if (type == 1)
-//		data = &(((t_sphere *)obj->obj)->center);
-//	if (type == 2)
-//		data = &(((t_plane *)obj->obj)->p);
-//	if (type == 3)
-//		data = &(((t_cone *)obj->obj)->summit);
-//	if (type == 4)
-//		data = &(((t_cylinder *)obj->obj)->summit);
-//	if (type == 6 || type / 10 == 6)
-//	  data = &(obj->position);
-*/
 	data->x = data->x + translation.x;
 	data->y = data->y + translation.y;
 	data->z = data->z + translation.z;

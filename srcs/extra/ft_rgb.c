@@ -14,7 +14,7 @@
 #include <libft.h>
 #include <geometry/geometry.h>
 
-t_rgb	ft_rgb(int r, int g, int b, int alpha)
+t_rgb		ft_rgb(int r, int g, int b, int alpha)
 {
 	t_rgb	rgb;
 
@@ -25,7 +25,7 @@ t_rgb	ft_rgb(int r, int g, int b, int alpha)
 	return (rgb);
 }
 
-void			usage(char *s, int i)
+void		usage(char *s, int i)
 {
 	ft_putendl(s);
 	ft_exit("usage : ./rtv1 [scene]", i);
