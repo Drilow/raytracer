@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/11 16:45:19 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/12 13:35:58 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ t_obj			*malloc_object(int type)
 	o = NULL;
 	if (!(o = (t_obj *)malloc(sizeof(t_obj))))
 		exit_properly(1);
+	o->reflex = 0;
+	o->obj = NULL;
+	o->type = type;
+	o->next = NULL;
 	if (type == 1)
 	{
 		if (!(o->obj = (t_sphere *)malloc(sizeof(t_sphere))))
@@ -60,8 +64,6 @@ t_obj			*malloc_object(int type)
 		if(!(o->obj = (t_cylinder *)malloc(sizeof(t_cylinder))))
 			exit_properly(1);
 	}
-	o->type = type;
-	o->next = NULL;
 	return (o);
 }
 
