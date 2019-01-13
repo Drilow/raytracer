@@ -75,6 +75,7 @@ bool			verif_infinite(t_obj *o, t_json_value *val);
 bool			get_inf(t_obj *o, t_json_value *val);
 bool			get_pyra_inf(t_json_object *obj);
 bool			get_pyramid(t_obj *p, double base_size, double height);
+//void			get_dodecahedron_faces(t_rpoint *v, t_rpoint **faces);
 bool			get_dodecahedron(t_obj *d, double size);
 bool			get_dod_inf(t_json_object *obj);
 bool			geet_reflex(t_json_value *val, t_obj *o);
