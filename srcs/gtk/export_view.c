@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:37:49 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 18:32:23 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/14 16:17:18 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ void				end_export(GtkWidget *dialog)
 	gtk_widget_destroy(dialog);
 }
 
+char						*clean_dir_name_export(char *s)
+{
+	char					*tmp;
+
+	tmp = NULL;
+	tmp = ft_strjoin(s, "/screens");
+	free(s);
+	s = NULL;
+	return (tmp);
+}
 void				export_view(void)
 {
 	GtkWidget				*dialog;
@@ -62,8 +72,8 @@ void				export_view(void)
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
 		exit_properly(1);
 	dir = getwd(dir);
-	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
-	ft_strjoin(dir, "/screens"));
+	dir = clean_dir_name_export(dir);
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), dir);
 	free(dir);
 	dir = NULL;
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);

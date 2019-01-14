@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 18:42:46 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/14 16:16:29 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,17 @@ void						open_file_append(gint res, GtkWidget *dialog)
 	}
 }
 
+char						*clean_dir_name(char *s)
+{
+	char					*tmp;
+
+	tmp = NULL;
+	tmp = ft_strjoin(s, "/scenes");
+	free(s);
+	s = NULL;
+	return (tmp);
+}
+
 void						open_file(void)
 {
 	GtkWidget				*dialog;
@@ -84,11 +95,12 @@ void						open_file(void)
 	GTK_WINDOW(g_global.base_view.win), action, "_Cancel",
 	GTK_RESPONSE_CANCEL, "_Open", GTK_RESPONSE_ACCEPT, NULL);
 	g_signal_connect(G_OBJECT(dialog), "key-press-event",
-					G_CALLBACK(dialog_keyhook), NULL);
+	G_CALLBACK(dialog_keyhook), NULL);
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))
 		exit_properly(1);
-	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog),
-	(dir = ft_strjoin(getwd(dir), "/scenes")));
+	dir = getwd(dir);
+	dir = clean_dir_name(dir);
+	gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), dir);
 	init_rt();
 	init_gtk_variables();
 	free(dir);
