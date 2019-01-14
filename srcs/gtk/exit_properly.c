@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 18:24:04 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/14 03:31:08 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/14 13:40:24 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void				exit_properly(int ret)
 	free(GTKMGR.buf);
 	GTKMGR.saved = NULL;
 	GTKMGR.buf = NULL;
+// free everything in g_global.r
 	free(g_global.r);
 	g_global.r = NULL;
 	gtk_main_quit();
