@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:52 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 17:40:52 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/14 03:03:10 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,22 @@
 #include <display/display.h>
 
 extern t_global		g_global;
+
+void			free_lights(t_light *start)
+{
+	t_light		*tmp;
+	t_light		*swap;
+
+	tmp = start;
+	while (tmp)
+	{
+		swap = tmp;
+		tmp = tmp->next;
+		free(swap);
+		swap = NULL;
+	}
+	tmp = NULL;
+}
 
 void			free_poly(t_poly_obj *p)
 {
@@ -41,6 +57,10 @@ void			free_poly(t_poly_obj *p)
 		free(freed_o);
 		freed_o = NULL;
 	}
+	tmp = NULL;
+	tmp_v = NULL;
+	freed_o = NULL;
+	freed_v = NULL;
 }
 
 void			free_objects(t_obj *start)
@@ -49,6 +69,7 @@ void			free_objects(t_obj *start)
 	t_obj		*swap;
 
 	tmp = start;
+	swap = start;
 	while (tmp)
 	{
 		swap = tmp;
@@ -58,4 +79,6 @@ void			free_objects(t_obj *start)
 		free(swap);
 		swap = NULL;
 	}
+	tmp = NULL;
+	swap = NULL;
 }

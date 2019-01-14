@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/09 14:07:36 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/14 03:09:28 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 # include <geometry/geometry.h>
 # include <stddef.h>
 # include <stdbool.h>
-/*
-# include <objects/sphere.h>
-# include <objects/camera.h>
-# include <objects/cone.h>
-# include <objects/cylinder.h>
-# include <objects/optics.h>
-# include <objects/plane.h>
-# include <objects/poly_object.h>
-*/
 # include <objects/camera.h>
 # include <objects/optics.h>
 # include "../../Libjson/includes/json.h"
@@ -88,10 +79,9 @@ bool                cylinder_collision(t_ray ray, t_obj *c, t_rpoint *p);
 
 bool				get_cc_eq_factors(t_ray ray, t_obj *c, t_rpoint *f);
 bool                cone_collision(t_ray ray, t_obj *c, t_rpoint *p);
-
 bool				sphere_collision(t_ray ray, t_obj *s, t_rpoint *p);
-
 void				free_objects(t_obj *start);
 void				free_poly(t_poly_obj *p);
+void			free_lights(t_light *start);
 
 #endif

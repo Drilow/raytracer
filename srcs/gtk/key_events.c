@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:40:41 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 16:41:59 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/14 03:01:45 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void						on_key_press_2(GtkWidget *w, GdkEventKey *event)
 	{
 		if (w == GTKMGR.ui.main_view.win)
 		{
-			free_objects(g_global.r->objects);
-		}
-		if (GTK_IS_WIDGET(w))
-		{
-			gtk_widget_destroy(GTK_WIDGET(w));
-			w = NULL;
+			if (GTK_IS_WIDGET(w))
+			{
+				gtk_widget_destroy(GTK_WIDGET(w));
+				w = NULL;
+			}
+			exit_properly(0);
 		}
 	}
 }

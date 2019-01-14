@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:28:27 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/09 14:11:44 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/14 03:03:19 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void				handle_main_view_3(void)
 	gtk_widget_show_all(GTKMGR.ui.main_view.win);
 	gtk_widget_destroy(g_global.base_view.win);
 	g_signal_connect(G_OBJECT(GTKMGR.ui.main_view.win),
-	"destroy", G_CALLBACK(gtk_main_quit), NULL);
+	"destroy", G_CALLBACK(handle_x_button), NULL);
 }
 
 void				handle_main_view_2(void)
