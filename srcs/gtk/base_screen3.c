@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:52 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/14 03:03:10 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/14 15:35:36 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ void			free_objects(t_obj *start)
 	while (tmp)
 	{
 		swap = tmp;
-		if (swap->type % 10 == 6)
+		if (swap->type == 6 || swap->type / 10 == 6)
 			free_poly(((t_poly_obj*)swap->obj));
+		else
+			free(swap->obj);
 		tmp = tmp->next;
 		free(swap);
 		swap = NULL;
