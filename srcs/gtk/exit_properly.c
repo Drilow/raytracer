@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 18:24:04 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/14 13:40:24 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/14 14:21:14 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,25 @@ extern t_global g_global;
 void				exit_callback(void)
 {
 	exit_properly(0);
+}
+
+void				free_checker(void)
+{
+	int				y;
+
+	y = -1;
+	if (g_global.r->checker)
+	{
+		while(++y < WIN_H)
+		{
+			free(g_global.r->checker[y]);
+			g_global.r->checker[y] = NULL;
+		}
+		free(g_global.r->checker);
+		g_global.r->checker= NULL;
+		free(g_global.r->selected_obj);
+		g_global.r->selected_obj = NULL;
+	}
 }
 
 void				exit_properly(int ret)
@@ -32,7 +51,9 @@ void				exit_properly(int ret)
 	free(GTKMGR.buf);
 	GTKMGR.saved = NULL;
 	GTKMGR.buf = NULL;
-// free everything in g_global.r
+	free_checker();
+	if (ADD_VIEW.sw.o)
+		free(ADD_VIEW.sw.o);
 	free(g_global.r);
 	g_global.r = NULL;
 	gtk_main_quit();
