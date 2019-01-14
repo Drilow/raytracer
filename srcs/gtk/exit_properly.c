@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 18:24:04 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/14 03:04:11 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/14 03:31:08 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void				exit_properly(int ret)
 		free_objects(g_global.r->objects);
 	if (g_global.r && g_global.r->lights)
 		free_lights(g_global.r->lights);
-	gtk_main_quit();
+	gtk_widget_destroy(SCENE_VIEW.win);
 	free(PIXMAP);
 	PIXMAP = NULL;
 	free(GTKMGR.saved);
@@ -34,5 +34,6 @@ void				exit_properly(int ret)
 	GTKMGR.buf = NULL;
 	free(g_global.r);
 	g_global.r = NULL;
+	gtk_main_quit();
 	exit(ret);
 }
