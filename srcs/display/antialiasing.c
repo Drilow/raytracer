@@ -15,7 +15,6 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <objects/object.h>
-//#include <cl_inc/cl_defs.h>
 #include <geometry/geometry.h>
 #include <extra/extra_defs.h>
 #include <libft.h>
@@ -47,24 +46,6 @@ static t_rgb	two_colors_average(t_rgb a, t_rgb b, double ratio)
 				   (a.b * ratio) + (b.b * (1 - ratio)), \
 				   (a.trans * ratio) + (b.trans * (1 - ratio))));
 }
-
-
-/*
-Fonction inutile pour l'instant :
-
-static t_rgb	color_average(t_rgb *colors, int size)
-{
-	int			i;
-	t_rgb		ca;
-
-	i = -1;
-	ca = ft_rgb(0, 0, 0, 0);
-	while (++i < size)
-		ca = ft_rgb(ca.r + (colors[i].r / size), ca.g + (colors[i].g / size), \
-			ca.b + (colors[i].b / size), ca.trans + (colors[i].trans / size));
-	return (ca);
-}
-*/
 
 static double	colorcmp(t_rgb a, t_rgb b)
 {
@@ -168,10 +149,6 @@ static void		apply_aa(t_point p, t_rgb **pixdup)
 	if (p.x > 0)
         adj[7] = pixdup[p.y][p.x - 1];
 	draw_px(GTKMGR.buf, p.x, p.y, new_color(pix, adj));
-//	draw_px(GTKMGR.buf, p.x, p.y, color_average(adj, 8));
-//	draw_px(GTKMGR.buf, p.x, p.y, two_colors_average(two_colors_average(pix, color_average(adj, 8), 0.5), pix, 0.5));
-//	draw_px(GTKMGR.buf, p.x, p.y, ft_rgb(255, 0, 175, 0));
-//	draw_px(GTKMGR.buf, p.x, p.y, pix);
 }
 
 static void		free_pixdup(t_rgb **pixdup)
@@ -202,9 +179,6 @@ static void		antialiasing_core(void)
 		{
 			pixdup[p.y][p.x] = get_pixel(GTKMGR.buf, p.x, p.y);
 			aa[p.y][p.x] = detect_edge(p);
-//			if (aa[p.y][p.x] == 1)
-//				ft_putendl("edge !");
-//			draw_px(GTKMGR.buf, p.x, p.y, new_color);
 		}
 	}
 	p.y = -1;

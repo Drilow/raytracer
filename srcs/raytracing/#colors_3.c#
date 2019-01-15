@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   colors_3.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/15 18:01:11 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/15 18:01:13 by alacrois         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include <raytracing/collision.h>
 #include <global.h>
@@ -46,12 +35,12 @@ static double		rpoint_max(t_rpoint p)
 {
 	if (p.x < p.y)
 		p.x = p.y;
-	if (p.x < p.z)
+    if (p.x < p.z)
 		p.x = p.z;
-	return (p.x);
+    return (p.x);
 }
 
-t_rpoint			color_to_add(t_rpoint oclr, t_rgb lclr, double af)
+t_rpoint		    color_to_add(t_rpoint oclr, t_rgb lclr, double af)
 {
 	t_rpoint		tmp;
 	t_rpoint		lclr_factors;

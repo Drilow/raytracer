@@ -103,7 +103,9 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)parser/set_obj.c			\
 		$(SRCPATH)raytracing/collision/normal_collision_vector.c 	\
 		$(SRCPATH)raytracing/collision/obj_collision.c				\
-		$(SRCPATH)raytracing/colors.c 		\
+		$(SRCPATH)raytracing/colors_1.c 	\
+		$(SRCPATH)raytracing/colors_2.c 	\
+		$(SRCPATH)raytracing/colors_3.c 	\
 		$(SRCPATH)raytracing/raytracing_1.c \
 		$(SRCPATH)raytracing/raytracing_2.c \
 		$(SRCPATH)raytracing/raytracing_3.c \

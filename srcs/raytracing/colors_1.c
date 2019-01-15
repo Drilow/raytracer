@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   colors_1.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/15 18:00:10 by alacrois          #+#    #+#             */
+/*   Updated: 2019/01/15 18:00:12 by alacrois         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <raytracing/collision.h>
 #include <global.h>
 #include <extra/extra_defs.h>
@@ -29,17 +41,16 @@ static t_rgb		get_final_color(t_rpoint c, double df)
 	return (color);
 }
 
-
 static t_rgb		average_color(t_rgb c1, t_rgb c2, unsigned int trans)
 {
 	t_rgb			new;
 
 	new.r = (unsigned int)((double)((double)c1.r * \
-            (255 - (double)trans) + (double)c2.r * (double)trans) / 255);
+			(255 - (double)trans) + (double)c2.r * (double)trans) / 255);
 	new.b = (unsigned int)((double)((double)c1.b * \
-            (255 - (double)trans) + (double)c2.b * (double)trans) / 255);
+			(255 - (double)trans) + (double)c2.b * (double)trans) / 255);
 	new.g = (unsigned int)((double)((double)c1.g * \
-            (255 - (double)trans) + (double)c2.g * (double)trans) / 255);
+			(255 - (double)trans) + (double)c2.g * (double)trans) / 255);
 	new.trans = 0;
 	return (new);
 }
@@ -58,8 +69,10 @@ t_rgb				get_ray_color(t_rt *r, t_collision *c)
 		distance_factor = 1;
 	color = get_final_color(tmp_color, distance_factor);
 	if (REFLEX_DEPTH > 0 && c->o->reflex > 0)
-		color = average_color(color, get_ray_color(r, c->reflected), c->o->reflex);
+		color = average_color(color, \
+				get_ray_color(r, c->reflected), c->o->reflex);
 	if (c->o->color.trans > 0)
-		color = average_color(color, get_ray_color(r, c->next), c->o->color.trans);
+		color = average_color(color, \
+				get_ray_color(r, c->next), c->o->color.trans);
 	return (color);
 }
