@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/14 14:01:24 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/15 04:31:21 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ unsigned char		*ft_ustrdup(unsigned char *s, int size)
 	unsigned char	*ret;
 
 	i = -1;
-	if (!(ret = (unsigned char*)malloc(sizeof(unsigned char) * (size + 1))))
+	if (!(ret = (unsigned char*)malloc(sizeof(unsigned char) * size)))
 		return (NULL);
 	while (++i < size)
 	{

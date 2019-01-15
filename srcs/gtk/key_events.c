@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_events.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:40:41 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/14 03:01:45 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/15 04:51:36 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,27 @@
 #include <display/display.h>
 
 extern t_global				g_global;
+
+void				handle_x_button(GtkWidget *w)
+{
+	if (g_global.r && w == ADD_VIEW.win)
+	{
+		redraw(false);
+		gtk_widget_destroy(GTK_WIDGET(w));
+		return ;
+	}
+	else if (g_global.r && w == GTKMGR.ui.main_view.win)
+		exit_properly(0);
+	else if (w == g_global.base_view.win)
+	{
+		gtk_main_quit();
+	}
+	if (GTK_IS_WIDGET(w))
+	{
+		gtk_widget_destroy(GTK_WIDGET(w));
+		w = NULL;
+	}
+}
 
 void						on_key_press_2(GtkWidget *w, GdkEventKey *event)
 {
