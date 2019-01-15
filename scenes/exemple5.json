@@ -1,10 +1,10 @@
 {
 	"camera":{
-				"pos":[-20,0,-30],
-				"angle":[0,-10,0]
+				"pos":[0,0,0],
+				"angle":[0,0,0]
 			},
 	"light":{
-				"source":[-30,150,-100],
+				"source":[30,150,-10],
 				"color":[45,45,45,0]
 			},
 	"ambientlight":{
@@ -13,10 +13,17 @@
 	"objects":[
 				{
 					"type":"sphere",
-					"pos":[-30,153,100],
-					"radius":2,
-					"color":[100,100,100,0],
-					"reflex":100
+					"pos":[-12,2,150],
+					"radius":6,
+					"color":[150,100,100,0],
+					"reflex":0
+				},
+				{
+					"type":"sphere",
+					"pos":[10,-15,120],
+					"radius":5,
+					"color":[120,100,190,0],
+					"reflex":0
 				},
 				{
 					"type":"plane",
@@ -27,58 +34,28 @@
 					"reflex":100
 				},
 				{
-					"type":"cone",
-					"pos":[0,0,19],
-					"vector":[2,2,-3],
-					"angle":10,
-					"INF":true,
-					"color":[25,150,150,0],
+					"type":"plane",
+					"pos":[0,0,-11],
+					"vector":[0,0,1],
+					"color":[0,0,0,0],
 					"rotate":[0,0,0],
-					"reflex":100
+					"reflex":255
 				},
 				{
-					"type":"cone",
-					"pos":[7,0,20],
-					"vector":[-2,-4,-2],
-					"angle":25,
-					"INF":false,
-					"color":[75,60,150,0],
+					"type":"plane",
+					"pos":[300,0,0],
+					"vector":[1,0,1],
+					"color":[0,0,0,0],
 					"rotate":[0,0,0],
-					"reflex":100
+					"reflex":255
 				},
 				{
-					"type":"dodeca",
-					"pos":[4,-6,6],
-					"size":4,
-					"color":[100,50,200,50],
+					"type":"plane",
+					"pos":[-300,0,0],
+					"vector":[-1,0,1],
+					"color":[0,0,0,0],
 					"rotate":[0,0,0],
-					"reflex":100
-				},
-				{
-					"type":"cube",
-					"pos":[-8,-2,28],
-					"size":8,
-					"color":[80,80,80,50],
-					"rotate":[0,0,0],
-					"reflex":100
-				},
-				{
-					"type":"cylinder",
-					"pos":[-4,-5,25],
-					"vector":[-8,8,10],
-					"radius":2,
-					"INF":false,
-					"color":[75,60,150,0],
-					"rotate":[0,20,-10],
-					"reflex":100
-				},
-				{
-					"type":"pyramide",
-					"pos":[-2,0,50],
-					"base_size":10,
-					"height":5,
-					"color":[150,50,100,0],
-					"reflex":100
+					"reflex":255
 				}
 	]
 }
