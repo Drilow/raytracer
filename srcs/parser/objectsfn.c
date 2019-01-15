@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 14:32:59 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/07 15:43:45 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/15 12:27:38 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,28 @@ bool	geet_reflex(t_json_value *val, t_obj *o)
 		return (false);
 	o->reflex = *(int *)val->ptr;
 	return (true);
+}
+
+t_obj	*malloc_object2(int type)
+{
+	t_obj	*o;
+
+	o = NULL;
+	if (!(o = (t_obj *)malloc(sizeof(t_obj))))
+		exit_properly(1);
+	o->reflex = 0;
+	o->obj = NULL;
+	o->type = type;
+	o->next = NULL;
+	if (type == 1)
+	{
+		if (!(o->obj = (t_sphere *)malloc(sizeof(t_sphere))))
+			exit_properly(1);
+	}
+	else if (type == 2)
+	{
+		if (!(o->obj = (t_plane *)malloc(sizeof(t_plane))))
+			exit_properly(1);
+	}
+	return (o);
 }

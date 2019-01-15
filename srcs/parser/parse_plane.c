@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:45:18 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/07 17:21:38 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/15 12:22:03 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ bool			get_plane_inf(t_json_object *obj)
 	int			i;
 
 	i = 0;
-	o = malloc_object(2);
+	o = malloc_object2(2);
 	while (i++ < 5)
 	{
 		if (call_parse(check_keys(obj->pair[i]->key->str),

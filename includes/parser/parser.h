@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/04 22:11:01 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/15 12:24:05 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ bool			parse_object(t_json_object *obj, unsigned long nb);
 bool			get_plane_inf(t_json_object *obj);
 bool			get_sphere_inf(t_json_object *obj);
 t_obj			*malloc_object(int type);
+t_obj			*malloc_object2(int type);
 bool			get_cone_inf(t_json_object *obj);
 bool			get_cyl_inf(t_json_object *obj);
 bool			prerotate(t_obj *obj, t_json_value *val, int type);

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 11:37:43 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/07 17:26:53 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/15 12:25:08 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool			get_sphere_inf(t_json_object *obj)
 	int			i;
 
 	i = 0;
-	o = malloc_object(1);
+	o = malloc_object2(1);
 	while (i++ < 4)
 	{
 		if (call_parse(check_keys(obj->pair[i]->key->str),
