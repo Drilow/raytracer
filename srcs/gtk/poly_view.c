@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:57:37 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 10:11:35 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 10:57:52 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void				open_poly_obj(void)
 	gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_CENTER);
 	res = gtk_dialog_run(GTK_DIALOG(dialog));
 	if (res == GTK_RESPONSE_ACCEPT)
-		ADD_VIEW.obj_file_path =
-		gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+		ADD_VIEW.obj_file_path
+		= gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
 	free(dir);
 	dir = NULL;
 	gtk_widget_destroy(dialog);

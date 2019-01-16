@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:31:57 by mabessir          #+#    #+#             */
-/*   Updated: 2018/12/05 17:35:04 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/16 10:46:09 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -487,7 +487,7 @@ static void				get_dodecahedron_vertices(t_rpoint *p, double size)
 {
 	double				a;
 	double				b;
-	
+
 	a = 0.5 + (sqrt(5) / 2);
 	b = 1 / a;
 	p[0] = set_rpoint(0, 0, 0);
@@ -621,7 +621,7 @@ bool					get_dodecahedron(t_obj *d, double size)
 	t_rpoint			v[21];
 	//t_rpoint			faces[12][5];
 	t_rpoint			*faces[12];
-	
+
 	i = -1;
 	while (++i < 12)
 		faces[i] = (t_rpoint *)malloc(sizeof(t_rpoint) * 5);

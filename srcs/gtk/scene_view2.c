@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2018/12/20 14:11:31 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 10:58:46 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ void					init_scene_view(void)
 	G_TYPE_DOUBLE, G_TYPE_DOUBLE, G_TYPE_DOUBLE, G_TYPE_BOOLEAN,
 	G_TYPE_BOOLEAN, G_TYPE_POINTER, -1);
 	populate_tree_model(SCENE_VIEW.store);
-	SCENE_VIEW.tree =
-	gtk_tree_view_new_with_model(GTK_TREE_MODEL(SCENE_VIEW.store));
+	SCENE_VIEW.tree
+	= gtk_tree_view_new_with_model(GTK_TREE_MODEL(SCENE_VIEW.store));
 	g_object_unref(G_OBJECT(SCENE_VIEW.store));
 	render = gtk_cell_renderer_text_new();
 	g_object_set(G_OBJECT(render), "foreground", "red", NULL);

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:40:41 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/15 04:51:36 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/16 10:59:33 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void				handle_x_button(GtkWidget *w)
 
 void						on_key_press_2(GtkWidget *w, GdkEventKey *event)
 {
-	if (event->keyval == GDK_KEY_Escape &&
-	w != NULL && w != PROGRESS_DATA.window)
+	if (event->keyval == GDK_KEY_Escape
+	&& w != NULL && w != PROGRESS_DATA.window)
 	{
 		if (w == GTKMGR.ui.main_view.win)
 		{

@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 18:32:52 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 10:56:30 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void				handle_filter_validation(void)
 	{
 		free(GTKMGR.buf);
 		GTKMGR.buf = NULL;
-		GTKMGR.buf =
-		ft_ustrdup(GTKMGR.saved,
+		GTKMGR.buf
+		= ft_ustrdup(GTKMGR.saved,
 		WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 		gtk_widget_destroy(FILTER_VIEW.win);
 		redraw(true);

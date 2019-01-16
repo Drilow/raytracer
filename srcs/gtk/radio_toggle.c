@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 17:12:58 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 10:07:42 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 10:59:53 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void				radio_toggle(GtkWidget *button)
 	}
 	if (ADD_VIEW.saved_type == 68 && (button == ADD_VIEW.same))
 		add_height_spin();
-	if (ADD_VIEW.saved_type / 10 != 6 && ADD_VIEW.saved_type != 6 &&
-	button == ADD_VIEW.same)
+	if (ADD_VIEW.saved_type / 10 != 6 && ADD_VIEW.saved_type != 6
+	&& button == ADD_VIEW.same)
 	{
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(ADD_VIEW.same), false);
 		gtk_toggle_button_set_active(

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 18:30:45 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 10:54:07 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void			handle_base_view(void)
 	"Open Scene");
 	g_signal_connect(G_OBJECT(g_global.base_view.open_button),
 	"clicked", G_CALLBACK(open_file), NULL);
-	g_global.base_view.exit_button =
-	gtk_button_new_from_icon_name("application-exit", GTK_ICON_SIZE_BUTTON);
+	g_global.base_view.exit_button
+	= gtk_button_new_from_icon_name("application-exit", GTK_ICON_SIZE_BUTTON);
 	gtk_button_set_label(GTK_BUTTON(g_global.base_view.exit_button), "Exit");
 	gtk_button_set_always_show_image(GTK_BUTTON(g_global.base_view.exit_button),
 	true);

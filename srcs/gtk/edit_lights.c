@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 17:33:56 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 18:32:06 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 10:54:44 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void				validate_light(t_light *l)
 	l->color.g = (unsigned char)(c->green * 255);
 	l->color.b = (unsigned char)(c->blue * 255);
 	l->color.trans = ((unsigned char)255 - (c->alpha * 255));
-	l->source.x =
-	gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_x_spin));
-	l->source.y =
-	gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_y_spin));
-	l->source.z =
-	gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_z_spin));
+	l->source.x
+	= gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_x_spin));
+	l->source.y
+	= gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_y_spin));
+	l->source.z
+	= gtk_spin_button_get_value(GTK_SPIN_BUTTON(LIGHT_VIEW.translate_z_spin));
 	redraw(true);
 	gtk_widget_destroy(GTK_WIDGET(SCENE_VIEW.win));
 	scene_win();
