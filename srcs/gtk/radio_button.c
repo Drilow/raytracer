@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:06:53 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 17:42:59 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 10:14:09 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void					for_file(GtkWidget *button)
 		g_signal_connect(G_OBJECT(ADD_VIEW.file_opener), "clicked",
 		G_CALLBACK(open_poly_obj), NULL);
 		gtk_widget_show_all(ADD_VIEW.win);
+		ADD_VIEW.sw.o->type = 6;
 	}
 	else
 	{
@@ -99,4 +100,10 @@ void					handle_radio_buttons(void)
 	"toggled", G_CALLBACK(radio_toggle), NULL);
 	gtk_radio_button_join_group(GTK_RADIO_BUTTON(ADD_VIEW.file_check),
 	GTK_RADIO_BUTTON(ADD_VIEW.same));
+	if (ADD_VIEW.saved_type / 10 != 6 && ADD_VIEW.saved_type != 6)
+	{
+		gtk_toggle_button_set_active(
+		GTK_TOGGLE_BUTTON(ADD_VIEW.from_template), true);
+		add_cube();
+	}
 }
