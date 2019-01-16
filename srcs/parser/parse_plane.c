@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:45:18 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/15 12:22:03 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/16 10:33:34 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ bool			get_plane_inf(t_json_object *obj)
 		obj->pair[i]->value, o) == false)
 			return (false);
 	}
-	o->reflex = 0;
 	put_inf_to_glob(o);
 	return (true);
 }
