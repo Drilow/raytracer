@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:06:53 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 09:54:41 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 10:04:08 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,9 @@ void					handle_radio_buttons(void)
 	gtk_radio_button_join_group(GTK_RADIO_BUTTON(ADD_VIEW.file_check),
 	GTK_RADIO_BUTTON(ADD_VIEW.same));
 	if (ADD_VIEW.saved_type / 10 != 6)
+	{
 		gtk_toggle_button_set_active(
 		GTK_TOGGLE_BUTTON(ADD_VIEW.from_template), true);
+		add_cube();
+	}
 }
