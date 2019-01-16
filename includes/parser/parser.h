@@ -75,7 +75,11 @@ bool			check_arr(t_json_array *arr);
 bool			verif_infinite(t_obj *o, t_json_value *val);
 bool			get_inf(t_obj *o, t_json_value *val);
 bool			get_pyra_inf(t_json_object *obj);
+// Ne pas virer les lignes en // ci dessous, ca reste a implementer
+//t_poly_obj	*pmalloc_po(void);
+//t_vertex		*pmalloc_vertex(void);
 bool			get_pyramid(t_obj *p, double base_size, double height);
+//void			get_dodecahedron_vertices(t_rpoint *p, double size)
 //void			get_dodecahedron_faces(t_rpoint *v, t_rpoint **faces);
 bool			get_dodecahedron(t_obj *d, double size);
 bool			get_dod_inf(t_json_object *obj);

@@ -5,7 +5,7 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static void				get_dodecahedron_vertices(t_rpoint *p, double size)
+void					get_dodecahedron_vertices(t_rpoint *p, double size)
 {
 	double				a;
 	double				b;
