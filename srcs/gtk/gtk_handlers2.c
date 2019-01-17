@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtk_handlers2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 18:33:30 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 22:58:12 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,26 @@ void				redraw_if_false(void)
 	WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
 		exit(1); //to fix
 	if (PIXMAP)
+	{
 		cairo_surface_destroy(PIXMAP);
+		PIXMAP = NULL;
+	}
 	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.saved,
 	CAIRO_FORMAT_RGB24,
 	WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+//	free(GTKMGR.buf);
+//	GTKMGR.buf = NULL;
 }
 
 void				redraw(bool display)
 {
 	if (display == true)
 	{
+		if (!GTKMGR.buf)
+			if (!(GTKMGR.buf
+= (unsigned char*)malloc(sizeof(unsigned char) * WIN_H
+* cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
+				exit_properly(1);
 		draw_image();
 		if (PIXMAP)
 			cairo_surface_destroy(PIXMAP);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/14 00:46:28 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 18:00:59 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void					handle_drawing(void);
 void					handle_radio_buttons(void);
 void					exit_properly(int ret);
 void					exit_callback(void);
+
+t_poly_obj		*malloc_po(void);
 
 #endif

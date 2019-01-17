@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/03 09:30:07 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/11 14:57:46 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/16 16:26:52 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void			init_gtk_variables(void)
 {
 	GTKMGR.editmode = 0;
 	GTKMGR.saved = NULL;
+	GTKMGR.buf = NULL;
+	PIXMAP = NULL;
 	init_main_view();
 	init_add_view();
 	init_filter_view();

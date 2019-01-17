@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 15:49:17 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/11 16:14:16 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 23:01:14 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 # include <objects/object.h>
 # include <geometry/geometry.h>
 # include <gtk_mgr/gtk_mgr.h>
-# define WIN_W 1600
-# define WIN_H 900
+# define WIN_W 800
+# define WIN_H 600
 
 
 typedef struct		s_rt

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/06 13:49:09 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/17 13:21:43 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void				checked_row(GtkCellRendererToggle *cell, gchar *p_str)
 	if (gtk_tree_model_get_iter(model, &iter, path) == FALSE)
 		return ;
 	gtk_tree_model_get(model, &iter, OBJ_REF, &obj, -1);
-	if (is_obj(((t_obj*)obj)->type))
+	if (is_obj(((t_obj*)obj)->type)) //leak ici, a cause de quand c'est une light probablement, ya pas ->type a choper
 		((t_obj*)obj)->enabled = enabled;
 	else if (go_throu_lights(((t_light*)obj)))
 		((t_light*)obj)->enabled = enabled;
@@ -79,7 +79,7 @@ void					select_handler(GtkTreeView *tree, GtkTreePath *path)
 	if (gtk_tree_model_get_iter(model, &iter, path))
 	{
 		gtk_tree_model_get(model, &iter, OBJ_REF, &obj, -1);
-		if (is_obj(((t_obj*)obj)->type))
+		if (is_obj(((t_obj*)obj)->type)) // idem leaks
 		{
 			outline_obj(((t_obj*)obj));
 			edit_win(((t_obj*)obj), SCENE_VIEW.win);

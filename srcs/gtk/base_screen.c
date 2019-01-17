@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 10:54:07 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/17 13:54:32 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ extern t_global		g_global;
 
 void			handle_drawing(void)
 {
-	if (!(GTKMGR.buf = (unsigned char*)malloc(sizeof(unsigned char)
-	* (WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
-		exit_properly(1);
+	if (!GTKMGR.buf)
+		if (!(GTKMGR.buf = (unsigned char*)malloc(sizeof(unsigned char)
+		* (WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
+			exit_properly(1);
 	draw_image();
 	if (PIXMAP)
+	{
 		cairo_surface_destroy(PIXMAP);
+		PIXMAP = NULL;
+	}
 	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf,
 	CAIRO_FORMAT_RGB24, WIN_W, WIN_H,
 	cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));

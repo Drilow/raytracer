@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_obj_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:31:57 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/16 10:46:09 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/17 13:43:39 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static	t_poly_obj		*malloc_po(void)
+t_poly_obj		*malloc_po(void)
 {
 	t_poly_obj *obj;
 
-	obj = (t_poly_obj *)malloc(sizeof(t_poly_obj));
+	obj = NULL;
+	if (!(obj = (t_poly_obj *)malloc(sizeof(t_poly_obj))))
+		exit_properly(1);
 	obj->next = NULL;
 	return (obj);
 }
@@ -30,7 +32,9 @@ static	t_vertex		*malloc_vertex(void)
 {
 	t_vertex *v;
 
-	v = (t_vertex *)malloc(sizeof(t_vertex));
+	v = NULL;
+	if (!(v = (t_vertex *)malloc(sizeof(t_vertex))))
+		exit_properly(1);
 	v->next = NULL;
 	return (v);
 }
@@ -45,6 +49,7 @@ static	void			free_vlist(t_vertex **v_list)
 	{
 		tmp_next = tmp->next;
 		free(tmp);
+		tmp = NULL;
 		tmp = tmp_next;
 	}
 }
@@ -328,24 +333,29 @@ bool					get_cube(t_obj *c, double size)
 	size = size / 2;
 	c->size = size;
 	maxd = sqrt(3 * size * size);
-	c->obj = malloc_po();
+//	c->obj = malloc_po();
 	o = c->obj;
 	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, 0, size));
 	o->next = malloc_po();
 	o = o->next;
+	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, 0, -size));
 	o->next = malloc_po();
 	o = o->next;
+	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, size, 0));
 	o->next = malloc_po();
 	o = o->next;
+	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, -size, 0));
 	o->next = malloc_po();
 	o = o->next;
+	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(size, 0, 0));
 	o->next = malloc_po();
 	o = o->next;
+	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(-size, 0, 0));
 	return (true);
 }

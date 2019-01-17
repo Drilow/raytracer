@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/14 03:13:26 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 17:41:11 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void			add_link_to_rt_list(void)
 {
 	t_rt		*tmp;
 
+	tmp = NULL;
 	if (!(tmp = (t_rt*)malloc(sizeof(t_rt))))
 		exit(1);
 	g_global.r->next = tmp;
@@ -70,8 +71,11 @@ void			init_obj_tab(void)
 	if (!(g_global.r->checker = malloc(sizeof(t_obj**) * WIN_H)))
 		exit(1);
 	while (++y < WIN_H)
+	{
+		g_global.r->checker[y] = NULL;
 		if (!(g_global.r->checker[y] = malloc(sizeof(t_obj*) * WIN_W)))
 			exit(1);
+	}
 }
 
 void			init_rt(void)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_tetrahedron.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 19:02:34 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/29 13:20:19 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/16 18:01:48 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static	t_poly_obj	*malloc_po(void)
-{
-	t_poly_obj *obj;
+// static	t_poly_obj	*malloc_po(void)
+// {
+// 	t_poly_obj *obj;
 
-	obj = (t_poly_obj *)malloc(sizeof(t_poly_obj));
-	obj->next = NULL;
-	return (obj);
-}
+// 	obj = (t_poly_obj *)malloc(sizeof(t_poly_obj));
+// 	obj->next = NULL;
+// 	return (obj);
+// }
 
 static	t_vertex	*malloc_vertex(void)
 {

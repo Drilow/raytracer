@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_obj.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 10:13:57 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/14 01:38:53 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 02:52:14 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ bool			prerotate(t_obj *obj, t_json_value *val, int type)
 	t->y = ((double)((int)t->y % 360) / 360) * (2 * PI);
 	t->z = ((double)((int)t->z % 360) / 360) * (2 * PI);
 	rotate_obj(obj, type, *t);
+	free(t);
 	return (true);
 }
 

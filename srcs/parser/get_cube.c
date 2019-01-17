@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cube.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 19:01:48 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/16 10:42:51 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/17 13:44:57 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,24 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static	t_poly_obj	*malloc_po(void)
+t_poly_obj		*malloc_po(void)
 {
 	t_poly_obj *obj;
 
-	obj = (t_poly_obj *)malloc(sizeof(t_poly_obj));
+	obj = NULL;
+	if (!(obj = (t_poly_obj *)malloc(sizeof(t_poly_obj))))
+		exit_properly(1);
 	obj->next = NULL;
 	return (obj);
 }
 
-static	t_vertex	*malloc_vertex(void)
+t_vertex		*malloc_vertex(void)
 {
 	t_vertex *v;
 
-	v = (t_vertex *)malloc(sizeof(t_vertex));
+	v = NULL;
+	if (!(v = (t_vertex *)malloc(sizeof(t_vertex))))
+		exit_properly(1);
 	v->next = NULL;
 	return (v);
 }

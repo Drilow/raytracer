@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/07 17:26:41 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/16 18:00:07 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ bool			get_cube_inf(t_json_object *obj)
 			return (false);
 		if (i == 4 && check_keys(obj->pair[i]->key->str) == 4)
 		{
+			o->obj = malloc_po();
 			get_cube(o, o->size);
 			if (prerotate(o, obj->pair[i]->value, 66) == false)
 				return (false);

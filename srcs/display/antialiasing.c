@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   antialiasing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 22:52:03 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/14 01:40:33 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/16 22:04:22 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,23 +157,49 @@ static void		free_pixdup(t_rgb **pixdup)
 
 	p.y = -1;
 	while (++p.y < WIN_H)
+	{
 		free(pixdup[p.y]);
+		pixdup[p.y] = NULL;
+	}
 	free(pixdup);
+	pixdup = NULL;
+}
+
+static void		free_aa(int **aa)
+{
+	int i;
+
+	i = -1;
+	while (++i < WIN_H)
+	{
+		free(aa[i]);
+		aa[i] = NULL;
+	}
+	free(aa);
+	aa = NULL;
 }
 
 static void		antialiasing_core(void)
 {
 	t_point		p;
-	int			aa[WIN_H][WIN_W];
+	int			**aa;//[WIN_H][WIN_W];
 	t_rgb		**pixdup;
 
 	p.y = -1;
+	pixdup = NULL;
+	aa = NULL;
 	if (!(pixdup = (t_rgb **)malloc(sizeof(t_rgb *) * WIN_H)))
+		ft_exit("malloc error", 0);
+	if (!(aa = (int **)malloc(sizeof(int *) * WIN_H)))
 		ft_exit("malloc error", 0);
 	while (++p.y < WIN_H)
 	{
 		p.x = -1;
+		pixdup[p.y] = NULL;
+		aa[p.y] = NULL;
 		if (!(pixdup[p.y] = (t_rgb *)malloc(sizeof(t_rgb) * WIN_W)))
+			ft_exit("malloc error", 0);
+		if (!(aa[p.y] = (int *)malloc(sizeof(int) * WIN_W)))
 			ft_exit("malloc error", 0);
 		while (++p.x < WIN_W)
 		{
@@ -194,6 +220,7 @@ static void		antialiasing_core(void)
 		}
 	}
 	free_pixdup(pixdup);
+	free_aa(aa);
 }
 
 void			antialiasing(void)

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/15 04:31:21 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/16 16:19:00 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ void			draw_image(void)
 	}
 	if (ANTIALIASING == 1)
 		antialiasing();
-	if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf, WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
-		exit(1); //fix
+	if (!GTKMGR.saved)
+		if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf, WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
+			exit(1); //fix
 	g_global.drawn = 0;
 }
