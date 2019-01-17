@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 13:54:32 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/17 14:46:40 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@ extern t_global		g_global;
 void			handle_drawing(void)
 {
 	if (!GTKMGR.buf)
+	{
+		GTKMGR.buf = NULL;
 		if (!(GTKMGR.buf = (unsigned char*)malloc(sizeof(unsigned char)
 		* (WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
 			exit_properly(1);
+	}
 	draw_image();
 	if (PIXMAP)
 	{

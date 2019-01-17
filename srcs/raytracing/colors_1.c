@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 18:00:10 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/15 18:00:12 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/17 14:49:50 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static t_rgb		get_final_color(t_rpoint c, double df)
 	t_rpoint		tmp;
 	double			max;
 
+	max = 0;
 	tmp = set_rpoint(c.x / df, c.y / df, c.z / df);
 	max = tmp.x;
 	if (max < tmp.y)

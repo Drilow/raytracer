@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 13:21:43 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/17 14:45:12 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ static void				checked_row(GtkCellRendererToggle *cell, gchar *p_str)
 	if (gtk_tree_model_get_iter(model, &iter, path) == FALSE)
 		return ;
 	gtk_tree_model_get(model, &iter, OBJ_REF, &obj, -1);
-	if (is_obj(((t_obj*)obj)->type)) //leak ici, a cause de quand c'est une light probablement, ya pas ->type a choper
-		((t_obj*)obj)->enabled = enabled;
-	else if (go_throu_lights(((t_light*)obj)))
+	if (go_throu_lights(((t_light*)obj)))
 		((t_light*)obj)->enabled = enabled;
+	else if (is_obj(((t_obj*)obj)->type))
+		((t_obj*)obj)->enabled = enabled;
 	redraw(true);
 	gtk_tree_path_free(path);
 }
@@ -79,13 +79,13 @@ void					select_handler(GtkTreeView *tree, GtkTreePath *path)
 	if (gtk_tree_model_get_iter(model, &iter, path))
 	{
 		gtk_tree_model_get(model, &iter, OBJ_REF, &obj, -1);
-		if (is_obj(((t_obj*)obj)->type)) // idem leaks
+		if (go_throu_lights(((t_light*)obj)))
+			edit_light((t_light*)obj, SCENE_VIEW.win);
+		else if (is_obj(((t_obj*)obj)->type))
 		{
 			outline_obj(((t_obj*)obj));
 			edit_win(((t_obj*)obj), SCENE_VIEW.win);
 		}
-		else if (go_throu_lights(((t_light*)obj)))
-			edit_light((t_light*)obj, SCENE_VIEW.win);
 	}
 }
 
