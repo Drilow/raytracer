@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:17:00 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/17 02:07:11 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/17 14:27:23 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void				parse_light(t_json_object *obj, unsigned long nb)
 
 	num = 0;
 	lights = NULL;
+	ol = NULL;
 	if (obj->pair[nb]->value->type != 4)
 		return ;
 	if ((ol = (t_json_object *)obj->pair[nb]->value->ptr) == NULL)
