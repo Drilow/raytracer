@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:31:57 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/17 13:43:39 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/17 14:01:24 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,27 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-t_poly_obj		*malloc_po(void)
-{
-	t_poly_obj *obj;
+// t_poly_obj		*malloc_po(void)
+// {
+// 	t_poly_obj *obj;
 
-	obj = NULL;
-	if (!(obj = (t_poly_obj *)malloc(sizeof(t_poly_obj))))
-		exit_properly(1);
-	obj->next = NULL;
-	return (obj);
-}
+// 	obj = NULL;
+// 	if (!(obj = (t_poly_obj *)malloc(sizeof(t_poly_obj))))
+// 		exit_properly(1);
+// 	obj->next = NULL;
+// 	return (obj);
+// }
 
-static	t_vertex		*malloc_vertex(void)
-{
-	t_vertex *v;
+// static	t_vertex		*malloc_vertex(void)
+// {
+// 	t_vertex *v;
 
-	v = NULL;
-	if (!(v = (t_vertex *)malloc(sizeof(t_vertex))))
-		exit_properly(1);
-	v->next = NULL;
-	return (v);
-}
+// 	v = NULL;
+// 	if (!(v = (t_vertex *)malloc(sizeof(t_vertex))))
+// 		exit_properly(1);
+// 	v->next = NULL;
+// 	return (v);
+// }
 
 static	void			free_vlist(t_vertex **v_list)
 {

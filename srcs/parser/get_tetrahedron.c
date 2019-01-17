@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 19:02:34 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/16 18:01:48 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/17 14:00:46 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@
 // 	return (obj);
 // }
 
-static	t_vertex	*malloc_vertex(void)
-{
-	t_vertex *v;
+// static	t_vertex	*malloc_vertex(void)
+// {
+// 	t_vertex *v;
 
-	v = (t_vertex *)malloc(sizeof(t_vertex));
-	v->next = NULL;
-	return (v);
-}
+// 	v = (t_vertex *)malloc(sizeof(t_vertex));
+// 	v->next = NULL;
+// 	return (v);
+// }
 
 static	t_vertex	*add_t_face(int fnb, double size)
 {

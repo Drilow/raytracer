@@ -5,25 +5,25 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static	t_poly_obj		*malloc_po(void)
-{
-	t_poly_obj *obj;
+// static	t_poly_obj		*malloc_po(void)
+// {
+// 	t_poly_obj *obj;
 
-	if (!(obj = (t_poly_obj *)malloc(sizeof(t_poly_obj))))
-        exit_properly(1);
-	obj->next = NULL;
-	return (obj);
-}
+// 	if (!(obj = (t_poly_obj *)malloc(sizeof(t_poly_obj))))
+//         exit_properly(1);
+// 	obj->next = NULL;
+// 	return (obj);
+// }
 
-static	t_vertex		*malloc_vertex(void)
-{
-	t_vertex *v;
+// static	t_vertex		*malloc_vertex(void)
+// {
+// 	t_vertex *v;
 
-	if (!(v = (t_vertex *)malloc(sizeof(t_vertex))))
-        exit_properly(1);
-	v->next = NULL;
-	return (v);
-}
+// 	if (!(v = (t_vertex *)malloc(sizeof(t_vertex))))
+//         exit_properly(1);
+// 	v->next = NULL;
+// 	return (v);
+// }
 
 static  t_vertex        *add_dode_face(t_rpoint **f, int i)
 {
