@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 14:45:12 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/17 15:27:40 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ GtkCellRenderer *renderer, int en_column)
 {
 	GtkTreeViewColumn	*column;
 
+	column = NULL;
 	column = gtk_tree_view_column_new_with_attributes(text, renderer,
 	"text", en_column, NULL);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(tree), column);

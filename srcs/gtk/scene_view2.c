@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 10:58:46 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/17 16:01:37 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void				read_obj(t_obj *obj)
 					POS_X_COLUMN, obj->position.x,
 					POS_Y_COLUMN, obj->position.y,
 					POS_Z_COLUMN, obj->position.z,
-					CHECKED_COLUMN, TRUE,
+					CHECKED_COLUMN, obj->enabled,
 					CHECKED_ACTIVE, TRUE,
 					OBJ_REF, (gpointer)obj,
 					-1);
@@ -63,7 +63,7 @@ static void				read_light(t_light *light)
 					POS_X_COLUMN, light->source.x,
 					POS_Y_COLUMN, light->source.y,
 					POS_Z_COLUMN, light->source.z,
-					CHECKED_COLUMN, TRUE,
+					CHECKED_COLUMN, light->enabled,
 					CHECKED_ACTIVE, TRUE,
 					OBJ_REF, (gpointer)light,
 					-1);

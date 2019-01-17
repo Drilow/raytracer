@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/11 13:45:59 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/17 15:30:15 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ gboolean		update_progress(void)
 {
 	gdouble		fraction;
 	int			pct;
-	char		*tmp;
 
 	if (PROGRESS_DATA.len <= 0)
 		return (TRUE);
@@ -29,12 +28,8 @@ gboolean		update_progress(void)
 	{
 		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(PROGRESS_DATA.pbar),
 			fraction);
-		tmp = ft_itoa(pct);
-		tmp = ft_strmerge(" %", tmp, 2, ft_strlen(tmp));
 		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(PROGRESS_DATA.pbar),
-			(gchar*)tmp);
-		free(tmp);
-		tmp = NULL;
+			NULL);
 		while (gtk_events_pending())
 			gtk_main_iteration();
 		PROGRESS_DATA.nlastpct = pct;

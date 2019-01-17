@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 10:59:17 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/17 15:58:48 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void				validate_edit(t_obj *o)
 	redraw(true);
 	free(c);
 	c = NULL;
+	gtk_tree_store_clear(SCENE_VIEW.store);
 	gtk_widget_destroy(GTK_WIDGET(SCENE_VIEW.win));
 	scene_win();
 }
