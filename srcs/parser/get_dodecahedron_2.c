@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_dodecahedron_2.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/18 13:26:04 by mabessir          #+#    #+#             */
+/*   Updated: 2019/01/18 13:27:26 by mabessir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <global.h>
 #include <objects/object.h>
 #include <stdlib.h>
@@ -5,11 +17,11 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-void					get_dodecahedron_vertices(t_rpoint *p, double size)
+void		get_dodecahedron_vertices(t_rpoint *p, double size)
 {
 	double				a;
 	double				b;
-	
+
 	a = 0.5 + (sqrt(5) / 2);
 	b = 1 / a;
 	p[0] = set_rpoint(0, 0, 0);
@@ -35,7 +47,7 @@ void					get_dodecahedron_vertices(t_rpoint *p, double size)
 	p[20] = set_rpoint(-size, -size, -size);
 }
 
-static void				get_dodecahedron_faces_1(t_rpoint *v, t_rpoint **faces)
+static void	get_dodecahedron_faces_1(t_rpoint *v, t_rpoint **faces)
 {
 	faces[0][0] = v[1];
 	faces[0][1] = v[10];
@@ -59,7 +71,7 @@ static void				get_dodecahedron_faces_1(t_rpoint *v, t_rpoint **faces)
 	faces[3][4] = v[14];
 }
 
-static void				get_dodecahedron_faces_2(t_rpoint *v, t_rpoint **faces)
+static void	get_dodecahedron_faces_2(t_rpoint *v, t_rpoint **faces)
 {
 	faces[4][0] = v[2];
 	faces[4][1] = v[13];
@@ -83,7 +95,7 @@ static void				get_dodecahedron_faces_2(t_rpoint *v, t_rpoint **faces)
 	faces[7][4] = v[20];
 }
 
-static void				get_dodecahedron_faces_3(t_rpoint *v, t_rpoint **faces)
+static void	get_dodecahedron_faces_3(t_rpoint *v, t_rpoint **faces)
 {
 	faces[8][0] = v[4];
 	faces[8][1] = v[15];
@@ -107,7 +119,7 @@ static void				get_dodecahedron_faces_3(t_rpoint *v, t_rpoint **faces)
 	faces[11][4] = v[20];
 }
 
-void				    get_dodecahedron_faces(t_rpoint *v, t_rpoint **faces)
+void		get_dodecahedron_faces(t_rpoint *v, t_rpoint **faces)
 {
 	get_dodecahedron_faces_1(v, faces);
 	get_dodecahedron_faces_2(v, faces);
