@@ -11,21 +11,19 @@
 /* ************************************************************************** */
 
 #include <objects/object.h>
+#include <global.h>
 
-
-static bool		bc_init(t_cylinder *c, t_plane *pl1, t_plane *pl2)
+static bool			bc_init(t_cylinder *c, t_plane *pl1, t_plane *pl2)
 {
 	if (c->infinite == true)
 		return (false);
 	pl1->vector = c->vector;
 	pl2->vector = c->vector;
-//	pl1->p = pos;
-//	pl2->p = set_rpoint(pl1->p.x + c->vector.x,			\
-//	pl1->p.y + c->vector.y, pl1->p.z + c->vector.z);
 	return (true);
 }
 
-static bool		base_collision(t_ray ray, t_cylinder *c, t_rpoint pos, t_rpoint *bc)
+static bool			base_collision(t_ray ray, t_cylinder *c, \
+									t_rpoint pos, t_rpoint *bc)
 {
 	t_rpoint		bcol1;
 	t_rpoint		bcol2;
@@ -36,7 +34,7 @@ static bool		base_collision(t_ray ray, t_cylinder *c, t_rpoint pos, t_rpoint *bc
 	if (bc_init(c, &pl1, &pl2) == false)
 		return (false);
 	pl2_pos = set_rpoint(pos.x + c->vector.x, \
-						 pos.y + c->vector.y, pos.z + c->vector.z);
+						pos.y + c->vector.y, pos.z + c->vector.z);
 	if (plane_collision(ray, &pl1, pos, &bcol1) == false \
 		|| deltasq(pos, bcol1) > pow(c->radius, 2))
 	{
@@ -54,7 +52,8 @@ static bool		base_collision(t_ray ray, t_cylinder *c, t_rpoint pos, t_rpoint *bc
 	return (true);
 }
 
-static bool		between_bases(t_ray ray, t_cylinder *c, t_rpoint pos, t_dpoint *s)
+static bool			between_bases(t_ray ray, t_cylinder *c, \
+								t_rpoint pos, t_dpoint *s)
 {
 	t_rpoint		p1;
 	t_rpoint		p2;
@@ -89,8 +88,8 @@ bool				cylinder_collision(t_ray ray, t_obj *c, t_rpoint *p)
 
 	bcol = base_collision(ray, (t_cylinder *)c->obj, c->position, &bcollision);
 	eq_factors = get_cyc_eq_factors(ray, (t_cylinder *)c->obj, c->position);
-	if (find_collisions(eq_factors, &solutions) == false || \
-		between_bases(ray, (t_cylinder *)c->obj, c->position, &solutions) == false)
+	if (find_collisions(eq_factors, &solutions, MIN_DISTANCE) == false || \
+	between_bases(ray, (t_cylinder *)c->obj, c->position, &solutions) == false)
 	{
 		if (bcol == false)
 			return (false);

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cone_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 19:57:41 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/26 20:08:47 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/11/23 12:29:48 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <objects/object.h>
 #include <geometry/geometry.h>
-
 #include <libft.h>
+#include <global.h>
 
-static bool	base_collision(t_ray ray, t_obj *c, t_rpoint *p)
+static bool		base_collision(t_ray ray, t_obj *c, t_rpoint *p)
 {
 	t_rpoint	bcenter;
 	double		bradius;
@@ -30,7 +30,6 @@ static bool	base_collision(t_ray ray, t_obj *c, t_rpoint *p)
 	bcenter.z = c->position.z + c_vector.z;
 	bradius = vlength(c_vector) * tan(((t_cone *)c->obj)->angle);
 	pl.vector = c_vector;
-//	pl.p = bcenter;
 	if (plane_collision(ray, &pl, bcenter, &pcol) == false)
 		return (false);
 	if (deltasq(bcenter, pcol) > (bradius * bradius))
@@ -39,7 +38,7 @@ static bool	base_collision(t_ray ray, t_obj *c, t_rpoint *p)
 	return (true);
 }
 
-static bool	check_solutions(t_ray ray, t_obj *c, t_dpoint *solutions)
+static bool		check_solutions(t_ray ray, t_obj *c, t_dpoint *solutions)
 {
 	t_rpoint	tmp1;
 	t_rpoint	tmp2;
@@ -76,14 +75,14 @@ bool			cone_collision(t_ray ray, t_obj *c, t_rpoint *p)
 
 	if (get_cc_eq_factors(ray, c, &eq_factors) == false)
 		return (false);
-	if (find_collisions(eq_factors, &solutions) == false)
+	if (find_collisions(eq_factors, &solutions, MIN_DISTANCE) == false)
 		return (false);
 	if (check_solutions(ray, c, &solutions) == false)
 		return (false);
 	*p = closer(ray.p, new_point(ray.p, ray.vector, solutions.x), \
 	new_point(ray.p, ray.vector, solutions.y));
-	if (((t_cone *)c->obj)->infinite == false && base_collision(ray, c, &bcollision) == true)
+	if (((t_cone *)c->obj)->infinite == false && \
+		base_collision(ray, c, &bcollision) == true)
 		*p = closer(ray.p, *p, bcollision);
-//	ft_putendl("true");
 	return (true);
 }

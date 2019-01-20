@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 18:38:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/06/22 21:13:19 by alacrois         ###   ########.fr       */
+/*   Updated: 2018/11/07 16:10:57 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,10 @@
 
 extern t_global g_global;
 
-static bool	get_camera(char *s, t_rpoint *angle)
+bool			set_camera(t_rpoint angle)
 {
-	int			index;
-
-	index = 0;
-	if (get_next_nb(s, &index, &(g_global.r.cam_position.x), NULL) == false || \
-		get_next_nb(s, &index, &(g_global.r.cam_position.y), NULL) == false || \
-		get_next_nb(s, &index, &(g_global.r.cam_position.z), NULL) == false || \
-		get_next_nb(s, &index, &(angle->x), NULL) == false || \
-		get_next_nb(s, &index, &(angle->y), NULL) == false || \
-		get_next_nb(s, &index, &(angle->z), NULL) == false)
-		return (false);
-	return (true);
-}
-
-bool			set_camera(char *s)
-{
-	t_rpoint	angle;
 	t_point		p;
 
-	if (get_camera(s, &angle) == false)
-		return (false);
 	angle.x = ((double)((int)angle.x % 360) / 360) * (2 * PI);
 	angle.y = ((double)((int)angle.y % 360) / 360) * (2 * PI);
 	angle.z = ((double)((int)angle.z % 360) / 360) * (2 * PI);
@@ -50,24 +32,25 @@ bool			set_camera(char *s)
 		p.x = -1;
 		while (++p.x < WIN_W)
 		{
-			g_global.r.rays[p.y][p.x].p = g_global.r.cam_position;
-			rotate(&(g_global.r.rays[p.y][p.x].vector), angle);
+			g_global.r->rays[p.y][p.x].p = g_global.r->cam_position;
+			rotate(&(g_global.r->rays[p.y][p.x].vector), angle);
 		}
 	}
 	return (true);
 }
 
-bool			find_collisions(t_rpoint factors, t_dpoint *solutions)
+bool			find_collisions(t_rpoint factors, \
+								t_dpoint *solutions, double minimum)
 {
 	if (ft_solve_equation(factors, solutions) == false)
 		return (false);
-	if (solutions->x < 0)
+	if (solutions->x < minimum)
 	{
-		if (solutions->y < 0)
+		if (solutions->y < minimum)
 			return (false);
 		solutions->x = solutions->y;
 	}
-	else if (solutions->y < 0)
+	else if (solutions->y < minimum)
 		solutions->y = solutions->x;
 	return (true);
 }

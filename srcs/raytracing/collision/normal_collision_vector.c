@@ -57,22 +57,18 @@ static t_rpoint		get_cylinder_ncv(t_cylinder *cy, t_rpoint pos, t_rpoint p)
 	return (ncv);
 }
 
-//t_rpoint			normal_collision_vector(t_obj *o, t_rpoint p)
-t_rpoint				normal_collision_vector(t_collision c)
+t_rpoint			normal_collision_vector(t_collision c)
 {
-	t_rpoint			ncv;
+	t_rpoint		ncv;
 
 	if (c.o->type == 1)
 		ncv = get_vector(c.o->position, c.p);
-//		ncv = get_vector(((t_sphere *)c.o->obj)->center, c.p);
 	if (c.o->type == 2)
 		ncv = ((t_plane *)c.o->obj)->vector;
 	if (c.o->type == 3)
 		ncv = get_cone_ncv((t_cone *)c.o->obj, c.o->position, c.p);
-//		ncv = get_cone_ncv((t_cone *)c.o->obj, c.p);
 	if (c.o->type == 4)
 		ncv = get_cylinder_ncv((t_cylinder *)c.o->obj, c.o->position, c.p);
-//		ncv = get_cylinder_ncv((t_cylinder *)c.o->obj, c.p);
 	if (c.o->type == 6 || (c.o->type / 10) == 6)
 		ncv = c.normal;
 	return (ncv);

@@ -1,14 +1,14 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adleau <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/31 14:51:35 by adleau            #+#    #+#              #
-#    Updated: 2017/12/19 11:14:18 by adleau           ###   ########.fr        #
+#    Updated: 2018/10/18 17:22:17 by mabessir         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 NAME = libft.a
 
@@ -25,7 +25,8 @@ SRCS		= 		ft_strlen.c ft_strdup.c ft_strcpy.c ft_strncpy.c ft_strcat.c \
 					ft_striteri.c ft_strmap.c ft_strmapi.c ft_strjoin.c ft_strsub.c ft_itoa.c \
 					ft_strsplit.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c \
 					ft_lstiter.c ft_lstmap.c ft_lstadd_end.c ft_pow.c get_next_line.c ft_isspacesorbase.c \
-					ft_atoi_base.c ft_abs.c
+					ft_atoi_base.c ft_abs.c ft_atof.c ft_check_bool.c ft_check_null.c ft_free.c ft_is_double.c\
+					ft_pass_spaces.c ft_powe.c ft_strjoini.c ft_strmerge.c ft_exit.c ft_readfile.c ft_strndup.c \
 
 CFLAGS	 	=		-Werror -Wall -Wextra
 

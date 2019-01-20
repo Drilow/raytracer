@@ -3,39 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   antialiasing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 22:52:03 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/19 17:37:34 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/16 22:04:22 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <display/display.h>
 #include <global.h>
-#include <sdl_stuff/sdl_mgr.h>
-
+#include <gtk/gtk.h>
 #include <stdio.h>
 #include <objects/object.h>
-#include <cl_inc/cl_defs.h>
 #include <geometry/geometry.h>
 #include <extra/extra_defs.h>
 #include <libft.h>
 #include <parser/parser.h>
 
-static t_rgb	get_pixel(SDL_Surface *surf, int x, int y)
-{
-	t_rgb		pixel;
-	Uint32		*intpixel;
-	Uint8		components[3];
+extern t_global	g_global;
 
-	intpixel = (Uint32*)surf->pixels +
-		(y * surf->pitch / surf->format->BytesPerPixel) + x;
-	SDL_GetRGB(*intpixel, surf->format, &(components[0]), &(components[1]), &(components[2]));
-	pixel.r = components[0];
-	pixel.g = components[1];
-	pixel.b = components[2];
-	pixel.trans = 0;
-	return (pixel);
+static t_rgb	get_pixel(unsigned char *buf, int x, int y)
+{
+	unsigned char	*ptr;
+	t_rgb		px;
+	int			stride;
+	int			bpp;
+
+	stride = cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W);
+	bpp = stride / WIN_W;
+	ptr = buf + (y * stride) + x * bpp;
+	px.r = ptr[2];
+	px.g = ptr[1];
+	px.b = ptr[0];
+	px.trans = 0;
+	return (px);
 }
 
 static t_rgb	two_colors_average(t_rgb a, t_rgb b, double ratio)
@@ -45,24 +46,6 @@ static t_rgb	two_colors_average(t_rgb a, t_rgb b, double ratio)
 				   (a.b * ratio) + (b.b * (1 - ratio)), \
 				   (a.trans * ratio) + (b.trans * (1 - ratio))));
 }
-
-
-/*
-Fonction inutile pour l'instant :
-
-static t_rgb	color_average(t_rgb *colors, int size)
-{
-	int			i;
-	t_rgb		ca;
-
-	i = -1;
-	ca = ft_rgb(0, 0, 0, 0);
-	while (++i < size)
-		ca = ft_rgb(ca.r + (colors[i].r / size), ca.g + (colors[i].g / size), \
-			ca.b + (colors[i].b / size), ca.trans + (colors[i].trans / size));
-	return (ca);
-}
-*/
 
 static double	colorcmp(t_rgb a, t_rgb b)
 {
@@ -78,24 +61,24 @@ static double	colorcmp(t_rgb a, t_rgb b)
 	return (clr_cmp * 0.80 + brightness_cmp * 0.20);
 }
 
-static int		detect_edge(t_point p, t_sdl_wrapper *e)
+static int		detect_edge(t_point p)
 {
 	t_rgb		pix;
 	t_rgb		adjacent[4];
 	int			i;
 
-	pix = get_pixel(e->surf, p.x, p.y);
+	pix = get_pixel(GTKMGR.buf, p.x, p.y);
 	i = -1;
 	while (++i < 4)
 		adjacent[i] = pix;
 	if (p.y > 0)
-		adjacent[0] = get_pixel(e->surf, p.x, p.y - 1);
+		adjacent[0] = get_pixel(GTKMGR.buf, p.x, p.y - 1);
 	if (p.x + 1 < WIN_W)
-		adjacent[1] = get_pixel(e->surf, p.x + 1, p.y);
+		adjacent[1] = get_pixel(GTKMGR.buf, p.x + 1, p.y);
 	if (p.y + 1 < WIN_H)
-		adjacent[1] = get_pixel(e->surf, p.x, p.y + 1);
+		adjacent[1] = get_pixel(GTKMGR.buf, p.x, p.y + 1);
 	if (p.x > 0)
-		adjacent[3] = get_pixel(e->surf, p.x - 1, p.y);
+		adjacent[3] = get_pixel(GTKMGR.buf, p.x - 1, p.y);
 	if (colorcmp(adjacent[0], adjacent[1]) > AA_UPPER_THRESHOLD && \
 		colorcmp(pix, two_colors_average(adjacent[0], adjacent[1], 0.5)) < AA_LOWER_THRESHOLD)
 		return (1);
@@ -110,6 +93,7 @@ static int		detect_edge(t_point p, t_sdl_wrapper *e)
 		return (1);
 	return (0);
 }
+
 
 static t_rgb	new_color(t_rgb pix, t_rgb *adj)
 {
@@ -138,7 +122,7 @@ static t_rgb	new_color(t_rgb pix, t_rgb *adj)
 			two_colors_average(adj[adj1], adj[adj2], 0.5), AA_MIX_RATIO));
 }
 
-static void		apply_aa(t_point p, t_sdl_wrapper *e, t_rgb **pixdup)
+static void		apply_aa(t_point p, t_rgb **pixdup)
 {
 	t_rgb		pix;
 	t_rgb		adj[8];
@@ -164,11 +148,7 @@ static void		apply_aa(t_point p, t_sdl_wrapper *e, t_rgb **pixdup)
         adj[6] = pixdup[p.y + 1][p.x - 1];
 	if (p.x > 0)
         adj[7] = pixdup[p.y][p.x - 1];
-// Applique la nouvelle couleur :
-	draw_px(e->surf, p.x, p.y, new_color(pix, adj));
-
-// Colore en rose pour bien voir les pixels choisis (pour verifier la detection) :
-//	draw_px(e->surf, p.x, p.y, ft_rgb(255, 50, 200, 0));
+	draw_px(GTKMGR.buf, p.x, p.y, new_color(pix, adj));
 }
 
 static void		free_pixdup(t_rgb **pixdup)
@@ -177,28 +157,54 @@ static void		free_pixdup(t_rgb **pixdup)
 
 	p.y = -1;
 	while (++p.y < WIN_H)
+	{
 		free(pixdup[p.y]);
+		pixdup[p.y] = NULL;
+	}
 	free(pixdup);
+	pixdup = NULL;
 }
 
-static void		antialiasing_core(t_sdl_wrapper *e)
+static void		free_aa(int **aa)
+{
+	int i;
+
+	i = -1;
+	while (++i < WIN_H)
+	{
+		free(aa[i]);
+		aa[i] = NULL;
+	}
+	free(aa);
+	aa = NULL;
+}
+
+static void		antialiasing_core(void)
 {
 	t_point		p;
-	int			aa[WIN_H][WIN_W];
+	int			**aa;//[WIN_H][WIN_W];
 	t_rgb		**pixdup;
 
 	p.y = -1;
+	pixdup = NULL;
+	aa = NULL;
 	if (!(pixdup = (t_rgb **)malloc(sizeof(t_rgb *) * WIN_H)))
+		ft_exit("malloc error", 0);
+	if (!(aa = (int **)malloc(sizeof(int *) * WIN_H)))
 		ft_exit("malloc error", 0);
 	while (++p.y < WIN_H)
 	{
 		p.x = -1;
+		pixdup[p.y] = NULL;
+		aa[p.y] = NULL;
 		if (!(pixdup[p.y] = (t_rgb *)malloc(sizeof(t_rgb) * WIN_W)))
+			ft_exit("malloc error", 0);
+		if (!(aa[p.y] = (int *)malloc(sizeof(int) * WIN_W)))
 			ft_exit("malloc error", 0);
 		while (++p.x < WIN_W)
 		{
-			pixdup[p.y][p.x] = get_pixel(e->surf, p.x, p.y);
-			aa[p.y][p.x] = detect_edge(p, e);
+			pixdup[p.y][p.x] = get_pixel(GTKMGR.buf, p.x, p.y);
+			aa[p.y][p.x] = detect_edge(p);
 		}
 	}
 	p.y = -1;
@@ -208,17 +214,20 @@ static void		antialiasing_core(t_sdl_wrapper *e)
 		while (++p.x < WIN_W)
 		{
 			if (aa[p.y][p.x] == 1)
-				apply_aa(p, e, (t_rgb **)pixdup);
+			{
+				apply_aa(p, (t_rgb **)pixdup);
+			}
 		}
 	}
 	free_pixdup(pixdup);
+	free_aa(aa);
 }
 
-void			antialiasing(t_sdl_wrapper *e)
+void			antialiasing(void)
 {
 	int			i;
 
 	i = -1;
 	while (++i < AA_ITERATIONS)
-		antialiasing_core(e);
+		antialiasing_core();
 }

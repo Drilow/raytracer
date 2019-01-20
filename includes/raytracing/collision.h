@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 13:03:48 by adleau            #+#    #+#             */
-/*   Updated: 2018/08/26 17:12:35 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/14 03:10:14 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,32 +18,30 @@
 
 # define BRIGHTNESS 0.065
 # define SHINING_FACTOR 9
-//# define AMBIENT_LIGHT 0.1
-# define AMBIENT_LIGHT 12
+# define LIGHT_LOSS false
 # define LIGHT_DISTANCE_FACTOR 2000
 
-typedef struct		s_collision
+typedef struct			s_collision
 {
-	t_rpoint		p;
-	t_rpoint		normal;
-	t_obj			*o;
-}					t_collision;
+	t_rpoint			p;
+	t_rpoint			normal;
+	t_obj				*o;
+	struct s_collision	*next;
+	struct s_collision	*reflected;
+}						t_collision;
 
-bool				find_collisions(t_rpoint factors, t_dpoint *solutions);
-
-//bool				sphere_collision(t_ray ray, t_sphere *s, t_rpoint *p);
-//bool				plane_collision(t_ray ray, t_plane *pl, t_rpoint *p);
-//bool				get_cc_eq_factors(t_ray ray, t_cone *c, t_rpoint *f);
-//bool				cone_collision(t_ray ray, t_cone *c, t_rpoint *p);
-//t_rpoint			get_cyc_eq_factors(t_ray ray, t_cylinder *c);
-//bool				cylinder_collision(t_ray ray, t_cylinder *c, t_rpoint *p);
+bool				find_collisions(t_rpoint factors, t_dpoint *solutions, double minimum);
 bool				poly_obj_collision(t_ray ray, t_poly_obj *po, \
-									   t_collision *col, bool test);
-//t_bool				collision(t_ray ray, t_obj *o, t_rpoint *p);
-bool				collision(t_ray ray, t_collision *c, bool test);
+									   t_collision *col);
+bool				collision(t_ray ray, t_collision *c);
 t_rpoint			normal_collision_vector(t_collision c);
-t_collision			ray_tracing(t_rt *r, t_ray ray, bool test);
-
-//t_rgb				get_ray_color(t_rt *r, t_collision c);
-t_rgb				get_ray_color(t_rt *r, t_collision c, bool debug);
+t_collision			*ray_tracing(t_rt *r, t_ray ray, int r_index);
+void				free_collisions(t_collision *c);
+void				clean_collision_list(t_collision *c);
+t_rpoint			reflected_vector(t_rpoint v, t_rpoint normal);
+void				reflexion(t_rt *r, t_ray ray, t_collision *c, int index);
+t_collision			*add_collision(t_ray ray, t_collision *c, t_collision *tmpc);
+t_rpoint			color_to_add(t_rpoint oclr, t_rgb lclr, double af);
+t_rpoint			get_color(t_rt *r, t_collision c);
+t_rgb				get_ray_color(t_rt *r, t_collision *c);
 #endif
