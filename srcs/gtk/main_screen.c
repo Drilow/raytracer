@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:18:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 10:58:59 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/22 12:01:35 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,17 @@ void				add_view(void)
 	if (!(o = (t_obj*)malloc(sizeof(t_obj))))
 		exit_properly(1);
 	o->type = -5;
+	o->position.x = 0;
+	o->position.y = 0;
+	o->position.z = 0;
 	o->enabled = true;
+	o->obj = NULL;
+	o->color.r = 0;
+	o->color.g = 0;
+	o->color.b = 0;
+	o->color.trans = 0;
+	o->reflex = 0;
+	o->size = 0;
 	edit_win(o, GTKMGR.ui.main_view.win);
 }
 
