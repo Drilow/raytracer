@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 11:31:49 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/22 21:50:13 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,26 @@ unsigned char	*ft_ustrdup(unsigned char *s, int size)
 	return (ret);
 }
 
+static void		draw_image_init(int *i)
+{
+	*i = 0;
+	if ((GTKMGR.saved))
+	{
+		free(GTKMGR.saved);
+		GTKMGR.saved = NULL;
+	}
+	progress_bar();
+	PROGRESS_DATA.pos = 0;
+	PROGRESS_DATA.len = WIN_W;
+}
+
 void			draw_image(void)
 {
 	pthread_t	th[THREADS_NB];
 	t_thread	th_arg[THREADS_NB];
 	int			i;
 
-	if ((GTKMGR.saved))
-	{
-		free(GTKMGR.saved);
-		GTKMGR.saved = NULL;
-	}
-	i = 0;
-	progress_bar();
-	PROGRESS_DATA.pos = 0;
-	PROGRESS_DATA.len = WIN_W;
+	draw_image_init(&i);
 	while (i < THREADS_NB)
 	{
 		th_arg[i].th_index = i;
@@ -109,10 +114,10 @@ void			draw_image(void)
 		if (pthread_join(th[i], NULL) != 0)
 			ft_exit("Thread could not be joined.", 1);
 	}
-	if (ANTIALIASING == 1)
-		antialiasing();
+	antialiasing();
 	if (!GTKMGR.saved)
-		if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf, WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
-			exit(1); //fix
+		if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf, \
+			WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
+			exit(1);
 	g_global.drawn = 0;
 }

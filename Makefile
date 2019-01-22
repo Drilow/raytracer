@@ -6,7 +6,7 @@
 #    By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2019/01/22 19:49:30 by alacrois         ###   ########.fr        #
+#    Updated: 2019/01/22 21:33:40 by alacrois         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ SRCPATH = srcs/
 
 SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)display/display.c 		\
-		$(SRCPATH)display/antialiasing.c	\
+		$(SRCPATH)display/antialiasing_1.c	\
+		$(SRCPATH)display/antialiasing_2.c	\
+		$(SRCPATH)display/antialiasing_3.c	\
 		$(SRCPATH)extra/ft_rgb.c			\
 		$(SRCPATH)geometry/rpoint_fcts.c	\
 		$(SRCPATH)gtk/add_templates.c	 	\
