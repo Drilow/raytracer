@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 13:28:38 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/18 13:28:50 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/22 12:16:32 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static t_rpoint         set_face_vector(t_vertex *face)
+static t_rpoint			set_face_vector(t_vertex *face)
 {
-    face->pl.vector = cross_product(get_vector(face->p, face->next->p), \
+	face->pl.vector = cross_product(get_vector(face->p, face->next->p), \
                     get_vector(face->p, face->next->next->p));
 	if (vangle(face->pl.vector, \
                 get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
@@ -27,7 +27,7 @@ static t_rpoint         set_face_vector(t_vertex *face)
                                     -face->pl.vector.y, -face->pl.vector.z);
 }
 
-static  t_vertex        *add_p_face_1(int fnb, double bsize, double h)
+static  t_vertex		*add_p_face_1(int fnb, double bsize, double h)
 {
 	t_vertex			*face;
 
@@ -52,7 +52,7 @@ static  t_vertex        *add_p_face_1(int fnb, double bsize, double h)
 	return (face);
 }
 
-static  t_vertex        *add_p_face_2(int fnb, double bsize, double h)
+static  t_vertex		*add_p_face_2(int fnb, double bsize, double h)
 {
 	t_vertex			*face;
 

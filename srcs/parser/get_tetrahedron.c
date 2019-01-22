@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_tetrahedron.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 19:02:34 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/17 14:00:46 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 12:13:25 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,6 @@
 #include <libft.h>
 #include <fcntl.h>
 #include <parser/parser.h>
-
-// static	t_poly_obj	*malloc_po(void)
-// {
-// 	t_poly_obj *obj;
-
-// 	obj = (t_poly_obj *)malloc(sizeof(t_poly_obj));
-// 	obj->next = NULL;
-// 	return (obj);
-// }
-
-// static	t_vertex	*malloc_vertex(void)
-// {
-// 	t_vertex *v;
-
-// 	v = (t_vertex *)malloc(sizeof(t_vertex));
-// 	v->next = NULL;
-// 	return (v);
-// }
 
 static	t_vertex	*add_t_face(int fnb, double size)
 {
@@ -70,9 +52,12 @@ static	t_vertex	*add_t_face(int fnb, double size)
 		face->next->p = set_rpoint(size / 2, -h, -h);
 		face->next->next->p = set_rpoint(-size / 2, -h, -h);
 	}
-	face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
-	if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
-		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y, face->pl.vector.z);
+	face->pl.vector = cross_product(get_vector(face->p, face->next->p),
+	get_vector(face->p, face->next->next->p));
+	if (vangle(face->pl.vector, get_vector(face->p, set_rpoint(0, 0, 0)))
+	< (PI / 2))
+		face->pl.vector = set_rpoint(-face->pl.vector.x, -face->pl.vector.y,
+		face->pl.vector.z);
 	return (face);
 }
 
