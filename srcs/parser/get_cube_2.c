@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cube_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/22 11:37:04 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/22 12:10:07 by mabessir         ###   ########.fr       */
+/*   Created: 2019/01/20 17:34:40 by alacrois          #+#    #+#             */
+/*   Updated: 2019/01/22 18:46:03 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static t_rpoint			set_face_vector(t_vertex *face)
+static void				set_face_vector(t_vertex *face)
 {
 	face->pl.vector = cross_product(get_vector(face->p, face->next->p), \
 						get_vector(face->p, face->next->next->p));
 	if (vangle(face->pl.vector, \
-			get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
-		face->pl.vector = set_rpoint(-face->pl.vector.x,
-		-face->pl.vector.y, -face->pl.vector.z);
+				get_vector(face->p, set_rpoint(0, 0, 0))) < (PI / 2))
+		face->pl.vector = set_rpoint(-face->pl.vector.x, \
+							-face->pl.vector.y, -face->pl.vector.z);
 }
 
 static t_vertex			*malloc_4v(void)
 {
-	t_vertex *face;
+	t_vertex			*face;
 
 	face = pmalloc_vertex();
 	face->next = pmalloc_vertex();
@@ -38,9 +38,9 @@ static t_vertex			*malloc_4v(void)
 	return (face);
 }
 
-static	t_vertex		*add_cube_face(t_rpoint f)
+static t_vertex			*add_cube_face(t_rpoint f)
 {
-	t_vertex *face;
+	t_vertex			*face;
 
 	face = malloc_4v();
 	if (f.x != 0)
@@ -64,7 +64,6 @@ static	t_vertex		*add_cube_face(t_rpoint f)
 		face->next->next->p = set_rpoint(f.z, f.z, f.z);
 		face->next->next->next->p = set_rpoint(f.z, -f.z, f.z);
 	}
-	face->pl.vector = set_face_vector(face);
 	return (face);
 }
 
@@ -74,20 +73,23 @@ static void				get_cube_2(t_poly_obj *o, double size, double maxd)
 	o = o->next;
 	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, -size, 0));
+	set_face_vector(o->vertices);
 	o->next = pmalloc_po();
 	o = o->next;
 	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(size, 0, 0));
+	set_face_vector(o->vertices);
 	o->next = pmalloc_po();
 	o = o->next;
 	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(-size, 0, 0));
+	set_face_vector(o->vertices);
 }
 
 bool					get_cube(t_obj *c, double size)
 {
-	t_poly_obj	*o;
-	double		maxd;
+	t_poly_obj			*o;
+	double				maxd;
 
 	size = size / 2;
 	c->size = size;
@@ -96,14 +98,17 @@ bool					get_cube(t_obj *c, double size)
 	o = c->obj;
 	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, 0, size));
+	set_face_vector(o->vertices);
 	o->next = pmalloc_po();
 	o = o->next;
 	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, 0, -size));
+	set_face_vector(o->vertices);
 	o->next = pmalloc_po();
 	o = o->next;
 	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, size, 0));
+	set_face_vector(o->vertices);
 	get_cube_2(o, size, maxd);
 	return (true);
 }

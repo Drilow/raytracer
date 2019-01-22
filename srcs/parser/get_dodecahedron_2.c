@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_dodecahedron_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 13:26:04 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/18 13:27:26 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/20 17:04:09 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,21 @@
 void		get_dodecahedron_vertices(t_rpoint *p, double size)
 {
 	double				a;
-	double				b;
 
 	a = 0.5 + (sqrt(5) / 2);
-	b = 1 / a;
 	p[0] = set_rpoint(0, 0, 0);
-	p[1] = set_rpoint(b * size, 0, a * size);
-	p[2] = set_rpoint(a * size, b * size, 0);
-	p[3] = set_rpoint(0, a * size, b * size);
-	p[4] = set_rpoint(-b * size, 0, -a * size);
-	p[5] = set_rpoint(-a * size, b * size, 0);
-	p[6] = set_rpoint(0, a * size, -b * size);
-	p[7] = set_rpoint(b * size, 0, -a * size);
-	p[8] = set_rpoint(a * size, -b * size, 0);
-	p[9] = set_rpoint(0, -a * size, -b * size);
-	p[10] = set_rpoint(-b * size, 0, a * size);
-	p[11] = set_rpoint(-a * size, -b * size, 0);
-	p[12] = set_rpoint(0, -a * size, b * size);
+	p[1] = set_rpoint((1 / a) * size, 0, a * size);
+	p[2] = set_rpoint(a * size, (1 / a) * size, 0);
+	p[3] = set_rpoint(0, a * size, (1 / a) * size);
+	p[4] = set_rpoint(-(1 / a) * size, 0, -a * size);
+	p[5] = set_rpoint(-a * size, (1 / a) * size, 0);
+	p[6] = set_rpoint(0, a * size, -(1 / a) * size);
+	p[7] = set_rpoint((1 / a) * size, 0, -a * size);
+	p[8] = set_rpoint(a * size, -(1 / a) * size, 0);
+	p[9] = set_rpoint(0, -a * size, -(1 / a) * size);
+	p[10] = set_rpoint(-(1 / a) * size, 0, a * size);
+	p[11] = set_rpoint(-a * size, -(1 / a) * size, 0);
+	p[12] = set_rpoint(0, -a * size, (1 / a) * size);
 	p[13] = set_rpoint(size, size, size);
 	p[14] = set_rpoint(size, size, -size);
 	p[15] = set_rpoint(-size, size, -size);

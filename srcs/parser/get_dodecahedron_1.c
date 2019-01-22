@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_dodecahedron_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 10:29:50 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/18 13:25:50 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/20 17:23:31 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ static	t_vertex		*add_dode_face(t_rpoint **f, int i)
 {
 	t_vertex			*face;
 
-	face = malloc_vertex();
-	face->next = malloc_vertex();
-	face->next->next = malloc_vertex();
-	face->next->next->next = malloc_vertex();
-	face->next->next->next->next = malloc_vertex();
+	face = pmalloc_vertex();
+	face->next = pmalloc_vertex();
+	face->next->next = pmalloc_vertex();
+	face->next->next->next = pmalloc_vertex();
+	face->next->next->next->next = pmalloc_vertex();
 	face->p = set_rpoint(f[i][0].x, f[i][0].y, f[i][0].z);
 	face->next->p = set_rpoint(f[i][1].x, f[i][1].y, f[i][1].z);
 	face->next->next->p = set_rpoint(f[i][2].x, f[i][2].y, f[i][2].z);
@@ -41,21 +41,24 @@ static	t_vertex		*add_dode_face(t_rpoint **f, int i)
 	return (face);
 }
 
-static void				init_get_dode(t_rpoint **v, t_rpoint ***faces,
-t_obj *d, double size)
+static t_rpoint			**init_get_dode(t_rpoint *v, t_obj *d, double size)
 {
 	int					i;
+	t_rpoint			**faces;
 
+	if (!(faces = (t_rpoint **)malloc(sizeof(t_rpoint *) * 12)))
+		exit_properly(1);
 	i = -1;
 	while (++i < 12)
 	{
-		if (!(*faces[i] = (t_rpoint *)malloc(sizeof(t_rpoint) * 5)))
+		if (!(faces[i] = (t_rpoint *)malloc(sizeof(t_rpoint) * 5)))
 			exit_properly(1);
 	}
-	get_dodecahedron_vertices(*v, size);
-	get_dodecahedron_faces(*v, *faces);
-	d->obj = malloc_po();
+	get_dodecahedron_vertices(v, size);
+	get_dodecahedron_faces(v, faces);
+	d->obj = pmalloc_po();
 	((t_poly_obj *)d->obj)->max_d = 4 * size;
+	return (faces);
 }
 
 bool					get_dodecahedron(t_obj *d, double size)
@@ -63,9 +66,9 @@ bool					get_dodecahedron(t_obj *d, double size)
 	t_poly_obj			*o;
 	int					i;
 	t_rpoint			v[21];
-	t_rpoint			*faces[12];
+	t_rpoint			**faces;
 
-	init_get_dode(&v, &faces, d, size);
+	faces = init_get_dode(v, d, size);
 	o = d->obj;
 	i = -1;
 	while (++i < 12)
@@ -73,12 +76,13 @@ bool					get_dodecahedron(t_obj *d, double size)
 		o->vertices = add_dode_face((t_rpoint **)faces, i);
 		if (i < 11)
 		{
-			o->next = malloc_po();
+			o->next = pmalloc_po();
 			o = o->next;
 		}
 	}
 	i = -1;
 	while (++i < 12)
 		free(faces[i]);
+	free(faces);
 	return (true);
 }

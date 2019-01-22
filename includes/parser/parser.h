@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 17:18:29 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/15 12:24:05 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/22 19:37:57 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,16 +75,15 @@ bool			check_arr(t_json_array *arr);
 bool			verif_infinite(t_obj *o, t_json_value *val);
 bool			get_inf(t_obj *o, t_json_value *val);
 bool			get_pyra_inf(t_json_object *obj);
-// Ne pas virer les lignes en // ci dessous, ca reste a implementer
-//bool			add_vertex(t_vertex **v_list, char *line, double size);
-//bool			parse_face(t_poly_obj *face, char *line, t_vertex *v_list);
-//void			free_vlist(t_vertex **v_list);
-//bool			get_next_double(char *line, int *index, double *a);
-//t_poly_obj	*pmalloc_po(void);
-//t_vertex		*pmalloc_vertex(void);
+bool			add_vertex(t_vertex **v_list, char *line, double size);
+bool			parse_face(t_poly_obj *face, char *line, t_vertex *v_list);
+void			free_vlist(t_vertex **v_list);
+bool			get_next_double(char *line, int *index, double *a);
+t_poly_obj		*pmalloc_po(void);
+t_vertex		*pmalloc_vertex(void);
 bool			get_pyramid(t_obj *p, double base_size, double height);
-//void			get_dodecahedron_vertices(t_rpoint *p, double size);
-//void			get_dodecahedron_faces(t_rpoint *v, t_rpoint **faces);
+void			get_dodecahedron_vertices(t_rpoint *p, double size);
+void			get_dodecahedron_faces(t_rpoint *v, t_rpoint **faces);
 bool			get_dodecahedron(t_obj *d, double size);
 bool			get_dod_inf(t_json_object *obj);
 bool			geet_reflex(t_json_value *val, t_obj *o);

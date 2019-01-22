@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_obj_file_1.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/20 17:55:59 by alacrois          #+#    #+#             */
+/*   Updated: 2019/01/22 19:55:24 by alacrois         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <global.h>
 #include <objects/object.h>
 #include <stdlib.h>
@@ -5,10 +17,10 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-static	bool		add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
+static bool			add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
 {
-	t_poly_obj      *tmp;
-	t_poly_obj      *new;
+	t_poly_obj		*tmp;
+	t_poly_obj		*new;
 
 	new = pmalloc_po();
 	if (parse_face(new, line, v_list) == false)
@@ -25,7 +37,8 @@ static	bool		add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
 	return (true);
 }
 
-static	bool		read_line(t_poly_obj **obj, t_vertex **v_list, char *line, double size)
+static bool			read_line(t_poly_obj **obj, t_vertex **v_list, \
+								char *line, double size)
 {
 	if (line[0] == 'v')
 		return (add_vertex(v_list, line, size));
@@ -34,9 +47,11 @@ static	bool		read_line(t_poly_obj **obj, t_vertex **v_list, char *line, double s
 	return (true);
 }
 
-static t_poly_obj   end_parsing(t_poly_obj *obj, int i)
+static t_poly_obj	*end_parsing(t_poly_obj *obj, int i, t_vertex *v_list)
 {
-    ft_putstr("Parsing ended at line ");
+	if (v_list != NULL)
+		free_vlist(&v_list);
+	ft_putstr("Parsing ended at line ");
 	ft_putnbr(i);
 	ft_putstr("\n");
 	return (obj);
@@ -44,11 +59,11 @@ static t_poly_obj   end_parsing(t_poly_obj *obj, int i)
 
 t_poly_obj			*parse_obj(char *scene_line, double size)
 {
-	t_poly_obj      *obj;
-	t_vertex        *v_list;
-	int             fd;
-	char            *line;
-	int             i;
+	t_poly_obj		*obj;
+	t_vertex		*v_list;
+	int				fd;
+	char			*line;
+	int				i;
 
 	obj = NULL;
 	v_list = NULL;
@@ -61,9 +76,7 @@ t_poly_obj			*parse_obj(char *scene_line, double size)
 		if (read_line(&obj, &v_list, line, size) == false)
 		{
 			free(line);
-			if (v_list != NULL)
-				free_vlist(&v_list);
-			return (end_parsing(obj, i));
+			return (end_parsing(obj, i, v_list));
 		}
 		i++;
 		free(line);

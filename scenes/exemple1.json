@@ -41,7 +41,8 @@
 					"size":5,
 					"adresse":"teapot.obj",
 					"color":[125,80,80,0],
-					"rotate":[0,0,0]
+					"rotate":[0,0,0],
+					"reflex":0
 				},
 				{
 					"type":"cube",

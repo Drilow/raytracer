@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_obj_file_3.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/20 18:05:08 by alacrois          #+#    #+#             */
+/*   Updated: 2019/01/20 18:08:56 by alacrois         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <global.h>
 #include <objects/object.h>
 #include <stdlib.h>
@@ -5,10 +17,9 @@
 #include <fcntl.h>
 #include <parser/parser.h>
 
-
-static	bool		parse_vertex(t_vertex *v, char *line, double size)
+static bool			parse_vertex(t_vertex *v, char *line, double size)
 {
-	int             index;
+	int				index;
 
 	index = 0;
 	if (get_next_double(line, &index, &(v->p.x)) == false)
@@ -23,10 +34,10 @@ static	bool		parse_vertex(t_vertex *v, char *line, double size)
 	return (true);
 }
 
-bool			    add_vertex(t_vertex **v_list, char *line, double size)
+bool				add_vertex(t_vertex **v_list, char *line, double size)
 {
-	t_vertex        *tmp;
-	t_vertex        *new;
+	t_vertex		*tmp;
+	t_vertex		*new;
 
 	new = pmalloc_vertex();
 	if (parse_vertex(new, line, size) == false)
@@ -45,10 +56,10 @@ bool			    add_vertex(t_vertex **v_list, char *line, double size)
 	return (true);
 }
 
-static	bool		get_vertex(t_vertex *v_list, int position, t_vertex *v)
+static bool			get_vertex(t_vertex *v_list, int position, t_vertex *v)
 {
-	t_vertex        *tmp;
-	int             index;
+	t_vertex		*tmp;
+	int				index;
 
 	tmp = v_list;
 	index = 0;
@@ -65,23 +76,23 @@ static	bool		get_vertex(t_vertex *v_list, int position, t_vertex *v)
 	return (false);
 }
 
-static bool         parse_face_2(t_vertex *vertices, \
-                                t_vertex *v_list, double v_index)
+static bool			parse_face_2(t_vertex *vertices, \
+								t_vertex *v_list, double v_index)
 {
-    while (vertices->next != NULL)
-				vertices = vertices->next;
+	while (vertices->next != NULL)
+		vertices = vertices->next;
 	vertices->next = pmalloc_vertex();
 	if (get_vertex(v_list, (int)v_index, vertices->next) == false)
 		return (false);
-    return (true);
+	return (true);
 }
 
-bool			    parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
+bool				parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
 {
-	int			    line_index;
-	double		    v_index;
-	t_vertex	    *vertices;
-	int			    v_nb;
+	int				line_index;
+	double			v_index;
+	t_vertex		*vertices;
+	int				v_nb;
 
 	v_index = 0;
 	line_index = 0;
@@ -98,7 +109,7 @@ bool			    parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
 				return (false);
 		}
 		else if (parse_face_2(vertices, v_list, v_index) == false)
-            return (false);
+			return (false);
 	}
 	if (v_nb < 3)
 		return (false);

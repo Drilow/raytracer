@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_obj_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 13:31:57 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/17 14:01:24 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 19:38:57 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 // 	return (v);
 // }
 
+/*
 static	void			free_vlist(t_vertex **v_list)
 {
 	t_vertex *tmp;
@@ -53,8 +54,9 @@ static	void			free_vlist(t_vertex **v_list)
 		tmp = tmp_next;
 	}
 }
+*/
 
-static	bool			get_next_double(char *line, int *index, double *a)
+bool			get_next_double(char *line, int *index, double *a)
 {
 	double	sign;
 	double	tmp;
@@ -96,6 +98,7 @@ static	bool			get_next_double(char *line, int *index, double *a)
 	return (true);
 }
 
+/*
 static	bool			parse_vertex(t_vertex *v, char *line, double size)
 {
 	int index;
@@ -189,6 +192,7 @@ static	bool			parse_face(t_poly_obj *face, char *line, t_vertex *v_list)
 		return (false);
 	return (true);
 }
+*/
 
 static	bool			add_face(t_poly_obj **obj, t_vertex *v_list, char *line)
 {
@@ -219,7 +223,7 @@ static	bool			read_line(t_poly_obj **obj, t_vertex **v_list, char *line, double 
 //	return (false);
 	return (true);
 }
-
+/*
 static	void			get_face_maxd(t_vertex *f, double *d)
 {
 	double tmp_d;
@@ -236,7 +240,8 @@ static	void			get_face_maxd(t_vertex *f, double *d)
 	if (tmp_d > *d)
 		*d = tmp_d;
 }
-
+*/
+/*
 void					set_obj(t_obj *o)
 {
 	t_poly_obj	*tmp;
@@ -256,6 +261,7 @@ void					set_obj(t_obj *o)
 	}
 	((t_poly_obj *)o->obj)->max_d = tmp_d;
 }
+*/
 
 t_poly_obj				*parse_obj(char *scene_line, double size)
 {
@@ -289,7 +295,7 @@ t_poly_obj				*parse_obj(char *scene_line, double size)
 	free_vlist(&v_list);
 	return (obj);
 }
-
+/*
 static	t_vertex		*add_cube_face(t_rpoint f)
 {
 	t_vertex *face;
@@ -655,3 +661,4 @@ bool					get_dodecahedron(t_obj *d, double size)
 		free(faces[i]);
 	return (true);
 }
+*/

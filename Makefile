@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
+#    By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2019/01/14 16:35:53 by adleau           ###   ########.fr        #
+#    Updated: 2019/01/22 19:49:30 by alacrois         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)objects/sphere.c			\
 		$(SRCPATH)parser/get_tetrahedron.c	\
 		$(SRCPATH)parser/get_cube.c			\
+		$(SRCPATH)parser/get_cube_2.c		\
 		$(SRCPATH)parser/objectsfn.c		\
 		$(SRCPATH)parser/parsing_1.c		\
 		$(SRCPATH)parser/parse_1.c			\
@@ -99,10 +100,16 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)parser/parse_cub.c		\
 		$(SRCPATH)parser/parse_tetra.c		\
 		$(SRCPATH)parser/parse_dodeca.c		\
-		$(SRCPATH)parser/parse_obj_file.c	\
+		$(SRCPATH)parser/parse_obj_file_1.c	\
+		$(SRCPATH)parser/parse_obj_file_2.c	\
+		$(SRCPATH)parser/parse_obj_file_3.c	\
 		$(SRCPATH)parser/set_obj.c			\
 		$(SRCPATH)raytracing/collision/normal_collision_vector.c 	\
 		$(SRCPATH)raytracing/collision/obj_collision.c				\
+		$(SRCPATH)parser/get_dodecahedron_1.c	\
+		$(SRCPATH)parser/get_dodecahedron_2.c	\
+		$(SRCPATH)parser/po_malloc.c		\
+		$(SRCPATH)parser/get_pyramid.c		\
 		$(SRCPATH)raytracing/colors_1.c 	\
 		$(SRCPATH)raytracing/colors_2.c 	\
 		$(SRCPATH)raytracing/colors_3.c 	\

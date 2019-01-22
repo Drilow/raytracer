@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_obj_file_2.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/01/20 18:01:24 by alacrois          #+#    #+#             */
+/*   Updated: 2019/01/22 20:05:22 by alacrois         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <global.h>
 #include <objects/object.h>
 #include <stdlib.h>
@@ -7,8 +19,8 @@
 
 void			free_vlist(t_vertex **v_list)
 {
-	t_vertex    *tmp;
-	t_vertex    *tmp_next;
+	t_vertex	*tmp;
+	t_vertex	*tmp_next;
 
 	tmp = *v_list;
 	while (tmp != NULL)
@@ -20,14 +32,14 @@ void			free_vlist(t_vertex **v_list)
 	}
 }
 
-static bool     get_next_double_2(char *line, int *index, \
-                                    double *a, double sign)
+static bool		get_next_double_2(char *line, int *index, \
+									double *a, double sign)
 {
-    int         digit_index;
-    int         tmp;
+	int			digit_index;
+	double		tmp;
 
-    tmp = 0;
-    while (ft_isdigit(line[*index]) == 1)
+	tmp = 0;
+	while (ft_isdigit(line[*index]) == 1)
 	{
 		tmp = (tmp * 10) + (double)(line[*index] - '0');
 		(*index)++;
@@ -46,12 +58,12 @@ static bool     get_next_double_2(char *line, int *index, \
 		digit_index++;
 	}
 	*a = tmp * sign;
-    return (true);
+	return (true);
 }
 
 bool			get_next_double(char *line, int *index, double *a)
 {
-	double	    sign;
+	double		sign;
 
 	sign = 1;
 	while (line[*index] != '-' && ft_isdigit(line[*index]) == 0
@@ -69,10 +81,10 @@ bool			get_next_double(char *line, int *index, double *a)
 	return (get_next_double_2(line, index, a, sign));
 }
 
-static	void			get_face_maxd(t_vertex *f, double *d)
+static	void	get_face_maxd(t_vertex *f, double *d)
 {
-	double tmp_d;
-	double tmp;
+	double		tmp_d;
+	double		tmp;
 
 	tmp_d = 0;
 	while (f != NULL)
@@ -86,7 +98,7 @@ static	void			get_face_maxd(t_vertex *f, double *d)
 		*d = tmp_d;
 }
 
-void					set_obj(t_obj *o)
+void			set_obj(t_obj *o)
 {
 	t_poly_obj	*tmp;
 	t_vertex	*face;
@@ -100,7 +112,8 @@ void					set_obj(t_obj *o)
 		face = tmp->vertices;
 		pos = o->position;
 		get_face_maxd(face, &tmp_d);
-		face->pl.vector = cross_product(get_vector(face->p, face->next->p), get_vector(face->p, face->next->next->p));
+		face->pl.vector = cross_product(get_vector(face->p, face->next->p), \
+									get_vector(face->p, face->next->next->p));
 		tmp = tmp->next;
 	}
 	((t_poly_obj *)o->obj)->max_d = tmp_d;
