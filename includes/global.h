@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 21:33:02 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/22 21:54:30 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # define MIN_DISTANCE 0.00001
 # define REFLEX_DEPTH 4
 # define ANTIALIASING 1
-//# define AA_ITERATIONS 4
 # define AA_ITERATIONS 6
 # define AA_LOWER_THRESHOLD 0.9
 # define AA_UPPER_THRESHOLD 0.1
