@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 17:41:11 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 10:42:32 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <libft.h>
 #include <parser/parser.h>
 #include <display/display.h>
-#define EVENT_PTR g_global.sdl_mgr.event
 
 t_global		g_global;
 
@@ -33,24 +32,23 @@ void	ft_exit(char *msg_error, int i)
 
 static void			init_ray(t_point p)
 {
-	g_global.r->rays[p.y][p.x].p = g_global.r->cam_position;
-	g_global.r->rays[p.y][p.x].vector.x = p.x - (WIN_W / 2);
-	g_global.r->rays[p.y][p.x].vector.y = -p.y + (WIN_H / 2);
-	g_global.r->rays[p.y][p.x].vector.z = g_global.r->screen_distance;
+	g_global.r.rays[p.y][p.x].p = g_global.r.cam_position;
+	g_global.r.rays[p.y][p.x].vector.x = p.x - (WIN_W / 2);
+	g_global.r.rays[p.y][p.x].vector.y = -p.y + (WIN_H / 2);
+	g_global.r.rays[p.y][p.x].vector.z = g_global.r.screen_distance;
 }
 
 void			setup_rt_lst(void)
 {
-	if (!(g_global.r = (t_rt*)malloc(sizeof(t_rt))))
-		exit(1);
-	g_global.r->checker = NULL;
-	g_global.r->selected_obj = NULL;
-	g_global.r->objects = NULL;
-	g_global.r->lights = NULL;
-	g_global.r->next = NULL;
-	g_global.first_scene = g_global.r;
+//	if (!(g_global.r = (t_rt*)malloc(sizeof(t_rt))))
+//		exit(1);
+	g_global.r.checker = NULL;
+	g_global.r.selected_obj = NULL;
+	g_global.r.objects = NULL;
+	g_global.r.lights = NULL;
+//	g_global.r.next = NULL;
 }
-
+/*
 void			add_link_to_rt_list(void)
 {
 	t_rt		*tmp;
@@ -58,22 +56,22 @@ void			add_link_to_rt_list(void)
 	tmp = NULL;
 	if (!(tmp = (t_rt*)malloc(sizeof(t_rt))))
 		exit(1);
-	g_global.r->next = tmp;
-	g_global.r = g_global.r->next;
+	g_global.r.next = tmp;
+	g_global.r = g_global.r.next;
 }
-
+*/
 void			init_obj_tab(void)
 {
 	int			y;
 
 	y = -1;
-	g_global.r->checker = NULL;
-	if (!(g_global.r->checker = malloc(sizeof(t_obj**) * WIN_H)))
+	g_global.r.checker = NULL;
+	if (!(g_global.r.checker = malloc(sizeof(t_obj**) * WIN_H)))
 		exit(1);
 	while (++y < WIN_H)
 	{
-		g_global.r->checker[y] = NULL;
-		if (!(g_global.r->checker[y] = malloc(sizeof(t_obj*) * WIN_W)))
+		g_global.r.checker[y] = NULL;
+		if (!(g_global.r.checker[y] = malloc(sizeof(t_obj*) * WIN_W)))
 			exit(1);
 	}
 }
@@ -82,16 +80,16 @@ void			init_rt(void)
 {
 	t_point			p;
 
-	if (g_global.r == NULL)
+/*	if (g_global.r == NULL)
 		setup_rt_lst();
 	else
 		add_link_to_rt_list();
-	init_obj_tab();
+*/	init_obj_tab();
 	PIXMAP = NULL;
-	g_global.r->cam_position.x = 0;
-	g_global.r->cam_position.y = 0;
-	g_global.r->cam_position.z = 0;
-	g_global.r->screen_distance = (WIN_W / 2) / tan(FOV / 2);
+	g_global.r.cam_position.x = 0;
+	g_global.r.cam_position.y = 0;
+	g_global.r.cam_position.z = 0;
+	g_global.r.screen_distance = (WIN_W / 2) / tan(FOV / 2);
 	p.y = -1;
 	while (++p.y < WIN_H)
 	{
@@ -103,9 +101,8 @@ void			init_rt(void)
 
 void			init_global(int ac, char **av)
 {
-//	ft_putendl("debug1");
 	g_global.drawn = 1;
-	g_global.r = NULL;
+//	g_global.r = NULL;
 	init_gtk(ac, av);
 }
 

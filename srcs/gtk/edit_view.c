@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 02:13:28 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 10:45:36 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void				add_addendum(t_obj *o)
 {
 	gtk_window_set_title(GTK_WINDOW(ADD_VIEW.win), "Add Object");
 	o->type = 1;
-	o->next = g_global.r->objects;
-	g_global.r->objects = o;
+	o->next = g_global.r.objects;
+	g_global.r.objects = o;
 	if (!(o->obj = (t_sphere*)malloc(sizeof(t_sphere))))
 		exit_properly(1);
 	set_default_values(o);

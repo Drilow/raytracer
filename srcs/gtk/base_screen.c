@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 14:46:40 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 11:02:27 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ static void		init_base_view(void)
 void			init_gtk(int ac, char **av)
 {
 	init_base_view();
-	g_global.r = NULL;
 	gtk_init(&ac, &av);
 	handle_base_view();
 	gtk_main();

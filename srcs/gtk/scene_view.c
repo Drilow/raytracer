@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 15:27:40 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 10:49:45 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool					go_throu_lights(t_light *curr)
 {
 	t_light				*tmp;
 
-	tmp = g_global.r->lights;
+	tmp = g_global.r.lights;
 	while (tmp)
 	{
 		if (curr == tmp)

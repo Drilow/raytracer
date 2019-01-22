@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 16:17:00 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/17 14:38:54 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 10:52:15 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ static	void		put_light_to_glob(t_light *lights)
 {
 	t_light	*ltmp;
 
-	if (g_global.r->lights == NULL)
+	if (g_global.r.lights == NULL)
 	{
 		lights->enabled = true;
-		g_global.r->lights = lights;
+		g_global.r.lights = lights;
 	}
 	else
 	{
 		lights->enabled = true;
-		ltmp = g_global.r->lights;
+		ltmp = g_global.r.lights;
 		while (ltmp->next != NULL)
 			ltmp = ltmp->next;
 		ltmp->next = lights;

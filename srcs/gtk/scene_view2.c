@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 16:01:37 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 10:50:12 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static void				populate_tree_model(GtkTreeStore *store)
 	t_obj				*tmp_objs;
 	t_light				*tmp_lights;
 
-	tmp_objs = g_global.r->objects;
-	tmp_lights = g_global.r->lights;
+	tmp_objs = g_global.r.objects;
+	tmp_lights = g_global.r.lights;
 	while (tmp_objs != NULL)
 	{
 		read_obj(tmp_objs);
@@ -89,12 +89,12 @@ static void				populate_tree_model(GtkTreeStore *store)
 	}
 	gtk_tree_store_append(store, &iter1, NULL);
 	gtk_tree_store_set(store, &iter1, TYPE_COLUMN, "Camera",
-					POS_X_COLUMN, g_global.r->cam_position.x,
-					POS_Y_COLUMN, g_global.r->cam_position.y,
-					POS_Z_COLUMN, g_global.r->cam_position.z,
+					POS_X_COLUMN, g_global.r.cam_position.x,
+					POS_Y_COLUMN, g_global.r.cam_position.y,
+					POS_Z_COLUMN, g_global.r.cam_position.z,
 					CHECKED_COLUMN, TRUE,
 					CHECKED_ACTIVE, FALSE,
-					OBJ_REF, (gpointer)&g_global.r->cam_position, -1);
+					OBJ_REF, (gpointer)&g_global.r.cam_position, -1);
 }
 
 void					init_scene_view(void)

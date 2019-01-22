@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/15 12:27:11 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/22 10:51:11 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool			get_started(t_json_value *val)
 
 	nb = 0;
 	obj = (t_json_object *)val->ptr;
-	g_global.r->ambient_light = ft_rgb(0, 0, 0, 0);
+	g_global.r.ambient_light = ft_rgb(0, 0, 0, 0);
 	while (nb < obj->nb)
 	{
 		if (start_parse(obj,
@@ -84,9 +84,9 @@ bool			parse(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (false);
-	g_global.r->objects = NULL;
-	g_global.r->lights = NULL;
-	g_global.r->ambient_light = ft_rgb(0, 0, 0, 0);
+	g_global.r.objects = NULL;
+	g_global.r.lights = NULL;
+	g_global.r.ambient_light = ft_rgb(0, 0, 0, 0);
 	str = ft_readfile(fd, file);
 	if ((val = json_init(str)) == NULL)
 	{

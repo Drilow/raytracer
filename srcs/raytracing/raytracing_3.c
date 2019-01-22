@@ -6,7 +6,7 @@
 /*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 16:51:25 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/12 16:51:27 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/22 11:37:15 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,3 +76,6 @@ void				reflexion(t_rt *r, t_ray ray, t_collision *c, int index)
 		tmp = tmp->next;
 	}
 }
+
+
+

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:47:04 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/15 03:31:17 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 10:47:12 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void				handle_edit_validation(t_obj *o)
 		if (!(ft_strcmp(gtk_window_get_title(GTK_WINDOW(ADD_VIEW.win)),
 			"Add Object")))
 		{
-			g_global.r->objects = o->next;
+			g_global.r.objects = o->next;
 			free(o->obj);
 			free(o);
 		}

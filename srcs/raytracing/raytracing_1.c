@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:11:40 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/30 17:33:28 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/22 11:36:50 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,4 @@ t_collision			*ray_tracing(t_rt *r, t_ray ray, int r_index)
 	}
 	return (c);
 }
+

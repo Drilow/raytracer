@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/14 14:02:27 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/14 14:02:30 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/22 11:36:07 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ static t_rpoint		init_color(t_obj *o)
 
 	ocolor = set_rpoint((double)o->color.r, \
 						(double)o->color.g, (double)o->color.b);
-	color = set_rpoint(ocolor.x * g_global.r->ambient_light.r * BRIGHTNESS, \
-						ocolor.y * g_global.r->ambient_light.g * BRIGHTNESS, \
-						ocolor.z * g_global.r->ambient_light.b * BRIGHTNESS);
+	color = set_rpoint(ocolor.x * g_global.r.ambient_light.r * BRIGHTNESS, \
+						ocolor.y * g_global.r.ambient_light.g * BRIGHTNESS, \
+						ocolor.z * g_global.r.ambient_light.b * BRIGHTNESS);
 	return (color);
 }
 

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 14:00:21 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 11:13:32 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ typedef struct			s_global
 {
 	t_base_view			base_view;
 	char				running;
-	t_rt				*r;
-	t_rt				*first_scene;
+	t_rt				r;
 	int					drawn;
 }						t_global;
 

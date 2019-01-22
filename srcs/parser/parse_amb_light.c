@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 15:17:09 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/09 18:46:46 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/22 10:52:44 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static	void	get_info(t_json_value *val)
 	t_rgb			alight;
 
 	alight = get_obj_color(val);
-	g_global.r->ambient_light = alight;
+	g_global.r.ambient_light = alight;
 }
 
 void			*parse_amblight(t_json_object *obj, unsigned long nb)

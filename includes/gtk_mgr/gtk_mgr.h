@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 17:15:48 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/22 10:42:21 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include <gtk/gtk.h>
 # include <stdbool.h>
 # include <objects/object.h>
-# define GTKMGR 			g_global.r->gtk_mgr
+# define GTKMGR 			g_global.r.gtk_mgr
 # define PIXMAP 			GTKMGR.pixmap
 # define SCENE_VIEW 		GTKMGR.ui.scene_view
 # define PROGRESS_DATA 		GTKMGR.ui.progress_data

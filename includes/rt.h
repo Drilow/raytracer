@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 15:49:17 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 23:01:14 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 11:13:20 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct		s_rt
 	t_obj			*objects;
 	t_light			*lights;
 	t_rgb			ambient_light;
-	struct s_rt		*next;
 }					t_rt;
 
 

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:28:27 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 10:57:42 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/22 11:00:02 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ static gboolean		clicked(GtkWidget __attribute__((unused)) *widget,
 {
 	if (event->button == 1)
 	{
-		if (g_global.r->checker[(int)event->y][(int)event->x])
+		if (g_global.r.checker[(int)event->y][(int)event->x])
 		{
-			g_global.r->selected_obj
-			= g_global.r->checker[(int)event->y][(int)event->x];
+			g_global.r.selected_obj
+			= g_global.r.checker[(int)event->y][(int)event->x];
 			if ((gtk_widget_get_state_flags(GTKMGR.ui.main_view.select_button)
 			& GTK_STATE_FLAG_CHECKED))
 			{
-				outline_obj(g_global.r->selected_obj);
-				edit_win(g_global.r->selected_obj, GTKMGR.ui.main_view.win);
+				outline_obj(g_global.r.selected_obj);
+				edit_win(g_global.r.selected_obj, GTKMGR.ui.main_view.win);
 			}
 		}
 	}

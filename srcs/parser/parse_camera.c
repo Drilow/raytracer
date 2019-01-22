@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/23 18:49:08 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/28 19:05:16 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/22 10:51:45 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static	t_rpoint	camera_init(void)
 {
 	t_rpoint	angle;
 
-	g_global.r->cam_position.x = 0;
-	g_global.r->cam_position.y = 0;
-	g_global.r->cam_position.z = 0;
+	g_global.r.cam_position.x = 0;
+	g_global.r.cam_position.y = 0;
+	g_global.r.cam_position.z = 0;
 	angle.x = 0;
 	angle.y = 0;
 	angle.z = 0;
@@ -75,7 +75,7 @@ static	void		*get_info(t_json_value *val, int i, t_rpoint *angle)
 	arr = (t_json_array *)val->ptr;
 	if (i == 1)
 		if (arr->nb == 3)
-			g_global.r->cam_position = put_cam_info(arr);
+			g_global.r.cam_position = put_cam_info(arr);
 	if (i == 2)
 		if (arr->nb == 3)
 			*angle = put_cam_info(arr);

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:40:41 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 10:59:33 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/22 10:48:37 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ extern t_global				g_global;
 
 void				handle_x_button(GtkWidget *w)
 {
-	if (g_global.r && w == ADD_VIEW.win)
+	if (w == ADD_VIEW.win)
 	{
 		redraw(false);
 		gtk_widget_destroy(GTK_WIDGET(w));
 		return ;
 	}
-	else if (g_global.r && w == GTKMGR.ui.main_view.win)
+	else if (w == GTKMGR.ui.main_view.win)
 		exit_properly(0);
 	else if (w == g_global.base_view.win)
 	{
@@ -62,8 +62,8 @@ void						on_key_press(GtkWidget *w, GdkEventKey *event)
 		return ;
 	if (w == g_global.base_view.win && event->keyval == GDK_KEY_Escape)
 	{
-		if (g_global.r)
-			free_objects(g_global.r->objects);
+		if (g_global.r.objects)
+			free_objects(g_global.r.objects);
 		gtk_main_quit();
 		return ;
 	}
@@ -73,7 +73,7 @@ void						on_key_press(GtkWidget *w, GdkEventKey *event)
 		gtk_widget_destroy(w);
 		return ;
 	}
-	if (g_global.r && w == ADD_VIEW.win && event->keyval == GDK_KEY_Escape)
+	if (w == ADD_VIEW.win && event->keyval == GDK_KEY_Escape)
 	{
 		redraw(false);
 		return ;

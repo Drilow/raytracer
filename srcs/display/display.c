@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 16:19:00 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/22 11:31:49 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ static void		draw_image_core2(t_point p, t_rt *r)
 
 	while (++p.y < WIN_H)
 	{
-		tmp = ray_tracing(r, g_global.r->rays[p.y][p.x], REFLEX_DEPTH);
+		tmp = ray_tracing(r, g_global.r.rays[p.y][p.x], REFLEX_DEPTH);
 		if (tmp != NULL && tmp->o != NULL)
 		{
-			g_global.r->checker[p.y][p.x] = tmp->o;
+			g_global.r.checker[p.y][p.x] = tmp->o;
 			draw_px(GTKMGR.buf, p.x, p.y, \
 						get_ray_color(r, tmp));
 		}
 		else
 		{
-			g_global.r->checker[p.y][p.x] = NULL;
+			g_global.r.checker[p.y][p.x] = NULL;
 			draw_px(GTKMGR.buf, p.x, p.y, ft_rgb(0, 0, 0, 0));
 		}
 		free_collisions(tmp);
@@ -50,7 +50,7 @@ static void		*draw_image_core(void *arg)
 	t_rt		*r;
 
 	th = *((t_thread *)arg);
-	r = g_global.r;
+	r = &(g_global.r);
 	p.x = th.th_index;
 	while (p.x < WIN_W)
 	{

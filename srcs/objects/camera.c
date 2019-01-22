@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 18:38:43 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/07 16:10:57 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/22 10:50:39 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ bool			set_camera(t_rpoint angle)
 		p.x = -1;
 		while (++p.x < WIN_W)
 		{
-			g_global.r->rays[p.y][p.x].p = g_global.r->cam_position;
-			rotate(&(g_global.r->rays[p.y][p.x].vector), angle);
+			g_global.r.rays[p.y][p.x].p = g_global.r.cam_position;
+			rotate(&(g_global.r.rays[p.y][p.x].vector), angle);
 		}
 	}
 	return (true);
