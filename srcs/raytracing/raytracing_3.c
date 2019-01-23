@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing_3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 16:51:25 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/22 11:37:15 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/23 10:15:41 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,3 @@ void				reflexion(t_rt *r, t_ray ray, t_collision *c, int index)
 		tmp = tmp->next;
 	}
 }
-
-
-

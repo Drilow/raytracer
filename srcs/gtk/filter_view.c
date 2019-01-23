@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filter_view.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 13:55:52 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/23 10:02:01 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void				handle_filter_validation(void)
 	{
 		free(GTKMGR.buf);
 		GTKMGR.buf = NULL;
-		GTKMGR.buf
-		= ft_ustrdup(GTKMGR.saved,
+		GTKMGR.buf = ft_ustrdup(GTKMGR.saved,
 		WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 		gtk_widget_destroy(FILTER_VIEW.win);
 		redraw(true);

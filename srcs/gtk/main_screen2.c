@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:28:27 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 11:00:02 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/23 10:08:54 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static gboolean		clicked(GtkWidget __attribute__((unused)) *widget,
 	{
 		if (g_global.r.checker[(int)event->y][(int)event->x])
 		{
-			g_global.r.selected_obj
-			= g_global.r.checker[(int)event->y][(int)event->x];
+			g_global.r.selected_obj = g_global.r.checker
+			[(int)event->y][(int)event->x];
 			if ((gtk_widget_get_state_flags(GTKMGR.ui.main_view.select_button)
 			& GTK_STATE_FLAG_CHECKED))
 			{

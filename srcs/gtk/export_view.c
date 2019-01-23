@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_view.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:37:49 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/14 16:17:18 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/23 09:43:01 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void				end_export(GtkWidget *dialog)
 	gtk_widget_destroy(dialog);
 }
 
-char						*clean_dir_name_export(char *s)
+char				*clean_dir_name_export(char *s)
 {
 	char					*tmp;
 
@@ -57,6 +57,7 @@ char						*clean_dir_name_export(char *s)
 	s = NULL;
 	return (tmp);
 }
+
 void				export_view(void)
 {
 	GtkWidget				*dialog;

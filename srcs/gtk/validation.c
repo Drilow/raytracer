@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 15:58:48 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/23 10:11:23 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void				validate_edit(t_obj *o)
 	o->color.trans = ((unsigned char)255 - (c->alpha * 255));
 	o->reflex = (unsigned char)
 	((gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.reflex_spin))));
-	o->position.x
-	= gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
-	o->position.y
-	= gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_y_spin));
-	o->position.z
-	= gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
+	o->position.x = gtk_spin_button_get_value(
+		GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
+	o->position.y = gtk_spin_button_get_value(
+		GTK_SPIN_BUTTON(ADD_VIEW.translate_y_spin));
+	o->position.z = gtk_spin_button_get_value(
+		GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
 	validate_objects(o);
 	redraw(true);
 	free(c);

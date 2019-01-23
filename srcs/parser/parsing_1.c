@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/22 10:51:11 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/23 09:40:22 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 extern t_global g_global;
 
-static	int		get_object_type(char *s)
+static	int	get_object_type(char *s)
 {
 	if (cmp_chars(s, "light", 0) == true)
 		return (1);
@@ -33,7 +33,7 @@ static	int		get_object_type(char *s)
 	return (-1);
 }
 
-t_obj			*malloc_object(int type)
+t_obj		*malloc_object(int type)
 {
 	t_obj		*o;
 
@@ -57,7 +57,7 @@ t_obj			*malloc_object(int type)
 	return (o);
 }
 
-bool			get_started(t_json_value *val)
+bool		get_started(t_json_value *val)
 {
 	t_json_object	*obj;
 	unsigned long	nb;
@@ -75,7 +75,7 @@ bool			get_started(t_json_value *val)
 	return (true);
 }
 
-bool			parse(char *file)
+bool		parse(char *file)
 {
 	int				fd;
 	char			*str;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_properly.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 18:24:04 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 10:46:41 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/23 09:39:18 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void				free_checker(void)
 	y = -1;
 	if (g_global.r.checker)
 	{
-		while(++y < WIN_H)
+		while (++y < WIN_H)
 		{
 			free(g_global.r.checker[y]);
 			g_global.r.checker[y] = NULL;
 		}
 		free(g_global.r.checker);
-		g_global.r.checker= NULL;
+		g_global.r.checker = NULL;
 		free(g_global.r.selected_obj);
 		g_global.r.selected_obj = NULL;
 	}
@@ -52,10 +52,6 @@ void				exit_properly(int ret)
 	GTKMGR.saved = NULL;
 	GTKMGR.buf = NULL;
 	free_checker();
-	//if (ADD_VIEW.sw.o)
-	//	free(ADD_VIEW.sw.o);
-	//free(g_global.r);
-	//g_global.r = NULL;
 	gtk_main_quit();
 	exit(ret);
 }

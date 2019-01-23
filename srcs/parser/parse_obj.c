@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_obj.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 10:13:57 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/22 10:53:16 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/23 09:30:15 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ bool			prerotate(t_obj *obj, t_json_value *val, int type)
 	t_json_array	*arr;
 	int				*a;
 
-	if (val == NULL || val->type != 3)
-		return (false);
-	if (!(t = (t_rpoint *)malloc(sizeof(t_rpoint))))
+	if (val == NULL || val->type != 3
+	|| !(t = (t_rpoint *)malloc(sizeof(t_rpoint))))
 		return (false);
 	arr = (t_json_array *)val->ptr;
 	if (arr->nb == 3 && check_arr(arr))
