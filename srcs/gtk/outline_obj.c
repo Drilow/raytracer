@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:36:15 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 15:20:12 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/25 15:47:55 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void				outline_algo(t_obj *o, int x, int y)
 	}
 }
 
-void				end_outline()
+void				end_outline(void)
 {
 	if (PIXMAP)
 		cairo_surface_destroy(PIXMAP);
