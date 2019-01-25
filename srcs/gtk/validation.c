@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/23 10:11:23 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/25 14:17:52 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ void				deactivate_buttons_from_tp(GtkWidget *except)
 		true);
 }
 
+void				validate_rotate(t_obj *o)
+{
+	t_rpoint		r;
+
+	r.x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_x_spin));
+	r.y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_y_spin));
+	r.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_z_spin));
+	rotate_obj(o, o->type, r);
+}
+
 void				validate_edit(t_obj *o)
 {
 	GdkRGBA			*c;
@@ -44,12 +54,13 @@ void				validate_edit(t_obj *o)
 	o->reflex = (unsigned char)
 	((gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.reflex_spin))));
 	o->position.x = gtk_spin_button_get_value(
-		GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
+	GTK_SPIN_BUTTON(ADD_VIEW.translate_x_spin));
 	o->position.y = gtk_spin_button_get_value(
-		GTK_SPIN_BUTTON(ADD_VIEW.translate_y_spin));
+	GTK_SPIN_BUTTON(ADD_VIEW.translate_y_spin));
 	o->position.z = gtk_spin_button_get_value(
-		GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
+	GTK_SPIN_BUTTON(ADD_VIEW.translate_z_spin));
 	validate_objects(o);
+	validate_rotate(o);
 	redraw(true);
 	free(c);
 	c = NULL;

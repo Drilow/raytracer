@@ -6,7 +6,7 @@
 /*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 17:02:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/10 18:31:47 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/25 14:21:24 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,21 @@ void				attach_base_elens_edit(t_obj *o)
 	ADD_VIEW.translate_z_spin = gtk_spin_button_new(adj_mv, 1, 4);
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.translate_z_spin,
 	3, 3, 1, 1);
+	ADD_VIEW.rotate_img = gtk_image_new_from_file("uiconfig/rotate.png");
+	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.rotate_img,
+	0, 11, 1, 1);
+	adj_mv = gtk_adjustment_new(0, -360, 360, .5, 1, 10);
+	ADD_VIEW.rotate_x_spin = gtk_spin_button_new(adj_mv, 1, 4);
+	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.rotate_x_spin,
+	1, 11, 1, 1);
+	adj_mv = gtk_adjustment_new(0, -360, 360, .5, 1, 10);
+	ADD_VIEW.rotate_y_spin = gtk_spin_button_new(adj_mv, 1, 4);
+	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.rotate_y_spin,
+	2, 11, 1, 1);
+	adj_mv = gtk_adjustment_new(0, -360, 360, .5, 1, 10);
+	ADD_VIEW.rotate_z_spin = gtk_spin_button_new(adj_mv, 1, 4);
+	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.rotate_z_spin,
+	3, 11, 1, 1);
 }
 
 void				handle_base_elems_edit(t_obj *o)
