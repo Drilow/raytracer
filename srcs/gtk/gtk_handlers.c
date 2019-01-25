@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:47:04 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 12:05:23 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/25 13:44:27 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void				handle_edit_validation(t_obj *o)
 		{
 			g_global.r.objects = o->next;
 			free(o->obj);
+			o->obj = NULL;
 			free(o);
+			o = NULL;
 		}
 		gtk_widget_destroy(GTK_WIDGET(ADD_VIEW.win));
 	}

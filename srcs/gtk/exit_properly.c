@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 18:24:04 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/23 09:39:18 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/25 13:51:00 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void				free_checker(void)
 		}
 		free(g_global.r.checker);
 		g_global.r.checker = NULL;
-		free(g_global.r.selected_obj);
-		g_global.r.selected_obj = NULL;
 	}
 }
 
