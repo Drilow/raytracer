@@ -6,12 +6,12 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:46:29 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/14 16:09:41 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/25 15:42:28 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef		OPTICS_H
-# define	OPTICS_H
+#ifndef OPTICS_H
+# define OPTICS_H
 # include <objects/object.h>
 # include <geometry/geometry.h>
 # include <stdbool.h>
@@ -30,6 +30,6 @@ typedef struct		s_light
 	struct s_light	*next;
 }					t_light;
 
-bool			get_light(char *s, t_light *l, int *index);
+bool				get_light(char *s, t_light *l, int *index);
 
 #endif

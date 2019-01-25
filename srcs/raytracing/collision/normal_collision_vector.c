@@ -6,11 +6,10 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:37:03 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/26 18:47:46 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/25 15:31:13 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <vector.h>
 #include <maths/transformations.h>
 #include <objects/object.h>
 #include <raytracing/collision.h>

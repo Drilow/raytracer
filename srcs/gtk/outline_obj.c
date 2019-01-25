@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:36:15 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 10:49:21 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/25 15:20:12 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,20 @@ void				outline_algo(t_obj *o, int x, int y)
 	}
 }
 
+void				end_outline()
+{
+	if (PIXMAP)
+		cairo_surface_destroy(PIXMAP);
+	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf,
+	CAIRO_FORMAT_RGB24, WIN_W, WIN_H,
+	cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
+	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
+		exit_properly(1);
+	cairo_surface_mark_dirty(PIXMAP);
+	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
+	PIXMAP);
+}
+
 void				outline_obj(t_obj *o)
 {
 	int				x;
@@ -65,14 +79,5 @@ void				outline_obj(t_obj *o)
 		while (++x < WIN_W)
 			outline_algo(o, x, y);
 	}
-	if (PIXMAP)
-		cairo_surface_destroy(PIXMAP);
-	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf,
-	CAIRO_FORMAT_RGB24, WIN_W, WIN_H,
-	cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
-	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
-		exit_properly(1);
-	cairo_surface_mark_dirty(PIXMAP);
-	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
-	PIXMAP);
+	end_outline();
 }

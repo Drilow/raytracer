@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 10:45:36 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/25 15:14:44 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void				actual_edit_view(t_obj *o)
 		gtk_window_set_title(GTK_WINDOW(ADD_VIEW.win), "Edit Object");
 		handle_base_elems_edit(o);
 	}
-	if (o->type == -5) // Use of uninitialised value of size 8
+	if (o->type == -5)
 		add_addendum(o);
 	if (o->type == 1)
 		edit_sphere_view((t_sphere*)o->obj);

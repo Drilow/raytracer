@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 16:22:54 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 02:13:07 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/25 15:14:05 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void				edit_sphere_view(t_sphere *s)
 	GTK_STATE_FLAG_CHECKED | GTK_STATE_FLAG_INSENSITIVE, true);
 	ADD_VIEW.scale_img = gtk_image_new_from_file("uiconfig/ruler.png");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.scale_img, 0, 1, 1, 1);
-	adj_scale = gtk_adjustment_new(s->radius, 0, 1000, .5, 1, 10); // Use of uninitialised value of size 8
+	adj_scale = gtk_adjustment_new(s->radius, 0, 1000, .5, 1, 10);
 	ADD_VIEW.scale_spin = gtk_spin_button_new(adj_scale, 1, 4);
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.scale_spin, 1, 1, 3, 1);
 }

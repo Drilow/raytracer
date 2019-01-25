@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:40:41 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 10:48:37 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/25 15:16:37 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 extern t_global				g_global;
 
-void				handle_x_button(GtkWidget *w)
+void						handle_x_button(GtkWidget *w)
 {
 	if (w == ADD_VIEW.win)
 	{

@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 10:42:32 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/25 15:22:03 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 t_global		g_global;
 
-void	ft_exit(char *msg_error, int i)
+void				ft_exit(char *msg_error, int i)
 {
 	if (msg_error != NULL)
 	{
@@ -38,29 +38,7 @@ static void			init_ray(t_point p)
 	g_global.r.rays[p.y][p.x].vector.z = g_global.r.screen_distance;
 }
 
-void			setup_rt_lst(void)
-{
-//	if (!(g_global.r = (t_rt*)malloc(sizeof(t_rt))))
-//		exit(1);
-	g_global.r.checker = NULL;
-	g_global.r.selected_obj = NULL;
-	g_global.r.objects = NULL;
-	g_global.r.lights = NULL;
-//	g_global.r.next = NULL;
-}
-/*
-void			add_link_to_rt_list(void)
-{
-	t_rt		*tmp;
-
-	tmp = NULL;
-	if (!(tmp = (t_rt*)malloc(sizeof(t_rt))))
-		exit(1);
-	g_global.r.next = tmp;
-	g_global.r = g_global.r.next;
-}
-*/
-void			init_obj_tab(void)
+void				init_obj_tab(void)
 {
 	int			y;
 
@@ -76,15 +54,11 @@ void			init_obj_tab(void)
 	}
 }
 
-void			init_rt(void)
+void				init_rt(void)
 {
 	t_point			p;
 
-/*	if (g_global.r == NULL)
-		setup_rt_lst();
-	else
-		add_link_to_rt_list();
-*/	init_obj_tab();
+	init_obj_tab();
 	PIXMAP = NULL;
 	g_global.r.cam_position.x = 0;
 	g_global.r.cam_position.y = 0;
@@ -99,17 +73,9 @@ void			init_rt(void)
 	}
 }
 
-void			init_global(int ac, char **av)
+int					main(int ac, char **av)
 {
 	g_global.drawn = 1;
-//	g_global.r = NULL;
 	init_gtk(ac, av);
-}
-
-
-
-int				main(int __attribute__((unused))ac, char __attribute__((unused))**av)
-{
-	init_global(ac, av);
 	return (0);
 }

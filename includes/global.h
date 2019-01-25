@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 21:54:30 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/25 15:25:46 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@
 # define AA_UPPER_THRESHOLD 0.1
 # define AA_MIX_RATIO 0.8
 
-typedef struct				s_base_view
+typedef struct			s_base_view
 {
-	GtkWidget				*win;
-	GtkWidget				*grid;
-	GtkWidget				*open_button;
-	GtkWidget				*exit_button;
-}							t_base_view;
+	GtkWidget			*win;
+	GtkWidget			*grid;
+	GtkWidget			*open_button;
+	GtkWidget			*exit_button;
+}						t_base_view;
 
 typedef struct			s_global
 {
@@ -75,8 +75,7 @@ void					handle_drawing(void);
 void					handle_radio_buttons(void);
 void					exit_properly(int ret);
 void					exit_callback(void);
-
-t_poly_obj		*malloc_po(void); // a deplacer
-t_vertex	*malloc_vertex(void);// a deplacer
+t_poly_obj				*malloc_po(void);
+t_vertex				*malloc_vertex(void);
 
 #endif
