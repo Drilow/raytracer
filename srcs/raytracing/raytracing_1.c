@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 22:11:40 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/23 10:15:49 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/26 19:46:16 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static bool			init_ray_tracing(t_rt *r, int r_index, \
 										t_collision **c, t_obj **tmp)
 {
 	if (!(*c = (t_collision *)malloc(sizeof(t_collision))))
-		exit_properly(1);
+		ft_exit("Malloc error ('raytracing_1.c' --> Ln 21)", 1);
 	if (r_index < 0)
 		return (false);
 	(*c)->next = NULL;

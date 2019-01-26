@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 20:50:09 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/22 21:48:46 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/26 19:13:18 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ static void		antialiasing_core_2(int **aa, t_rgb **pixdup)
 		pixdup[p.y] = NULL;
 		aa[p.y] = NULL;
 		if (!(pixdup[p.y] = (t_rgb *)malloc(sizeof(t_rgb) * WIN_W)))
-			exit_properly(1);
+			ft_exit("Malloc error ('antialiasing_1.c' --> Ln 77)", 1);
 		if (!(aa[p.y] = (int *)malloc(sizeof(int) * WIN_W)))
-			exit_properly(1);
+			ft_exit("Malloc error ('antialiasing_1.c' --> Ln 79)", 1);
 		while (++p.x < WIN_W)
 		{
 			pixdup[p.y][p.x] = get_pixel(GTKMGR.buf, p.x, p.y);
@@ -95,9 +95,9 @@ static void		antialiasing_core(void)
 	pixdup = NULL;
 	aa = NULL;
 	if (!(pixdup = (t_rgb **)malloc(sizeof(t_rgb *) * WIN_H)))
-		exit_properly(1);
+		ft_exit("Malloc error ('antialiasing_1.c' --> Ln 97)", 1);
 	if (!(aa = (int **)malloc(sizeof(int *) * WIN_H)))
-		exit_properly(1);
+		ft_exit("Malloc error ('antialiasing_1.c' --> Ln 99)", 1);
 	antialiasing_core_2(aa, pixdup);
 	p.y = -1;
 	while (++p.y < WIN_H)

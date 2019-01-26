@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   objectsfn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 14:32:59 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/15 12:27:38 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/26 19:21:13 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_obj	*malloc_object2(int type)
 
 	o = NULL;
 	if (!(o = (t_obj *)malloc(sizeof(t_obj))))
-		exit_properly(1);
+		ft_exit("Malloc error ('objectsfn.c' --> Ln 85)", 1);
 	o->reflex = 0;
 	o->obj = NULL;
 	o->type = type;
@@ -91,12 +91,12 @@ t_obj	*malloc_object2(int type)
 	if (type == 1)
 	{
 		if (!(o->obj = (t_sphere *)malloc(sizeof(t_sphere))))
-			exit_properly(1);
+			ft_exit("Malloc error ('objectsfn.c' --> Ln 93)", 1);
 	}
 	else if (type == 2)
 	{
 		if (!(o->obj = (t_plane *)malloc(sizeof(t_plane))))
-			exit_properly(1);
+			ft_exit("Malloc error ('objectsfn.c' --> Ln 98)", 1);
 	}
 	return (o);
 }

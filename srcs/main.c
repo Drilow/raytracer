@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 15:22:03 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/26 19:48:45 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void				ft_exit(char *msg_error, int i)
 		ft_putstr(msg_error);
 		ft_putstr("\n");
 	}
-	exit(i);
+	exit_properly(i);
 }
 
 static void			init_ray(t_point p)
@@ -45,12 +45,12 @@ void				init_obj_tab(void)
 	y = -1;
 	g_global.r.checker = NULL;
 	if (!(g_global.r.checker = malloc(sizeof(t_obj**) * WIN_H)))
-		exit(1);
+		ft_exit("Malloc error ('main.c' --> Ln 47)", 1);
 	while (++y < WIN_H)
 	{
 		g_global.r.checker[y] = NULL;
 		if (!(g_global.r.checker[y] = malloc(sizeof(t_obj*) * WIN_W)))
-			exit(1);
+			ft_exit("Malloc error ('main.c' --> Ln 52)", 1);
 	}
 }
 
