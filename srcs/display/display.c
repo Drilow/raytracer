@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 21:59:08 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/26 19:14:28 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void			draw_image(void)
 	{
 		th_arg[i].th_index = i;
 		if (pthread_create(&(th[i]), NULL, draw_image_core, &th_arg[i]) != 0)
-			exit_properly(1);
+			ft_exit("Thread could not be created.", 1);
 		i++;
 	}
 	progress_main_handler();
@@ -112,12 +112,12 @@ void			draw_image(void)
 	{
 		i--;
 		if (pthread_join(th[i], NULL) != 0)
-			exit_properly(1);
+			ft_exit("Thread could not be joined.", 1);
 	}
 	antialiasing();
 	if (!GTKMGR.saved)
 		if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf, \
 			WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
-			exit(1);
+			exit_properly(1);
 	g_global.drawn = 0;
 }

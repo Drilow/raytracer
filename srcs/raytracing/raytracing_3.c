@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytracing_3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 16:51:25 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/23 10:15:41 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/26 19:46:58 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void			init_add_collision(t_collision **tmp, t_collision **new, \
 	if (!(*new = (t_collision *)malloc(sizeof(t_collision))))
 	{
 		free_collisions(c);
-		exit_properly(1);
+		ft_exit("Malloc error ('raytracing_3.c' --> Ln 22)", 1);
 	}
 	**new = *tmpc;
 	(*new)->next = NULL;

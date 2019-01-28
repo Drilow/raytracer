@@ -6,14 +6,14 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 15:25:46 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/26 18:58:39 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBAL_H
 # define GLOBAL_H
 # include <gtk_mgr/gtk_mgr.h>
-# include <scene/scene_list.h>
+//# include <scene/scene_list.h>
 # include <rt.h>
 # include <json.h>
 # include <geometry/geometry.h>

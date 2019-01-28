@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 10:27:07 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/20 18:57:38 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/26 19:25:32 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_poly_obj		*malloc_po(void)
 
 	obj = NULL;
 	if (!(obj = (t_poly_obj *)malloc(sizeof(t_poly_obj))))
-		exit_properly(1);
+		ft_exit("Malloc error ('po_malloc.c' --> Ln 25)", 1);
 	obj->next = NULL;
 	return (obj);
 }
@@ -34,7 +34,7 @@ t_vertex		*malloc_vertex(void)
 
 	v = NULL;
 	if (!(v = (t_vertex *)malloc(sizeof(t_vertex))))
-		exit_properly(1);
+		ft_exit("Malloc error ('po_malloc.c' --> Ln 36)", 1);
 	v->next = NULL;
 	return (v);
 }
@@ -44,7 +44,7 @@ t_poly_obj		*pmalloc_po(void)
 	t_poly_obj	*obj;
 
 	if (!(obj = (t_poly_obj *)malloc(sizeof(t_poly_obj))))
-		exit_properly(1);
+		ft_exit("Malloc error ('po_malloc.c' --> Ln 46)", 1);
 	obj->next = NULL;
 	return (obj);
 }
@@ -54,7 +54,7 @@ t_vertex		*pmalloc_vertex(void)
 	t_vertex	*v;
 
 	if (!(v = (t_vertex *)malloc(sizeof(t_vertex))))
-		exit_properly(1);
+		ft_exit("Malloc error ('po_malloc.c' --> Ln 56)", 1);
 	v->next = NULL;
 	return (v);
 }

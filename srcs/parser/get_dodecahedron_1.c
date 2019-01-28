@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 10:29:50 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/20 17:23:31 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/26 19:18:50 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ static t_rpoint			**init_get_dode(t_rpoint *v, t_obj *d, double size)
 	t_rpoint			**faces;
 
 	if (!(faces = (t_rpoint **)malloc(sizeof(t_rpoint *) * 12)))
-		exit_properly(1);
+		ft_exit("Malloc error ('get_dodecahedron_1.c' --> Ln 49)", 1);
 	i = -1;
 	while (++i < 12)
 	{
 		if (!(faces[i] = (t_rpoint *)malloc(sizeof(t_rpoint) * 5)))
-			exit_properly(1);
+			ft_exit("Malloc error ('get_dodecahedron_1.c' --> Ln 54)", 1);
 	}
 	get_dodecahedron_vertices(v, size);
 	get_dodecahedron_faces(v, faces);

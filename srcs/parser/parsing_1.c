@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/23 09:40:22 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/26 19:24:05 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_obj		*malloc_object(int type)
 
 	o = NULL;
 	if (!(o = (t_obj *)malloc(sizeof(t_obj))))
-		exit_properly(1);
+		ft_exit("Malloc error ('parsing_1.c' --> Ln 41)", 1);
 	o->reflex = 0;
 	o->obj = NULL;
 	o->type = type;
@@ -47,12 +47,12 @@ t_obj		*malloc_object(int type)
 	if (type == 3)
 	{
 		if (!(o->obj = (t_cone *)malloc(sizeof(t_cone))))
-			exit_properly(1);
+			ft_exit("Malloc error ('parsing_1.c' --> Ln 49)", 1);
 	}
 	else if (type == 4)
 	{
 		if (!(o->obj = (t_cylinder *)malloc(sizeof(t_cylinder))))
-			exit_properly(1);
+			ft_exit("Malloc error ('parsing_1.c' --> Ln 54)", 1);
 	}
 	return (o);
 }
