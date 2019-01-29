@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:45:24 by alacrois          #+#    #+#             */
-/*   Updated: 2018/12/03 17:32:01 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/01/29 17:34:40 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ void			rotate_obj(void *o, int type, t_rpoint angle)
 	if (type == 4)
 		rotate(&(((t_cylinder *)obj->obj)->vector), angle);
 	if (type == 6 || type / 10 == 6)
+	{
+		((t_poly_obj *)obj->obj)->rotation = angle;
 		rotate_poly_obj(obj, angle);
+	}
 }
 
 void			translate_obj(void *o, int type, t_rpoint translation)

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:08:00 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 15:41:07 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/29 17:31:26 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct			s_poly_obj
 {
 	double				max_d;
 	t_vertex			*vertices;
+	t_rpoint			rotation;
 	struct s_poly_obj	*next;
 }						t_poly_obj;
 
