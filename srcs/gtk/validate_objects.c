@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:18:32 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 13:56:44 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/01/28 21:04:29 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ extern t_global		g_global;
 
 void				validate_same_obj(t_obj *o)
 {
+	free_poly((t_poly_obj*)ADD_VIEW.sw.o->obj);
 	if (o->type == 66)
 		set_cube(ADD_VIEW.sw.o->position,
 	gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.scale_spin)) * 2,

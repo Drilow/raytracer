@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 10:58:24 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/29 04:15:33 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void						end_open(GtkWidget *dialog)
 {
 	char					*filename;
 	GtkFileChooser			*chooser;
-	GtkCssProvider			*css_provider;
+/*	GtkCssProvider			*css_provider;
 
 	css_provider = gtk_css_provider_new();
 	gtk_css_provider_load_from_path(css_provider,
@@ -30,7 +30,7 @@ void						end_open(GtkWidget *dialog)
 	gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
 	GTK_STYLE_PROVIDER(css_provider),
 	GTK_STYLE_PROVIDER_PRIORITY_USER);
-	chooser = GTK_FILE_CHOOSER(dialog);
+*/	chooser = GTK_FILE_CHOOSER(dialog);
 	filename = gtk_file_chooser_get_filename(chooser);
 	if (!parse(filename))
 		usage("Error : invalid argument.", 1);
@@ -65,8 +65,7 @@ void						open_file_append(gint res, GtkWidget *dialog)
 		end_open(dialog);
 	else
 	{
-		if (GTK_IS_WIDGET(dialog))
-			gtk_widget_destroy(dialog);
+		gtk_widget_destroy(dialog);
 		dialog = NULL;
 	}
 }

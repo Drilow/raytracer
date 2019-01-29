@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 14:17:52 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/28 21:09:19 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void				validate_rotate(t_obj *o)
 	r.x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_x_spin));
 	r.y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_y_spin));
 	r.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_z_spin));
-	rotate_obj(o, o->type, r);
+	if (r.x != 0 && r.y != 0 && r.z != 0)
+		rotate_obj(o, o->type, r);
 }
 
 void				validate_edit(t_obj *o)

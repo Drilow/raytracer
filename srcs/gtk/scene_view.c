@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 10:49:45 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/29 04:13:33 by Dagnear          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void					select_handler(GtkTreeView *tree, GtkTreePath *path)
 		else if (is_obj(((t_obj*)obj)->type))
 		{
 			outline_obj(((t_obj*)obj));
-			edit_win(((t_obj*)obj), SCENE_VIEW.win);
+			edit_win(((t_obj*)obj), GTKMGR.ui.main_view.win);
 		}
 	}
 }
