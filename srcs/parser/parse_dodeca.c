@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/10 13:39:50 by adleau           ###   ########.fr       */
+/*   Updated: 2019/01/31 12:06:05 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ bool			get_dod_inf(t_json_object *obj)
 	i = 0;
 	o = malloc_object(69);
 	size = 1;
-	while (i++ < 4)
+	while (i++ < 5)
 	{
 		if (call_parse(check_keys(obj->pair[i]->key->str),
 			obj->pair[i]->value, o) == false)

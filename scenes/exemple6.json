@@ -1,0 +1,33 @@
+{
+	"camera":{
+				"pos":[-20,0,-30],
+				"angle":[0,-10,0]
+			},
+	"light":{
+				"source":[-30,150,-100],
+				"color":[45,45,45,0]
+			},
+	"light":{
+				"source":[70,150,-100],
+				"color":[45,45,45,0]
+			},
+	"objects":[
+				{
+					"type":"dodeca",
+					"pos":[4,-6,6],
+					"size":4,
+					"color":[100,50,200,50],
+					"rotate":[0,0,0],
+					"reflex":100
+				},
+				{
+					"type":"pyramide",
+					"pos":[-2,0,50],
+					"base_size":10,
+					"height":5,
+					"color":[150,50,100,0],
+					"rotate":[0,0,0],
+					"reflex":100
+				}
+			]
+}
