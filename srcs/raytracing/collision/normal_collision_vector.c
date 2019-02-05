@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   normal_collision_vector.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:37:03 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/25 15:31:13 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 15:54:26 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <maths/transformations.h>
 #include <objects/object.h>
 #include <raytracing/collision.h>
-#include <geometry/geometry.h>
 
 static t_rpoint		get_cone_ncv(t_cone *c, t_rpoint pos, t_rpoint p)
 {

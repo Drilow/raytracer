@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   obj_collision.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 15:30:52 by alacrois          #+#    #+#             */
-/*   Updated: 2018/11/30 19:06:34 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 15:54:28 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <geometry/geometry.h>
 #include <objects/object.h>
 #include <maths/transformations.h>
 #include <raytracing/collision.h>
-#include <stdbool.h>
-#include <libft.h>
 
 static t_rpoint	add_rpoints(t_rpoint a, t_rpoint b)
 {
