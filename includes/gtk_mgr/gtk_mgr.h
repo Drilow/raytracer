@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtk_mgr.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 13:56:18 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 16:00:51 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,5 +244,6 @@ void						radio_toggle(GtkWidget *button);
 void						handle_cube_template(void);
 void						for_template(void);
 void						for_file(GtkWidget *button);
+bool						go_throu_lights(t_light *curr);
 
 #endif

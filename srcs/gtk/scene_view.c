@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   scene_view.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/29 04:13:33 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/02/05 16:08:29 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,12 @@ GtkCellRenderer *renderer, int en_column)
 	gtk_tree_view_append_column(GTK_TREE_VIEW(tree), column);
 }
 
-bool					go_throu_lights(t_light *curr)
+static void				checked_row2(gpointer *obj, gboolean enabled)
 {
-	t_light				*tmp;
-
-	tmp = g_global.r.lights;
-	while (tmp)
-	{
-		if (curr == tmp)
-			return (true);
-		tmp = tmp->next;
-	}
-	return (false);
+	if (go_throu_lights(((t_light*)obj)))
+		((t_light*)obj)->enabled = enabled;
+	else if (is_obj(((t_obj*)obj)->type))
+		((t_obj*)obj)->enabled = enabled;
 }
 
 static void				checked_row(GtkCellRendererToggle *cell, gchar *p_str)
@@ -47,28 +41,24 @@ static void				checked_row(GtkCellRendererToggle *cell, gchar *p_str)
 	GtkTreeModel		*model;
 	gpointer			*obj;
 
-	if(PROGRESS_DATA.window == NULL)
-	{
-		obj = NULL;
-		model = gtk_tree_view_get_model(GTK_TREE_VIEW(SCENE_VIEW.tree));
-		path = gtk_tree_path_new_from_string(p_str);
-		if (model == NULL || !cell)
-			return ;
-		if (gtk_tree_model_get_iter(model, &iter, path) == FALSE)
-			return ;
-		gtk_tree_model_get(model, &iter, CHECKED_COLUMN, &enabled, -1);
-		enabled = !enabled;
-		gtk_tree_store_set(SCENE_VIEW.store, &iter, CHECKED_COLUMN, enabled, -1);
-		if (gtk_tree_model_get_iter(model, &iter, path) == FALSE)
-			return ;
-		gtk_tree_model_get(model, &iter, OBJ_REF, &obj, -1);
-		if (go_throu_lights(((t_light*)obj)))
-			((t_light*)obj)->enabled = enabled;
-		else if (is_obj(((t_obj*)obj)->type))
-			((t_obj*)obj)->enabled = enabled;
-		redraw(true);
-		gtk_tree_path_free(path);
-	}
+	if (PROGRESS_DATA.window)
+		return ;
+	obj = NULL;
+	model = gtk_tree_view_get_model(GTK_TREE_VIEW(SCENE_VIEW.tree));
+	path = gtk_tree_path_new_from_string(p_str);
+	if (model == NULL || !cell)
+		return ;
+	if (gtk_tree_model_get_iter(model, &iter, path) == FALSE)
+		return ;
+	gtk_tree_model_get(model, &iter, CHECKED_COLUMN, &enabled, -1);
+	enabled = !enabled;
+	gtk_tree_store_set(SCENE_VIEW.store, &iter, CHECKED_COLUMN, enabled, -1);
+	if (gtk_tree_model_get_iter(model, &iter, path) == FALSE)
+		return ;
+	gtk_tree_model_get(model, &iter, OBJ_REF, &obj, -1);
+	checked_row2(obj, enabled);
+	redraw(true);
+	gtk_tree_path_free(path);
 }
 
 void					select_handler(GtkTreeView *tree, GtkTreePath *path)
@@ -77,21 +67,20 @@ void					select_handler(GtkTreeView *tree, GtkTreePath *path)
 	GtkTreeModel		*model;
 	GtkTreeIter			iter;
 
-	if(PROGRESS_DATA.window == NULL)
+	if (PROGRESS_DATA.window)
+		return ;
+	model = NULL;
+	if ((model = gtk_tree_view_get_model(tree)) == NULL)
+		return ;
+	if (gtk_tree_model_get_iter(model, &iter, path))
 	{
-		model = NULL;
-		if ((model = gtk_tree_view_get_model(tree)) == NULL)
-			return ;
-		if (gtk_tree_model_get_iter(model, &iter, path))
+		gtk_tree_model_get(model, &iter, OBJ_REF, &obj, -1);
+		if (go_throu_lights(((t_light*)obj)))
+			edit_light((t_light*)obj, SCENE_VIEW.win);
+		else if (is_obj(((t_obj*)obj)->type))
 		{
-			gtk_tree_model_get(model, &iter, OBJ_REF, &obj, -1);
-			if (go_throu_lights(((t_light*)obj)))
-				edit_light((t_light*)obj, SCENE_VIEW.win);
-			else if (is_obj(((t_obj*)obj)->type))
-			{
-				outline_obj(((t_obj*)obj));
-				edit_win(((t_obj*)obj), GTKMGR.ui.main_view.win);
-			}
+			outline_obj(((t_obj*)obj));
+			edit_win(((t_obj*)obj), GTKMGR.ui.main_view.win);
 		}
 	}
 }
