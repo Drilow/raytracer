@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include <global.h>
-#include <fcntl.h>
-#include <libft.h>
 #include <parser/parser.h>
 #include <display/display.h>
 

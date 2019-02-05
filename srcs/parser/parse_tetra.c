@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tetra.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 11:44:02 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/07 17:26:49 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:50:12 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <libft.h>
 #include <parser/parser.h>
-#include <extra/extra_defs.h>
-#include <objects/object.h>
-#include <geometry/geometry.h>
-#include <fcntl.h>
 
 static	bool	get_tetra_size(t_obj *o, t_json_value *val)
 {

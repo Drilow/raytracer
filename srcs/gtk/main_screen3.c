@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main_screen3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:50:05 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/15 04:51:45 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/02/05 15:31:54 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <parser/parser.h>
-#include <fcntl.h>
-#include <libft.h>
-#include <display/display.h>
 
 extern t_global		g_global;
 

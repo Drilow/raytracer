@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder_collision_2.c                             :+:      :+:    :+:   */
+/*   cylinder_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:35:16 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/26 17:50:43 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:43:02 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <geometry/geometry.h>
 #include <objects/object.h>
 
 static t_dpoint	get_const1(t_ray ray, t_cylinder *cy, t_rpoint pos)

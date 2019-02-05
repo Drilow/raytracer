@@ -12,7 +12,6 @@
 
 #ifndef OPTICS_H
 # define OPTICS_H
-# include <objects/object.h>
 # include <geometry/geometry.h>
 # include <stdbool.h>
 

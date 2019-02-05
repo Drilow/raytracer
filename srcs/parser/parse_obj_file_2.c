@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_obj_file_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 18:01:24 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/22 20:05:22 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:49:06 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <objects/object.h>
-#include <stdlib.h>
 #include <libft.h>
-#include <fcntl.h>
 #include <parser/parser.h>
 
 void			free_vlist(t_vertex **v_list)

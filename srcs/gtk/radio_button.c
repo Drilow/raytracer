@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   radio_button.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:06:53 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/23 10:10:22 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:35:41 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <parser/parser.h>
-#include <fcntl.h>
-#include <libft.h>
-#include <display/display.h>
 
 extern t_global		g_global;
 

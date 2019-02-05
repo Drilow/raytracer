@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cone_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 19:57:41 by adleau            #+#    #+#             */
-/*   Updated: 2018/11/23 12:29:48 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:42:49 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
-#include <objects/object.h>
-#include <geometry/geometry.h>
-#include <libft.h>
 #include <global.h>
 
 static bool		base_collision(t_ray ray, t_obj *c, t_rpoint *p)

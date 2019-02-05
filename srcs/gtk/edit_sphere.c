@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   edit_sphere.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 16:22:54 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 15:14:05 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 15:31:22 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <parser/parser.h>
-#include <fcntl.h>
-#include <libft.h>
 
 extern t_global		g_global;
 

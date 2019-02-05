@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_dodecahedron_2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 13:26:04 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/20 17:04:09 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:45:40 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <global.h>
 #include <objects/object.h>
-#include <stdlib.h>
-#include <libft.h>
-#include <fcntl.h>
 #include <parser/parser.h>
 
 void		get_dodecahedron_vertices(t_rpoint *p, double size)

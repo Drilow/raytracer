@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_pyra.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 18:14:35 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/31 13:40:59 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:49:56 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <libft.h>
 #include <parser/parser.h>
-#include <extra/extra_defs.h>
-#include <objects/object.h>
-#include <geometry/geometry.h>
-#include <fcntl.h>
 
 static	bool	set_size(t_obj *o, t_json_value *val)
 {

@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   set_obj.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 10:43:54 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/22 19:55:45 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:52:13 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <objects/object.h>
-#include <stdlib.h>
 #include <libft.h>
-#include <fcntl.h>
 #include <parser/parser.h>
 
 static	bool		add_face(t_poly_obj **obj, t_vertex *v_list, char *line)

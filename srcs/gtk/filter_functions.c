@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include <global.h>
-#include <fcntl.h>
-#include <libft.h>
 
 extern t_global		g_global;
 

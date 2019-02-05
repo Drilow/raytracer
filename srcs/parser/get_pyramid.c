@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_pyramid.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 13:28:38 by mabessir          #+#    #+#             */
-/*   Updated: 2019/02/05 14:26:37 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 15:45:46 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <objects/object.h>
-#include <stdlib.h>
-#include <libft.h>
-#include <fcntl.h>
 #include <parser/parser.h>
 
 static void				set_face_vector(t_vertex *face)

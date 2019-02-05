@@ -13,7 +13,7 @@
 #ifndef DISPLAY_H
 # define DISPLAY_H
 # include <libft.h>
-# include <extra/extra_defs.h>
+# include <geometry/geometry.h>
 
 void			draw_image(void);
 t_rgb			two_colors_average(t_rgb a, t_rgb b, double ratio);
