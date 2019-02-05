@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_pyramid.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 13:28:38 by mabessir          #+#    #+#             */
-/*   Updated: 2019/02/05 15:45:46 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/05 16:24:00 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,3 @@ bool					get_pyramid(t_obj *p, double base_size, double height)
 	p->size = base_size;
 	return (true);
 }
-
-
-
-
-
-
-
-
-
-

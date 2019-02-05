@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_dodecahedron_1.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 10:29:50 by mabessir          #+#    #+#             */
-/*   Updated: 2019/02/05 15:44:52 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/05 16:24:33 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,3 @@ bool					get_dodecahedron(t_obj *d, double size)
 	d->size = size;
 	return (true);
 }
-
-
-
-
-
-
-
-
-
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   progress_bar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 15:32:57 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/05 16:25:58 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			progress_bar(void)
 	gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR(PROGRESS_DATA.pbar), TRUE);
 	gtk_window_set_deletable(GTK_WINDOW(PROGRESS_DATA.window), FALSE);
 	gtk_window_set_resizable(GTK_WINDOW(PROGRESS_DATA.window), FALSE);
-    gtk_container_add(GTK_CONTAINER(PROGRESS_DATA.window), PROGRESS_DATA.pbar);
+	gtk_container_add(GTK_CONTAINER(PROGRESS_DATA.window), PROGRESS_DATA.pbar);
 	gtk_widget_show_all(PROGRESS_DATA.window);
 }
 
