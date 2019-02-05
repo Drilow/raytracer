@@ -76,7 +76,5 @@ void					handle_drawing(void);
 void					handle_radio_buttons(void);
 void					exit_properly(int ret);
 void					exit_callback(void);
-t_poly_obj				*malloc_po(void);
-t_vertex				*malloc_vertex(void);
 
 #endif

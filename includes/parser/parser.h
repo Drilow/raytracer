@@ -89,5 +89,7 @@ void				get_dodecahedron_faces(t_rpoint *v, t_rpoint **faces);
 bool				get_dodecahedron(t_obj *d, double size);
 bool				get_dod_inf(t_json_object *obj);
 bool				geet_reflex(t_json_value *val, t_obj *o);
+t_poly_obj			*malloc_po(void);
+t_vertex			*malloc_vertex(void);
 
 #endif
