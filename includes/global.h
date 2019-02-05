@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/26 18:58:39 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 12:57:44 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <geometry/geometry.h>
 # include <stdbool.h>
 # include <gtk/gtk.h>
+# define SCREEN_DISTANCE_FACTOR 1
+# define SDF SCREEN_DISTANCE_FACTOR
 # define MIN_DISTANCE 0.00001
 # define REFLEX_DEPTH 4
 # define ANTIALIASING 1
