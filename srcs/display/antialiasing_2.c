@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   antialiasing_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 20:50:07 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/22 21:04:11 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 13:40:14 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <display/display.h>
 #include <global.h>
 #include <gtk/gtk.h>
-#include <stdio.h>
 #include <objects/object.h>
 #include <geometry/geometry.h>
 #include <extra/extra_defs.h>

@@ -1,24 +1,24 @@
 {
 	"camera":{
-		"pos":[0,0,0],
-		"angle":[0,-10,0]
+				"pos":[0,0,0],
+				"angle":[0,-10,0]
 	},
-"light":{
-		"source":[0,0,-0],
-		"color":[45,45,45,0]
+	"light":{
+				"source":[0,0,-0],
+				"color":[45,45,45,0]
 	},
-"light":{
-	"source":[70,150,-100],
-	"color":[45,45,45,0]
+	"light":{
+				"source":[70,150,-100],
+				"color":[45,45,45,0]
 	},
 	"objects":[
 		{
-			"type":"cube",
-			"pos":[0,5,30],
-			"size":8,
-			"color":[80,80,80,130],
-			"rotate":[25,0,15],
-			"reflex":200
+				"type":"cube",
+				"pos":[0,5,30],
+				"size":8,
+				"color":[80,80,80,130],
+				"rotate":[25,0,15],
+				"reflex":0
 		}
-			]
+]
 }

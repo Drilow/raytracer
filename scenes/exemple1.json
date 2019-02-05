@@ -24,7 +24,8 @@
 					"type":"sphere",
 					"pos":[-150,0,150],
 					"radius":20,
-					"color":[255,255, 255,0]
+					"color":[255,255, 255,0],
+					"reflex":0
 				},
 				{
 					"type":"cone",
@@ -33,7 +34,8 @@
 					"angle":5,
 					"INF":true,
 					"color":[25,150,150,0],
-					"rotate":[0,0,0]
+					"rotate":[0,0,0],
+					"reflex":0
 				},
 				{
 					"type":"polyobject",
@@ -49,14 +51,16 @@
 					"pos":[-130, 120,60],
 					"size":30,
 					"color":[120,255,255,0],
-					"rotate":[0,0,0]
+					"rotate":[0,0,0],
+					"reflex":0
 				},
 				{
 					"type":"tetrahedron",
 					"pos":[-170, 80,60],
 					"size":30,
 					"color":[120,255,255,0],
-					"rotate":[0,0,0]
+					"rotate":[0,0,0],
+					"reflex":0
 				},
 				{
 					"type":"cylinder",
@@ -65,7 +69,8 @@
 					"radius":10,
 					"INF":true,
 					"color":[150,50,100,0],
-					"rotate":[0,0,0]
+					"rotate":[0,0,0],
+					"reflex":0
 				}
 	]
 }
