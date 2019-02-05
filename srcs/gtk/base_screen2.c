@@ -6,11 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/02/05 14:13:20 by adleau           ###   ########.fr       */
-=======
-/*   Updated: 2019/02/05 14:06:20 by mabessir         ###   ########.fr       */
->>>>>>> a27429187e69fffb76ff36b3c401f6368facef18
+/*   Updated: 2019/02/05 14:15:56 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +57,6 @@ void						open_file_append(gint res, GtkWidget *dialog)
 {
 	if (res == GTK_RESPONSE_ACCEPT)
 		end_open(dialog);
-	else
-	{
-		printf("a\n");
-		printf("b\n");
-	}
 }
 
 char						*clean_dir_name(char *s)
