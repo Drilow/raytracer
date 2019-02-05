@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_amb_light.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/22 15:17:09 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/22 10:52:44 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 15:47:07 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <libft.h>
 #include <parser/parser.h>
-#include <extra/extra_defs.h>
-#include <objects/object.h>
-#include <fcntl.h>
 
 extern t_global g_global;
 

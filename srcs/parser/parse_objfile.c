@@ -3,20 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_objfile.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/15 12:03:39 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/07 18:59:05 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:49:42 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <libft.h>
 #include <parser/parser.h>
-#include <extra/extra_defs.h>
-#include <objects/object.h>
-#include <geometry/geometry.h>
-#include <fcntl.h>
 
 static	bool	set_size(t_obj *o, t_json_value *val)
 {

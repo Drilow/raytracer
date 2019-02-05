@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/18 02:57:56 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/26 19:24:05 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:50:22 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
 #include <libft.h>
 #include <parser/parser.h>
-#include <extra/extra_defs.h>
-#include <objects/object.h>
-#include <fcntl.h>
 
 extern t_global g_global;
 

@@ -3,19 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/19 15:54:44 by mabessir          #+#    #+#             */
-/*   Updated: 2018/11/28 19:03:37 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:46:52 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
 #include <libft.h>
 #include <parser/parser.h>
-#include <extra/extra_defs.h>
-#include <objects/object.h>
-#include <fcntl.h>
 
 extern t_global g_global;
 

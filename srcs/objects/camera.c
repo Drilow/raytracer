@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 18:38:43 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/22 10:50:39 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 15:41:18 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <objects/object.h>
-#include <parser/parser.h>
 #include <maths/transformations.h>
-
-#include <libft.h>
 
 extern t_global g_global;
 

@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   po_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 10:27:07 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/26 19:25:32 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:52:03 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <objects/object.h>
-#include <stdlib.h>
-#include <libft.h>
-#include <fcntl.h>
 #include <parser/parser.h>
 
 t_poly_obj		*malloc_po(void)

@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   objectsfn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 14:32:59 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/26 19:21:13 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:46:30 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <libft.h>
 #include <parser/parser.h>
-#include <extra/extra_defs.h>
-#include <objects/object.h>
-#include <fcntl.h>
 
 bool	get_inf(t_obj *o, t_json_value *val)
 {

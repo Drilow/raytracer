@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylinder_collision_1.c                             :+:      :+:    :+:   */
+/*   cylinder_1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:33:05 by alacrois          #+#    #+#             */
-/*   Updated: 2018/08/26 18:23:54 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:42:56 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <objects/object.h>
 #include <global.h>
 
 static bool			bc_init(t_cylinder *c, t_plane *pl1, t_plane *pl2)

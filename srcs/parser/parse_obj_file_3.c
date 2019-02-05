@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_obj_file_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 18:05:08 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/20 18:08:56 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:49:27 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <objects/object.h>
-#include <stdlib.h>
-#include <libft.h>
-#include <fcntl.h>
 #include <parser/parser.h>
 
 static bool			parse_vertex(t_vertex *v, char *line, double size)

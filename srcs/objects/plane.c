@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 16:42:16 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/17 14:48:36 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/02/05 15:43:06 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <objects/object.h>
 #include <global.h>
 
 bool			plane_collision(t_ray ray, t_plane *pl, \

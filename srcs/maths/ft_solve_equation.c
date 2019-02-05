@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_solve_equation.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 19:18:36 by alacrois          #+#    #+#             */
-/*   Updated: 2018/04/28 19:41:00 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 15:40:37 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <geometry/geometry.h>
 #include <stdbool.h>
 

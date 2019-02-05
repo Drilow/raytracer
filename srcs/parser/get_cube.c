@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_cube.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 19:01:48 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/22 18:46:31 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:43:40 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <objects/object.h>
-#include <stdlib.h>
-#include <libft.h>
-#include <fcntl.h>
 #include <parser/parser.h>
 
 static void				set_face_vector(t_vertex *face)
