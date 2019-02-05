@@ -14,10 +14,8 @@
 # define GLOBAL_H
 # include <gtk_mgr/gtk_mgr.h>
 # include <rt.h>
-# include <json.h>
-# include <geometry/geometry.h>
+# include <objects/object.h>
 # include <stdbool.h>
-# include <gtk/gtk.h>
 # define SCREEN_DISTANCE_FACTOR 1
 # define SDF SCREEN_DISTANCE_FACTOR
 # define MIN_DISTANCE 0.00001
