@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_view2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 17:02:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 15:19:22 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 12:32:18 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,32 @@ void				handle_reflex_edit(t_obj *o)
 	1, 8, 3, 1);
 }
 
-void				attach_rotate(void)
+GtkAdjustment		*setup_adj(double n, int type)
+{
+	GtkAdjustment	*adj_mv;
+
+	adj_mv = gtk_adjustment_new(0, -360, 360, .5, 1, 10);
+	if (type == 6 || type / 10 == 6)
+		adj_mv = gtk_adjustment_new(n * 360 / (2 * PI), -360, 360, .5, 1, 10);
+	return (adj_mv);
+}
+
+void				attach_rotate(t_obj *o)
 {
 	GtkAdjustment	*adj_mv;
 
 	ADD_VIEW.rotate_img = gtk_image_new_from_file("uiconfig/rotate.png");
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.rotate_img,
 	0, 11, 1, 1);
-	adj_mv = gtk_adjustment_new(0, -360, 360, .5, 1, 10);
+	adj_mv = setup_adj(((t_poly_obj*)o->obj)->rotation.x, o->type);
 	ADD_VIEW.rotate_x_spin = gtk_spin_button_new(adj_mv, 1, 4);
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.rotate_x_spin,
 	1, 11, 1, 1);
-	adj_mv = gtk_adjustment_new(0, -360, 360, .5, 1, 10);
+	adj_mv = setup_adj(((t_poly_obj*)o->obj)->rotation.y, o->type);
 	ADD_VIEW.rotate_y_spin = gtk_spin_button_new(adj_mv, 1, 4);
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.rotate_y_spin,
 	2, 11, 1, 1);
-	adj_mv = gtk_adjustment_new(0, -360, 360, .5, 1, 10);
+	adj_mv = setup_adj(((t_poly_obj*)o->obj)->rotation.z, o->type);
 	ADD_VIEW.rotate_z_spin = gtk_spin_button_new(adj_mv, 1, 4);
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.rotate_z_spin,
 	3, 11, 1, 1);
@@ -70,7 +80,7 @@ void				attach_base_elens_edit(t_obj *o)
 	ADD_VIEW.translate_z_spin = gtk_spin_button_new(adj_mv, 1, 4);
 	gtk_grid_attach(GTK_GRID(ADD_VIEW.grid), ADD_VIEW.translate_z_spin,
 	3, 3, 1, 1);
-	attach_rotate();
+	attach_rotate(o);
 }
 
 void				handle_base_elems_edit(t_obj *o)

@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/29 17:26:17 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/05 12:26:43 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ void				validate_rotate(t_obj *o)
 {
 	t_rpoint		r;
 
-	r.x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_x_spin));
-	r.y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_y_spin));
-	r.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_z_spin));
+	r.x = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_x_spin))
+	/ 360 * (2 * PI);
+	r.y = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_y_spin))
+	/ 360 * (2 * PI);
+	r.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(ADD_VIEW.rotate_z_spin))
+	/ 360 * (2 * PI);
 	if (r.x != 0 || r.y != 0 || r.z != 0)
 		rotate_obj(o, o->type, r);
 }
