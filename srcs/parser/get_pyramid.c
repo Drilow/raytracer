@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 13:28:38 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/20 17:21:33 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 14:26:37 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,16 @@ bool					get_pyramid(t_obj *p, double base_size, double height)
 	o->next = pmalloc_po();
 	o = o->next;
 	o->vertices = add_p_face_2(5, base_size, height);
+	p->size = base_size;
 	return (true);
 }
+
+
+
+
+
+
+
+
+
+

@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/18 10:29:50 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/26 19:18:50 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 14:26:25 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,16 @@ bool					get_dodecahedron(t_obj *d, double size)
 	while (++i < 12)
 		free(faces[i]);
 	free(faces);
+	d->size = size;
 	return (true);
 }
+
+
+
+
+
+
+
+
+
+
