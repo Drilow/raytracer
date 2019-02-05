@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   antialiasing_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 20:50:07 by alacrois          #+#    #+#             */
-/*   Updated: 2019/02/05 13:40:14 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/05 18:18:41 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,8 @@ static t_rgb	new_color(t_rgb pix, t_rgb *adj)
 			two_colors_average(adj[adj1], adj[adj2], 0.5), AA_MIX_RATIO));
 }
 
-void			apply_aa(t_point p, t_rgb **pixdup)
+static void		apply_aa_core(t_point p, t_rgb **pixdup, t_rgb *adj)
 {
-	t_rgb		pix;
-	t_rgb		adj[8];
-	int			i;
-
-	pix = pixdup[p.y][p.x];
-	i = -1;
-	while (++i < 8)
-		adj[i] = pixdup[p.y][p.x];
 	if (p.y > 0 && p.x > 0)
 		adj[0] = pixdup[p.y - 1][p.x - 1];
 	if (p.y > 0)
@@ -93,5 +85,22 @@ void			apply_aa(t_point p, t_rgb **pixdup)
 		adj[6] = pixdup[p.y + 1][p.x - 1];
 	if (p.x > 0)
 		adj[7] = pixdup[p.y][p.x - 1];
+}
+
+void			apply_aa(t_point p, t_rgb **pixdup)
+{
+	t_rgb		pix;
+	t_rgb		*adj;
+	int			i;
+
+	pix = pixdup[p.y][p.x];
+	if (!(adj = (t_rgb *)malloc(sizeof(t_rgb) * 8)))
+		ft_exit("Malloc error ('antialiasing_2.c' --> Ln 97)", 1);
+	i = -1;
+	while (++i < 8)
+		adj[i] = pixdup[p.y][p.x];
+	apply_aa_core(p, pixdup, adj);
 	draw_px(GTKMGR.buf, p.x, p.y, new_color(pix, adj));
+	free(adj);
+	adj = NULL;
 }
