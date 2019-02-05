@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+         #
+#    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2019/01/22 21:33:40 by alacrois         ###   ########.fr        #
+#    Updated: 2019/02/05 13:07:40 by mabessir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME = rt
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -O3 $(shell pkg-config --cflags gtk+-3.0) -g3
+CFLAGS = -Wall -Werror -Wextra $(shell pkg-config --cflags gtk+-3.0) -g3
 
 LDFLAGS = 	-framework IOKit -framework CoreVideo $(shell pkg-config --libs gtk+-3.0)
 
