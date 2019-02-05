@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/29 04:15:33 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/02/05 14:13:20 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,8 @@ void						end_open(GtkWidget *dialog)
 {
 	char					*filename;
 	GtkFileChooser			*chooser;
-/*	GtkCssProvider			*css_provider;
 
-	css_provider = gtk_css_provider_new();
-	gtk_css_provider_load_from_path(css_provider,
-	"./uiconfig/progressbar.css", NULL);
-	gtk_style_context_add_provider_for_screen(gdk_screen_get_default(),
-	GTK_STYLE_PROVIDER(css_provider),
-	GTK_STYLE_PROVIDER_PRIORITY_USER);
-*/	chooser = GTK_FILE_CHOOSER(dialog);
+	chooser = GTK_FILE_CHOOSER(dialog);
 	filename = gtk_file_chooser_get_filename(chooser);
 	if (!parse(filename))
 		usage("Error : invalid argument.", 1);
@@ -38,7 +31,7 @@ void						end_open(GtkWidget *dialog)
 	filename = NULL;
 	if (dialog)
 	{
-		gtk_widget_destroy(dialog);
+		gtk_widget_destroy(GTK_WIDGET(dialog));
 		dialog = NULL;
 	}
 	handle_main_view();
@@ -51,7 +44,8 @@ void						dialog_keyhook(GtkWidget *w, GdkEventKey *event)
 	{
 		if (w == ADD_VIEW.win)
 			redraw(false);
-		gtk_widget_destroy(w);
+		gtk_widget_destroy(GTK_WIDGET(w));
+		return ;
 	}
 	else if (event->keyval == 65421 || event->keyval == 65293)
 		end_open(w);
@@ -65,8 +59,8 @@ void						open_file_append(gint res, GtkWidget *dialog)
 		end_open(dialog);
 	else
 	{
-		gtk_widget_destroy(dialog);
-		dialog = NULL;
+		printf("a\n");
+		printf("b\n");
 	}
 }
 
