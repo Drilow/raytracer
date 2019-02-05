@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/17 15:30:15 by Dagnear          ###   ########.fr       */
+/*   Updated: 2019/02/05 13:33:07 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void		end_progress(void)
 {
 	PROGRESS_DATA.bprogressup = FALSE;
 	gtk_widget_destroy(GTK_WIDGET(PROGRESS_DATA.window));
+	PROGRESS_DATA.window = NULL;
 	pthread_mutex_destroy(&PROGRESS_DATA.g_mutex);
 	pthread_cond_destroy(&PROGRESS_DATA.g_cond_a);
 	pthread_cond_destroy(&PROGRESS_DATA.g_cond_b);

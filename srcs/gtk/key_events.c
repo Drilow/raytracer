@@ -6,7 +6,7 @@
 /*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:40:41 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 15:16:37 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 13:35:05 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ void						handle_x_button(GtkWidget *w)
 {
 	if (w == ADD_VIEW.win)
 	{
-		redraw(false);
-		gtk_widget_destroy(GTK_WIDGET(w));
+		if (!(PROGRESS_DATA.window))
+		{
+			redraw(false);
+			gtk_widget_destroy(GTK_WIDGET(w));
+		}
 		return ;
 	}
 	else if (w == GTKMGR.ui.main_view.win)
