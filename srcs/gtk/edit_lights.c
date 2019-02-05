@@ -11,9 +11,6 @@
 /* ************************************************************************** */
 
 #include <global.h>
-#include <parser/parser.h>
-#include <fcntl.h>
-#include <libft.h>
 
 extern t_global		g_global;
 

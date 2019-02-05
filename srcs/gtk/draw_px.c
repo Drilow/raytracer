@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <global.h>
-#include <gtk/gtk.h>
 
 extern t_global		g_global;
 

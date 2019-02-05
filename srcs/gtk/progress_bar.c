@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <global.h>
 
 extern t_global				g_global;
