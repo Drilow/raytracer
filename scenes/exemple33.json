@@ -20,6 +20,13 @@
 					"reflex":100
 				},
 				{
+					"type":"sphere",
+					"pos":[-34,14,10],
+					"radius":4,
+					"color":[180,180,100,0],
+					"reflex":0
+				},
+				{
 					"type":"plane",
 					"pos":[0,-50,0],
 					"vector":[0,10,0],

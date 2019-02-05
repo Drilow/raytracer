@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/26 19:48:45 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 11:53:12 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ static void			init_ray(t_point p)
 	g_global.r.rays[p.y][p.x].p = g_global.r.cam_position;
 	g_global.r.rays[p.y][p.x].vector.x = p.x - (WIN_W / 2);
 	g_global.r.rays[p.y][p.x].vector.y = -p.y + (WIN_H / 2);
-	g_global.r.rays[p.y][p.x].vector.z = g_global.r.screen_distance;
+	g_global.r.rays[p.y][p.x].vector.z = sqrt(pow(g_global.r.screen_distance, \
+					2) - pow(g_global.r.rays[p.y][p.x].vector.x, 2) \
+					- pow(g_global.r.rays[p.y][p.x].vector.y, 2));
 }
 
 void				init_obj_tab(void)
