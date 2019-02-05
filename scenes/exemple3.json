@@ -78,6 +78,7 @@
 					"base_size":10,
 					"height":5,
 					"color":[150,50,100,0],
+					"rotate":[0,0,0],
 					"reflex":100
 				}
 	]
