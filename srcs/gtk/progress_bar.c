@@ -69,7 +69,9 @@ void			progress_bar(void)
 	gtk_window_set_default_size(GTK_WINDOW(PROGRESS_DATA.window), 220, 20);
 	PROGRESS_DATA.pbar = gtk_progress_bar_new();
 	gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR(PROGRESS_DATA.pbar), TRUE);
-	gtk_container_add(GTK_CONTAINER(PROGRESS_DATA.window), PROGRESS_DATA.pbar);
+	gtk_window_set_deletable(GTK_WINDOW(PROGRESS_DATA.window), FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(PROGRESS_DATA.window), FALSE);
+    gtk_container_add(GTK_CONTAINER(PROGRESS_DATA.window), PROGRESS_DATA.pbar);
 	gtk_widget_show_all(PROGRESS_DATA.window);
 }
 

@@ -13,11 +13,7 @@
 #include <display/display.h>
 #include <global.h>
 #include <gtk/gtk.h>
-#include <objects/object.h>
-#include <geometry/geometry.h>
 #include <extra/extra_defs.h>
-#include <libft.h>
-#include <parser/parser.h>
 
 extern t_global	g_global;
 
