@@ -13,7 +13,6 @@
 #ifndef RT_H
 # define RT_H
 # include <objects/object.h>
-# include <geometry/geometry.h>
 # include <gtk_mgr/gtk_mgr.h>
 # define WIN_W 800
 # define WIN_H 600

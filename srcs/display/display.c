@@ -10,13 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
 #include <thread/thread.h>
 #include <rt.h>
 #include <raytracing/collision.h>
 #include <global.h>
 #include <extra/extra_defs.h>
-#include <geometry/geometry.h>
 #include <display/display.h>
 
 extern t_global		g_global;

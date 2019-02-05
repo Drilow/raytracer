@@ -17,7 +17,6 @@
 # include <stdbool.h>
 # include <objects/camera.h>
 # include <objects/optics.h>
-# include "../../Libjson/includes/json.h"
 
 typedef struct			s_obj
 {
