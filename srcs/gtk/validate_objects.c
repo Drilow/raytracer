@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   validate_objects.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:18:32 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 15:15:48 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 15:38:14 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
 #include <parser/parser.h>
-#include <fcntl.h>
-#include <libft.h>
 
 extern t_global		g_global;
 

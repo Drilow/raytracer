@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   radio_toggle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 17:12:58 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/16 10:59:53 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 15:33:16 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <parser/parser.h>
-#include <fcntl.h>
-#include <libft.h>
-#include <display/display.h>
 
 extern t_global		g_global;
 

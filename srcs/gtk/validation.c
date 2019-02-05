@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/03 19:15:20 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 12:26:43 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/05 15:37:27 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
 #include <parser/parser.h>
-#include <fcntl.h>
-#include <libft.h>
 
 extern t_global		g_global;
 

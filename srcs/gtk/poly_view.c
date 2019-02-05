@@ -11,10 +11,8 @@
 /* ************************************************************************** */
 
 #include <global.h>
-#include <parser/parser.h>
 #include <fcntl.h>
 #include <libft.h>
-#include <display/display.h>
 
 extern t_global		g_global;
 

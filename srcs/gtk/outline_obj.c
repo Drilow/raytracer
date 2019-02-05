@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   outline_obj.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Dagnear <Dagnear@student.42.fr>            +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:36:15 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 15:47:55 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/05 15:34:01 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
-#include <fcntl.h>
 #include <libft.h>
-#include <parser/parser.h>
+#include <extra/extra_defs.h>
 #include <display/display.h>
 
 extern t_global		g_global;
