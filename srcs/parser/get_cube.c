@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/28 19:01:48 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/20 19:33:35 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/22 18:46:31 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,17 @@ bool					set_cube(t_rpoint position, double size, t_obj *c)
 	o = c->obj;
 	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, 0, size));
+	set_face_vector(o->vertices);
 	o->next = pmalloc_po();
 	o = o->next;
 	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, 0, -size));
+	set_face_vector(o->vertices);
 	o->next = pmalloc_po();
 	o = o->next;
 	o->max_d = maxd;
 	o->vertices = add_cube_face(set_rpoint(0, size, 0));
+	set_face_vector(o->vertices);
 	get_cube_2(o, size, maxd);
 	c->size = size;
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 10:43:54 by mabessir          #+#    #+#             */
-/*   Updated: 2019/01/20 19:14:10 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/22 18:50:34 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ bool				validate_obj(t_rpoint pos, double size, char *path, \
 	char			*line;
 	int				i;
 
+	ft_putendl("==> validate_obj");
 	obj = NULL;
 	o->obj = NULL;
 	v_list = NULL;

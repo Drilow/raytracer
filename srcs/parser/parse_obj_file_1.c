@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 17:55:59 by alacrois          #+#    #+#             */
-/*   Updated: 2019/01/20 18:01:06 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/01/22 18:48:40 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_poly_obj			*parse_obj(char *scene_line, double size)
 	char			*line;
 	int				i;
 
+	ft_putendl("==> parse_obj");
 	obj = NULL;
 	v_list = NULL;
 	fd = open(scene_line, O_RDONLY);
