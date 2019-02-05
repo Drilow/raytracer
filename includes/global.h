@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   global.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:06:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 12:57:44 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/05 14:07:04 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GLOBAL_H
 # define GLOBAL_H
 # include <gtk_mgr/gtk_mgr.h>
-//# include <scene/scene_list.h>
 # include <rt.h>
 # include <json.h>
 # include <geometry/geometry.h>
