@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/26 19:14:28 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/06 14:23:05 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static void		draw_image_core2(t_point p, t_rt *r)
 		if (tmp != NULL && tmp->o != NULL)
 		{
 			g_global.r.checker[p.y][p.x] = tmp->o;
-			draw_px(GTKMGR.buf, p.x, p.y, \
+			draw_px(g_global.r.gtk_mgr.buf, p.x, p.y, \
 						get_ray_color(r, tmp));
 		}
 		else
 		{
 			g_global.r.checker[p.y][p.x] = NULL;
-			draw_px(GTKMGR.buf, p.x, p.y, ft_rgb(0, 0, 0, 0));
+			draw_px(g_global.r.gtk_mgr.buf, p.x, p.y, ft_rgb(0, 0, 0, 0));
 		}
 		free_collisions(tmp);
 	}
@@ -81,14 +81,14 @@ unsigned char	*ft_ustrdup(unsigned char *s, int size)
 static void		draw_image_init(int *i)
 {
 	*i = 0;
-	if ((GTKMGR.saved))
+	if ((g_global.r.gtk_mgr.saved))
 	{
-		free(GTKMGR.saved);
-		GTKMGR.saved = NULL;
+		free(g_global.r.gtk_mgr.saved);
+		g_global.r.gtk_mgr.saved = NULL;
 	}
 	progress_bar();
-	PROGRESS_DATA.pos = 0;
-	PROGRESS_DATA.len = WIN_W;
+	g_global.r.gtk_mgr.ui.progress_data.pos = 0;
+	g_global.r.gtk_mgr.ui.progress_data.len = WIN_W;
 }
 
 void			draw_image(void)
@@ -113,8 +113,8 @@ void			draw_image(void)
 			ft_exit("Thread could not be joined.", 1);
 	}
 	antialiasing();
-	if (!GTKMGR.saved)
-		if (!(GTKMGR.saved = ft_ustrdup(GTKMGR.buf, \
+	if (!g_global.r.gtk_mgr.saved)
+		if (!(g_global.r.gtk_mgr.saved = ft_ustrdup(g_global.r.gtk_mgr.buf, \
 			WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
 			exit_properly(1);
 	g_global.drawn = 0;

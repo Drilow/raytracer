@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 16:25:58 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/06 15:06:05 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,73 +19,85 @@ gboolean		update_progress(void)
 	gdouble		fraction;
 	int			pct;
 
-	if (PROGRESS_DATA.len <= 0)
+	if (g_global.r.gtk_mgr.ui.progress_data.len <= 0)
 		return (TRUE);
-	fraction = (gfloat)PROGRESS_DATA.pos / (gfloat)PROGRESS_DATA.len;
+	fraction = (gfloat)g_global.r.gtk_mgr.ui.progress_data.pos
+	/ (gfloat)g_global.r.gtk_mgr.ui.progress_data.len;
 	pct = fraction * 100;
-	if (PROGRESS_DATA.nlastpct != pct)
+	if (g_global.r.gtk_mgr.ui.progress_data.nlastpct != pct)
 	{
-		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(PROGRESS_DATA.pbar),
-			fraction);
-		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(PROGRESS_DATA.pbar),
-			NULL);
+		gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(
+		g_global.r.gtk_mgr.ui.progress_data.pbar), fraction);
+		gtk_progress_bar_set_text(GTK_PROGRESS_BAR(
+		g_global.r.gtk_mgr.ui.progress_data.pbar), NULL);
 		while (gtk_events_pending())
 			gtk_main_iteration();
-		PROGRESS_DATA.nlastpct = pct;
+		g_global.r.gtk_mgr.ui.progress_data.nlastpct = pct;
 	}
-	if (PROGRESS_DATA.nlastpct >= 100)
+	if (g_global.r.gtk_mgr.ui.progress_data.nlastpct >= 100)
 		return (TRUE);
 	return (FALSE);
 }
 
 static void		end_progress(void)
 {
-	PROGRESS_DATA.bprogressup = FALSE;
-	gtk_widget_destroy(GTK_WIDGET(PROGRESS_DATA.window));
-	PROGRESS_DATA.window = NULL;
-	pthread_mutex_destroy(&PROGRESS_DATA.g_mutex);
-	pthread_cond_destroy(&PROGRESS_DATA.g_cond_a);
-	pthread_cond_destroy(&PROGRESS_DATA.g_cond_b);
+	g_global.r.gtk_mgr.ui.progress_data.bprogressup = FALSE;
+	gtk_widget_destroy(
+	GTK_WIDGET(g_global.r.gtk_mgr.ui.progress_data.window));
+	g_global.r.gtk_mgr.ui.progress_data.window = NULL;
+	pthread_mutex_destroy(&g_global.r.gtk_mgr.ui.progress_data.g_mutex);
+	pthread_cond_destroy(&g_global.r.gtk_mgr.ui.progress_data.g_cond_a);
+	pthread_cond_destroy(&g_global.r.gtk_mgr.ui.progress_data.g_cond_b);
 }
 
 void			progress_bar(void)
 {
-	PROGRESS_DATA.g_state = STATE_A;
-	pthread_mutex_init(&PROGRESS_DATA.g_mutex, NULL);
-	pthread_cond_init(&PROGRESS_DATA.g_cond_a, NULL);
-	pthread_cond_init(&PROGRESS_DATA.g_cond_b, NULL);
-	PROGRESS_DATA.nlastpct = -1;
-	PROGRESS_DATA.bprogressup = TRUE;
-	PROGRESS_DATA.pbar = NULL;
-	PROGRESS_DATA.window = NULL;
-	PROGRESS_DATA.window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_transient_for(GTK_WINDOW(PROGRESS_DATA.window),
-		GTK_WINDOW(GTKMGR.ui.main_view.win));
-	gtk_window_set_destroy_with_parent(GTK_WINDOW(PROGRESS_DATA.window), TRUE);
-	gtk_window_set_title(GTK_WINDOW(PROGRESS_DATA.window), "Loading");
-	gtk_window_set_position(GTK_WINDOW(PROGRESS_DATA.window),
-		GTK_WIN_POS_CENTER);
-	gtk_window_set_default_size(GTK_WINDOW(PROGRESS_DATA.window), 220, 20);
-	PROGRESS_DATA.pbar = gtk_progress_bar_new();
-	gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR(PROGRESS_DATA.pbar), TRUE);
-	gtk_window_set_deletable(GTK_WINDOW(PROGRESS_DATA.window), FALSE);
-	gtk_window_set_resizable(GTK_WINDOW(PROGRESS_DATA.window), FALSE);
-	gtk_container_add(GTK_CONTAINER(PROGRESS_DATA.window), PROGRESS_DATA.pbar);
-	gtk_widget_show_all(PROGRESS_DATA.window);
+	g_global.r.gtk_mgr.ui.progress_data.g_state = STATE_A;
+	pthread_mutex_init(&g_global.r.gtk_mgr.ui.progress_data.g_mutex, NULL);
+	pthread_cond_init(&g_global.r.gtk_mgr.ui.progress_data.g_cond_a, NULL);
+	pthread_cond_init(&g_global.r.gtk_mgr.ui.progress_data.g_cond_b, NULL);
+	g_global.r.gtk_mgr.ui.progress_data.nlastpct = -1;
+	g_global.r.gtk_mgr.ui.progress_data.bprogressup = TRUE;
+	g_global.r.gtk_mgr.ui.progress_data.pbar = NULL;
+	g_global.r.gtk_mgr.ui.progress_data.window = NULL;
+	g_global.r.gtk_mgr.ui.progress_data.window = gtk_window_new(
+	GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_transient_for(GTK_WINDOW(
+	g_global.r.gtk_mgr.ui.progress_data.window),
+	GTK_WINDOW(g_global.r.gtk_mgr.ui.main_view.win));
+	gtk_window_set_destroy_with_parent(GTK_WINDOW(
+	g_global.r.gtk_mgr.ui.progress_data.window), TRUE);
+	gtk_window_set_title(GTK_WINDOW(g_global.r.gtk_mgr.ui.progress_data.window),
+	"Loading");
+	gtk_window_set_position(GTK_WINDOW(
+	g_global.r.gtk_mgr.ui.progress_data.window), GTK_WIN_POS_CENTER);
+	gtk_window_set_default_size(GTK_WINDOW(
+	g_global.r.gtk_mgr.ui.progress_data.window), 220, 20);
+	g_global.r.gtk_mgr.ui.progress_data.pbar = gtk_progress_bar_new();
+	gtk_progress_bar_set_show_text(GTK_PROGRESS_BAR(
+	g_global.r.gtk_mgr.ui.progress_data.pbar), TRUE);
+	gtk_window_set_deletable(GTK_WINDOW(
+	g_global.r.gtk_mgr.ui.progress_data.window), FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(
+	g_global.r.gtk_mgr.ui.progress_data.window), FALSE);
+	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.progress_data.window),
+	g_global.r.gtk_mgr.ui.progress_data.pbar);
+	gtk_widget_show_all(g_global.r.gtk_mgr.ui.progress_data.window);
 }
 
 void			progress_thread_handler(gdouble x)
 {
-	pthread_mutex_lock(&PROGRESS_DATA.g_mutex);
-	while (PROGRESS_DATA.g_state != STATE_B)
-		pthread_cond_wait(&PROGRESS_DATA.g_cond_b, &PROGRESS_DATA.g_mutex);
-	pthread_mutex_unlock(&PROGRESS_DATA.g_mutex);
-	PROGRESS_DATA.pos = x;
-	PROGRESS_DATA.len = WIN_W;
-	pthread_mutex_lock(&PROGRESS_DATA.g_mutex);
-	PROGRESS_DATA.g_state = STATE_A;
-	pthread_cond_signal(&PROGRESS_DATA.g_cond_a);
-	pthread_mutex_unlock(&PROGRESS_DATA.g_mutex);
+	pthread_mutex_lock(&g_global.r.gtk_mgr.ui.progress_data.g_mutex);
+	while (g_global.r.gtk_mgr.ui.progress_data.g_state != STATE_B)
+		pthread_cond_wait(&g_global.r.gtk_mgr.ui.progress_data.g_cond_b,
+		&g_global.r.gtk_mgr.ui.progress_data.g_mutex);
+	pthread_mutex_unlock(&g_global.r.gtk_mgr.ui.progress_data.g_mutex);
+	g_global.r.gtk_mgr.ui.progress_data.pos = x;
+	g_global.r.gtk_mgr.ui.progress_data.len = WIN_W;
+	pthread_mutex_lock(&g_global.r.gtk_mgr.ui.progress_data.g_mutex);
+	g_global.r.gtk_mgr.ui.progress_data.g_state = STATE_A;
+	pthread_cond_signal(&g_global.r.gtk_mgr.ui.progress_data.g_cond_a);
+	pthread_mutex_unlock(&g_global.r.gtk_mgr.ui.progress_data.g_mutex);
 }
 
 void			progress_main_handler(void)
@@ -95,19 +107,20 @@ void			progress_main_handler(void)
 	b_lock = FALSE;
 	while (b_lock == FALSE)
 	{
-		pthread_mutex_lock(&PROGRESS_DATA.g_mutex);
-		while (PROGRESS_DATA.g_state != STATE_A)
-			pthread_cond_wait(&PROGRESS_DATA.g_cond_a, &PROGRESS_DATA.g_mutex);
-		pthread_mutex_unlock(&PROGRESS_DATA.g_mutex);
+		pthread_mutex_lock(&g_global.r.gtk_mgr.ui.progress_data.g_mutex);
+		while (g_global.r.gtk_mgr.ui.progress_data.g_state != STATE_A)
+			pthread_cond_wait(&g_global.r.gtk_mgr.ui.progress_data.g_cond_a,
+			&g_global.r.gtk_mgr.ui.progress_data.g_mutex);
+		pthread_mutex_unlock(&g_global.r.gtk_mgr.ui.progress_data.g_mutex);
 		b_lock = update_progress();
 		if (b_lock == FALSE)
 		{
-			pthread_mutex_lock(&PROGRESS_DATA.g_mutex);
+			pthread_mutex_lock(&g_global.r.gtk_mgr.ui.progress_data.g_mutex);
 			while (gtk_events_pending())
 				gtk_main_iteration();
-			PROGRESS_DATA.g_state = STATE_B;
-			pthread_cond_signal(&PROGRESS_DATA.g_cond_b);
-			pthread_mutex_unlock(&PROGRESS_DATA.g_mutex);
+			g_global.r.gtk_mgr.ui.progress_data.g_state = STATE_B;
+			pthread_cond_signal(&g_global.r.gtk_mgr.ui.progress_data.g_cond_b);
+			pthread_mutex_unlock(&g_global.r.gtk_mgr.ui.progress_data.g_mutex);
 		}
 	}
 	end_progress();

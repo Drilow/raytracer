@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 15:16:16 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 14:24:44 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void				set_default_values(t_obj *o)
 	}
 	else if (o->type == 6 || o->type / 10 == 6)
 	{
-		ADD_VIEW.sw.o->size = 2;
+		g_global.r.gtk_mgr.ui.add_view.sw.o->size = 2;
 		((t_poly_obj*)(o->obj))->vertices = NULL;
 		((t_poly_obj*)(o->obj))->next = NULL;
 	}
@@ -55,36 +55,36 @@ void				set_default_values(t_obj *o)
 
 void				deactivate_buttons(GtkWidget *except)
 {
-	if (&(ADD_VIEW.sphere_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.sphere_button,
+	if (&(g_global.r.gtk_mgr.ui.add_view.sphere_button) != &except)
+		gtk_widget_set_state_flags(g_global.r.gtk_mgr.ui.add_view.sphere_button,
 		GTK_STATE_FLAG_NORMAL, true);
-	if (&(ADD_VIEW.plane_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.plane_button,
+	if (&(g_global.r.gtk_mgr.ui.add_view.plane_button) != &except)
+		gtk_widget_set_state_flags(g_global.r.gtk_mgr.ui.add_view.plane_button,
 		GTK_STATE_FLAG_NORMAL, true);
-	if (&(ADD_VIEW.cone_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.cone_button,
+	if (&(g_global.r.gtk_mgr.ui.add_view.cone_button) != &except)
+		gtk_widget_set_state_flags(g_global.r.gtk_mgr.ui.add_view.cone_button,
 		GTK_STATE_FLAG_NORMAL, true);
-	if (&(ADD_VIEW.cylinder_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.cylinder_button,
+	if (&(g_global.r.gtk_mgr.ui.add_view.cylinder_button) != &except)
+		gtk_widget_set_state_flags(g_global.r.gtk_mgr.ui.add_view.cylinder_button,
 		GTK_STATE_FLAG_NORMAL, true);
-	if (&(ADD_VIEW.obj_file_button) != &except)
-		gtk_widget_set_state_flags(ADD_VIEW.obj_file_button,
+	if (&(g_global.r.gtk_mgr.ui.add_view.obj_file_button) != &except)
+		gtk_widget_set_state_flags(g_global.r.gtk_mgr.ui.add_view.obj_file_button,
 		GTK_STATE_FLAG_NORMAL, true);
 }
 
 void				redraw_if_false(void)
 {
-	free(GTKMGR.buf);
-	GTKMGR.buf = NULL;
-	if (!(GTKMGR.buf = ft_ustrdup(GTKMGR.saved,
+	free(g_global.r.gtk_mgr.buf);
+	g_global.r.gtk_mgr.buf = NULL;
+	if (!(g_global.r.gtk_mgr.buf = ft_ustrdup(g_global.r.gtk_mgr.saved,
 	WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))
 		exit_properly(1);
-	if (PIXMAP)
+	if (g_global.r.gtk_mgr.pixmap)
 	{
-		cairo_surface_destroy(PIXMAP);
-		PIXMAP = NULL;
+		cairo_surface_destroy(g_global.r.gtk_mgr.pixmap);
+		g_global.r.gtk_mgr.pixmap = NULL;
 	}
-	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.saved,
+	g_global.r.gtk_mgr.pixmap = cairo_image_surface_create_for_data(g_global.r.gtk_mgr.saved,
 	CAIRO_FORMAT_RGB24,
 	WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 }
@@ -93,24 +93,24 @@ void				redraw(bool display)
 {
 	if (display == true)
 	{
-		if (!GTKMGR.buf)
-			if (!(GTKMGR.buf = (
+		if (!g_global.r.gtk_mgr.buf)
+			if (!(g_global.r.gtk_mgr.buf = (
 				unsigned char*)malloc(sizeof(unsigned char
 				) * WIN_H * cairo_format_stride_for_width(
 					CAIRO_FORMAT_RGB24, WIN_W))))
 				exit_properly(1);
 		draw_image();
-		if (PIXMAP)
-			cairo_surface_destroy(PIXMAP);
-		PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf,
+		if (g_global.r.gtk_mgr.pixmap)
+			cairo_surface_destroy(g_global.r.gtk_mgr.pixmap);
+		g_global.r.gtk_mgr.pixmap = cairo_image_surface_create_for_data(g_global.r.gtk_mgr.buf,
 		CAIRO_FORMAT_RGB24,
 		WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 	}
 	else
 		redraw_if_false();
-	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
+	if (cairo_surface_status(g_global.r.gtk_mgr.pixmap) != CAIRO_STATUS_SUCCESS)
 		exit_properly(1);
-	cairo_surface_mark_dirty(PIXMAP);
-	gtk_image_set_from_surface(GTK_IMAGE(GTKMGR.ui.main_view.render_area),
-	PIXMAP);
+	cairo_surface_mark_dirty(g_global.r.gtk_mgr.pixmap);
+	gtk_image_set_from_surface(GTK_IMAGE(g_global.r.gtk_mgr.ui.main_view.render_area),
+	g_global.r.gtk_mgr.pixmap);
 }

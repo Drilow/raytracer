@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 14:15:03 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 14:23:44 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,31 @@ extern t_global		g_global;
 
 void			handle_drawing(void)
 {
-	if (!GTKMGR.buf)
+	if (!g_global.r.gtk_mgr.buf)
 	{
-		GTKMGR.buf = NULL;
-		if (!(GTKMGR.buf = (unsigned char*)malloc(sizeof(unsigned char)
+		g_global.r.gtk_mgr.buf = NULL;
+		if (!(g_global.r.gtk_mgr.buf = (unsigned char*)malloc(sizeof(unsigned char)
 		* (WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
 			exit_properly(1);
 	}
 	draw_image();
-	if (PIXMAP)
+	if (g_global.r.gtk_mgr.pixmap)
 	{
-		cairo_surface_destroy(PIXMAP);
-		PIXMAP = NULL;
+		cairo_surface_destroy(g_global.r.gtk_mgr.pixmap);
+		g_global.r.gtk_mgr.pixmap = NULL;
 	}
-	PIXMAP = cairo_image_surface_create_for_data(GTKMGR.buf,
+	g_global.r.gtk_mgr.pixmap = cairo_image_surface_create_for_data(g_global.r.gtk_mgr.buf,
 	CAIRO_FORMAT_RGB24, WIN_W, WIN_H,
 	cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
-	if (cairo_surface_status(PIXMAP) != CAIRO_STATUS_SUCCESS)
+	if (cairo_surface_status(g_global.r.gtk_mgr.pixmap) != CAIRO_STATUS_SUCCESS)
 		exit_properly(1);
-	cairo_surface_mark_dirty(PIXMAP);
-	GTKMGR.ui.main_view.render_area = gtk_image_new_from_surface(PIXMAP);
-	GTKMGR.ui.main_view.event_box = gtk_event_box_new();
-	gtk_grid_attach(GTK_GRID(GTKMGR.ui.main_view.grid),
-	GTKMGR.ui.main_view.event_box, 0, 1, 1, 1);
-	gtk_container_add(GTK_CONTAINER(GTKMGR.ui.main_view.event_box),
-	GTKMGR.ui.main_view.render_area);
+	cairo_surface_mark_dirty(g_global.r.gtk_mgr.pixmap);
+	g_global.r.gtk_mgr.ui.main_view.render_area = gtk_image_new_from_surface(g_global.r.gtk_mgr.pixmap);
+	g_global.r.gtk_mgr.ui.main_view.event_box = gtk_event_box_new();
+	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.main_view.grid),
+	g_global.r.gtk_mgr.ui.main_view.event_box, 0, 1, 1, 1);
+	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.main_view.event_box),
+	g_global.r.gtk_mgr.ui.main_view.render_area);
 }
 
 void			end_base_view(void)

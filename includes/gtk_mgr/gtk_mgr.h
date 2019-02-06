@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 16:00:51 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 15:01:03 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,6 @@
 # include <gtk/gtk.h>
 # include <stdbool.h>
 # include <objects/object.h>
-# define GTKMGR 			g_global.r.gtk_mgr
-# define PIXMAP 			GTKMGR.pixmap
-# define SCENE_VIEW 		GTKMGR.ui.scene_view
-# define PROGRESS_DATA 		GTKMGR.ui.progress_data
-# define ADD_VIEW 			GTKMGR.ui.add_view
-# define FILTER_VIEW 		GTKMGR.ui.filter_view
-# define LIGHT_VIEW 		GTKMGR.ui.light_view
 
 enum
 {
@@ -245,5 +238,6 @@ void						handle_cube_template(void);
 void						for_template(void);
 void						for_file(GtkWidget *button);
 bool						go_throu_lights(t_light *curr);
-
+void						init_scene_view2(GtkCellRenderer *render);
+void						for_template(void);
 #endif

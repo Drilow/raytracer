@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 18:24:04 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/25 13:51:00 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 14:23:59 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void				exit_properly(int ret)
 		free_objects(g_global.r.objects);
 	if (g_global.r.lights)
 		free_lights(g_global.r.lights);
-	gtk_widget_destroy(SCENE_VIEW.win);
-	free(PIXMAP);
-	PIXMAP = NULL;
-	free(GTKMGR.saved);
-	free(GTKMGR.buf);
-	GTKMGR.saved = NULL;
-	GTKMGR.buf = NULL;
+	gtk_widget_destroy(g_global.r.gtk_mgr.ui.scene_view.win);
+	free(g_global.r.gtk_mgr.pixmap);
+	g_global.r.gtk_mgr.pixmap = NULL;
+	free(g_global.r.gtk_mgr.saved);
+	free(g_global.r.gtk_mgr.buf);
+	g_global.r.gtk_mgr.saved = NULL;
+	g_global.r.gtk_mgr.buf = NULL;
 	free_checker();
 	gtk_main_quit();
 	exit(ret);

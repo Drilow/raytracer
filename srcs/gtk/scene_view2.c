@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/23 10:14:30 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/06 14:47:38 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static void				read_obj(t_obj *obj)
 {
 	GtkTreeIter			iter1;
 
-	gtk_tree_store_append(SCENE_VIEW.store, &iter1, NULL);
-	gtk_tree_store_set(SCENE_VIEW.store, &iter1,
+	gtk_tree_store_append(g_global.r.gtk_mgr.ui.scene_view.store, &iter1, NULL);
+	gtk_tree_store_set(g_global.r.gtk_mgr.ui.scene_view.store, &iter1,
 					TYPE_COLUMN, get_obj_type(obj->type),
 					POS_X_COLUMN, obj->position.x,
 					POS_Y_COLUMN, obj->position.y,
@@ -57,8 +57,8 @@ static void				read_light(t_light *light)
 {
 	GtkTreeIter			iter1;
 
-	gtk_tree_store_append(SCENE_VIEW.store, &iter1, NULL);
-	gtk_tree_store_set(SCENE_VIEW.store, &iter1,
+	gtk_tree_store_append(g_global.r.gtk_mgr.ui.scene_view.store, &iter1, NULL);
+	gtk_tree_store_set(g_global.r.gtk_mgr.ui.scene_view.store, &iter1,
 					TYPE_COLUMN, "Light",
 					POS_X_COLUMN, light->source.x,
 					POS_Y_COLUMN, light->source.y,
@@ -101,26 +101,23 @@ void					init_scene_view(void)
 {
 	GtkCellRenderer		*render;
 
-	SCENE_VIEW.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_window_set_title(GTK_WINDOW(SCENE_VIEW.win), "Scene");
-	gtk_window_set_transient_for(GTK_WINDOW(SCENE_VIEW.win),
-		GTK_WINDOW(GTKMGR.ui.main_view.win));
-	gtk_window_set_destroy_with_parent(GTK_WINDOW(SCENE_VIEW.win), TRUE);
-	gtk_window_set_deletable(GTK_WINDOW(SCENE_VIEW.win), FALSE);
-	SCENE_VIEW.store = gtk_tree_store_new(N_COLUMNS, G_TYPE_STRING,
-	G_TYPE_DOUBLE, G_TYPE_DOUBLE, G_TYPE_DOUBLE, G_TYPE_BOOLEAN,
-	G_TYPE_BOOLEAN, G_TYPE_POINTER, -1);
-	populate_tree_model(SCENE_VIEW.store);
-	SCENE_VIEW.tree = gtk_tree_view_new_with_model(
-		GTK_TREE_MODEL(SCENE_VIEW.store));
-	g_object_unref(G_OBJECT(SCENE_VIEW.store));
+	g_global.r.gtk_mgr.ui.scene_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_title(GTK_WINDOW(
+	g_global.r.gtk_mgr.ui.scene_view.win), "Scene");
+	gtk_window_set_transient_for(
+	GTK_WINDOW(g_global.r.gtk_mgr.ui.scene_view.win),
+	GTK_WINDOW(g_global.r.gtk_mgr.ui.main_view.win));
+	gtk_window_set_destroy_with_parent(GTK_WINDOW(
+	g_global.r.gtk_mgr.ui.scene_view.win), TRUE);
+	gtk_window_set_deletable(GTK_WINDOW(g_global.r.gtk_mgr.ui.scene_view.win),
+	FALSE);
+	g_global.r.gtk_mgr.ui.scene_view.store = gtk_tree_store_new(
+	N_COLUMNS, G_TYPE_STRING, G_TYPE_DOUBLE, G_TYPE_DOUBLE, G_TYPE_DOUBLE,
+	G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_POINTER, -1);
+	populate_tree_model(g_global.r.gtk_mgr.ui.scene_view.store);
+	g_global.r.gtk_mgr.ui.scene_view.tree = gtk_tree_view_new_with_model(
+		GTK_TREE_MODEL(g_global.r.gtk_mgr.ui.scene_view.store));
+	g_object_unref(G_OBJECT(g_global.r.gtk_mgr.ui.scene_view.store));
 	render = gtk_cell_renderer_text_new();
-	g_object_set(G_OBJECT(render), "foreground", "red", NULL);
-	append_column_with_text(SCENE_VIEW.tree, "Type", render, TYPE_COLUMN);
-	render = gtk_cell_renderer_text_new();
-	g_object_set(render, "weight", PANGO_WEIGHT_BOLD, "weight-set",
-	TRUE, NULL);
-	append_column_with_text(SCENE_VIEW.tree, "Pos X", render, POS_X_COLUMN);
-	append_column_with_text(SCENE_VIEW.tree, "Pos Y", render, POS_Y_COLUMN);
-	append_column_with_text(SCENE_VIEW.tree, "Pos Z", render, POS_Z_COLUMN);
+	init_scene_view2(render);
 }

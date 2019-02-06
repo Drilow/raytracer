@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:40:41 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 15:31:50 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 14:25:10 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ extern t_global				g_global;
 
 void						handle_x_button(GtkWidget *w)
 {
-	if (w == ADD_VIEW.win)
+	if (w == g_global.r.gtk_mgr.ui.add_view.win)
 	{
-		if (!(PROGRESS_DATA.window))
+		if (!(g_global.r.gtk_mgr.ui.progress_data.window))
 		{
 			redraw(false);
 			gtk_widget_destroy(GTK_WIDGET(w));
 		}
 		return ;
 	}
-	else if (w == GTKMGR.ui.main_view.win)
+	else if (w == g_global.r.gtk_mgr.ui.main_view.win)
 		exit_properly(0);
 	else if (w == g_global.base_view.win)
 	{
@@ -42,9 +42,9 @@ void						handle_x_button(GtkWidget *w)
 void						on_key_press_2(GtkWidget *w, GdkEventKey *event)
 {
 	if (event->keyval == GDK_KEY_Escape
-	&& w != NULL && w != PROGRESS_DATA.window)
+	&& w != NULL && w != g_global.r.gtk_mgr.ui.progress_data.window)
 	{
-		if (w == GTKMGR.ui.main_view.win)
+		if (w == g_global.r.gtk_mgr.ui.main_view.win)
 		{
 			if (GTK_IS_WIDGET(w))
 			{
@@ -67,13 +67,13 @@ void						on_key_press(GtkWidget *w, GdkEventKey *event)
 		gtk_main_quit();
 		return ;
 	}
-	if (event->keyval == GDK_KEY_Escape && w == FILTER_VIEW.win)
+	if (event->keyval == GDK_KEY_Escape && w == g_global.r.gtk_mgr.ui.filter_view.win)
 	{
 		redraw(true);
 		gtk_widget_destroy(w);
 		return ;
 	}
-	if (w == ADD_VIEW.win && event->keyval == GDK_KEY_Escape)
+	if (w == g_global.r.gtk_mgr.ui.add_view.win && event->keyval == GDK_KEY_Escape)
 	{
 		redraw(false);
 		return ;
