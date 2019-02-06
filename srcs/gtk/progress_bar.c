@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   progress_bar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:06:05 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:51:19 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,7 @@ static void		end_progress(void)
 
 void			progress_bar(void)
 {
-	g_global.r.gtk_mgr.ui.progress_data.g_state = STATE_A;
-	pthread_mutex_init(&g_global.r.gtk_mgr.ui.progress_data.g_mutex, NULL);
-	pthread_cond_init(&g_global.r.gtk_mgr.ui.progress_data.g_cond_a, NULL);
-	pthread_cond_init(&g_global.r.gtk_mgr.ui.progress_data.g_cond_b, NULL);
-	g_global.r.gtk_mgr.ui.progress_data.nlastpct = -1;
-	g_global.r.gtk_mgr.ui.progress_data.bprogressup = TRUE;
-	g_global.r.gtk_mgr.ui.progress_data.pbar = NULL;
-	g_global.r.gtk_mgr.ui.progress_data.window = NULL;
-	g_global.r.gtk_mgr.ui.progress_data.window = gtk_window_new(
-	GTK_WINDOW_TOPLEVEL);
+	progress_bar_init();
 	gtk_window_set_transient_for(GTK_WINDOW(
 	g_global.r.gtk_mgr.ui.progress_data.window),
 	GTK_WINDOW(g_global.r.gtk_mgr.ui.main_view.win));

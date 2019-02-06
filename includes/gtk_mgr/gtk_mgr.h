@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:36:37 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 15:56:34 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,6 +242,8 @@ void						init_scene_view2(GtkCellRenderer *render);
 void						for_template(void);
 void						handle_drawing_end(void);
 void						edit_win_4(void);
-void						edit_win_img_init(void);
+void						edit_win_img_init(t_obj *o);
+void						progress_bar_init(void);
+void						end_filters2(void);
 
 #endif

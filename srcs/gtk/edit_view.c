@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:36:08 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 15:47:53 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void				edit_win(t_obj *o, GtkWidget *parent)
 	GtkWidget		*content_area;
 
 	init_add_view();
-	edit_win_img_init();
+	edit_win_img_init(o);
 	g_global.r.gtk_mgr.ui.add_view.win =
 	gtk_dialog_new_with_buttons("Edit Object", GTK_WINDOW(parent),
 	GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,

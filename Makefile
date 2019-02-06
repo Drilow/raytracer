@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
+#    By: cpays <cpays@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2019/02/06 15:44:39 by adleau           ###   ########.fr        #
+#    Updated: 2019/02/06 15:56:27 by cpays            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/export_view.c			\
 		$(SRCPATH)gtk/filter_functions.c	\
 		$(SRCPATH)gtk/filter_view.c			\
+		$(SRCPATH)gtk/filter_view2.c		\
 		$(SRCPATH)gtk/gtk_handlers.c		\
 		$(SRCPATH)gtk/gtk_handlers2.c		\
 		$(SRCPATH)gtk/gtk_handlers3.c		\
@@ -61,6 +62,7 @@ SRC =   $(SRCPATH)main.c \
 		$(SRCPATH)gtk/outline_obj.c			\
 		$(SRCPATH)gtk/poly_view.c			\
 		$(SRCPATH)gtk/progress_bar.c		\
+		$(SRCPATH)gtk/progress_bar2.c		\
 		$(SRCPATH)gtk/radio_button.c		\
 		$(SRCPATH)gtk/radio_toggle.c 		\
 		$(SRCPATH)gtk/scene_view.c			\

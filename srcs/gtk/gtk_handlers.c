@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:47:04 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 14:13:55 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:58:35 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void				handle_edit_validation(t_obj *o)
 	else if (r == GTK_RESPONSE_REJECT)
 	{
 		redraw(false);
-		if (!(ft_strcmp(gtk_window_get_title(GTK_WINDOW(g_global.r.gtk_mgr.ui.add_view.win)),
-			"Add Object")))
+		if (!(ft_strcmp(gtk_window_get_title(GTK_WINDOW(
+			g_global.r.gtk_mgr.ui.add_view.win)), "Add Object")))
 		{
 			g_global.r.objects = o->next;
 			free(o->obj);

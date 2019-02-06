@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gtk_handlers3.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 17:07:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:00:50 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:58:01 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void					for_template(void)
 	for_template2();
 }
 
-void				init_scene_view2(GtkCellRenderer *render)
+void					init_scene_view2(GtkCellRenderer *render)
 {
 	g_object_set(G_OBJECT(render), "foreground", "red", NULL);
 	append_column_with_text(
@@ -77,7 +77,7 @@ void				init_scene_view2(GtkCellRenderer *render)
 	g_global.r.gtk_mgr.ui.scene_view.tree, "Pos Z", render, POS_Z_COLUMN);
 }
 
-void				get_color_values(t_rgb col, GdkRGBA *c)
+void					get_color_values(t_rgb col, GdkRGBA *c)
 {
 	c->red = (gdouble)(col.r) / 255;
 	c->green = (gdouble)(col.g) / 255;
@@ -85,7 +85,7 @@ void				get_color_values(t_rgb col, GdkRGBA *c)
 	c->alpha = (gdouble)(255 - col.trans) / 255;
 }
 
-gboolean			is_obj(int type)
+gboolean				is_obj(int type)
 {
 	if (type == 1 || type == 2 || type == 3 || type == 4 || type == 6
 			|| type == 66 || type == 67 || type == 68 || type == 69)

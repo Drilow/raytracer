@@ -3,26 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_light_view.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:59:22 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:21:34 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:56:33 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <global.h>
 
 extern t_global		g_global;
-
-void				init_filter_img(void)
-{
-	g_global.r.gtk_mgr.ui.
-	filter_view.bw_img = gtk_image_new_from_file("uiconfig/bw.png");
-	g_global.r.gtk_mgr.ui.
-	filter_view.sepia_img = gtk_image_new_from_file("uiconfig/sepia.png");
-	g_global.r.gtk_mgr.ui.
-	filter_view.reversed_img = gtk_image_new_from_file("uiconfig/reversed.png");
-}
 
 void				init_light_view(void)
 {

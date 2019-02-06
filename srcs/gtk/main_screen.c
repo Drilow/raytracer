@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:18:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:18:50 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:59:27 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void				add_view(void)
 	edit_win(o, g_global.r.gtk_mgr.ui.main_view.win);
 }
 
-void				handle_main_view(void)
+static void			handle_main_view_img(void)
 {
 	g_global.r.gtk_mgr.ui.main_view.add_img = gtk_image_new_from_file(
 	"uiconfig/plus-sign-in-a-black-circle.png");
@@ -45,6 +45,11 @@ void				handle_main_view(void)
 	"uiconfig/new-file.png");
 	g_global.r.gtk_mgr.ui.main_view.export_img = gtk_image_new_from_file(
 	"uiconfig/scale-symbol.png");
+}
+
+void				handle_main_view(void)
+{
+	handle_main_view_img();
 	g_global.r.gtk_mgr.ui.main_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(g_global.r.gtk_mgr.ui.main_view.win),
 	GTK_WIN_POS_CENTER);

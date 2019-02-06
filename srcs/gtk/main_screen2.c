@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_screen2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:28:27 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:14:50 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 16:00:10 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,10 @@ void				select_cb(void)
 
 void				handle_main_view_3(void)
 {
+	g_global.r.gtk_mgr.ui.main_view.export_button = gtk_button_new();
+	gtk_button_set_image(
+	GTK_BUTTON(g_global.r.gtk_mgr.ui.main_view.export_button),
+	g_global.r.gtk_mgr.ui.main_view.export_img);
 	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.main_view.export_button,
 	"export to png format");
 	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.main_view.export_button),
@@ -97,9 +101,5 @@ void				handle_main_view_2(void)
 	g_global.r.gtk_mgr.ui.main_view.select_img);
 	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.main_view.buttonbox),
 	g_global.r.gtk_mgr.ui.main_view.select_button);
-	g_global.r.gtk_mgr.ui.main_view.export_button = gtk_button_new();
-	gtk_button_set_image(
-	GTK_BUTTON(g_global.r.gtk_mgr.ui.main_view.export_button),
-	g_global.r.gtk_mgr.ui.main_view.export_img);
 	handle_main_view_3();
 }
