@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 20:50:09 by alacrois          #+#    #+#             */
-/*   Updated: 2019/02/05 13:40:11 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/06 14:23:18 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,18 @@ static int		detect_edge(t_point p)
 	t_rgb		adjacent[4];
 	int			i;
 
-	pix = get_pixel(GTKMGR.buf, p.x, p.y);
+	pix = get_pixel(g_global.r.gtk_mgr.buf, p.x, p.y);
 	i = -1;
 	while (++i < 4)
 		adjacent[i] = pix;
 	if (p.y > 0)
-		adjacent[0] = get_pixel(GTKMGR.buf, p.x, p.y - 1);
+		adjacent[0] = get_pixel(g_global.r.gtk_mgr.buf, p.x, p.y - 1);
 	if (p.x + 1 < WIN_W)
-		adjacent[1] = get_pixel(GTKMGR.buf, p.x + 1, p.y);
+		adjacent[1] = get_pixel(g_global.r.gtk_mgr.buf, p.x + 1, p.y);
 	if (p.y + 1 < WIN_H)
-		adjacent[1] = get_pixel(GTKMGR.buf, p.x, p.y + 1);
+		adjacent[1] = get_pixel(g_global.r.gtk_mgr.buf, p.x, p.y + 1);
 	if (p.x > 0)
-		adjacent[3] = get_pixel(GTKMGR.buf, p.x - 1, p.y);
+		adjacent[3] = get_pixel(g_global.r.gtk_mgr.buf, p.x - 1, p.y);
 	return (detect_edge_core(adjacent, pix));
 }
 
@@ -73,7 +73,7 @@ static void		antialiasing_core_2(int **aa, t_rgb **pixdup)
 			ft_exit("Malloc error ('antialiasing_1.c' --> Ln 79)", 1);
 		while (++p.x < WIN_W)
 		{
-			pixdup[p.y][p.x] = get_pixel(GTKMGR.buf, p.x, p.y);
+			pixdup[p.y][p.x] = get_pixel(g_global.r.gtk_mgr.buf, p.x, p.y);
 			aa[p.y][p.x] = detect_edge(p);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 15:56:20 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 14:04:11 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void				init_rt(void)
 	t_point			p;
 
 	init_obj_tab();
-	PIXMAP = NULL;
+	g_global.r.gtk_mgr.pixmap = NULL;
 	g_global.r.cam_position.x = 0;
 	g_global.r.cam_position.y = 0;
 	g_global.r.cam_position.z = 0;

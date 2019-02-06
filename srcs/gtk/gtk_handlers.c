@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:47:04 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 15:31:41 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 14:13:55 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ void				handle_edit_validation(t_obj *o)
 {
 	int		r;
 
-	r = gtk_dialog_run(GTK_DIALOG(ADD_VIEW.win));
+	r = gtk_dialog_run(GTK_DIALOG(g_global.r.gtk_mgr.ui.add_view.win));
 	if (r == GTK_RESPONSE_ACCEPT)
 	{
 		validate_edit(o);
-		if (ADD_VIEW.win)
+		if (g_global.r.gtk_mgr.ui.add_view.win)
 		{
-			gtk_widget_destroy(GTK_WIDGET(ADD_VIEW.win));
-			ADD_VIEW.win = NULL;
+			gtk_widget_destroy(GTK_WIDGET(g_global.r.gtk_mgr.ui.add_view.win));
+			g_global.r.gtk_mgr.ui.add_view.win = NULL;
 		}
 	}
 	else if (r == GTK_RESPONSE_REJECT)
 	{
 		redraw(false);
-		if (!(ft_strcmp(gtk_window_get_title(GTK_WINDOW(ADD_VIEW.win)),
+		if (!(ft_strcmp(gtk_window_get_title(GTK_WINDOW(g_global.r.gtk_mgr.ui.add_view.win)),
 			"Add Object")))
 		{
 			g_global.r.objects = o->next;
@@ -40,23 +40,23 @@ void				handle_edit_validation(t_obj *o)
 			free(o);
 			o = NULL;
 		}
-		gtk_widget_destroy(GTK_WIDGET(ADD_VIEW.win));
+		gtk_widget_destroy(GTK_WIDGET(g_global.r.gtk_mgr.ui.add_view.win));
 	}
 }
 
 void				destroy_ui_for_poly(void)
 {
-	gtk_widget_destroy(ADD_VIEW.scale_img);
-	gtk_widget_destroy(ADD_VIEW.scale_spin);
-	gtk_widget_destroy(ADD_VIEW.file_check);
-	gtk_widget_destroy(ADD_VIEW.same);
-	gtk_widget_destroy(ADD_VIEW.from_template);
-	if (ADD_VIEW.cube)
+	gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.scale_img);
+	gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.scale_spin);
+	gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.file_check);
+	gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.same);
+	gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.from_template);
+	if (g_global.r.gtk_mgr.ui.add_view.cube)
 	{
-		gtk_widget_destroy(ADD_VIEW.cube);
-		gtk_widget_destroy(ADD_VIEW.tetra);
-		gtk_widget_destroy(ADD_VIEW.dode);
-		gtk_widget_destroy(ADD_VIEW.pyramid);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.cube);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.tetra);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.dode);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.pyramid);
 	}
 }
 
@@ -64,25 +64,25 @@ void				destroy_interface_for_type(int type)
 {
 	if (type == 1 || type == 4)
 	{
-		gtk_widget_destroy(ADD_VIEW.scale_img);
-		gtk_widget_destroy(ADD_VIEW.scale_spin);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.scale_img);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.scale_spin);
 	}
 	if (type == 2 || type == 3 || type == 4)
 	{
-		gtk_widget_destroy(ADD_VIEW.vector_x);
-		gtk_widget_destroy(ADD_VIEW.vector_y);
-		gtk_widget_destroy(ADD_VIEW.vector_z);
-		gtk_widget_destroy(ADD_VIEW.vector_img);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.vector_x);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.vector_y);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.vector_z);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.vector_img);
 	}
 	if (type == 3 || type == 4)
 	{
 		if (type == 3)
 		{
-			gtk_widget_destroy(ADD_VIEW.angle_img);
-			gtk_widget_destroy(ADD_VIEW.angle_spin);
+			gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.angle_img);
+			gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.angle_spin);
 		}
-		gtk_widget_destroy(ADD_VIEW.infinite);
-		gtk_widget_destroy(ADD_VIEW.inf_img);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.infinite);
+		gtk_widget_destroy(g_global.r.gtk_mgr.ui.add_view.inf_img);
 	}
 	if (type == 6 || type / 10 == 6)
 		destroy_ui_for_poly();

@@ -6,7 +6,7 @@
 /*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/22 20:50:07 by alacrois          #+#    #+#             */
-/*   Updated: 2019/02/05 18:18:41 by alacrois         ###   ########.fr       */
+/*   Updated: 2019/02/06 14:23:26 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void			apply_aa(t_point p, t_rgb **pixdup)
 	while (++i < 8)
 		adj[i] = pixdup[p.y][p.x];
 	apply_aa_core(p, pixdup, adj);
-	draw_px(GTKMGR.buf, p.x, p.y, new_color(pix, adj));
+	draw_px(g_global.r.gtk_mgr.buf, p.x, p.y, new_color(pix, adj));
 	free(adj);
 	adj = NULL;
 }

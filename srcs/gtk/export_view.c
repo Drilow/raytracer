@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:37:49 by adleau            #+#    #+#             */
-/*   Updated: 2019/01/23 09:43:01 by mabessir         ###   ########.fr       */
+/*   Updated: 2019/02/06 14:24:10 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ void				end_export(GtkWidget *dialog)
 	chooser = GTK_FILE_CHOOSER(dialog);
 	filename = gtk_file_chooser_get_filename(chooser);
 	if (!check_png(filename))
-		cairo_surface_write_to_png(PIXMAP, ft_strjoin(filename, ".png"));
+		cairo_surface_write_to_png(g_global.r.gtk_mgr.pixmap,
+		ft_strjoin(filename, ".png"));
 	else
-		cairo_surface_write_to_png(PIXMAP, filename);
+		cairo_surface_write_to_png(g_global.r.gtk_mgr.pixmap, filename);
 	g_free(filename);
 	filename = NULL;
 	gtk_widget_destroy(dialog);
@@ -64,7 +65,7 @@ void				export_view(void)
 
 	action = GTK_FILE_CHOOSER_ACTION_SAVE;
 	dialog = gtk_file_chooser_dialog_new("Export",
-	GTK_WINDOW(GTKMGR.ui.main_view.win),
+	GTK_WINDOW(g_global.r.gtk_mgr.ui.main_view.win),
 	action, "_Cancel", GTK_RESPONSE_CANCEL, "_Export",
 	GTK_RESPONSE_ACCEPT, NULL);
 	if (!(dir = (char*)malloc(sizeof(char) * PATH_MAX + 1)))

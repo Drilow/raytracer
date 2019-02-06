@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:11 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 14:15:56 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 14:12:25 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void						dialog_keyhook(GtkWidget *w, GdkEventKey *event)
 {
 	if (event->keyval == GDK_KEY_Escape)
 	{
-		if (w == ADD_VIEW.win)
+		if (w == g_global.r.gtk_mgr.ui.add_view.win)
 			redraw(false);
 		gtk_widget_destroy(GTK_WIDGET(w));
 		return ;
