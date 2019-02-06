@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_templates.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adleau <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 17:10:17 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 14:12:12 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:10:30 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,14 @@ void				add_height_spin(void)
 {
 	GtkAdjustment	*adj;
 
-	g_global.r.gtk_mgr.ui.add_view.height_img = gtk_image_new_from_file("uiconfig/height.png");
-	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid), g_global.r.gtk_mgr.ui.add_view.height_img, 0, 9, 1, 1);
+	g_global.r.gtk_mgr.ui.add_view.height_img =
+		gtk_image_new_from_file("uiconfig/height.png");
+	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid),
+		g_global.r.gtk_mgr.ui.add_view.height_img, 0, 9, 1, 1);
 	adj = gtk_adjustment_new(1, 0, 1000, .5, 1, 10);
 	g_global.r.gtk_mgr.ui.add_view.height_spin = gtk_spin_button_new(adj, 1, 4);
-	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid), g_global.r.gtk_mgr.ui.add_view.height_spin, 1, 9, 3, 1);
+	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid),
+		g_global.r.gtk_mgr.ui.add_view.height_spin, 1, 9, 3, 1);
 	gtk_widget_show_all(g_global.r.gtk_mgr.ui.add_view.grid);
 }
 
