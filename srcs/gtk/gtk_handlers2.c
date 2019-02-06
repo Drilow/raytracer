@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:52:28 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 14:24:44 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:22:40 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,12 @@ void				deactivate_buttons(GtkWidget *except)
 		gtk_widget_set_state_flags(g_global.r.gtk_mgr.ui.add_view.cone_button,
 		GTK_STATE_FLAG_NORMAL, true);
 	if (&(g_global.r.gtk_mgr.ui.add_view.cylinder_button) != &except)
-		gtk_widget_set_state_flags(g_global.r.gtk_mgr.ui.add_view.cylinder_button,
+		gtk_widget_set_state_flags(
+		g_global.r.gtk_mgr.ui.add_view.cylinder_button,
 		GTK_STATE_FLAG_NORMAL, true);
 	if (&(g_global.r.gtk_mgr.ui.add_view.obj_file_button) != &except)
-		gtk_widget_set_state_flags(g_global.r.gtk_mgr.ui.add_view.obj_file_button,
+		gtk_widget_set_state_flags(
+		g_global.r.gtk_mgr.ui.add_view.obj_file_button,
 		GTK_STATE_FLAG_NORMAL, true);
 }
 
@@ -84,8 +86,8 @@ void				redraw_if_false(void)
 		cairo_surface_destroy(g_global.r.gtk_mgr.pixmap);
 		g_global.r.gtk_mgr.pixmap = NULL;
 	}
-	g_global.r.gtk_mgr.pixmap = cairo_image_surface_create_for_data(g_global.r.gtk_mgr.saved,
-	CAIRO_FORMAT_RGB24,
+	g_global.r.gtk_mgr.pixmap = cairo_image_surface_create_for_data(
+	g_global.r.gtk_mgr.saved, CAIRO_FORMAT_RGB24,
 	WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 }
 
@@ -102,8 +104,8 @@ void				redraw(bool display)
 		draw_image();
 		if (g_global.r.gtk_mgr.pixmap)
 			cairo_surface_destroy(g_global.r.gtk_mgr.pixmap);
-		g_global.r.gtk_mgr.pixmap = cairo_image_surface_create_for_data(g_global.r.gtk_mgr.buf,
-		CAIRO_FORMAT_RGB24,
+		g_global.r.gtk_mgr.pixmap = cairo_image_surface_create_for_data(
+		g_global.r.gtk_mgr.buf, CAIRO_FORMAT_RGB24,
 		WIN_W, WIN_H, cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 	}
 	else
@@ -111,6 +113,6 @@ void				redraw(bool display)
 	if (cairo_surface_status(g_global.r.gtk_mgr.pixmap) != CAIRO_STATUS_SUCCESS)
 		exit_properly(1);
 	cairo_surface_mark_dirty(g_global.r.gtk_mgr.pixmap);
-	gtk_image_set_from_surface(GTK_IMAGE(g_global.r.gtk_mgr.ui.main_view.render_area),
-	g_global.r.gtk_mgr.pixmap);
+	gtk_image_set_from_surface(GTK_IMAGE(
+	g_global.r.gtk_mgr.ui.main_view.render_area), g_global.r.gtk_mgr.pixmap);
 }

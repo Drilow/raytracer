@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 16:40:41 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 14:25:10 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:19:34 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,15 @@ void						on_key_press(GtkWidget *w, GdkEventKey *event)
 		gtk_main_quit();
 		return ;
 	}
-	if (event->keyval == GDK_KEY_Escape && w == g_global.r.gtk_mgr.ui.filter_view.win)
+	if (event->keyval == GDK_KEY_Escape
+	&& w == g_global.r.gtk_mgr.ui.filter_view.win)
 	{
 		redraw(true);
 		gtk_widget_destroy(w);
 		return ;
 	}
-	if (w == g_global.r.gtk_mgr.ui.add_view.win && event->keyval == GDK_KEY_Escape)
+	if (w == g_global.r.gtk_mgr.ui.add_view.win
+	&& event->keyval == GDK_KEY_Escape)
 	{
 		redraw(false);
 		return ;

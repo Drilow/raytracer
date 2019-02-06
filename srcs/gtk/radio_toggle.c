@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 17:12:58 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 14:15:49 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:17:23 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ void				radio_toggle_2(void)
 	}
 }
 
+void				radio_toggle1_5(void)
+{
+	gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(
+	g_global.r.gtk_mgr.ui.add_view.same), false);
+	gtk_toggle_button_set_active(
+	GTK_TOGGLE_BUTTON(g_global.r.gtk_mgr.ui.add_view.from_template), true);
+}
+
 void				radio_toggle(GtkWidget *button)
 {
 	if (g_global.r.gtk_mgr.ui.add_view.height_img)
@@ -55,13 +63,11 @@ void				radio_toggle(GtkWidget *button)
 		else
 			radio_toggle_2();
 	}
-	if (g_global.r.gtk_mgr.ui.add_view.saved_type == 68 && (button == g_global.r.gtk_mgr.ui.add_view.same))
+	if (g_global.r.gtk_mgr.ui.add_view.saved_type == 68
+	&& (button == g_global.r.gtk_mgr.ui.add_view.same))
 		add_height_spin();
-	if (g_global.r.gtk_mgr.ui.add_view.saved_type / 10 != 6 && g_global.r.gtk_mgr.ui.add_view.saved_type != 6
+	if (g_global.r.gtk_mgr.ui.add_view.saved_type / 10 != 6
+	&& g_global.r.gtk_mgr.ui.add_view.saved_type != 6
 	&& button == g_global.r.gtk_mgr.ui.add_view.same)
-	{
-		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(g_global.r.gtk_mgr.ui.add_view.same), false);
-		gtk_toggle_button_set_active(
-		GTK_TOGGLE_BUTTON(g_global.r.gtk_mgr.ui.add_view.from_template), true);
-	}
+		radio_toggle1_5();
 }

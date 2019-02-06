@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:18:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 14:25:36 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:18:50 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void				handle_main_view(void)
 	g_global.r.gtk_mgr.ui.main_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	gtk_window_set_position(GTK_WINDOW(g_global.r.gtk_mgr.ui.main_view.win),
 	GTK_WIN_POS_CENTER);
-	gtk_window_set_title(GTK_WINDOW(g_global.r.gtk_mgr.ui.main_view.win), "raytracer");
+	gtk_window_set_title(GTK_WINDOW(g_global.r.gtk_mgr.ui.main_view.win),
+	"raytracer");
 	g_global.r.gtk_mgr.ui.main_view.grid = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.main_view.win),
 	g_global.r.gtk_mgr.ui.main_view.grid);
@@ -58,8 +59,9 @@ void				handle_main_view(void)
 	g_global.r.gtk_mgr.ui.main_view.buttonbox);
 	g_global.r.gtk_mgr.ui.main_view.list_button = gtk_button_new();
 	g_global.r.gtk_mgr.ui.main_view.add_button = gtk_button_new();
-	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.main_view.add_button, "add object");
-	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.main_view.add_button), "clicked",
-	G_CALLBACK(add_view), NULL);
+	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.main_view.add_button,
+	"add object");
+	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.main_view.add_button),
+	"clicked", G_CALLBACK(add_view), NULL);
 	handle_main_view_2();
 }

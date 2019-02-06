@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:36:15 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 14:26:01 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:11:30 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void				end_outline(void)
 {
 	if (g_global.r.gtk_mgr.pixmap)
 		cairo_surface_destroy(g_global.r.gtk_mgr.pixmap);
-	g_global.r.gtk_mgr.pixmap = cairo_image_surface_create_for_data(g_global.r.gtk_mgr.buf,
-	CAIRO_FORMAT_RGB24, WIN_W, WIN_H,
+	g_global.r.gtk_mgr.pixmap = cairo_image_surface_create_for_data(
+	g_global.r.gtk_mgr.buf, CAIRO_FORMAT_RGB24, WIN_W, WIN_H,
 	cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 	if (cairo_surface_status(g_global.r.gtk_mgr.pixmap) != CAIRO_STATUS_SUCCESS)
 		exit_properly(1);
 	cairo_surface_mark_dirty(g_global.r.gtk_mgr.pixmap);
-	gtk_image_set_from_surface(GTK_IMAGE(g_global.r.gtk_mgr.ui.main_view.render_area),
-	g_global.r.gtk_mgr.pixmap);
+	gtk_image_set_from_surface(GTK_IMAGE(
+	g_global.r.gtk_mgr.ui.main_view.render_area), g_global.r.gtk_mgr.pixmap);
 }
 
 void				outline_obj(t_obj *o)

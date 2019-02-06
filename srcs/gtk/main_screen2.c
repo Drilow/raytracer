@@ -6,7 +6,7 @@
 /*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 15:28:27 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 14:25:48 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:14:50 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ static gboolean		clicked(GtkWidget __attribute__((unused)) *widget,
 		{
 			g_global.r.selected_obj = g_global.r.checker
 			[(int)event->y][(int)event->x];
-			if ((gtk_widget_get_state_flags(g_global.r.gtk_mgr.ui.main_view.select_button)
+			if ((gtk_widget_get_state_flags(
+			g_global.r.gtk_mgr.ui.main_view.select_button)
 			& GTK_STATE_FLAG_CHECKED))
 			{
 				outline_obj(g_global.r.selected_obj);
-				edit_win(g_global.r.selected_obj, g_global.r.gtk_mgr.ui.main_view.win);
+				edit_win(g_global.r.selected_obj,
+				g_global.r.gtk_mgr.ui.main_view.win);
 			}
 		}
 	}
@@ -36,10 +38,11 @@ static gboolean		clicked(GtkWidget __attribute__((unused)) *widget,
 
 void				select_cb(void)
 {
-	if (!(gtk_widget_get_state_flags(g_global.r.gtk_mgr.ui.main_view.select_button)
-	& GTK_STATE_FLAG_CHECKED))
+	if (!(gtk_widget_get_state_flags(
+	g_global.r.gtk_mgr.ui.main_view.select_button) & GTK_STATE_FLAG_CHECKED))
 	{
-		gtk_widget_set_state_flags(g_global.r.gtk_mgr.ui.main_view.select_button,
+		gtk_widget_set_state_flags(
+		g_global.r.gtk_mgr.ui.main_view.select_button,
 		GTK_STATE_FLAG_CHECKED, false);
 		g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.main_view.event_box),
 		"button_press_event",
@@ -47,8 +50,8 @@ void				select_cb(void)
 		g_global.r.gtk_mgr.ui.main_view.render_area);
 	}
 	else
-		gtk_widget_unset_state_flags(g_global.r.gtk_mgr.ui.main_view.select_button,
-		GTK_STATE_FLAG_CHECKED);
+		gtk_widget_unset_state_flags(
+		g_global.r.gtk_mgr.ui.main_view.select_button, GTK_STATE_FLAG_CHECKED);
 }
 
 void				handle_main_view_3(void)
@@ -75,10 +78,12 @@ void				handle_main_view_2(void)
 	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.main_view.buttonbox),
 	g_global.r.gtk_mgr.ui.main_view.add_button);
 	g_global.r.gtk_mgr.ui.main_view.filters_button = gtk_button_new();
-	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.main_view.filters_button, "filters");
-	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.main_view.filters_button), "clicked",
-	G_CALLBACK(filter_win), NULL);
-	gtk_button_set_image(GTK_BUTTON(g_global.r.gtk_mgr.ui.main_view.filters_button),
+	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.main_view.filters_button,
+	"filters");
+	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.main_view.filters_button),
+	"clicked", G_CALLBACK(filter_win), NULL);
+	gtk_button_set_image(GTK_BUTTON(
+	g_global.r.gtk_mgr.ui.main_view.filters_button),
 	g_global.r.gtk_mgr.ui.main_view.filters_img);
 	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.main_view.buttonbox),
 	g_global.r.gtk_mgr.ui.main_view.filters_button);
@@ -87,12 +92,14 @@ void				handle_main_view_2(void)
 	"select object");
 	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.main_view.select_button),
 	"clicked", G_CALLBACK(select_cb), NULL);
-	gtk_button_set_image(GTK_BUTTON(g_global.r.gtk_mgr.ui.main_view.select_button),
+	gtk_button_set_image(GTK_BUTTON(
+	g_global.r.gtk_mgr.ui.main_view.select_button),
 	g_global.r.gtk_mgr.ui.main_view.select_img);
 	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.main_view.buttonbox),
 	g_global.r.gtk_mgr.ui.main_view.select_button);
 	g_global.r.gtk_mgr.ui.main_view.export_button = gtk_button_new();
-	gtk_button_set_image(GTK_BUTTON(g_global.r.gtk_mgr.ui.main_view.export_button),
+	gtk_button_set_image(
+	GTK_BUTTON(g_global.r.gtk_mgr.ui.main_view.export_button),
 	g_global.r.gtk_mgr.ui.main_view.export_img);
 	handle_main_view_3();
 }
