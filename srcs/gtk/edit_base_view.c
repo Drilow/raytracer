@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_base_view.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:17:37 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:43:28 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 16:51:27 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void				end_cone_view(t_cone *c)
 	"uiconfig/angle.png");
 	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid),
 	g_global.r.gtk_mgr.ui.add_view.angle_img, 0, 6, 1, 1);
-	adj_angle = gtk_adjustment_new(c->angle * 360, 0, 360, 1, 1, 10);
+	adj_angle = gtk_adjustment_new(c->angle * 360 / (PI * 2) , 0, 360, 1, 1, 10);
 	g_global.r.gtk_mgr.ui.add_view.angle_spin = gtk_spin_button_new(
 	adj_angle, 1, 4);
 	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid),

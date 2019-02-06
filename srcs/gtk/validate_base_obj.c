@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_base_obj.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 15:04:16 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 14:41:29 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 16:52:40 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void				validate_cone(t_cone *c)
 	c->vector.z = gtk_spin_button_get_value(GTK_SPIN_BUTTON(
 	g_global.r.gtk_mgr.ui.add_view.vector_z));
 	c->angle = gtk_spin_button_get_value(GTK_SPIN_BUTTON(
-	g_global.r.gtk_mgr.ui.add_view.angle_spin)) / 360;
+	g_global.r.gtk_mgr.ui.add_view.angle_spin)) / 360 * (PI * 2);
 	c->infinite = gtk_switch_get_active(GTK_SWITCH(
 	g_global.r.gtk_mgr.ui.add_view.infinite));
 }
