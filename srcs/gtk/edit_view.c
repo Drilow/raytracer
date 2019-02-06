@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:47:53 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 17:13:46 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ void				edit_win(t_obj *o, GtkWidget *parent)
 {
 	GtkWidget		*content_area;
 
+	if (g_global.r.ui.progress_data.window)
+		return ;
 	init_add_view();
 	edit_win_img_init(o);
 	g_global.r.gtk_mgr.ui.add_view.win =
