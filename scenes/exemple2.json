@@ -26,6 +26,16 @@
 				"reflex":0
 		},
 		{
+			"type":"cone",
+			"pos":[1,-1,8],
+			"vector":[2,4,-3],
+			"angle":60,
+			"INF":false,
+			"color":[200,200,100,20],
+			"rotate":[0,0,0],
+			"reflex":0
+		},
+		{
 				"type":"sphere",
 				"pos":[-4,-5,15],
 				"radius":1,
