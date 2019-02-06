@@ -1,0 +1,76 @@
+{
+	"camera":{
+				"pos":[50,-50,-500],
+				"angle":[0,0,0]
+			},
+	"light":{
+				"source":[100,-100,0],
+				"color":[75,75,75,0]
+			},
+	"light":{
+				"source":[-100,100,0],
+				"color":[75,75,75,0]
+			},
+	"light":{
+				"source":[-20,-33,-350],
+				"color":[75,75,75,0]
+			},
+	"light":{
+				"source":[-100,-50,0],
+				"color":[75,75,75,0]
+			},
+	"objects":[
+				{
+					"type":"sphere",
+					"pos":[-150,0,150],
+					"radius":20,
+					"color":[255,255, 255,0],
+					"reflex":0
+				},
+				{
+					"type":"cone",
+					"pos":[-30, 5,10],
+					"vector":[2,2,-3],
+					"angle":5,
+					"INF":true,
+					"color":[25,150,150,0],
+					"rotate":[0,0,0],
+					"reflex":0
+				},
+				{
+					"type":"polyobject",
+					"pos":[-20,-33,-300],
+					"size":5,
+					"adresse":"teapot.obj",
+					"color":[125,80,80,0],
+					"rotate":[0,0,0],
+					"reflex":0
+				},
+				{
+					"type":"cube",
+					"pos":[-130, 120,60],
+					"size":30,
+					"color":[120,255,255,0],
+					"rotate":[0,0,0],
+					"reflex":0
+				},
+				{
+					"type":"tetrahedron",
+					"pos":[-170, 80,60],
+					"size":30,
+					"color":[120,255,255,0],
+					"rotate":[0,0,0],
+					"reflex":0
+				},
+				{
+					"type":"cylinder",
+					"pos":[-180,5,100],
+					"vector":[-8,8,10],
+					"radius":10,
+					"INF":true,
+					"color":[150,50,100,0],
+					"rotate":[0,0,0],
+					"reflex":0
+				}
+	]
+}

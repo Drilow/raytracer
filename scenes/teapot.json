@@ -1,0 +1,33 @@
+{
+	"camera":{
+				"pos":[0,-0,0],
+				"angle":[0,0,0]
+			},
+	"light":{
+				"source":[10,15,-10],
+				"color":[75,75,75,0]
+			},
+	"light":{
+				"source":[-100,100,0],
+				"color":[75,75,75,0]
+			},
+	"light":{
+				"source":[-20,-33,-350],
+				"color":[75,75,75,0]
+			},
+	"light":{
+				"source":[-100,-50,0],
+				"color":[75,75,75,0]
+			},
+	"objects":[
+				{
+					"type":"polyobject",
+					"pos":[1,0,10],
+					"size":1,
+					"adresse":"teapot.obj",
+					"color":[125,80,80,0],
+					"rotate":[0,0,0],
+					"reflex":0
+				}
+	]
+}
