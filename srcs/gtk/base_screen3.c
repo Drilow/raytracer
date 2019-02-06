@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 17:01:52 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 15:31:16 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 15:18:20 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,12 @@ void			free_objects(t_obj *start)
 	}
 	tmp = NULL;
 	swap = NULL;
+}
+
+void			handle_drawing_end(void)
+{
+	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.main_view.grid),
+	g_global.r.gtk_mgr.ui.main_view.event_box, 0, 1, 1, 1);
+	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.main_view.event_box),
+	g_global.r.gtk_mgr.ui.main_view.render_area);
 }

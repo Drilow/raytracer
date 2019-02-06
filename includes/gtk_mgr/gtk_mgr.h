@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/26 21:18:21 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:01:03 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:36:37 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,4 +240,8 @@ void						for_file(GtkWidget *button);
 bool						go_throu_lights(t_light *curr);
 void						init_scene_view2(GtkCellRenderer *render);
 void						for_template(void);
+void						handle_drawing_end(void);
+void						edit_win_4(void);
+void						edit_win_img_init(void);
+
 #endif

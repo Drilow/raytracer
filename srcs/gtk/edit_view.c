@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 14:13:32 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:36:08 by cpays            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ extern t_global		g_global;
 
 void				add_addendum(t_obj *o)
 {
-	gtk_window_set_title(GTK_WINDOW(g_global.r.gtk_mgr.ui.add_view.win), "Add Object");
+	gtk_window_set_title(GTK_WINDOW(g_global.r.gtk_mgr.ui.add_view.win),
+		"Add Object");
 	o->type = 1;
 	o->next = g_global.r.objects;
 	g_global.r.objects = o;
@@ -27,10 +28,12 @@ void				add_addendum(t_obj *o)
 
 void				actual_edit_view(t_obj *o)
 {
-	if (!(g_global.r.gtk_mgr.ui.add_view.translate_x_spin) && !(g_global.r.gtk_mgr.ui.add_view.translate_y_spin)
+	if (!(g_global.r.gtk_mgr.ui.add_view.translate_x_spin) &&
+		!(g_global.r.gtk_mgr.ui.add_view.translate_y_spin)
 	&& !(g_global.r.gtk_mgr.ui.add_view.translate_z_spin))
 	{
-		gtk_window_set_title(GTK_WINDOW(g_global.r.gtk_mgr.ui.add_view.win), "Edit Object");
+		gtk_window_set_title(GTK_WINDOW(g_global.r.gtk_mgr.ui.add_view.win),
+			"Edit Object");
 		handle_base_elems_edit(o);
 	}
 	if (o->type == -5)
@@ -53,52 +56,59 @@ void				actual_edit_view(t_obj *o)
 
 void				edit_win_3(t_obj *o)
 {
-	gtk_button_set_image(GTK_BUTTON(g_global.r.gtk_mgr.ui.add_view.cylinder_button),
+	edit_win_4();
+	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.add_view.cylinder_button,
+		"Cylinder");
+	gtk_button_set_image(GTK_BUTTON(
+		g_global.r.gtk_mgr.ui.add_view.cylinder_button),
 	g_global.r.gtk_mgr.ui.add_view.cylinder_img);
 	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.add_view.buttonbox),
-	g_global.r.gtk_mgr.ui.add_view.cylinder_button);
+		g_global.r.gtk_mgr.ui.add_view.cylinder_button);
 	g_global.r.gtk_mgr.ui.add_view.obj_file_button = gtk_button_new();
-	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.add_view.obj_file_button), "clicked",
-	G_CALLBACK(switch_type), NULL);
-	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.add_view.obj_file_button, "Obj File");
-	gtk_button_set_image(GTK_BUTTON(g_global.r.gtk_mgr.ui.add_view.obj_file_button),
-	g_global.r.gtk_mgr.ui.add_view.obj_file_img);
+	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.add_view.obj_file_button),
+		"clicked", G_CALLBACK(switch_type), NULL);
+	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.add_view.obj_file_button,
+		"Obj File");
+	gtk_button_set_image(GTK_BUTTON(
+		g_global.r.gtk_mgr.ui.add_view.obj_file_button),
+		g_global.r.gtk_mgr.ui.add_view.obj_file_img);
 	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.add_view.buttonbox),
-	g_global.r.gtk_mgr.ui.add_view.obj_file_button);
+		g_global.r.gtk_mgr.ui.add_view.obj_file_button);
 	actual_edit_view(o);
 	gtk_widget_grab_focus(gtk_dialog_get_widget_for_response(
 	GTK_DIALOG(g_global.r.gtk_mgr.ui.add_view.win), GTK_RESPONSE_ACCEPT));
 	gtk_widget_show_all(g_global.r.gtk_mgr.ui.add_view.win);
-	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.add_view.win), "delete-event",
-	G_CALLBACK(handle_x_button), NULL);
+	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.add_view.win),
+		"delete-event", G_CALLBACK(handle_x_button), NULL);
 	handle_edit_validation(o);
 }
 
 void				edit_win_2(t_obj *o)
 {
-	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.add_view.sphere_button), "clicked",
-	G_CALLBACK(switch_type), NULL);
-	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.add_view.sphere_button, "Sphere");
-	gtk_button_set_image(GTK_BUTTON(g_global.r.gtk_mgr.ui.add_view.sphere_button),
-	g_global.r.gtk_mgr.ui.add_view.sphere_img);
+	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.add_view.sphere_button),
+		"clicked", G_CALLBACK(switch_type), NULL);
+	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.add_view.sphere_button,
+		"Sphere");
+	gtk_button_set_image(GTK_BUTTON(
+		g_global.r.gtk_mgr.ui.add_view.sphere_button),
+		g_global.r.gtk_mgr.ui.add_view.sphere_img);
 	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.add_view.buttonbox),
 	g_global.r.gtk_mgr.ui.add_view.sphere_button);
 	g_global.r.gtk_mgr.ui.add_view.plane_button = gtk_button_new();
-	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.add_view.plane_button), "clicked",
-	G_CALLBACK(switch_type), NULL);
-	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.add_view.plane_button, "Plane");
-	gtk_button_set_image(GTK_BUTTON(g_global.r.gtk_mgr.ui.add_view.plane_button), g_global.r.gtk_mgr.ui.add_view.plane_img);
-	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.add_view.buttonbox), g_global.r.gtk_mgr.ui.add_view.plane_button);
+	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.add_view.plane_button),
+		"clicked", G_CALLBACK(switch_type), NULL);
+	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.add_view.plane_button,
+		"Plane");
+	gtk_button_set_image(GTK_BUTTON(
+		g_global.r.gtk_mgr.ui.add_view.plane_button),
+		g_global.r.gtk_mgr.ui.add_view.plane_img);
+	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.add_view.buttonbox),
+		g_global.r.gtk_mgr.ui.add_view.plane_button);
 	g_global.r.gtk_mgr.ui.add_view.cone_button = gtk_button_new();
 	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.add_view.cone_button),
 	"clicked", G_CALLBACK(switch_type), NULL);
-	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.add_view.cone_button, "Cone");
-	gtk_button_set_image(GTK_BUTTON(g_global.r.gtk_mgr.ui.add_view.cone_button), g_global.r.gtk_mgr.ui.add_view.cone_img);
-	gtk_container_add(GTK_CONTAINER(g_global.r.gtk_mgr.ui.add_view.buttonbox), g_global.r.gtk_mgr.ui.add_view.cone_button);
-	g_global.r.gtk_mgr.ui.add_view.cylinder_button = gtk_button_new();
-	g_signal_connect(G_OBJECT(g_global.r.gtk_mgr.ui.add_view.cylinder_button),
-	"clicked", G_CALLBACK(switch_type), NULL);
-	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.add_view.cylinder_button, "Cylinder");
+	gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.add_view.cone_button,
+		"Cone");
 	edit_win_3(o);
 }
 
@@ -107,25 +117,25 @@ void				edit_win(t_obj *o, GtkWidget *parent)
 	GtkWidget		*content_area;
 
 	init_add_view();
-	g_global.r.gtk_mgr.ui.add_view.saved_type = o->type;
-	g_global.r.gtk_mgr.ui.add_view.sphere_img = gtk_image_new_from_file("uiconfig/sphere.png");
-	g_global.r.gtk_mgr.ui.add_view.plane_img = gtk_image_new_from_file("uiconfig/plane.png");
-	g_global.r.gtk_mgr.ui.add_view.cone_img = gtk_image_new_from_file("uiconfig/cone.png");
-	g_global.r.gtk_mgr.ui.add_view.cylinder_img = gtk_image_new_from_file("uiconfig/cylinder.png");
-	g_global.r.gtk_mgr.ui.add_view.obj_file_img = gtk_image_new_from_file("uiconfig/poly_obj.png");
-	g_global.r.gtk_mgr.ui.add_view.win = gtk_dialog_new_with_buttons("Edit Object",
-	GTK_WINDOW(parent),
+	edit_win_img_init();
+	g_global.r.gtk_mgr.ui.add_view.win =
+	gtk_dialog_new_with_buttons("Edit Object", GTK_WINDOW(parent),
 	GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 	"_OK", GTK_RESPONSE_ACCEPT, "_Cancel", GTK_RESPONSE_REJECT, NULL);
 	gtk_window_set_transient_for(GTK_WINDOW(g_global.r.gtk_mgr.ui.add_view.win),
 	GTK_WINDOW(parent));
-	gtk_window_set_position(GTK_WINDOW(g_global.r.gtk_mgr.ui.add_view.win), GTK_WIN_POS_MOUSE);
+	gtk_window_set_position(GTK_WINDOW(g_global.r.gtk_mgr.ui.add_view.win),
+		GTK_WIN_POS_MOUSE);
 	g_global.r.gtk_mgr.ui.add_view.sw.o = o;
-	content_area = gtk_dialog_get_content_area(GTK_DIALOG(g_global.r.gtk_mgr.ui.add_view.win));
+	content_area = gtk_dialog_get_content_area(GTK_DIALOG(
+		g_global.r.gtk_mgr.ui.add_view.win));
 	g_global.r.gtk_mgr.ui.add_view.grid = gtk_grid_new();
-	gtk_container_add(GTK_CONTAINER(content_area), g_global.r.gtk_mgr.ui.add_view.grid);
-	g_global.r.gtk_mgr.ui.add_view.buttonbox = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
-	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid), g_global.r.gtk_mgr.ui.add_view.buttonbox, 0, 0, 4, 1);
+	gtk_container_add(GTK_CONTAINER(content_area),
+		g_global.r.gtk_mgr.ui.add_view.grid);
+	g_global.r.gtk_mgr.ui.add_view.buttonbox =
+	gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
+	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid),
+		g_global.r.gtk_mgr.ui.add_view.buttonbox, 0, 0, 4, 1);
 	g_global.r.gtk_mgr.ui.add_view.sphere_button = gtk_button_new();
 	edit_win_2(o);
 }
