@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   geometry.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 16:51:22 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 16:09:57 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 18:02:48 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GEOMETRY_H
 # include <math.h>
 # define PI M_PI
-# define FOV (PI / 3)
+# define FOV  3
 
 typedef struct		s_point
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   base_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:15:01 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:17:02 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 18:24:54 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void			handle_drawing(void)
 	if (!g_global.r.gtk_mgr.buf)
 	{
 		g_global.r.gtk_mgr.buf = NULL;
-		if (!(g_global.r.gtk_mgr.buf =
-			(unsigned char*)malloc(sizeof(unsigned char) * (WIN_H *
-			cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
+		if (!(g_global.r.gtk_mgr.buf = (unsigned char*)
+		malloc(sizeof(unsigned char) * (WIN_H
+			* cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W)))))
 			exit_properly(1);
 	}
 	draw_image();
@@ -31,15 +31,15 @@ void			handle_drawing(void)
 		cairo_surface_destroy(g_global.r.gtk_mgr.pixmap);
 		g_global.r.gtk_mgr.pixmap = NULL;
 	}
-	g_global.r.gtk_mgr.pixmap =
-		cairo_image_surface_create_for_data(g_global.r.gtk_mgr.buf,
+	g_global.r.gtk_mgr.pixmap = cairo_image_surface_create_for_data(
+		g_global.r.gtk_mgr.buf,
 		CAIRO_FORMAT_RGB24, WIN_W, WIN_H,
 		cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W));
 	if (cairo_surface_status(g_global.r.gtk_mgr.pixmap) != CAIRO_STATUS_SUCCESS)
 		exit_properly(1);
 	cairo_surface_mark_dirty(g_global.r.gtk_mgr.pixmap);
-	g_global.r.gtk_mgr.ui.main_view.render_area =
-		gtk_image_new_from_surface(g_global.r.gtk_mgr.pixmap);
+	g_global.r.gtk_mgr.ui.main_view.render_area = gtk_image_new_from_surface(
+		g_global.r.gtk_mgr.pixmap);
 	g_global.r.gtk_mgr.ui.main_view.event_box = gtk_event_box_new();
 	handle_drawing_end();
 }

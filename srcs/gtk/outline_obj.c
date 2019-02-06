@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   outline_obj.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 17:36:15 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:11:30 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 18:12:02 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void				outline_obj(t_obj *o)
 	int				x;
 	int				y;
 
+	if (g_global.r.gtk_mgr.ui.progress_data.window)
+		return ;
 	y = -1;
 	if ((g_global.r.gtk_mgr.saved))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_lights.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/02 17:33:56 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:20:33 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 18:27:54 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,18 @@ void				attach_light_buttons(t_light *l)
 	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.light_view.grid),
 	g_global.r.gtk_mgr.ui.light_view.translate_img, 0, 0, 1, 1);
 	adj = gtk_adjustment_new(l->source.x, -1000, 1000, .5, 1, 10);
-	g_global.r.gtk_mgr.ui.light_view.translate_x_spin =
-		gtk_spin_button_new(adj, 1, 4);
+	g_global.r.gtk_mgr.ui.light_view.translate_x_spin = gtk_spin_button_new(
+		adj, 1, 4);
 	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.light_view.grid),
 	g_global.r.gtk_mgr.ui.light_view.translate_x_spin, 1, 0, 1, 1);
 	adj = gtk_adjustment_new(l->source.y, -1000, 1000, .5, 1, 10);
-	g_global.r.gtk_mgr.ui.light_view.translate_y_spin =
-		gtk_spin_button_new(adj, 1, 4);
+	g_global.r.gtk_mgr.ui.light_view.translate_y_spin = gtk_spin_button_new(
+		adj, 1, 4);
 	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.light_view.grid),
 	g_global.r.gtk_mgr.ui.light_view.translate_y_spin, 2, 0, 1, 1);
 	adj = gtk_adjustment_new(l->source.z, -1000, 1000, .5, 1, 10);
-	g_global.r.gtk_mgr.ui.light_view.translate_z_spin =
-		gtk_spin_button_new(adj, 1, 4);
+	g_global.r.gtk_mgr.ui.light_view.translate_z_spin = gtk_spin_button_new(
+		adj, 1, 4);
 	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.light_view.grid),
 	g_global.r.gtk_mgr.ui.light_view.translate_z_spin, 3, 0, 1, 1);
 }
@@ -106,10 +106,10 @@ void				edit_light(t_light *l, GtkWidget *parent)
 	GtkWidget		*content_area;
 
 	init_light_view();
-	g_global.r.gtk_mgr.ui.light_view.translate_img =
-		gtk_image_new_from_file("uiconfig/move.png");
-	g_global.r.gtk_mgr.ui.light_view.win =
-		gtk_dialog_new_with_buttons("Edit Light", GTK_WINDOW(parent),
+	g_global.r.gtk_mgr.ui.light_view.translate_img = gtk_image_new_from_file(
+		"uiconfig/move.png");
+	g_global.r.gtk_mgr.ui.light_view.win = gtk_dialog_new_with_buttons(
+		"Edit Light", GTK_WINDOW(parent),
 		GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 		"_OK", GTK_RESPONSE_ACCEPT, "_Cancel", GTK_RESPONSE_REJECT, NULL);
 	gtk_window_set_transient_for(GTK_WINDOW(

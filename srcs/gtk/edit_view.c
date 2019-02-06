@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_view.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/18 17:55:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 17:13:46 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 18:33:05 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void				add_addendum(t_obj *o)
 
 void				actual_edit_view(t_obj *o)
 {
-	if (!(g_global.r.gtk_mgr.ui.add_view.translate_x_spin) &&
-		!(g_global.r.gtk_mgr.ui.add_view.translate_y_spin)
+	if (!(g_global.r.gtk_mgr.ui.add_view.translate_x_spin)
+	&& !(g_global.r.gtk_mgr.ui.add_view.translate_y_spin)
 	&& !(g_global.r.gtk_mgr.ui.add_view.translate_z_spin))
 	{
 		gtk_window_set_title(GTK_WINDOW(g_global.r.gtk_mgr.ui.add_view.win),
@@ -116,12 +116,12 @@ void				edit_win(t_obj *o, GtkWidget *parent)
 {
 	GtkWidget		*content_area;
 
-	if (g_global.r.ui.progress_data.window)
+	if (g_global.r.gtk_mgr.ui.progress_data.window)
 		return ;
 	init_add_view();
 	edit_win_img_init(o);
-	g_global.r.gtk_mgr.ui.add_view.win =
-	gtk_dialog_new_with_buttons("Edit Object", GTK_WINDOW(parent),
+	g_global.r.gtk_mgr.ui.add_view.win = gtk_dialog_new_with_buttons(
+		"Edit Object", GTK_WINDOW(parent),
 	GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 	"_OK", GTK_RESPONSE_ACCEPT, "_Cancel", GTK_RESPONSE_REJECT, NULL);
 	gtk_window_set_transient_for(GTK_WINDOW(g_global.r.gtk_mgr.ui.add_view.win),
@@ -134,8 +134,8 @@ void				edit_win(t_obj *o, GtkWidget *parent)
 	g_global.r.gtk_mgr.ui.add_view.grid = gtk_grid_new();
 	gtk_container_add(GTK_CONTAINER(content_area),
 		g_global.r.gtk_mgr.ui.add_view.grid);
-	g_global.r.gtk_mgr.ui.add_view.buttonbox =
-	gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
+	g_global.r.gtk_mgr.ui.add_view.buttonbox = gtk_button_box_new(
+		GTK_ORIENTATION_HORIZONTAL);
 	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid),
 		g_global.r.gtk_mgr.ui.add_view.buttonbox, 0, 0, 4, 1);
 	g_global.r.gtk_mgr.ui.add_view.sphere_button = gtk_button_new();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_screen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/22 15:18:24 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:59:27 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 18:19:43 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void				handle_main_view(void)
 {
 	handle_main_view_img();
 	g_global.r.gtk_mgr.ui.main_view.win = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_resizable(GTK_WINDOW(
+	g_global.r.gtk_mgr.ui.main_view.win), FALSE);
 	gtk_window_set_position(GTK_WINDOW(g_global.r.gtk_mgr.ui.main_view.win),
 	GTK_WIN_POS_CENTER);
 	gtk_window_set_title(GTK_WINDOW(g_global.r.gtk_mgr.ui.main_view.win),

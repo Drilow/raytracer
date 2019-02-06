@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 09:06:03 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 14:04:11 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 18:02:56 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void				init_rt(void)
 	g_global.r.cam_position.x = 0;
 	g_global.r.cam_position.y = 0;
 	g_global.r.cam_position.z = 0;
-	g_global.r.screen_distance = (WIN_W / 2) / tan(FOV / 2) * SDF;
+	g_global.r.screen_distance = (WIN_W / 2) / tan((PI / FOV) / 2) * SDF;
 	p.y = -1;
 	while (++p.y < WIN_H)
 	{

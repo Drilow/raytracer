@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/28 13:03:48 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 16:10:04 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 18:02:16 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdbool.h>
 # define BRIGHTNESS 0.065
 # define SHINING_FACTOR 9
-# define LIGHT_LOSS false
+# define LIGHT_LOSS 0
 # define LIGHT_DISTANCE_FACTOR 2000
 
 typedef struct			s_collision

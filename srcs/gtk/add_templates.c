@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_templates.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 17:10:17 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:10:30 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 18:21:25 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void				add_height_spin(void)
 {
 	GtkAdjustment	*adj;
 
-	g_global.r.gtk_mgr.ui.add_view.height_img =
-		gtk_image_new_from_file("uiconfig/height.png");
+	g_global.r.gtk_mgr.ui.add_view.height_img = gtk_image_new_from_file(
+		"uiconfig/height.png");
 	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid),
 		g_global.r.gtk_mgr.ui.add_view.height_img, 0, 9, 1, 1);
 	adj = gtk_adjustment_new(1, 0, 1000, .5, 1, 10);

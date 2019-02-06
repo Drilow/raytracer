@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   radio_button.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/04 18:06:53 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:00:38 by adleau           ###   ########.fr       */
+/*   Updated: 2019/02/06 18:35:28 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void					for_file(GtkWidget *button)
 {
 	if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(button)))
 	{
-		g_global.r.gtk_mgr.ui.add_view.file_opener =
-		gtk_button_new_from_icon_name("document-open", GTK_ICON_SIZE_BUTTON);
+		g_global.r.gtk_mgr.ui.add_view \
+		.file_opener = gtk_button_new_from_icon_name(
+			"document-open", GTK_ICON_SIZE_BUTTON);
 		gtk_widget_set_tooltip_text(g_global.r.gtk_mgr.ui.add_view.file_opener,
 		"Open obj File");
 		gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid),
@@ -70,8 +71,8 @@ void					handle_radio_buttons(void)
 	NULL, "Current object");
 	gtk_grid_attach(GTK_GRID(g_global.r.gtk_mgr.ui.add_view.grid),
 	g_global.r.gtk_mgr.ui.add_view.same, 0, 5, 2, 1);
-	g_global.r.gtk_mgr.ui.add_view.from_template =
-	gtk_radio_button_new_with_label(NULL, "From Template");
+	g_global.r.gtk_mgr.ui.add_view.\
+	from_template = gtk_radio_button_new_with_label(NULL, "From Template");
 	gtk_radio_button_join_group(GTK_RADIO_BUTTON(
 	g_global.r.gtk_mgr.ui.add_view.from_template),
 	GTK_RADIO_BUTTON(g_global.r.gtk_mgr.ui.add_view.same));

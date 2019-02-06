@@ -6,7 +6,7 @@
 #    By: cpays <cpays@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2019/02/06 15:56:27 by cpays            ###   ########.fr        #
+#    Updated: 2019/02/06 16:28:26 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra $(shell pkg-config --cflags gtk+-3.0)
 
-LDFLAGS = 	-framework IOKit -framework CoreVideo $(shell pkg-config --libs gtk+-3.0)
+LDFLAGS = $(shell pkg-config --libs gtk+-3.0)
 
 
 SRCPATH = srcs/

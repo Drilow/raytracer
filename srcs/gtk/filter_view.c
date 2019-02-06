@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filter_view.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 07:36:43 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:56:33 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 18:14:16 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ void				filter_win(void)
 {
 	GtkWidget		*content_area;
 
+	if (g_global.r.gtk_mgr.ui.progress_data.window)
+		return ;
 	if (!g_global.r.gtk_mgr.saved)
 		if (!(g_global.r.gtk_mgr.saved = ft_ustrdup(g_global.r.gtk_mgr.buf,
 		WIN_H * cairo_format_stride_for_width(CAIRO_FORMAT_RGB24, WIN_W))))

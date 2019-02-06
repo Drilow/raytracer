@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_view3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 17:02:31 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/06 15:48:11 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 18:30:58 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ extern t_global		g_global;
 void				edit_win_img_init(t_obj *o)
 {
 	g_global.r.gtk_mgr.ui.add_view.saved_type = o->type;
-	g_global.r.gtk_mgr.ui.add_view.sphere_img =
-	gtk_image_new_from_file("uiconfig/sphere.png");
-	g_global.r.gtk_mgr.ui.add_view.plane_img =
-	gtk_image_new_from_file("uiconfig/plane.png");
-	g_global.r.gtk_mgr.ui.add_view.cone_img =
-	gtk_image_new_from_file("uiconfig/cone.png");
-	g_global.r.gtk_mgr.ui.add_view.cylinder_img =
-	gtk_image_new_from_file("uiconfig/cylinder.png");
-	g_global.r.gtk_mgr.ui.add_view.obj_file_img =
-	gtk_image_new_from_file("uiconfig/poly_obj.png");
+	g_global.r.gtk_mgr.ui.add_view.sphere_img = gtk_image_new_from_file(
+		"uiconfig/sphere.png");
+	g_global.r.gtk_mgr.ui.add_view.plane_img = gtk_image_new_from_file(
+		"uiconfig/plane.png");
+	g_global.r.gtk_mgr.ui.add_view.cone_img = gtk_image_new_from_file(
+		"uiconfig/cone.png");
+	g_global.r.gtk_mgr.ui.add_view.cylinder_img = gtk_image_new_from_file(
+		"uiconfig/cylinder.png");
+	g_global.r.gtk_mgr.ui.add_view.obj_file_img = gtk_image_new_from_file(
+		"uiconfig/poly_obj.png");
 }
 
 void				edit_win_4(void)

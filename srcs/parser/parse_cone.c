@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cone.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 17:40:23 by mabessir          #+#    #+#             */
-/*   Updated: 2019/02/05 15:47:56 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 17:52:40 by mabessir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ static	bool	cone_angle(t_obj *o, t_json_value *val)
 	if (val->type == 5)
 	{
 		a = (int *)val->ptr;
+		if (*a >= 180)
+			return (false);
+		*a /= 2;
 		c->angle = ((double)*a / 360) * (2 * PI);
 	}
 	else
