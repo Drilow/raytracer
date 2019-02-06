@@ -6,7 +6,7 @@
 /*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/05 12:54:02 by adleau            #+#    #+#             */
-/*   Updated: 2019/02/05 16:08:29 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 13:29:57 by adleau           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static void				checked_row(GtkCellRendererToggle *cell, gchar *p_str)
 	if (PROGRESS_DATA.window)
 		return ;
 	obj = NULL;
+	model = NULL;
 	model = gtk_tree_view_get_model(GTK_TREE_VIEW(SCENE_VIEW.tree));
 	path = gtk_tree_path_new_from_string(p_str);
 	if (model == NULL || !cell)
@@ -59,6 +60,8 @@ static void				checked_row(GtkCellRendererToggle *cell, gchar *p_str)
 	checked_row2(obj, enabled);
 	redraw(true);
 	gtk_tree_path_free(path);
+	gtk_widget_destroy(SCENE_VIEW.win);
+	scene_win();
 }
 
 void					select_handler(GtkTreeView *tree, GtkTreePath *path)
@@ -98,6 +101,7 @@ void					scene_win(void)
 		NULL);
 	column = gtk_tree_view_column_new_with_attributes("Visible",
 	render, "active", CHECKED_COLUMN, NULL);
+	gtk_tree_view_set_activate_on_single_click(GTK_TREE_VIEW(SCENE_VIEW.tree), FALSE);
 	gtk_tree_view_column_add_attribute(column, render, "activatable",
 	CHECKED_ACTIVE);
 	gtk_tree_view_append_column(GTK_TREE_VIEW(SCENE_VIEW.tree), column);

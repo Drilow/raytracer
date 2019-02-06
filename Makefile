@@ -6,7 +6,7 @@
 #    By: mabessir <mabessir@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/15 16:49:08 by adleau            #+#    #+#              #
-#    Updated: 2019/02/05 18:08:06 by mabessir         ###   ########.fr        #
+#    Updated: 2019/02/06 13:09:54 by adleau           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME = rt
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra $(shell pkg-config --cflags gtk+-3.0) 
+CFLAGS = -Wall -Werror -Wextra $(shell pkg-config --cflags gtk+-3.0)
 
 LDFLAGS = 	-framework IOKit -framework CoreVideo $(shell pkg-config --libs gtk+-3.0)
 
