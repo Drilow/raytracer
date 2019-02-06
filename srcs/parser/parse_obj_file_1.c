@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_obj_file_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/20 17:55:59 by alacrois          #+#    #+#             */
-/*   Updated: 2019/02/05 15:48:50 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 18:37:50 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static t_poly_obj	*end_parsing(t_poly_obj *obj, int i, t_vertex *v_list)
 		free_vlist(&v_list);
 	ft_putstr("Parsing ended at line ");
 	ft_putnbr(i);
-	ft_putstr("\n");
+	ft_exit("", 1);
 	return (obj);
 }
 

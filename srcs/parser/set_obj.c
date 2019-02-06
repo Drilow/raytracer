@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_obj.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpays <cpays@student.42.fr>                +#+  +:+       +#+        */
+/*   By: alacrois <alacrois@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 10:43:54 by mabessir          #+#    #+#             */
-/*   Updated: 2019/02/05 15:52:13 by cpays            ###   ########.fr       */
+/*   Updated: 2019/02/06 18:37:44 by alacrois         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static bool			end_parsing(int i, t_vertex *v_list, char *line)
 		free_vlist(&v_list);
 	ft_putstr("Parsing ended at line ");
 	ft_putnbr(i);
-	ft_putstr("\n");
+	ft_exit("", 1);
 	return (false);
 }
 
