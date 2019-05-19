@@ -8,3 +8,5 @@ Compiling the project :
 
 Executing :
 ```./rt```
+
+Scenes are in JSon format, there are some in the scene folder, you can write your own if you want :)
